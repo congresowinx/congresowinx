@@ -1,5 +1,6 @@
 <?php
-session_start(); 
+ini_set("display_errors", 1);
+session_start();
 ?>
 
 <?php 
@@ -759,7 +760,7 @@ echo"$url";
     $allowedfileExtensions = array('pdf');
 
        
-         $conexion=pg_connect("host=localhost dbname=BDCongresoMate user=postgres password=");
+         $conexion=pg_connect("host=localhost dbname=congresowinx user=congresowinx password=W1nxC0ngr3s032511");
        $fechaActual = date ( 'Y-m-d' );
       /*  echo $fechaActual;
                if($conexion){
