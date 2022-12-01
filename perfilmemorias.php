@@ -10,13 +10,13 @@ while ($elemento = readdir($directorio))
   {
   if (is_dir("memorias/memorias0/".$elemento))
   {
-    $listar .="<a class=' col-md-6' href='memorias/memorias0/ $elemento' target='_blank'> 
+    $listar .="<a class=' col-md-6' href='memorias/memorias0/$elemento'target='_blank'> 
     $elemento/</a>
     <br><br>";
   }
   else
   {
-     $listar .="<a class=' col-md-6' href='memorias/memorias0/ $elemento' target='_blank'> 
+     $listar .="<a class=' col-md-6' href='memorias/memorias0/$elemento'target='_blank'> 
     $elemento</a>
     <br><br>";
   }

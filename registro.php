@@ -6,9 +6,9 @@ session_start();
 <?php 
 // Capturamos una URL completa incluidas las variables pasadas por URL
 
-$dominio = $_SERVER['CongresoMate']; 
-$nombre_archivo = $_SERVER['winxcongreso']; 
-$url = "http://" . "$dominio" . "$nombre_archivo"; 
+$dominio = $_SERVER['laboratoriosistemas.cuautitlan2.unam.mx']; 
+$nombre_archivo = $_SERVER['congresowinx']; 
+$url = "https://"."$dominio"."$nombre_archivo"; 
 
 echo"$url"; 
 ?> 
@@ -802,7 +802,7 @@ echo"$url";
 
                         if (in_array($fileExtension, $allowedfileExtensions))
     {
-      $uploadFileDir = '../semblanza/';
+      $uploadFileDir = '../Semblanza/';
       $dest_path = $uploadFileDir . $newFileName;
 
       if(move_uploaded_file($fileTmpPath, $dest_path)) 

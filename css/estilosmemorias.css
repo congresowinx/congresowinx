@@ -3,6 +3,9 @@ body {
   padding: 0;
   box-sizing: border-box;
   font-family: sans-serif;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  color: #5a5a5a;
 }
 
 header {

@@ -619,7 +619,7 @@ Encabezado de la página */
 									<label for="Country">País:</label>
 								</td>
                                                                 <td>
-                                                                <select border-radius: 9px; input class="inputNombreC" name ="pais">
+                                                                <select border-radius: 9px; input class="inputP" name ="pais">
                                                 
                                                                    <option value="México">México</option>
                                                                    <option value="Afganistán">Afganistán</option>

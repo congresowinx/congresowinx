@@ -450,8 +450,11 @@
         border-radius: 3em;
       }
 
-      @media (max-width: 560px) {
+       @media (max-width: 760px) {
         .inputP {
+          width: 80px;
+        }
+        .inputNombreC {
           width: 160px;
         }
 
@@ -484,6 +487,22 @@
           
         }
 
+        .contenedorregistroI{
+        margin:1em;
+}
+      }
+button{
+  background: #2B307C;
+  color: #FFF;
+  font-size: 20px;
+  border-radius: 9px;
+  padding: 5px 30px;
+  margin-bottom: -30px; 
+  position: relative;
+  top:60%; 
+  
+
+}
 
 
         </style>
@@ -840,9 +859,9 @@ Encabezado de la página */
                             </tr>
  </table> </div>  </div>
                            
-                            <button >Agregar</button>  <button >Regresar</button> 
+                            <button >Agregar</button>  
         
-      </form>
+      </form> <br><br> <a  href="Perfiladmin.php"  > <button class="enviarBtn">Regresar</button> </a>
   </div></div>
   </div>
 
