@@ -3,15 +3,6 @@ ini_set("display_errors", 1);
 session_start();
 ?>
 
-<?php 
-// Capturamos una URL completa incluidas las variables pasadas por URL
-
-$dominio = $_SERVER['laboratoriosistemas.cuautitlan2.unam.mx']; 
-$nombre_archivo = $_SERVER['congresowinx']; 
-$url = "https://"."$dominio"."$nombre_archivo"; 
-
-echo"$url"; 
-?> 
 <html lang="es">
     <head>
         <title>Registro de cuenta</title>
