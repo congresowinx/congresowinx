@@ -811,7 +811,7 @@ session_start();
 
 
               if (in_array($fileExtension, $allowedfileExtensions)) {
-                $uploadFileDir = '../Semblanza/';
+                $uploadFileDir = './Semblanza/';
                 $dest_path = $uploadFileDir . $newFileName;
 
                 if (move_uploaded_file($fileTmpPath, $dest_path)) {
