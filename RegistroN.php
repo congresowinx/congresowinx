@@ -6,7 +6,7 @@ session_start();
 <html lang="es">
     <head>
         <link href="icono.ico" type="image/x-icon" rel="shortcut icon" />
-        <title>Registro Nuevo Uusario</title>
+        <title>Registro Nuevo Usuario</title>
        <meta charset="UTF-8"> 
        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1, minimum-scale=1">
