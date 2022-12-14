@@ -768,7 +768,7 @@ if (isset($_POST['uploadBtn']) && $_POST['uploadBtn'] == 'Enviar') {
                 //Agregar destinatario
                 $mail->AddAddress($Correo);
                 $mail->Subject = "Registro Congreso de Matematicas FES Cuautitlan";
-                $mail->Body = "Bienvenid@ {$nombre}, se ha registrado de manera exitosa, esta es su contraseña: {$contraseñaSinHash}";
+                $mail->Body = "Bienvenid@ {$nombre}, se ha registrado de manera exitosa, esta es su contrase&ntilde;a: {$contraseñaSinHash}";
 
                 // Enviar
                 $mail->Send();
