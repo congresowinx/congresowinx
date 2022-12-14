@@ -456,13 +456,34 @@
         width: 500px;
         border-radius: 3em;
       }
+
+      .inputNombreC2 {
+        border: 0.15em solid #B18904;
+        width: auto;
+        border-radius: 3em;
+      }
+      .inputNombreC3 {
+        border: 0.15em solid #B18904;
+        width: 500px;
+        border-radius: 3em;
+      }
        @media (max-width: 760px) {
         .inputP {
           width: 80px;
         }
         .inputNombreC {
           width: 160px;
+          font-size: 0.9rem;
         }
+        .inputNombreC2 {
+          width: auto;
+          font-size: 0.6rem;
+        }
+        .inputNombreC3 {
+          width: 90px;
+          font-size: 0.6rem;
+        }
+
 
         .content-select {
           width: 160px;
@@ -476,6 +497,17 @@
         margin:1em;
 
       }
+      .button2{
+   font-size: 0.9rem;
+  border-radius: 0.5rem;
+  padding: 0.5px 1px;
+  margin-bottom: -5px; 
+  position: relative;
+  top:10%; 
+  margin-left: -10px;
+  margin-right: -10px;
+width: 90px;
+}
     }
       @media (max-width: 370px) {
         .inputP {
@@ -483,6 +515,15 @@
         }
         .inputNombreC {
           width: 130px;
+        }
+        .inputNombreC2 {
+          width: auto;
+           font-size: 0.6rem;
+        }
+        .inputNombreC3 {
+          width: 20px;
+          height: 10px;
+          font-size: 0.6rem;
         }
         .content-select {
           width: 60px;
@@ -493,6 +534,16 @@
           
         }
 
+.button2{
+  font-size: 2px;
+  border-radius: 0.5rem;
+  padding: 0.5px 2px;
+  margin-bottom: -5px; 
+  position: relative;
+  top:10%; 
+  left: 90%;
+
+}
         .contenedorregistroI{
         margin:1em;
 }
@@ -509,6 +560,33 @@ button{
   
 
 }
+.button2{
+  background: #2B307C;
+  color: #FFF;
+  font-size: 15px;
+  border-radius: 1px;
+  padding: 1px 10px;
+  margin-bottom: 0.5px; 
+  position: relative;
+  top:10%; 
+  left: 10%;
+
+}
+
+ .sinborde {
+    border: 0;
+  }
+
+  .table-responsive{
+
+        margin:1em;
+        height: 90%;
+
+        border-radius: 1em;
+ 
+        width: auto;
+}
+
         </style>
     </head>
 
@@ -520,20 +598,19 @@ Encabezado de la página */
      
       
          <div id="wrapper" > <center> <img src="img/banpru.jpg" class="baner"/> </center>  </div>
-         
        <!-- Barra de menu -->
          <div>
             <header>  
                 <input type="checkbox" id="btn-menu"> 
-                <label for="btn-menu"><img src="img/menuicono.png" alt=""> </label>
+                <label for="btn-menu"><img src="img/menuicono11.png" alt=""> </label>
                 <nav class="menu" style="z-index: 1;">
                     <ul>
-                        <li> <a href="">Inicio</a></li>
-                        <li> <a href="">Memorias</a></li>
+                        
+                        <li> <a href="memoriascarrusel.php">Memorias</a></li>
                         <li> <a href="convocatoria.php">Convocatoria</a></li> 
                         <li>  <a href="inscripcionYcostos.php">Inscripción y Costos</a></li>
-                        <li> <a href="ComiteOrg">Comité Organizador</a></li>
-                        <li> <a href=""><img class="alineadoicono" src="img/iniciaricono.png">&nbsp;Iniciar Sesión</a></li>
+                        <li> <a href="ComiteOrg.php">Comité Organizador</a></li>
+                        <li> <a href="index3.php"><img class="alineadoicono" src="img/iniciaricono.png">&nbsp;Cerrar Sesión</a></li>
                     </ul>  
                 </nav> 
                 
@@ -555,50 +632,127 @@ Encabezado de la página */
             </header>
         </div>
  
-       <div class="containerBoton">
-        <label for="btn-menu3"></label>
-        <nav class="menu3" style="z-index: 2;">  
-        <button class="boton1" type="button" onClick="ico2()" >Usuario</button>
-        <button class="boton2" type="button" onClick="ico1()">Ponente</button>
-        <button class="boton3" type="button" onClick="ico4()" >Evaluador</button>
-        <button class="boton4" type="button" onClick="ico3()" >Memorias</button>
-        <button class="boton5" type="button" onClick="ico6()" >Admin</button>
-        <button class="boton6" type="button" onClick="ico5()" >Comite Orga</button>
-        </nav>
-    </div>
-
-    <!-- Barra de menu Secundario - Movil-->
-
-       <div class="nav-bar" >
-            <a onClick="return ico2()"class="icond icon-book" target="_blank"> <img src="img/icons8-usuario-16.png"/> </a>
-            <a onClick="return ico1()" href="#" class="icond icon-file-text2" target="_blank"> <img src="img/icons8-expositor-16.png"/> </a>
-            <a onClick="return ico4()" href="#" class="icond icon-mic" target="_blank"> <img src="img/icons8-lectura-16.png"/> </a>
-            <a onClick="return ico3()" href="#" class="icond icon-stack" target="_blank"> <img src="img/icons8-foto-16.png"/> </a>
-            <a onClick="return ico6()" href="#" class="icond icon-key" target="_blank"> <img src="img/icons8-configuración-del-administrador-16.png"/> </a>
-            <a onClick="return ico5()" href="#" class="icond icon-hearth" target="_blank"> <img src="img/icons8-llamada-de-conferencia-16.png"/> </a>
-        </div> 
-
 <div class="contenedorregistroI"> 
   <div class="px-4 pt-5 my-5 text-center border-bottom">
     <div class="col-lg-6 mx-auto">
     <p class="Tema">Modificar Datos de Escuelas</p>
+     <form action="#" method="POST" >
 <div class="D1">
                             <table>
                                 <tr>
             <td class="C2">
-          <input class="inputNombreC" type="text" name="titulo" placeholder="Ingrese el nombre de la escuela" required>
+          <input class="inputNombreC" type="text" name="nombus" placeholder="Ingrese el nombre de la escuela" >
                 
-               <button >Buscar</button> 
+               <button name="uploadBtn2" class="enviarBtn" value="Buscar">Buscar</button>  <button name="uploadBtn2" class="enviarBtn" value="Mostrar">Mostrar todos los datos</button> 
                 </td>
                                                                 
               </tr> 
- </table> </div>
+ </table> </div> </form>
 
-      <div class="contenedorregistroI2"> 
-  <div class="px-4 pt-5 my-5 text-center border-bottom">
-    <div class="col-lg-6 mx-auto">
+       <div class="contenedorregistroI2" id='usua1' > 
+  <div class="px-4 pt-1 my-5 text-center border-bottom">
+    <div class="col-lg-12 mx-auto">
+      <div class="table-responsive">
+      <table class="table table-bordered border border-secondary"  ><center>
       
+      <table class="inputNombreC" > 
+            <tr class="inputNombreC2">
+              <td class="inputNombreC2">Nombre</td>
+              <td class="inputNombreC3">País</td>
 
+              <td class="inputNombreC2">Opción</td>
+            </tr>
+
+          
+               <?php if (isset($_POST['uploadBtn2']) && $_POST['uploadBtn2'] == 'Buscar') {
+
+             $conexion = pg_connect("host=localhost dbname=congresowinx user=congresowinx password=W1nxC0ngr3s032511");
+            if (isset($_POST["nombus"])) {
+             $nombusc = $_POST['nombus'];
+
+
+            $query1 = ("Select * from institucion
+              where nombre_institucion='$nombusc'");
+                  $conn1 = pg_query($conexion, $query1);
+
+                  if (!$conn1) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($conn1) > 0) {
+                    while ($rowData = pg_fetch_array($conn1)) {
+                 ?>   
+          <tr >  <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowData["nombre_institucion"] ?> </textarea></td>  
+
+
+           <td class="inputNombreC2" ><textarea  name="pais" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly> <?php echo $rowData["pais_institucion"] ?>  </textarea></td>  
+
+
+           <td class="inputNombreC2" >
+               <a href="editaresc.php?id=<?php echo $rowData["id_institucion"];
+            ?>">    <button class="button2" onclick="getElementsByTagName('textareaa').readonly:false;">Modificar</button> </a>
+          </td> 
+
+                 </tr>    <?php } }}
+                 
+
+
+
+               }else  if (isset($_POST['uploadBtn']) && $_POST['uploadBtn2'] == 'Mostrar') {
+           $conexion = pg_connect("host=localhost dbname=congresowinx user=congresowinx password=W1nxC0ngr3s032511");
+            $query1 = ("Select * from institucion");
+                  $conn1 = pg_query($conexion, $query1);
+
+                  if (!$conn1) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($conn1) > 0) {
+                    while ($rowData = pg_fetch_array($conn1)) {
+                 ?>   
+          <tr >  <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowData["nombre_institucion"] ?> </textarea></td>  
+
+
+           <td class="inputNombreC2" ><textarea  name="pais" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly> <?php echo $rowData["pais_institucion"] ?>  </textarea></td>  
+
+
+           <td class="inputNombreC2" >
+               <a href="editaresc.php?id=<?php echo $rowData["id_institucion"];
+?>">
+            <button class="button2" onclick="getElementsByTagName('textareaa').readonly:false;">Modificar</button> </a>
+          </td> 
+
+                 </tr>    <?php } } } else {
+
+
+           $conexion = pg_connect("host=localhost dbname=congresowinx user=congresowinx password=W1nxC0ngr3s032511");
+            $query1 = ("Select * from institucion");
+                  $conn1 = pg_query($conexion, $query1);
+
+                  if (!$conn1) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($conn1) > 0) {
+                    while ($rowData = pg_fetch_array($conn1)) {
+                 ?>   
+          <tr >  <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowData["nombre_institucion"] ?> </textarea></td>  
+
+
+           <td class="inputNombreC2" ><textarea  name="pais" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly> <?php echo $rowData["pais_institucion"] ?>  </textarea></td>  
+
+
+           <td class="inputNombreC2" >
+               <a href="editaresc.php?id=<?php echo $rowData["id_institucion"];
+?>">
+            <button class="button2" onclick="getElementsByTagName('textareaa').readonly:false;">Modificar</button> </a>
+          </td> 
+
+                 </tr>    <?php } } }
+                 ?>
+       </table></table>
+
+      </div>
 
       </div></div>
   </div>

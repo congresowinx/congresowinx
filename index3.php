@@ -1,3 +1,8 @@
+<?php
+ini_set("display_errors", 0);
+session_start();
+?>
+
 <html lang="es">
     <head>
       
@@ -244,25 +249,26 @@
   z-index: 2;
 }
 
-.form-signin input[type="text"] {
+.form-signin input[type="email"] {
   margin-bottom: -1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 12px;
+  border-bottom-left-radius: 12px;
+  
+				border-bottom: 3px solid #2B307C;
+				background: #00000012;
+				color: #000;
+
 }
 
 .form-signin input[type="password"] {
   margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+  border-bottom-right-radius: 12px;
+  border-bottom-left-radius: 12px;
+  
+				border-bottom: 3px solid #2B307C;
+				background: #00000012;
+				color: #000;
 }
-
-
-.form-signin {
-   border-radius: 3em;
- border: 0.5em solid #2B307C;
-        margin:2em;
-
-}  
 
 /*estilos de la tabla*/
 .table-responsive{
@@ -277,7 +283,36 @@
 }
 
 
-
+.loginBox input[type="submit"] {
+				border: none;
+				outline: none;
+				height: 40px;
+                                width: 200px;
+				background: #2B307C;
+				color: #FFF;
+				font-size: 18px;
+				border-radius: 20px;	
+			}
+			
+			.loginBox input[type="submit"]:hover {
+				cursor: pointer;
+				background: #998636;
+			}
+                        
+                        .loginBox a {
+				text-decoration: none;
+				font-size: 14px;
+				line-height: 20px;
+				color: navy;
+			}
+			
+			.loginBox a:hover {
+				color: #998636;
+			}
+                         .loginBox h1 {
+				color:  #2B307C;
+				font-size: 26px;
+			}
   
       </style>
       
@@ -297,14 +332,14 @@ Encabezado de la página */
             <header>  
                 <input type="checkbox" id="btn-menu"> 
                 <label for="btn-menu"><img src="img/menuicono11.png"> </label>
-                <nav class="menu" style="z-index: 1;">
+                <nav class="menu" style="z-index: 2;">
                     <ul>
-                        <li> <a href="index3.php">Inicio</a></li>
                         <li> <a href="memoriascarrusel.php">Memorias</a></li>
                         <li> <a href="convocatoria.php">Convocatoria</a></li> 
                         <li> <a href="inscripcionYcostos.php">Inscripción y Costos</a></li>
                         <li> <a href="ComiteOrg.php">Comité Organizador</a></li>
-                        <li> <a href=""><img class="alineadoicono" src="img/iniciaricono.png">&nbsp;Iniciar Sesión</a></li>
+                        <li> <a href="ComiteEva.php">Comité Evaluador</a></li>
+                        <li> <a href="InicioSesion.php"><img class="alineadoicono" src="img/iniciaricono.png">&nbsp;Iniciar Sesión</a></li>
                     </ul>  
                 </nav> 
                 
@@ -318,11 +353,11 @@ Encabezado de la página */
                         <li> <a href="carteles_info.php">Carteles</a></li>
                         <li> <a href="talleres_info.php">Talleres</a></li>
                     </ul>  
-                </nav>
-                 </div>                
+                </nav>                
             </header>
+        </div>
        
-
+<div>
 <section id="container-slider"> 
    <a href="javascript: fntExecuteSlide('prev');" class="arrowPrev"><i class="fas fa-chevron-circle-left"></i></a>
    <a href="javascript: fntExecuteSlide('next');" class="arrowNext"><i class="fas fa-chevron-circle-right"></i></a>
@@ -359,39 +394,72 @@ Encabezado de la página */
      </li>
   </ul>
 </section>
+</div>
 
 <div class="contenedorinicio">
+  <body class="text-center">
+<div class="loginBox">
 <main class="form-signin w-100 m-auto">
-  <form>
+  <form method="POST">
     <center>
     <img class="mb-4" src="img/Recurso1.png" alt="" width="60" height="57"></center>
-    <h1 class="h3 mb-3 fw-normal">Iniciar sesión</h1>
+    <center><h1 class="h3 mb-3 fw-normal">Iniciar sesión</h1></center>
     <form method="POST">
-          <!******USERNAME*******>
+      
     <div class="form-floating">
-      <input type="text" placeholder="Ingresa Correo" name="user" class="form-control" id="floatingInput">
-      <label for="floatingInput" for="Username">Correo</label>
+      <input type="email" class="form-control" id="floatingInput" name="correo" placeholder="name@example.com" required>
+      <label for="floatingInput">Correo</label>
     </div>
-
-         <!******PASSWORD*******>
+    <br>
     <div class="form-floating">
-      <input type="password" class="form-control" id="floatingPassword"  placeholder="Ingresa Contraseña" name="pass">
-      <label for="floatingPassword" for="Password">Contraseña</label>
+      <input type="password" class="form-control" id="floatingPassword" name="pass" placeholder="Password" required>
+      <label for="floatingPassword">Contraseña</label>
     </div>
 
     <div class="checkbox mb-3">
       <label>
        <a href="#">¿Olvidaste tu contraseña?</a>
           <br>
-          <a href="registro.php">¿No tienes una cuenta?</a>
+          <a href="RegistroN.php">¿No tienes una cuenta?</a>
  
       </label>
     </div>
-    <button class="w-100 btn btn-lg btn-primary" type="submit" value="Iniciar Sesión">Iniciar Sesión</button>
-    <p class="mt-5 mb-3 text-muted">&copy; <?php echo date('Y'); ?></p>
+    <center><input type="submit" name="uploadBtn"  value="Iniciar Sesión"></center>
+    
   </form>
 </main>
-</div>
+
+
+    <?php
+        $message = '';
+
+$conexion = pg_connect("host=localhost dbname=congresowinx user=congresowinx password=W1nxC0ngr3s032511");
+if (isset($_POST['uploadBtn']) && $_POST['uploadBtn'] == 'Iniciar Sesión'){
+ if (isset($_POST["correo"]) && isset($_POST["pass"]) ) {
+          
+  $coreo = $_POST["correo"];
+  $clave= $_POST["pass"];
+  $clave = hash('sha512', $clave);
+
+
+  $query="SELECT usuario, contraseña FROM usuario WHERE usuario='$coreo' AND contraseña= '$clave' ";
+ $consulta= pg_query($conexion,$query);
+ $cantidad= pg_num_rows($consulta);
+ if ($cantidad>0){
+  echo "<script>alert('Bienvenido!!!'); 
+  window.location.replace('https://laboratoriosistemas.cuautitlan2.unam.mx/congresowinx/WinxCongreso/Perfiladmin.php');</script>";
+
+ } else{
+     echo"<script> alert ('El Correo o la Contraseña son Incorrectos. Porfavor, intenta nuevamente !!')</script>";
+ }
+}}
+  
+$_SESSION['sms'] = $message;  ?>
+ </body>
+    </div>
+
+
+
 <br>
 <br>
 
@@ -545,9 +613,10 @@ Encabezado de la página */
         <li style="color: #FFFFFF;"class="nav-item mb-2" class="nav-link p-0 text-muted"> Chavez Luna Miriam Virginia</li>
         <li style="color: #FFFFFF;"class="nav-item mb-2" class="nav-link p-0 text-muted"> Jonathan </li>
         <li style="color: #FFFFFF;"class="nav-item mb-2" class="nav-link p-0 text-muted"> Davila Almaraz Nayeli</li>
-        <li style="color: #FFFFFF;"class="nav-item mb-2" class="nav-link p-0 text-muted"> Luz</li>
+        <li style="color: #FFFFFF;"class="nav-item mb-2" class="nav-link p-0 text-muted"> Montes Range Luz Elena </li>
         <li style="color: #FFFFFF;"class="nav-item mb-2" class="nav-link p-0 text-muted"> Olivares Vega Ana Jesús</li>
         <li style="color: #FFFFFF;"class="nav-item mb-2" class="nav-link p-0 text-muted"> Olvera Mendoza Viridiana</li>
+        <li style="color: #FFFFFF;"class="nav-item mb-2" class="nav-link p-0 text-muted"> Perez Monserrat</li>
           <li style="color: #FFFFFF;"class="nav-item mb-2" class="nav-link p-0 text-muted"> Romero Jaime Fernanda</li>
         <ul class="nav flex-column">
           
@@ -621,76 +690,6 @@ function fntExecuteSlide(side){
     elements[nextElement].style.zIndex =1;
 }
 </script>
-
-<?php
-$conexion=pg_connect("host=localhost dbname=BDCongresoMate user=postgres password= ");
-
- if(isset($_POST["user"]) && isset($_POST["pass"])){
-     session_start();
-$usuario= $_POST["user"];
-$clave= $_POST["pass"];
-  $clave = hash('sha512', $clave);
-/*
- if($conexion){
-                echo "CONEXIÓN EXITOSA <br>";
-            }else{
-                echo "CONEXIÓN FALLIDA";
-            }
-            */
-$query="SELECT usuario, contraseña FROM usuario WHERE usuario='$usuario' AND contraseña= '$clave' ";
- $consulta= pg_query($conexion,$query);
- $cantidad= pg_num_rows($consulta);
- 
- $query2=("Select id_usuario from usuario where usuario='$usuario' ");
-                            $conn2=pg_query($conexion,$query2);
-
-                               if(!$conn2){
-                                 die(pg_error($conexion));
-                                    }
-
-                               if (pg_num_rows($conn2) > 0) {
-                                          while($rowData = pg_fetch_array($conn2)){
-                                       $conn3=intval($rowData["id_usuario"]);
-                                                   }
-                                             }
-                                             
-                           $query5=("Select permiso_id_rol from permisos where usuario_id='$conn3' ");
-                            $conn5=pg_query($conexion,$query5);
-
-                               if(!$conn5){
-                                 die(pg_error($conexion));
-                                    }
-
-                               if (pg_num_rows($conn5) > 0) {
-                                          while($rowData = pg_fetch_array($conn5)){
-                                       $conn4=$rowData["permiso_id_rol"];
-                                                   }
-                                             }
-                                if ($cantidad>0){
-     header ("location:perfilnavegacion.php");
-                                }
-                                             
-                    /*    if ($conn4=="0"){
-                                          
- if ($cantidad>0){
-     echo '<script>alert("Sesión Iniciada")</script>';
-     header ("location:perfilusuario.php");
-
- } else{
-      echo '<script>alert("Datos incorrectos")</script>';
- }}else if ($conn4=="1"){
-     if ($cantidad>0){
-     echo '<script>alert("Sesión Iniciada")</script>';
-     header ("location:perfilponente.php");
-
- } else{
-      echo '<script>alert("Datos incorrectos")</script>';
- }
- 
- }*/
- 
- }
-?>
 
 </body>
 </html>  

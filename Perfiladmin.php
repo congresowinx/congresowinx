@@ -1104,6 +1104,15 @@
       filter: invert(59%) sepia(73%) saturate(310%) hue-rotate(10deg) brightness(92%) contrast(97%);
     }
 
+    .Tema {
+	margin: -10px;
+	padding: 0 0 50px;
+	text-align: center;
+	font-size: 50px;
+	font-style: normal;
+	color: #2B307C;
+}
+
         </style>
     </head>
 
@@ -1123,12 +1132,13 @@ Encabezado de la página */
                 <label for="btn-menu"><img src="img/menuicono.png" alt=""> </label>
                 <nav class="menu" style="z-index: 1;">
                     <ul>
-                        <li> <a href="">Inicio</a></li>
-                        <li> <a href="">Memorias</a></li>
+                        <li> <a href="index.php">Inicio</a></li>
+                        <li> <a href="memoriascarrusel.php">Memorias</a></li>
                         <li> <a href="convocatoria.php">Convocatoria</a></li> 
                         <li>  <a href="inscripcionYcostos.php">Inscripción y Costos</a></li>
                         <li> <a href="ComiteOrg">Comité Organizador</a></li>
-                        <li> <a href=""><img class="alineadoicono" src="img/iniciaricono.png">&nbsp;Iniciar Sesión</a></li>
+                        <li> <a href="ComiteEva">Comité Evaluador</a></li>
+                        <li> <a href=""><img class="alineadoicono" src="img/iniciaricono.png">&nbsp;Cerrar  Sesión</a></li>
                     </ul>  
                 </nav> 
                 
@@ -1175,7 +1185,7 @@ Encabezado de la página */
 
 <div class="contenedorregistroI" id='User'> 
   <div class="px-4 pt-5 my-5 text-center border-bottom">
-   
+  <p class="Tema">Usuario </p>
      <a href="usuarioPerfil.php"> <div class="botonU">  </div>  </a>
      <a href="ReferenciaCongr.php"> <div class="botonH">  </div>  </a>
      <a href="pagos.php"> <div class="botonP">  </div>  </a>  
@@ -1186,7 +1196,7 @@ Encabezado de la página */
 
 <div class="contenedorregistroI2" id='Pone'> 
   <div class="px-4 pt-5 my-5 text-center border-bottom">
-   
+  <p class="Tema">Ponente - Registro de Trabajos </p>
      <a href="registroponencias.php"> <div class="botonPon">  </div>  </a>
      <a href="registrocarteles.php"> <div class="botonCar">  </div>  </a>
      <a href="registrotalleres.php"> <div class="botonTal">  </div>  </a>                                  
@@ -1196,7 +1206,7 @@ Encabezado de la página */
 
    <div class="contenedorregistroI3" id='Mem'> 
   <div class="px-4 pt-5 my-5 text-center border-bottom">
-   
+  <p class="Tema">Memorias </p>
      <a href="perfilmemorias.php"> <div class="botonSubmem">  </div>  </a>
      <a href="memoriascarrusel.php"> <div class="botonMem">  </div>  </a>                                 
        
@@ -1205,7 +1215,7 @@ Encabezado de la página */
 
 <div class="contenedorregistroI4" id='Eval'> 
   <div class="px-4 pt-5 my-5 text-center border-bottom">
-   
+  <p class="Tema"> Evaluador </p>
      <a href="evaRes.php"> <div class="botonEvP">  </div>  </a>
      <a href="evaCar.php"> <div class="botonEvC">  </div>  </a>
      <a href="evaTar.php"> <div class="botonEvT">  </div>  </a>                                  
@@ -1213,9 +1223,9 @@ Encabezado de la página */
   </div>
 </div>
 
-<div class="contenedorregistroI5" id='Comi'> 
+<div class="contenedorregistroI5" id='Comi'>
   <div class="px-4 pt-5 my-5 text-center border-bottom">
-   
+  <p class="Tema">Comite Organizador </p>  
      <a href="RegistroCongr.php"> <div class="botonNueC">  </div>  </a>
      <a href="ReferenciaCongr.php"> <div class="botonRefCon">  </div>  </a>
      <a href="BusquedaCongr.php"> <div class="botonBusCon">  </div>  </a>                                  
@@ -1225,7 +1235,7 @@ Encabezado de la página */
 
 <div class="contenedorregistroI6" id='Admin1'> 
   <div class="px-4 pt-5 my-5 text-center border-bottom">
-   
+  <p class="Tema">Administrador </p>
      <a href="#"> <div class="botonAgrEven" onClick="return ico8()" >  </div>  </a>
      <a href="Asignarroles.php"> <div class="botonAsigRol">  </div>  </a>
      <a href="#"> <div class="botonConfEsc" onClick="return ico7()" >  </div>  </a>

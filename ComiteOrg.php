@@ -170,11 +170,12 @@ Encabezado de la página */
                 <label for="btn-menu"><img src="img/menuicono11.png" alt=""> </label>
                 <nav class="menu" style="z-index: 1;">
                     <ul>
-                    <li> <a href="index.php">Inicio</a></li>
-                        <li> <a href="">Memorias</a></li>
+                    <li> <a href="index3.php">Inicio</a></li>
+                    <li> <a href="memoriascarrusel.php">Memorias</a></li>
                         <li> <a href="convocatoria.php">Convocatoria</a></li> 
                         <li> <a href="inscripcionYcostos.php">Inscripción y Costos</a></li>
                         <li> <a href="ComiteOrg.php">Comité Organizador</a></li>
+                        <li> <a href="ComiteEva.php">Comité Evaluador</a></li>
                         <li> <a href="InicioSesion.php"><img class="alineadoicono" src="img/iniciaricono.png">&nbsp;Iniciar Sesión</a></li>
                     </ul>  
                 </nav> 

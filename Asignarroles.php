@@ -1,3 +1,5 @@
+
+
 <html lang="es">
     <head>
         <link href="icono.ico" type="image/x-icon" rel="shortcut icon" />
@@ -456,7 +458,11 @@
         width: 500px;
         border-radius: 3em;
       }
-
+ .inputNombreC2 {
+        border: 0.15em solid #B18904;
+        width: auto;
+        border-radius: 3em;
+      }
    @media (max-width: 760px) {
         .inputP {
           width: 80px;
@@ -510,6 +516,34 @@ button{
   
 
 }
+    
+.button2{
+  background: #2B307C;
+  color: #FFF;
+  font-size: 15px;
+  border-radius: 1px;
+  padding: 1px 10px;
+  margin-bottom: 0.5px; 
+  position: relative;
+  top:10%; 
+  left: 10%;
+
+}
+
+ .sinborde {
+    border: 0;
+  }
+
+  .table-responsive{
+
+        margin:1em;
+        height: 90%;
+
+        border-radius: 1em;
+ 
+        width: auto;
+}
+
 
         </style>
     </head>
@@ -520,22 +554,20 @@ Encabezado de la página */
         */banner, menu, carrusel, cuadro iniciar, cuadro fechas, -->
         <!-- Baner -->
      
-      
          <div id="wrapper" > <center> <img src="img/banpru.jpg" class="baner"/> </center>  </div>
-         
        <!-- Barra de menu -->
          <div>
             <header>  
                 <input type="checkbox" id="btn-menu"> 
-                <label for="btn-menu"><img src="img/menuicono.png" alt=""> </label>
+                <label for="btn-menu"><img src="img/menuicono11.png" alt=""> </label>
                 <nav class="menu" style="z-index: 1;">
                     <ul>
-                        <li> <a href="">Inicio</a></li>
-                        <li> <a href="">Memorias</a></li>
+                        
+                        <li> <a href="memoriascarrusel.php">Memorias</a></li>
                         <li> <a href="convocatoria.php">Convocatoria</a></li> 
                         <li>  <a href="inscripcionYcostos.php">Inscripción y Costos</a></li>
-                        <li> <a href="ComiteOrg">Comité Organizador</a></li>
-                        <li> <a href=""><img class="alineadoicono" src="img/iniciaricono.png">&nbsp;Iniciar Sesión</a></li>
+                        <li> <a href="ComiteOrg.php">Comité Organizador</a></li>
+                        <li> <a href="index3.php"><img class="alineadoicono" src="img/iniciaricono.png">&nbsp;Cerrar Sesión</a></li>
                     </ul>  
                 </nav> 
                 
@@ -556,55 +588,408 @@ Encabezado de la página */
                 </nav>                
             </header>
         </div>
- 
-       <div class="containerBoton">
-        <label for="btn-menu3"></label>
-        <nav class="menu3" style="z-index: 2;">  
-        <button class="boton1" type="button" onClick="ico2()" >Usuario</button>
-        <button class="boton2" type="button" onClick="ico1()">Ponente</button>
-        <button class="boton3" type="button" onClick="ico4()" >Evaluador</button>
-        <button class="boton4" type="button" onClick="ico3()" >Memorias</button>
-        <button class="boton5" type="button" onClick="ico6()" >Admin</button>
-        <button class="boton6" type="button" onClick="ico5()" >Comite Orga</button>
-        </nav>
-    </div>
 
-    <!-- Barra de menu Secundario - Movil-->
-
-       <div class="nav-bar" >
-            <a onClick="return ico2()"class="icond icon-book" target="_blank"> <img src="img/icons8-usuario-16.png"/> </a>
-            <a onClick="return ico1()" href="#" class="icond icon-file-text2" target="_blank"> <img src="img/icons8-expositor-16.png"/> </a>
-            <a onClick="return ico4()" href="#" class="icond icon-mic" target="_blank"> <img src="img/icons8-lectura-16.png"/> </a>
-            <a onClick="return ico3()" href="#" class="icond icon-stack" target="_blank"> <img src="img/icons8-foto-16.png"/> </a>
-            <a onClick="return ico6()" href="#" class="icond icon-key" target="_blank"> <img src="img/icons8-configuración-del-administrador-16.png"/> </a>
-            <a onClick="return ico5()" href="#" class="icond icon-hearth" target="_blank"> <img src="img/icons8-llamada-de-conferencia-16.png"/> </a>
-        </div> 
 
 <div class="contenedorregistroI"> 
   <div class="px-4 pt-5 my-5 text-center border-bottom">
     <div class="col-lg-6 mx-auto">
     <p class="Tema">Asignar Roles</p>
+    <form action="#" method="POST" >
 <div class="D1">
-                            <table>
+                             <table>
                                 <tr>
             <td class="C2">
-          <input class="inputNombreC" type="text" name="titulo" placeholder="Ingrese un correo" required>
+          <input class="inputNombreC" type="text" name="nombus" placeholder="Ingrese un correo" >
                 
-               <button >Buscar</button> 
+               <button name="uploadBtn2" class="enviarBtn" value="Buscar">Buscar</button>  <button name="uploadBtn2" class="enviarBtn" value="Mostrar">Mostrar todos los datos</button> 
                 </td>
                                                                 
               </tr> 
- </table> </div>
+ </table> </div> </form>
 
       <div class="contenedorregistroI2"> 
-  <div class="px-4 pt-5 my-5 text-center border-bottom">
-    <div class="col-lg-6 mx-auto">
+  
+      <div class="table-responsive">
+      <table class="table table-bordered border border-secondary"  ><center>
       
+      <table class="inputNombreC" > 
+            <tr class="inputNombreC2">
+              <td class="inputNombreC2">Nombre</td>
+              <td class="inputNombreC3">Correo</td>
+              <td class="inputNombreC2">Permiso</td>
+              <td class="inputNombreC2">Estado</td>
+              <td class="inputNombreC2">Título</td>
+
+              <td class="inputNombreC2">Opción</td>
+            </tr>
+
+ <?php 
+
+ if (isset($_POST['uploadBtn2']) && $_POST['uploadBtn2'] == 'Buscar') {
+ if (isset($_POST["nombus"])) {
+             $nombusc = $_POST['nombus'];
+          $conexion = pg_connect("host=localhost dbname=congresowinx user=congresowinx password=W1nxC0ngr3s032511");
+            
+              $queryi1 = ("Select * from usuario where usuario='$nombusc'");
+                  $conni1 = pg_query($conexion, $queryi1);
+             if (!$conni1) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($conni1) > 0) {
+                    while ($rowDatai1 = pg_fetch_array($conni1)) {
+               $id_usuarioi = $rowDatai1["id_usuario"];}}
+
+             $queryi = ("Select * from permisos where usuario_id='$id_usuarioi'");
+                  $conni = pg_query($conexion, $queryi);
+
+                  if (!$conni) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($conni) > 0) {
+                    while ($rowDatai = pg_fetch_array($conni)) {
+                      $id_usu1= $rowDatai["usuario_id"];
+            $query1 = ("Select * from usuario where id_usuario='$id_usu1'");
+                  $conn1 = pg_query($conexion, $query1);
+if (!$conn1) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($conn1) > 0) {
+                    while ($rowData = pg_fetch_array($conn1)) {
+               $id_usuario = $rowData["id_usuario"];
+                 ?>   
+          <tr >  <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowData["nombre_usuario"] ?> </textarea></td>  
 
 
-      </div></div>
+            <td class="inputNombreC2" ><textarea  name="pais" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly> <?php echo $rowData["usuario"] ?>  </textarea></td>
+
+            <?php $perid= $rowDatai["permiso_id_rol"];
+            $query3 = ("Select * from rol where id_rol= '$perid' ");
+                  $conn3 = pg_query($conexion, $query3);
+
+                  if (!$conn3) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($conn3) > 0) {
+                    while ($rowData3 = pg_fetch_array($conn3)) {
+                       $descrip= $rowData3["descripcion"];
+                       $est= $rowData3["estado"];
+                    }
+                     
+                     ?>
+              <td class="inputNombreC2"><?php echo $descrip ?></td> 
+
+              <?php 
+                $estadoi= $rowDatai["estado"];
+                 $est =  $estadoi;
+                 if($est == "t"){
+               ?>
+                       <td class="inputNombreC2">Activo</td>
+
+                      <?php } else{ ?>
+                          <td class="inputNombreC2">Inactivo</td> 
+
+                     <?php   
+                      } $query4 = ("Select * from trayectoria where usuario_id= '$id_usuario' ");
+                  $conn4 = pg_query($conexion, $query4);
+
+                  if (!$conn4) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($conn4) > 0) {
+                    while ($rowData4 = pg_fetch_array($conn4)) {
+                     $id_t = $rowData4["id_trayectoria"];
+                     ?>
+            <?php  $query5 = ("Select * from grado_trayectoria where trayectoria_id= '$id_t' ");
+                  $conn5 = pg_query($conexion, $query5);
+
+                  if (!$conn5) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($conn5) > 0) {
+                    while ($rowData5 = pg_fetch_array($conn5)) {
+                     $id_g = $rowData5["grado_id"];
+                    
+  $query6 = ("Select * from grado_academico where id_grado= '$id_g' ");
+                  $conn6 = pg_query($conexion, $query6);
+
+                  if (!$conn6) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($conn6) > 0) {
+                    while ($rowData6 = pg_fetch_array($conn6)) {
+                     
+                     ?>
+
+
+<td class="inputNombreC2"><?php echo $rowData6["titulo"] ?></td>
+
+<?php   }} ?>
+
+
+
+ 
+
+                                 <?php   } ?>
+
+                  <?php } } }} ?>
+                <?php 
+                  ?>
+
+           <td class="inputNombreC2" >
+               <a href="asignarrol.php?id=<?php echo $id_usu1;
+            ?> &id2=<?php echo $perid;
+            ?>">    <button class="button2" onclick="getElementsByTagName('textareaa').readonly:false;">Modificar</button> </a>
+          </td> 
+
+                 </tr>    <?php  }} 
+           
+
+          }} }}else if (isset($_POST['uploadBtn']) && $_POST['uploadBtn2'] == 'Mostrar') {
+
+             $conexion = pg_connect("host=localhost dbname=congresowinx user=congresowinx password=W1nxC0ngr3s032511");
+            $queryi = ("Select * from permisos");
+                  $conni = pg_query($conexion, $queryi);
+
+                  if (!$conni) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($conni) > 0) {
+                    while ($rowDatai = pg_fetch_array($conni)) {
+                      $id_usu1= $rowDatai["usuario_id"];
+                    
+               
+            $query1 = ("Select * from usuario where id_usuario='$id_usu1'");
+                  $conn1 = pg_query($conexion, $query1);
+
+                  if (!$conn1) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($conn1) > 0) {
+                    while ($rowData = pg_fetch_array($conn1)) {
+               $id_usuario = $rowData["id_usuario"];
+                 ?>   
+          <tr >  <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowData["nombre_usuario"] ?> </textarea></td>  
+           <td class="inputNombreC2" ><textarea  name="pais" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly> <?php echo $rowData["usuario"] ?>  </textarea></td>
+
+            <?php $perid= $rowDatai["permiso_id_rol"];
+            $query3 = ("Select * from rol where id_rol= '$perid' ");
+                  $conn3 = pg_query($conexion, $query3);
+
+                  if (!$conn3) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($conn3) > 0) {
+                    while ($rowData3 = pg_fetch_array($conn3)) {
+                       $descrip= $rowData3["descripcion"];
+                       $est= $rowData3["estado"];
+                    }
+                     
+                     ?>
+              <td class="inputNombreC2"><?php echo $descrip ?></td> 
+
+              <?php 
+                $estadoi= $rowDatai["estado"];
+                 $est =  $estadoi;
+                 if($est == "t"){
+               ?>
+                       <td class="inputNombreC2">Activo</td>
+
+                      <?php } else{ ?>
+                          <td class="inputNombreC2">Inactivo</td> 
+
+                     <?php   
+                      } $query4 = ("Select * from trayectoria where usuario_id= '$id_usuario' ");
+                  $conn4 = pg_query($conexion, $query4);
+
+                  if (!$conn4) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($conn4) > 0) {
+                    while ($rowData4 = pg_fetch_array($conn4)) {
+                     $id_t = $rowData4["id_trayectoria"];
+                     ?>
+            <?php  $query5 = ("Select * from grado_trayectoria where trayectoria_id= '$id_t' ");
+                  $conn5 = pg_query($conexion, $query5);
+
+                  if (!$conn5) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($conn5) > 0) {
+                    while ($rowData5 = pg_fetch_array($conn5)) {
+                     $id_g = $rowData5["grado_id"];
+                    
+  $query6 = ("Select * from grado_academico where id_grado= '$id_g' ");
+                  $conn6 = pg_query($conexion, $query6);
+
+                  if (!$conn6) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($conn6) > 0) {
+                    while ($rowData6 = pg_fetch_array($conn6)) {
+                     
+                     ?>
+
+
+<td class="inputNombreC2"><?php echo $rowData6["titulo"] ?></td>
+
+<?php   }} ?>
+
+
+
+ 
+
+                                 <?php   } ?>
+
+                  <?php } } }} ?>
+                <?php 
+                  ?>
+
+           <td class="inputNombreC2" >
+               <a href="asignarrol.php?id=<?php echo $id_usu1;
+            ?> &id2=<?php echo $perid;
+            ?>">    <button class="button2" onclick="getElementsByTagName('textareaa').readonly:false;">Modificar</button> </a>
+          </td>
+
+                 </tr>    <?php  }} 
+           
+
+          }}  }else{
+                   $conexion = pg_connect("host=localhost dbname=congresowinx user=congresowinx password=W1nxC0ngr3s032511");
+            
+                   $queryi = ("Select * from permisos");
+                  $conni = pg_query($conexion, $queryi);
+
+                  if (!$conni) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($conni) > 0) {
+                    while ($rowDatai = pg_fetch_array($conni)) {
+                      $id_usu1= $rowDatai["usuario_id"];
+            $query1 = ("Select * from usuario where id_usuario='$id_usu1'");
+                  $conn1 = pg_query($conexion, $query1);
+
+                  if (!$conn1) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($conn1) > 0) {
+                    while ($rowData = pg_fetch_array($conn1)) {
+               $id_usuario = $rowData["id_usuario"];
+                 ?>   
+          <tr >  <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowData["nombre_usuario"] ?> </textarea></td>  
+
+
+           <td class="inputNombreC2" ><textarea  name="pais" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly> <?php echo $rowData["usuario"] ?>  </textarea></td>
+
+            <?php $perid= $rowDatai["permiso_id_rol"];
+            $query3 = ("Select * from rol where id_rol= '$perid' ");
+                  $conn3 = pg_query($conexion, $query3);
+
+                  if (!$conn3) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($conn3) > 0) {
+                    while ($rowData3 = pg_fetch_array($conn3)) {
+                       $descrip= $rowData3["descripcion"];
+                       $est= $rowData3["estado"];
+                    }
+                     
+                     ?>
+              <td class="inputNombreC2"><?php echo $descrip ?></td> 
+
+              <?php 
+                $estadoi= $rowDatai["estado"];
+                 $est =  $estadoi;
+                 if($est == "t"){
+               ?>
+                       <td class="inputNombreC2">Activo</td>
+
+                      <?php } else{ ?>
+                          <td class="inputNombreC2">Inactivo</td> 
+
+                     <?php   
+                      } $query4 = ("Select * from trayectoria where usuario_id= '$id_usuario' ");
+                  $conn4 = pg_query($conexion, $query4);
+
+                  if (!$conn4) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($conn4) > 0) {
+                    while ($rowData4 = pg_fetch_array($conn4)) {
+                     $id_t = $rowData4["id_trayectoria"];
+                     ?>
+            <?php  $query5 = ("Select * from grado_trayectoria where trayectoria_id= '$id_t' ");
+                  $conn5 = pg_query($conexion, $query5);
+
+                  if (!$conn5) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($conn5) > 0) {
+                    while ($rowData5 = pg_fetch_array($conn5)) {
+                     $id_g = $rowData5["grado_id"];
+                    
+  $query6 = ("Select * from grado_academico where id_grado= '$id_g' ");
+                  $conn6 = pg_query($conexion, $query6);
+
+                  if (!$conn6) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($conn6) > 0) {
+                    while ($rowData6 = pg_fetch_array($conn6)) {
+                     
+                     ?>
+
+
+<td class="inputNombreC2"><?php echo $rowData6["titulo"] ?></td>
+
+<?php   }} ?>
+
+
+
+                                 <?php   } ?>
+
+                  <?php } } }} ?>
+                <?php 
+                  ?>
+
+           <td class="inputNombreC2" >
+               <a href="asignarrol.php?id=<?php echo $id_usu1;
+            ?> &id2=<?php echo $perid;
+            ?>">    <button class="button2" onclick="getElementsByTagName('textareaa').readonly:false;">Modificar</button> </a>
+          </td> 
+
+                 </tr>    <?php  }} 
+           
+
+          }} 
+                 } ?>
+
+       </table></table>
+
+      </div>
+
+
+     
   </div>
-       <a  href="Perfiladmin.php"  > <button class="enviarBtn">Regresar</button> </a>
+        <a  href="Perfiladmin.php"  > <button >Regresar</button> </a>
          
   </div></div>
   </div>

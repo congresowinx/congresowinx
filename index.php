@@ -1,18 +1,25 @@
+<?php
+ini_set("display_errors", 0);
+session_start();
+?>
 
 <html lang="es">
     <head>
-         <link href="img/favicon.png" type="image/x-icon" rel="shortcut icon" />
-        <title>Congreso de Matemáticas</title>
       
-        <link rel="stylesheet" href="css/estilos.css">
- <meta charset="UTF-8"> 
+        <title>Pagina Principal</title>
+       <meta charset="UTF-8"> 
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1, minimum-scale">
-           
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"> 
+           <link rel="stylesheet" href="css/estilosmemorias.css">
+          <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
+<link rel="icon" href="img/favicon.png" type="image/x-icon"> 
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+            <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
+<link rel="icon" href="img/favicon.png" type="image/x-icon"> 
 
-            <style>  
 
-    .bd-placeholder-img {
+      <style>
+        /*Estilos del carrusel*/
+          .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
         -webkit-user-select: none;
@@ -25,13 +32,6 @@
           font-size: 3.5rem;
         }
       }
-
-      .containerCredi {
-        background-color: #333333;
-    }
-
-  
-
 
       .b-example-divider {
         height: 3rem;
@@ -70,470 +70,261 @@
         -webkit-overflow-scrolling: touch;
       }
 
-      .feature-icon {
-  width: 4rem;
-  height: 4rem;
-  border-radius: .75rem;
-}
+ .containerCredi {
+        background-color: #333333;
+    }
 
-.icon-link > .bi {
-  margin-top: .125rem;
-  margin-left: .125rem;
-  fill: currentcolor;
-  transition: transform .25s ease-in-out;
-}
-.icon-link:hover > .bi {
-  transform: translate(.25rem);
-}
-
-.icon-square {
-  width: 3rem;
-  height: 3rem;
-  border-radius: .75rem;
-}
-
-.text-shadow-1 { text-shadow: 0 .125rem .25rem rgba(0, 0, 0, .25); }
-.text-shadow-2 { text-shadow: 0 .25rem .5rem rgba(0, 0, 0, .25); }
-.text-shadow-3 { text-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .25); }
-
-.card-cover {
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-}
-
-.feature-icon-small {
-  width: 3rem;
-  height: 3rem;
-}
-/*Aqui empieza el nuevo menu de colores junto con el menu para celular responsivo
--------
-------
-------
-------*/
-
-
- * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Roboto, sans-serif;
-}
-
-
-.containerBoton {
-   width: 100%;
-    height: 12vh;
+/*estilos de carrusel*/
+#container-slider
+{
     position: relative;
-    top: 6%;
-    transform: translateY(-50%);
-    text-align: center; 
-    background-color: transparent;
+    display: block;
+    width: 100%;
 }
-
-
-.nav-bar{
-  display: none;
-}
-
-@media only screen and (max-width:768px){
-
-    .nav-bar{
-    position: fixed;
-    right: 0;
-    top: 14%;
-    font-size:1.5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    z-index: 100;
-    }
-
-
-}
-
-
-
-  #btn-menu3{
-      display: none;
-    }
-    .menu3 ul{
-      margin: 0;
-      list-style: none;
-      padding: 0;
-      display: flex;
-    }
-    
-    .menu3 li{
-      text-align: center;
-      flex-grow: 1;
-    }
-    
-    .menu3 li:hover {
-        background:  rgb(135, 110, 19); 
-    }
-    
-    .menu3 li a{
-      display:  block;
-      padding: 15px 20px;
-      color: #fff;
-      text-decoration: none;
-    }
-
- @media (max-width: 768px){
-      header label{
-        display: block;
-      } 
-      .menu3 {
-        position: absolute;
-        background: transparent;
-        width: 70%;
-        margin-left: -70%;
-        transition: all 0.5s;
-      }
-      .menu3 ul {
-        flex-direction: column;
-      }
-      .menu3 li{
-        border-top: 1px solid transparent;
-      }
-      #btn-menu3:checked ~.menu3 {
-        margin: 0;
-      }
-    }
-
-/*Aqui termina el nuevo menu de colores junto con el menu para celular responsivo*
--------------
-------------
-------------*/
-  .box {
-                width: 320px;
-                height: 280px;
-                background: transparent;
-                margin-top: 20em;
-                /*top: 50%;*/
-                position: absolute;
-                transform: translate(-150%, -50%);
-                padding: 70px 30px;
-                border-radius: 25px;
-            }
-            
-            .loginBox {
-                width: 320px;
-                height: 400px;
-                background: #FFF;
-                color: #2B307C;
-                position: absolute;
-                transform: translate(-50%, -50%);
-                box-sizing: border-box;
-                padding: 40px 30px;
-                border-radius: 9px;
-                margin-top: -60px;
-
-                border: 0.5em solid #2B307C;
-            }
-            
-            .loginBox .avatar {
-                width: 80px;
-                height: 80px;
-                border-radius: 50%;
-                position: absolute;
-                top: -50px;
-                left: calc(50% - 40px);
-
-                border: 0.5em solid #2B307C;
-            }
-            
-            .loginBox h1 {
-                margin: 0;
-                padding: 0 0 20px;
-                text-align: center;
-                font-size: 22px;
-            }
-            
-            .loginBox label {
-                margin: 0;
-                padding: 0;
-                font-weight: bold;
-                display: block; 
-            }
-            
-            .loginBox input {
-                width: 100%;
-                margin-bottom: 20px;
-            }
-            
-            .loginBox input[type="text"], 
-            .loginBox input[type="password"] {
-                border: none;
-                border-bottom: 2px solid #2B307C;
-                background: #00000012;
-                outline: none;
-                height: 40px;
-                color: #000;
-                font-size: 16px;
-                margin-top: 5px;
-                border-top-left-radius: 12px;
-                border-top-right-radius: 12px;
-            }
-            
-            .loginBox input[type="submit"] {
-                border: none;
-                outline: none;
-                height: 40px;
-                background: #2B307C;
-                color: #FFF;
-                font-size: 18px;
-                border-radius: 20px;    
-            }
-            
-            .loginBox input[type="submit"]:hover {
-                cursor: pointer;
-                background: #998636;
-            }
-            
-            .loginBox a {
-                text-decoration: none;
-                font-size: 12px;
-                line-height: 20px;
-                color: navy;
-            }
-            
-            .loginBox a:hover {
-                color: #998636;
-            }
-
-@media (max-width: 768px){
-    .calendar{
-        
-          transform: translate(-40%, -80%);
-    }
-    .contenedorlogincalendar{
-    border-radius: 3em;
-        margin:3em;
-        height: 100%;
-        width: auto;
-}
-
-.containerCredi{
-    transform: translate(0%, 80%);
-}
-
-
-         }
-
-
-.title {
-  text-align: center;
-  color: #FFFFFF; }
-
-.calendar {
-  background: #fff;
+.slider url {
   width: 100%;
-  max-width: 600px;
-        border-radius: 25px;
-                border: 0.5em solid #2B307C;
- }
-
-  .calendar__info {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    padding: 0 2em;
-    font-size: 1.2em;
-    text-transform: uppercase; }
-
-  .calendar__prev, .calendar__next {
-    color: #C7F464;
-    cursor: pointer;
-    font-size: 1.3em; }
-
-  .calendar__prev {
-    margin-right: auto; }
-
-  .calendar__next {
-    margin-left: auto; }
-
-  .calendar__week, .calendar__dates {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    grid-gap: 10px; }
-
-  .calendar__month, .calendar__year {
-    padding: .5em 1em; }
-
-  .calendar__item {
-    text-align: center;
-    line-height: 2; }
-
-  .calendar__today {
-    background: lightcoral;
-    color: white;
-    width: 50%;
-    border-radius: 50%;
-    margin: auto; }
-
-  .calendar__last-days {
-    opacity: .3; }
-/*Aqui Empieza el css de estilos de la pagina de cada uno*
--------------
-------------
-------------*/          
-
-.ContenedorPrincipal{
-    border-radius: 3em;
-    border: 0.3em solid #2B307C;
-        margin:3em;
-        height: 40%;
-        width: auto;
-}
-.contenedorlogincalendar{
-    border-radius: 3em;
-        margin:3em;
-        height: 60%;
-        width: 50%;
-}
-
-  .box {
-    margin-left: 25%;
-  }
-    
-   .calendar {
-    transform: translate(10%, 5%);
-    margin-left: 80%;
-  }
-}
-
-
- .slider{
-                width: 92%;
-                height: 500px;
-                border-radius: 10px;
-                overflow: hidden;
-                margin-top: 3em;
-                margin-bottom: -1.5em;
-            }
-
-            .slides{
-                width: 500%;
-                height: 500px;
-                display: flex;
-            }
-
-            .slides input{
-              display: none;
-            }
-
-            .slide{
-              width: 20%;
-              transition: 2s;
-            }
-
-            .slide img{
-              width: 100%;
               height: 500px;
-            }
+}
+#slider {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100vh;
+    min-height: 500px;
+}
+#slider li {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100%;
+    height: 100%;
+    display: block;
+    -webkit-transition: opacity 1s;
+    -moz-transition: opacity 1s;
+    -ms-transition: opacity 1s;
+    -o-transition: opacity 1s;
+    transition: opacity 1s;
+    z-index: -1;
+    opacity: 0;
+    transition: in;
+}
+#container-slider .arrowPrev, #container-slider .arrowNext{
+    font-size: 30pt;
+    color: rgba(204, 204, 204, 0.65);
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    left: 50px;
+    z-index: 2; 
+}
+#container-slider .arrowNext {
+    left: initial;
+    right: 50px !important;
+}
+.content_slider{
+    padding: 15px 30px;
+    color: #FFF;
+    width: 100%;
+    height: 100%;
+}
+.content_slider div{
+    text-align: center;
+}
+.content_slider h2{
+    font-family: 'arial';
+    font-size: 30pt;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+.content_slider p {
+    font-size: 15pt;
+    font-family: 'arial';
+    color: #FFF;
+    margin-bottom: 20px;
+}
+#slider li .content_slider{
+    
+    padding: 10px 125px;
 
-            .navigation-manual{
-              position: absolute;
-              width: 92%;
-              margin-top: -40px;
-              display: flex;
-              justify-content: center;
-            }
+}
+.content_slider{
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.btnSlider{
+    color: #FFF;
+    font-size: 15pt;
+    font-family: 'arial';
+    letter-spacing: 1px;
+    padding: 10px 50px;
+    border: 1px solid #CCC;
+    background: rgba(13, 13, 13, 0.55);
+    border-radius: 31px;
+    text-decoration: none;
+    transition: .5s all;
+}
+.btnSlider:hover{
+    background: #111;
+    border: 1px solid #111;
+}
+.listslider {
+    position: absolute;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    left: 50%;
+    bottom: 5%;
+    list-style: none;
+    z-index: 2;
+    transform: translateX(-50%);
+}
+.listslider li {
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    cursor: pointer;
+    margin: 0 5px;
+}
+.listslider li a {
+    background: #CCC;
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+.item-select-slid {
+    background: #FFF  !important;
+}
 
-            .manual-btn{
-              border: 2px solid #40D3DC;
-              padding: 5px;
-              border-radius: 10px;
-              cursor: pointer;
-              transition: 1s;
-            }
+@media screen and (max-width: 460px){
+  .content_slider h2 {
+      font-size: 15pt !important;
+  }
+  .content_slider p {
+      font-size: 12pt !important;
+  }
+  #container-slider .arrowPrev, #container-slider .arrowNext{
+    font-size: 20pt;
+  }
+  #container-slider .arrowPrev{
+    left: 15px;
+  }
+  #container-slider .arrowNext{
+    right: 15px !important;
+  }
+  #slider{
+    height: 400px;
+    min-height: 400px;
+  }
+  #slider li .content_slider{
+    padding: 10px 35px;
+  }
+  .btnSlider{
+    padding: 10px 30px;
+      font-size: 10pt;
+  }
 
-            .manual-btn:not(:last-child){
-              margin-right: 40px;
-            }
+} 
 
-            .manual-btn:hover{
-              background: #40D3DC;
-            }
+/*estilos de iniciar sesion*/
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+}
 
-            #radio1:checked ~ .first{
-              margin-left: 0;
-            }
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
 
-            #radio2:checked ~ .first{
-              margin-left: -20%;
-            }
-
-            #radio3:checked ~ .first{
-              margin-left: -40%;
-            }
-
-            #radio4:checked ~ .first{
-              margin-left: -60%;
-            }
-
-            .navigation-auto{
-              position: absolute;
-              display: flex;
-              width: 92%;
-              justify-content: center;
-              margin-top: 460px;
-            }
-
-            .navigation-auto div{
-              border: 2px solid #40D3DC;
-              padding: 5px;
-              border-radius: 10px;
-              transition: 0.5s;
-            }
-
-            .navigation-auto div:not(:last-child){
-              margin-right: 40px;
-            }
-            
-            #radio1:checked ~ .navigation-auto .auto-btn1{
-              background: #40D3DC;
-            }
-
-            #radio2:checked ~ .navigation-auto .auto-btn2{
-              background: #40D3DC;
-            }
-
-            #radio3:checked ~ .navigation-auto .auto-btn3{
-              background: #40D3DC;
-            }
-
-            #radio4:checked ~ .navigation-auto .auto-btn4{
-              background: #40D3DC;
-            }
-            
-            .slider{
-                background: rgb(224,243,250); /* Old browsers */
-                background: -moz-linear-gradient(45deg,  rgba(224,243,250,1) 0%, rgba(216,240,252,1) 50%, rgba(184,226,246,1) 51%, rgba(182,223,253,1) 100%); /* FF3.6-15 */
-                background: -webkit-linear-gradient(45deg,  rgba(224,243,250,1) 0%,rgba(216,240,252,1) 50%,rgba(184,226,246,1) 51%,rgba(182,223,253,1) 100%); /* Chrome10-25,Safari5.1-6 */
-                background: linear-gradient(45deg,  rgba(224,243,250,1) 0%,rgba(216,240,252,1) 50%,rgba(184,226,246,1) 51%,rgba(182,223,253,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0f3fa', endColorstr='#b6dffd',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-                border-radius:10px;
-            }
-
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 12px;
+  border-bottom-left-radius: 12px;
   
-          
+				border-bottom: 3px solid #2B307C;
+				background: #00000012;
+				color: #000;
 
-        </style>
+}
 
-    </head>
-    <body>
-        <!--
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-bottom-right-radius: 12px;
+  border-bottom-left-radius: 12px;
+  
+				border-bottom: 3px solid #2B307C;
+				background: #00000012;
+				color: #000;
+}
+
+/*estilos de la tabla*/
+.table-responsive{
+
+        margin:4em;
+        height: 90%;
+
+        border-radius: 1em;
+ border: 0.5em solid #2B307C;
+        width: auto;
+        background-color: #FFFFFA;
+}
+
+
+.loginBox input[type="submit"] {
+				border: none;
+				outline: none;
+				height: 40px;
+                                width: 200px;
+				background: #2B307C;
+				color: #FFF;
+				font-size: 18px;
+				border-radius: 20px;	
+			}
+			
+			.loginBox input[type="submit"]:hover {
+				cursor: pointer;
+				background: #998636;
+			}
+                        
+                        .loginBox a {
+				text-decoration: none;
+				font-size: 14px;
+				line-height: 20px;
+				color: navy;
+			}
+			
+			.loginBox a:hover {
+				color: #998636;
+			}
+                         .loginBox h1 {
+				color:  #2B307C;
+				font-size: 26px;
+			}
+  
+      </style>
+      
+      </head>
+
+<body>
+    <!--
 Encabezado de la página */
         */banner, menu, carrusel, cuadro iniciar, cuadro fechas, -->
-                
-       <!-- Barra de menu -->
-        
+        <!-- Baner -->
+     
+      
          <div id="wrapper" > <center> <img src="img/banpru.jpg" class="baner"/> </center>  </div>
          
        <!-- Barra de menu -->
@@ -541,124 +332,199 @@ Encabezado de la página */
             <header>  
                 <input type="checkbox" id="btn-menu"> 
                 <label for="btn-menu"><img src="img/menuicono11.png"> </label>
-                <nav class="menu" style="z-index: 1;">
+                <nav class="menu" style="z-index: 2;">
                     <ul>
-                        <li> <a href="">Inicio</a></li>
-                        <li> <a href="">Memorias</a></li>
-                        <li> <a href="">Convocatoria</a></li> 
-                        <li> <a href="">Inscripción y Costos</a></li>
-                        <li> <a href="ComiteOrg">Comité Organizador</a></li>
-                        <li> <a href=""><img class="alineadoicono" src="img/iniciaricono.png">&nbsp;Iniciar Sesión</a></li>
+                        <li> <a href="memoriascarrusel.php">Memorias</a></li>
+                        <li> <a href="convocatoria.php">Convocatoria</a></li> 
+                        <li> <a href="inscripcionYcostos.php">Inscripción y Costos</a></li>
+                        <li> <a href="ComiteOrg.php">Comité Organizador</a></li>
+                        <li> <a href="ComiteEva.php">Comité Evaluador</a></li>
+                        <li> <a href="InicioSesion.php"><img class="alineadoicono" src="img/iniciaricono.png">&nbsp;Cerrar Sesión</a></li>
                     </ul>  
-                </nav>               
+                </nav> 
+                
+            
+            <input type="checkbox" id="btn-menu2"> 
+                <label for="btn-menu2"><img src="img/icono_informacion2.png" alt=""> </label>
+                <nav class="menu2" style="z-index: 2;">           
+                    <ul>    
+                      <li> <a href=""><img class="alineadoicono" src="img/icono_informacion2.png"> </a></li>        
+                        <li> <a href="ponencias_info.php">Ponencias</a></li>  
+                        <li> <a href="carteles_info.php">Carteles</a></li>
+                        <li> <a href="talleres_info.php">Talleres</a></li>
+                    </ul>  
+                </nav>                
             </header>
         </div>
-       <!-- Carrusel -->
-         
-        
-            <div align="center">
-            <div class="slider">
-              <div class="slides">
-                <!--radio buttons start-->
-                <input type="radio" name="radio-btn" id="radio1">
-                <input type="radio" name="radio-btn" id="radio2">
-                <input type="radio" name="radio-btn" id="radio3">
-                <input type="radio" name="radio-btn" id="radio4">
-                <!--radio buttons end-->
-                <!--slide images start-->
-               <div class="slide first">
-                  <img src="img/pruebaconvocatoria1.jpg" alt="">
-                </div>
-                <div class="slide">
-                  <img src="img/convocatoriafechas.jpg" alt="">
-                </div>
-                <div class="slide">
-                  <img src="img/carrusel1.jpg" alt="">
-                </div>
-              <div class="slide">
-                  <img src="img/carrusel2.jpg" alt="">
-                </div>
-              <!--  <div class="slide">
-                  <img src="4.jpg" alt="">
-                </div>-->
-                <!--slide images end-->
-                <!--automatic navigation start-->
-                <div class="navigation-auto">
-                  <div class="auto-btn1"></div>
-                  <div class="auto-btn2"></div>
-                  <div class="auto-btn3"></div>
-                  <div class="auto-btn4"></div>
-                </div>
-                <!--automatic navigation end-->
-              </div>
-              <!--manual navigation start-->
-              <div class="navigation-manual">
-                <label for="radio1" class="manual-btn"></label>
-                <label for="radio2" class="manual-btn"></label>
-                <label for="radio3" class="manual-btn"></label>
-                <label for="radio4" class="manual-btn"></label>
-              </div>
-              <!--manual navigation end-->
-            </div>
-            </div>
-       <br>
-       <!-- Cuadritos, inicio sesión y calendario  -->
-         <!-- Inicio sesión  -->
-         <div class="contenedorlogincalendar">
-         <div class="row justify-content-start">
-    <div class="col-4">   
-         <div class="box">
-			<div class="loginBox">
-				<img class="avatar" src="img/Recurso1.png" alt="user">
-				<h1>Iniciar Sesión</h1>
-				<form method="POST">
-					<!******USERNAME*******>
-					<label for="Username">Correo</label>
-					<input type="text" placeholder="Ingresa Correo" name="user">
+       
+<div>
+<section id="container-slider"> 
+   <a href="javascript: fntExecuteSlide('prev');" class="arrowPrev"><i class="fas fa-chevron-circle-left"></i></a>
+   <a href="javascript: fntExecuteSlide('next');" class="arrowNext"><i class="fas fa-chevron-circle-right"></i></a>
+   <ul class="listslider">
+     <li><a itlist="itList_0" href="#" class="item-select-slid"></a></li>
+     <li><a itlist="itList_1" href="#"></a></li>
+     <li><a itlist="itList_2" href="#"></a></li>
+   </ul>
+   <ul id="slider">
+     <li style="background-image: url('img/pruebaconvocatoria1.jpg'); z-index:0; opacity: 1;">
+       <div class="content_slider" >
+         <div>
+   </div>
+       </div>
+     </li>
+     <li style="background-image: url('img/convocatoriafechas.jpg'); ">
+       <div class="content_slider" >
+         <div>
+   </div>
+       </div>
+     </li>
+     <li style="background-image: url('img/carrusel2.jpg'); ">
+       <div class="content_slider" >
+         <div>
+   </div>
+       </div>
+     </li>
 
-					<!******PASSWORD*******>
-					<label for="Password">Contraseña</label>
-					<input type="password" placeholder="Ingresa Contraseña" name="pass">
-
-					<input type="submit" value="Iniciar Sesión">
-
-					<a href="#">¿Olvidaste tu contraseña?</a>
-					<br>
-					<a href="registro.php">¿No tienes una cuenta?</a>
-				</form>
-			</div>
-		</div>
-        
-          </div>
-    <div class="col-13"> 
-         <!-- calendario -->
-         <div class="calendar">
-             <h1 class="title" style="color:#2B307C">Fechas Importantes</h1>
-    <div class="calendar__info">
-        <div class="calendar__prev" id="prev-month">&#9664;</div>
-        <div class="calendar__month" id="month"></div>
-        <div class="calendar__year" id="year"></div>
-        <div class="calendar__next" id="next-month">&#9654;</div>
-    </div>
-          
-    <div class="calendar__week">
-        <div class="calendar__day calendar__item">Lu.</div>
-        <div class="calendar__day calendar__item">Ma.</div>
-        <div class="calendar__day calendar__item">Mi.</div>
-        <div class="calendar__day calendar__item">Ju.</div>
-        <div class="calendar__day calendar__item">Vi.</div>
-        <div class="calendar__day calendar__item">Sa.</div>
-        <div class="calendar__day calendar__item">Do.</div>
-    </div>
-
-    <div class="calendar__dates" id="dates"></div>
+     <li style="background-image: url('img/carrusel2.jpg'); ">
+       <div class="content_slider" >
+         <div>
+   </div>
+       </div>
+     </li>
+  </ul>
+</section>
 </div>
 
-<script src="js/scriptscal.js"></script>
- </div>
-  </div> </div>
-       <br>
-       <br>
+<div class="contenedorinicio">
+  <body class="text-center">
+<div class="loginBox">
+<main class="form-signin w-100 m-auto">
+  <form method="POST">
+  </form>
+</main>
+
+
+ </body>
+    </div>
+
+
+
+<br>
+<br>
+
+<center>
+<h2>FECHAS IMPORTANTES</h2>
+<div class="table-responsive">
+<table class="table table-bordered border border-secondary"  >
+  <thead>
+    <tr>
+      <th scope="col" >Descripción</th>
+      <th scope="col">Fecha</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Recepción de resúmenes de trabajos.</td>
+      <td>Del 28 de noviembre de 2022 al 15 de enero de 2023</td>
+  
+    </tr>
+    <tr>
+      <td>Evaluación de resúmenes por parte del comité.</td>
+      <td>Del 16 al 22 de enero de 2023</td>
+    </tr>
+
+    <tr>
+      <td>Resultado de evaluación de resúmenes.</td>
+      <td>Del 23 al 29 de enero de 2023</td>
+    </tr>
+
+    <tr>
+      <td>Recepción de corrección de resúmenes.</td>
+      <td>Del 30 de enero al 10 de febrero de 2023</td>
+    </tr>
+
+    <tr>
+      <td class="table-danger"><center>Si su resumen no fué aprobado al 10 de febrero quedará fuera del evento.</center></td>
+      <td class="table-danger"><center></center></td>
+    </tr>
+     
+       <tr>
+      <td>Recepción de trabajos en extenso.</td>
+      <td>Del 30 de enero al 12 de febrero de 2023</td>
+  
+    </tr>
+    <tr>
+      <td>Notificación de observaciones de los trabajos en extenso.</td>
+      <td>Del 20 al 24 de febrero de 2023</td>
+    </tr>
+
+    <tr>
+      <td>Inicia el periodo de recepción de pagos.</td>
+      <td>10 de marzo de 2023</td>
+    </tr>
+
+    <tr>
+      <td>Recepción de extensos finales.</td>
+      <td>Del 13 al 17 de marzo de 2023</td>
+    </tr>
+
+      <tr>
+      <td class="table-danger"><center>Si su extenso no fué aprobado para el 20 de marzo quedará fuera del evento.</center></td>
+       <td class="table-danger"></td>
+    </tr>
+
+    <tr>
+      <td>Recepción de videos de las ponencias aceptadas.</td>
+      <td>Del 20 de marzo al 21 de abril de 2023</td>
+    </tr>
+
+      <tr>
+      <td class="table-danger"><center>Si su video no fué recibido para el 21 de abril quedará fuera del evento.</center></td>
+       <td class="table-danger"></td>
+    </tr>
+
+       <tr>
+      <td>Publicación del programa general del evento.</td>
+      <td>17 de abril de 2023</td>
+  
+    </tr>
+    <tr>
+      <td>Periodo de impartición de talleres en línea.</td>
+      <td>2 y 3 de mayo de 2023</td>
+    </tr>
+
+    <tr>
+      <td>Fecha del Congreso.</td>
+      <td>4 y 5 de mayo de 2023</td>
+    </tr>
+
+    <tr>
+      <td>Inicia el envío de constancias virtuales.</td>
+      <td>Del 5 al 9 de junio 2023</td>
+    </tr>
+
+     <tr>
+      <td>Publicación de las memorias del congreso.</td>
+      <td>A partir del 12 de junio de 2023</td>
+    </tr>
+
+    <tr>
+      <td class="table-info"><center>*A partir de esta fecha puede enviar correcciones de trabajos extensos si ya cuenta con observaciones.</center></td>
+       <td class="table-info"></td>
+    </tr>
+
+
+
+  </tbody>
+</table>
+</div>
+
+</center>
+
+
+<br>
+<br>
 
 <div class="containerCredi">
 <footer class="py-5">
@@ -692,6 +558,21 @@ Encabezado de la página */
         </ul>
         </div>
 
+        <div class="col-6 col-md-2 mb-3">
+        <h5 style="color: #FFFFFF;">DESARROLLADORES</h5>
+        <li style="color: #FFFFFF;"class="nav-item mb-2" class="nav-link p-0 text-muted"> Chavez Luna Miriam Virginia</li>
+        <li style="color: #FFFFFF;"class="nav-item mb-2" class="nav-link p-0 text-muted"> Jonathan </li>
+        <li style="color: #FFFFFF;"class="nav-item mb-2" class="nav-link p-0 text-muted"> Davila Almaraz Nayeli</li>
+        <li style="color: #FFFFFF;"class="nav-item mb-2" class="nav-link p-0 text-muted"> Montes Range Luz Elena </li>
+        <li style="color: #FFFFFF;"class="nav-item mb-2" class="nav-link p-0 text-muted"> Olivares Vega Ana Jesús</li>
+        <li style="color: #FFFFFF;"class="nav-item mb-2" class="nav-link p-0 text-muted"> Olvera Mendoza Viridiana</li>
+        <li style="color: #FFFFFF;"class="nav-item mb-2" class="nav-link p-0 text-muted"> Perez Monserrat</li>
+          <li style="color: #FFFFFF;"class="nav-item mb-2" class="nav-link p-0 text-muted"> Romero Jaime Fernanda</li>
+        <ul class="nav flex-column">
+          
+        </ul>
+        </div>
+
   <div class="containerCredi">
   <footer class="py-3 my-4">
     <ul class="nav justify-content-center border-bottom pb-3 mb-3">
@@ -704,76 +585,61 @@ Encabezado de la página */
       <p style="color: #FFFFFF;">&copy; <?php echo date('Y'); ?> Hecho en México, todos los derechos reservados. </p>
     </center>
   </footer>
- <div>  
- <?php
-$conexion=pg_connect("host=localhost dbname=BDCongresoMate user=postgres password= ");
+</div>
+    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+<script>
+  if(document.querySelector('#container-slider')){
+   setInterval('fntExecuteSlide("next")',5000);
+}
+//------------------------------ LIST SLIDER -------------------------
+if(document.querySelector('.listslider')){
+   let link = document.querySelectorAll(".listslider li a");
+   link.forEach(function(link) {
+      link.addEventListener('click', function(e){
+         e.preventDefault();
+         let item = this.getAttribute('itlist');
+         let arrItem = item.split("_");
+         fntExecuteSlide(arrItem[1]);
+         return false;
+      });
+    });
+}
 
- if(isset($_POST["user"]) && isset($_POST["pass"])){
-     session_start();
-$usuario= $_POST["user"];
-$clave= $_POST["pass"];
-  $clave = hash('sha512', $clave);
-/*
- if($conexion){
-                echo "CONEXIÓN EXITOSA <br>";
-            }else{
-                echo "CONEXIÓN FALLIDA";
-            }
-            */
-$query="SELECT usuario, contraseña FROM usuario WHERE usuario='$usuario' AND contraseña= '$clave' ";
- $consulta= pg_query($conexion,$query);
- $cantidad= pg_num_rows($consulta);
- 
- $query2=("Select id_usuario from usuario where usuario='$usuario' ");
-                            $conn2=pg_query($conexion,$query2);
+function fntExecuteSlide(side){
+    let parentTarget = document.getElementById('slider');
+    let elements = parentTarget.getElementsByTagName('li');
+    let curElement, nextElement;
 
-                               if(!$conn2){
-                                 die(pg_error($conexion));
-                                    }
+    for(var i=0; i<elements.length;i++){
 
-                               if (pg_num_rows($conn2) > 0) {
-                                          while($rowData = pg_fetch_array($conn2)){
-                                       $conn3=intval($rowData["id_usuario"]);
-                                                   }
-                                             }
-                                             
-                           $query5=("Select permiso_id_rol from permisos where usuario_id='$conn3' ");
-                            $conn5=pg_query($conexion,$query5);
+        if(elements[i].style.opacity==1){
+            curElement = i;
+            break;
+        }
+    }
+    if(side == 'prev' || side == 'next'){
 
-                               if(!$conn5){
-                                 die(pg_error($conexion));
-                                    }
+        if(side=="prev"){
+            nextElement = (curElement == 0)?elements.length -1:curElement -1;
+        }else{
+            nextElement = (curElement == elements.length -1)?0:curElement +1;
+        }
+    }else{
+        nextElement = side;
+        side = (curElement > nextElement)?'prev':'next';
 
-                               if (pg_num_rows($conn5) > 0) {
-                                          while($rowData = pg_fetch_array($conn5)){
-                                       $conn4=$rowData["permiso_id_rol"];
-                                                   }
-                                             }
-                                if ($cantidad>0){
-     header ("location:perfilnavegacion.php");
-                                }
-                                             
-                    /*    if ($conn4=="0"){
-                                          
- if ($cantidad>0){
-     echo '<script>alert("Sesión Iniciada")</script>';
-     header ("location:perfilusuario.php");
+    }
+    //RESALTA LOS PUNTOS
+    let elementSel = document.getElementsByClassName("listslider")[0].getElementsByTagName("a");
+    elementSel[curElement].classList.remove("item-select-slid");
+    elementSel[nextElement].classList.add("item-select-slid");
+    elements[curElement].style.opacity=0;
+    elements[curElement].style.zIndex =0;
+    elements[nextElement].style.opacity=1;
+    elements[nextElement].style.zIndex =1;
+}
+</script>
 
- } else{
-      echo '<script>alert("Datos incorrectos")</script>';
- }}else if ($conn4=="1"){
-     if ($cantidad>0){
-     echo '<script>alert("Sesión Iniciada")</script>';
-     header ("location:perfilponente.php");
-
- } else{
-      echo '<script>alert("Datos incorrectos")</script>';
- }
- 
- }*/
- 
- }
-?>
-   </div>
-    </body>
-</html>
+</body>
+</html>  

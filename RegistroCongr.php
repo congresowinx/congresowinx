@@ -1,21 +1,23 @@
+<?php
+ini_set("display_errors",1);
+session_start();
+?>
 <html lang="es">
     <head>
         <link href="icono.ico" type="image/x-icon" rel="shortcut icon" />
+        
         <title>Registro de Nuevo Congreso de Matemáticas</title>
-       <meta charset="UTF-8"> 
+        <meta charset="UTF-8"> 
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1, minimum-scale=1">
         <link rel="stylesheet" href="icon.css">
- 
            <link rel="stylesheet" href="css/estilosmenuarriba.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">  
-
-        <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+           
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">   
         
         <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
-<link rel="icon" href="img/favicon.png" type="image/x-icon"> 
-        
+<link rel="icon" href="img/favicon.png" type="image/x-icon">      
         <style>
-    .bd-placeholder-img {
+   .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
         -webkit-user-select: none;
@@ -467,10 +469,10 @@ button{
     }
       @media (max-width: 370px) {
         .inputP {
-          width: 60px;
+          width: 65px;
         }
         .inputNombreC {
-          width: 130px;
+          width: 150px;
         }
         .content-select {
           width: 60px;
@@ -512,8 +514,6 @@ button{
 	border: 0.3em solid #B18904;
         margin:3em;
 }
-
-
         </style>
     </head>
 
@@ -560,7 +560,8 @@ Encabezado de la página */
                 </nav>                
             </header>
         </div>
- 
+                
+                <!-- Barra de menu Secundario-->       
        <div class="containerBoton">
         <label for="btn-menu3"></label>
         <nav class="menu3" style="z-index: 2;">  
@@ -583,14 +584,13 @@ Encabezado de la página */
             <a href="#" class="icond icon-key" target="_blank"> <img src="img/icons8-configuración-del-administrador-16.png"/> </a>
             <a href="#" class="icond icon-hearth" target="_blank"> <img src="img/icons8-llamada-de-conferencia-16.png"/> </a>
         </div>   
-    
-
+       
 
 <div class="contenedorregistroI"> 
   <div class="px-4 pt-5 my-5 text-center border-bottom">
     <div class="col-lg-6 mx-auto">
            
-          <p class="Tema">Regístro de Congreso</p>
+    <p class="Tema">Regístro de Congreso</p>
 			<form action="#" method="POST" >
                              <div class="D1">
                             <table>
@@ -599,7 +599,7 @@ Encabezado de la página */
 					<label for="Name">Nombre del Congreso:</label>
                                                 </td>
 						<td class="C2">
-					<input class="inputNombreC" type="text" name="nombre" placeholder="Ingresa el Nombre del Congreso" required>
+					<input class="inputNombreC" type="text" name="NombreC" placeholder="Ingresa el Nombre del Congreso" required>
 								</td>
                                                                 
 							</tr>
@@ -608,17 +608,33 @@ Encabezado de la página */
                             <div> 
                                 <table>
                                                         <tr>
-                                                            <td class="C1">
-									<label for="Registro">Número de Registro:</label>
+                                                        <td class="C1">
+									<label for="Registro">Identificador :</label>
 								</td>
-								<td class="C2">
-									<input class="inputP" type="text" name="nombre" placeholder="Número de Congreso" required>
-								</td>
-								<td class="C1">
+								<td class="C2">                
+									<select class="inputP" type="text" name="Iden" placeholder="Tipo de Registro" required>
+                  <?php 
+           $conexion = pg_connect("host=localhost dbname=congresowinx user=congresowinx password=W1nxC0ngr3s032511");
+            $query1 = ("Select n_referencia, tipo from identificador");
+                  $consulta = pg_query($conexion, $query1); ?>
+
+          <?php 
+          while($obj=pg_fetch_object($consulta)){        
+          ?>
+         <option value="<?php echo $obj->n_referencia ?>"><?php echo $obj->tipo;?> <?php echo $obj->n_referencia;?></option>
+         <?php
+          }
+           ?>      
+
+                    </select>
+								
+							</tr>
+              <tr>
+              <td class="C1">
 									<label for="Numero">Número de Congreso:</label>
 								</td>
 								<td class="C2">
-                                                                    <select class="inputP" required>
+                                                                    <select name="NumeroC" class="inputP" required>
                                                                         <option class="inputP"> 1° Primero I</option>
                                                                         <option class="inputP"> 2° Segundo  II</option>
                                                                         <option class="inputP"> 3° Tercero  III</option>
@@ -648,14 +664,13 @@ Encabezado de la página */
                                                                         <option class="inputP"> 27° Vigésimoseptimo  XXVII</option>
                                                                     </select>
 								</td>
-							</tr>
-                                                    
-                                                      <tr>
+        </tr>                                      
+            <tr>                                         
 								<td class="C1">
 									<label for="Email">Correo del Congreso:</label>
 								</td>
 								<td class="C2">
-									<input class="inputP" type="email" name="Correo" placeholder="Ingresa el Correo del Congreso" required>
+									<input class="inputP" type="email" name="CorreoC" placeholder="Ingresa el Correo del Congreso" required>
 								</td>
 							</tr>
                                 
@@ -671,14 +686,14 @@ Encabezado de la página */
 									<label for="Name">Fecha Inicio:</label>
 								</td>
 								<td class="C2">
-                                                                       <input  class="inputP" type ="date" name ="fechaI" required>
+                                                                       <input  class="inputP" type ="date" name ="InviI" required>
 								</td>
                                                                 
 								<td class="C1">
 									<label for="Last">Fecha Fin:</label>
 								</td>
 								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaF" required>
+									<input  class="inputP" type ="date" name ="InviF" required>
 								</td>
 							</tr>						
 						</table>
@@ -694,14 +709,14 @@ Encabezado de la página */
 									<label for="Name">Fecha Inicio:</label>
 								</td>
 								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaI" required/>
+									<input  class="inputP" type ="date" name ="IniC" required/>
 								</td>
                                                                 
 								<td class="C1">
 									<label for="Last">Fecha Fin:</label>
 								</td>
 								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaF" required/>
+									<input  class="inputP" type ="date" name ="FinC" required/>
 								</td>
 							</tr>						
 						</table>
@@ -717,14 +732,14 @@ Encabezado de la página */
 									<label for="Name">Fecha Inicio:</label>
 								</td>
 								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaI" required>
+									<input  class="inputP" type ="date" name ="PagI" required>
 								</td>
                                                                 
 								<td class="C1">
 									<label for="Last">Fecha Fin:</label>
 								</td>
 								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaF" required>
+									<input  class="inputP" type ="date" name ="PagF" required>
 								</td>
 							</tr>						
 						</table>
@@ -740,14 +755,14 @@ Encabezado de la página */
 									<label for="Name">Fecha Inicio:</label>
 								</td>
 								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaI" required>
+									<input  class="inputP" type ="date" name ="ResuI" required>
 								</td>
                                                                 
 								<td class="C1">
 									<label for="Last">Fecha Fin:</label>
 								</td>
 								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaF" required>
+									<input  class="inputP" type ="date" name ="ResuF" required>
 								</td>
 							</tr>						
 						</table>
@@ -763,14 +778,14 @@ Encabezado de la página */
 									<label for="Name">Fecha Inicio:</label>
 								</td>
 								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaI" required>
+									<input  class="inputP" type ="date" name ="EvaRI" required>
 								</td>
                                                                 
 								<td class="C1">
 									<label for="Last">Fecha Fin:</label>
 								</td>
 								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaF" required>
+									<input  class="inputP" type ="date" name ="EvaRF" required>
 								</td>
 							</tr>						
 						</table>
@@ -786,14 +801,14 @@ Encabezado de la página */
 									<label for="Name">Fecha Inicio:</label>
 								</td>
 								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaI" required>
+									<input  class="inputP" type ="date" name ="ResEvRI" required>
 								</td>
                                                                 
 								<td class="C1">
 									<label for="Last">Fecha Fin:</label>
 								</td>
 								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaF" required>
+									<input  class="inputP" type ="date" name ="ResEvRF" required>
 								</td>
 							</tr>						
 						</table>
@@ -809,14 +824,14 @@ Encabezado de la página */
 									<label for="Name">Fecha Inicio:</label>
 								</td>
 								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaI" required>
+									<input  class="inputP" type ="date" name ="CorRI" required>
 								</td>
                                                                 
 								<td class="C1">
 									<label for="Last">Fecha Fin:</label>
 								</td>
 								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaF" required>
+									<input  class="inputP" type ="date" name ="CorRF" required>
 								</td>
 							</tr>						
 						</table>
@@ -832,14 +847,14 @@ Encabezado de la página */
 									<label for="Name">Fecha Inicio:</label>
 								</td>
 								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaI" required>
+									<input  class="inputP" type ="date" name ="ExtI" required>
 								</td>
                                                                 
 								<td class="C1">
 									<label for="Last">Fecha Fin:</label>
 								</td>
 								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaF" required>
+									<input  class="inputP" type ="date" name ="ExtF" required>
 								</td>
 							</tr>						
 						</table>
@@ -855,14 +870,14 @@ Encabezado de la página */
 									<label for="Name">Fecha Inicio:</label>
 								</td>
 								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaI" required>
+									<input  class="inputP" type ="date" name ="NotObExI" required>
 								</td>
                                                                 
 								<td class="C1">
 									<label for="Last">Fecha Fin:</label>
 								</td>
 								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaF" required>
+									<input  class="inputP" type ="date" name ="NotObExF" required>
 								</td>
 							</tr>						
 						</table>
@@ -878,14 +893,14 @@ Encabezado de la página */
 									<label for="Name">Fecha Inicio:</label>
 								</td>
 								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaI" required>
+									<input  class="inputP" type ="date" name ="ReExtFI" required>
 								</td>
                                                                 
 								<td class="C1">
 									<label for="Last">Fecha Fin:</label>
 								</td>
 								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaF" required>
+									<input  class="inputP" type ="date" name ="ReExtFF" required>
 								</td>
 							</tr>						
 						</table>
@@ -901,14 +916,14 @@ Encabezado de la página */
 									<label for="Name">Fecha Inicio:</label>
 								</td>
 								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaI" required>
+									<input  class="inputP" type ="date" name ="VidPonAI" required>
 								</td>
                                                                 
 								<td class="C1">
 									<label for="Last">Fecha Fin:</label>
 								</td>
 								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaF" required>
+									<input  class="inputP" type ="date" name ="VidPonAF" required>
 								</td>
 							</tr>						
 						</table>
@@ -924,7 +939,7 @@ Encabezado de la página */
 									<label for="Name">Fecha de Publicación del Evento:</label>
 								</td>
 								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaI" required>
+									<input  class="inputP" type ="date" name ="ProgEven" required>
 								</td>
 							</tr>						
 						</table>
@@ -940,14 +955,14 @@ Encabezado de la página */
 									<label for="Name">Fecha Inicio:</label>
 								</td>
 								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaI" required>
+									<input  class="inputP" type ="date" name ="TallI" required>
 								</td>
                                                                 
 								<td class="C1">
 									<label for="Last">Fecha Fin:</label>
 								</td>
 								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaF" required>
+									<input  class="inputP" type ="date" name ="TallF" required>
 								</td>
 							</tr>						
 						</table>
@@ -963,14 +978,14 @@ Encabezado de la página */
 									<label for="Name">Fecha Inicio:</label>
 								</td>
 								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaI" required>
+									<input  class="inputP" type ="date" name ="EnvConsI" required>
 								</td>
                                                                 
 								<td class="C1">
 									<label for="Last">Fecha Fin:</label>
 								</td>
 								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaF" required>
+									<input  class="inputP" type ="date" name ="EnvConsF" required>
 								</td>
 							</tr>						
 						</table>
@@ -986,16 +1001,18 @@ Encabezado de la página */
 									<label for="Name">Fecha de Publicación de Memorias del Congreso:</label>
 								</td>
 								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaI" required>
+									<input  class="inputP" type ="date" name ="Pmemo" required>
 								</td>
 							</tr>						
 						</table>
 					</div> 
-				</div>  
+				</div> 
                            
-                            <button>Registrar Congreso</button> 
-        
+                            <button name="uploadBtn" class="enviarBtn" value="Registrar Congreso">Registrar Congreso</button> 
 			</form>
+      <br>
+        <br>
+        <div> <a  href="Perfiladmin.php"  > <button > Regresar</button> </a> </div> 
         
        </div>
   </div>
@@ -1044,12 +1061,74 @@ Encabezado de la página */
         completa y su dirección electrónica.</li>
          <li style="color: #FFFFFF;" class="nav-item" class="nav-link px-2 text-muted">De otra forma requiere permiso previo por escrito de la institución</li>
     </ul>
-     <center>
+    <center>
       <p style="color: #FFFFFF;">&copy; <?php echo date('Y'); ?> Hecho en México, todos los derechos reservados. </p>
     </center>
   </footer>
+
+  <div>
+  <?php
+$message = '';
+if (isset($_POST['uploadBtn']) && $_POST['uploadBtn'] == 'Registrar Congreso') {
+    
+
+    $conexion = pg_connect("host=localhost dbname=congresowinx user=congresowinx password=W1nxC0ngr3s032511");
+   
+
+    if (isset($_POST["NombreC"]) && isset($_POST["Iden"]) && isset($_POST["NumeroC"]) && isset($_POST["CorreoC"])&& isset($_POST["InviI"]) && isset($_POST["InviF"])) {
+
+      $NombreC = $_POST["NombreC"];
+      $Identi = $_POST["Iden"];
+      $NumeroC = $_POST["NumeroC"];
+      $CorreoC = $_POST["CorreoC"];
+      $InvitacionesI = $_POST["InviI"];
+      $InvitacionesF = $_POST["InviF"];
+      $CongresoI = $_POST["IniC"];
+      $CongresoF = $_POST["FinC"];
+      $PagoI = $_POST["PagI"];
+      $PagoF = $_POST["PagF"];
+      $ResumI = $_POST["ResuI"];
+      $ResumF = $_POST["ResuF"];
+      $EvalResI = $_POST["EvaRI"];
+      $EvalResF = $_POST["EvaRF"];
+      $RestEvaResI = $_POST["ResEvRI"];
+      $RestEvaResF = $_POST["ResEvRF"];
+      $CorResI = $_POST["CorRI"];
+      $CorResF = $_POST["CorRF"];
+      $ExtenI = $_POST["ExtI"];
+      $ExtenF = $_POST["ExtF"];
+      $NotObsExtI = $_POST["NotObExI"];
+      $NotObsExtF = $_POST["NotObExF"];
+      $RecExtenFinI = $_POST["ReExtFI"];
+      $RecExtenFinF = $_POST["ReExtFF"];
+      $VideoPonAcI = $_POST["VidPonAI"];
+      $VideoPonAcF = $_POST["VidPonAF"];
+      $ProgramEvent = $_POST["ProgEven"];
+      $TallerI = $_POST["TallI"];
+      $TallerF = $_POST["TallF"];
+      $EnvioConstI = $_POST["EnvConsI"];
+      $EnvioConstF = $_POST["EnvConsF"];
+      $PublicMemor = $_POST["Pmemo"];
+
+      $query="SELECT id_congreso, email FROM congreso WHERE id_congreso='$NumeroC' AND email='$CorreoC'";
+      $consulta= pg_query($conexion,$query);
+      $cantidad= pg_num_rows($consulta);
+      if ($cantidad>0){
+       echo "<script>alert('Ya existe este un Congreso registrado con este número. Intenta Nuevamente!!!'); 
+       window.location.replace('https://laboratoriosistemas.cuautitlan2.unam.mx/congresowinx/WinxCongreso/ReferenciaCongr.php');</script>";
+      } else{
+        $query = ("INSERT INTO congreso (id_congreso, email,  fecha_inicio_envio_invitaciones_convocatoria,  fecha_fin_envio_invitaciones_convocatoria, fecha_inicio_recepcion_resumenes, fecha_fin_recepcion_resumenes, fecha_inicio_evaluacion_resumenes, fecha_fin_evaluacion_resumenes, fecha_inicio_resultado_evaluacion_resumenes, fecha_fin_resultado_evaluacion_resumenes, fecha_inicio_recepcion_correcion_resumenes, fecha_fin_recepcion_correcion_resumenes,  fecha_inicio_recepcion_extensos,  fecha_fin_recepcion_extensos, fecha_inicio_notificacion_observaciones_extensos, fecha_fin_notificacion_observaciones_extensos, fecha_inicio_recepcion_pagos,  fceha_fin_recepcion_pagos,  fecha_inicio_recepcion_extensos_finales,  fecha_fin_recepcion_extensos_finales,  fecha_inicio_recepcion_videos_ponencias_aceptadas,  fecha_fin_recepcion_videos_ponencias_aceptadas, fecha_publicacion_programa_evento, fecha_inicio_congreso, fecha_fin_congreso, fecha_inicio_imparticion_talleres, fecha_fin_imparticion_talleres, fecha_inicio_envio_contancias, fecha_fin_envio_contancias, fecha_publicacion_memorias, nombre_congreso, numero_congreso, identificador_numero_registro) 
+        VALUES('$NumeroC','$CorreoC','$InvitacionesI','$InvitacionesF', '$ResumI', '$ResumF', '$EvalResI', '$EvalResF', '$RestEvaResI', '$RestEvaResF', '$CorResI', '$CorResF', '$ExtenI', '$ExtenF', '$NotObsExtI', '$NotObsExtF', '$PagoI', '$PagoF', '$RecExtenFinI', '$RecExtenFinF', '$VideoPonAcI', '$VideoPonAcF', '$ProgramEvent', '$CongresoI', '$CongresoF', '$TallerI', '$TallerF', '$EnvioConstI', '$EnvioConstF', '$PublicMemor', '$NombreC', '$NumeroC', '$Identi' )");
+      $consulta = pg_query($conexion, $query);
+      if($consulta){
+      echo "<script>alert('Congreso Registrado Exitosamente !!!'); 
+       window.location.replace('https://laboratoriosistemas.cuautitlan2.unam.mx/congresowinx/WinxCongreso/ReferenciaCongr.php');</script>";
+      }
+      }
+     }}
+     $_SESSION['sms'] = $message;  ?>  
+        </div>
 </div>
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
-           
 </body>
 </html>

@@ -1,5 +1,6 @@
+
 <?php
-ini_set("display_errors", 1);
+ini_set("display_errors", 0);
 session_start();
 ?>
 
@@ -28,6 +29,7 @@ session_start();
   <script>
     function onSubmit(token) {
       document.getElementById("demo-form").submit();
+      
     }
   </script>
 
@@ -54,12 +56,12 @@ session_start();
       <label for="btn-menu"><img src="img/menuicono.png" alt=""> </label>
       <nav class="menu">
         <ul>
-          <li> <a href="index.php">Inicio</a></li>
+          <li> <a href="index3.php">Inicio</a></li>
           <li> <a href="">Memorias</a></li>
           <li> <a href="">Convocatoria</a></li>
           <li> <a href="">Inscripción</a></li>
           <li> <a href="">Comité Organizador</a></li>
-          <li> <a href=""><img class="alineadoicono" src="img/iniciaricono.png">&nbsp;Iniciar Sesión</a></li>
+          <li> <a href="InicioSesion"><img class="alineadoicono" src="img/iniciaricono.png">&nbsp;Iniciar Sesión</a></li>
         </ul>
       </nav>
     </header>
@@ -466,200 +468,27 @@ session_start();
 
                 <td>
                   <select name="institucion" class="content-select" required>
+        
+              <option>FES Cuautitlán</option>
+         <?php 
+           $conexion = pg_connect("host=localhost dbname=congresowinx user=congresowinx password=W1nxC0ngr3s032511");
+            $query1 = ("Select * from institucion");
+                  $conn1 = pg_query($conexion, $query1);
 
-                    <option value="FES Cuautitlán">FES Cuautitlán</option>
+                  if (!$conn1) {
+                    die(pg_error($conexion));
+                  }
 
-                    <option value="Facultad de Arquitectura">Facultad de Arquitectura</option>
-                    <option value="Facultad de Artes y Diseño">Facultad de Artes y Diseño</option>
-                    <option value="Facultad de Ciencias">Facultad de Ciencias</option>
-                    <option value="Facultad de Ciencias Políticas y Sociales">Facultad de Ciencias Políticas y Sociales</option>
-                    <option value="Facultad de Contaduría y Administración">Facultad de Contaduría y Administración</option>
-                    <option value="Facultad de Derecho">Facultad de Derecho</option>
-                    <option value="Facultad de Economía">Facultad de Economía</option>
-                    <option value="Facultad de Filosofía y Letras">Facultad de Filosofía y Letras</option>
-                    <option value="Facultad de Ingeniería">Facultad de Ingeniería</option>
-                    <option value="Facultad de Medicina">Facultad de Medicina</option>
-                    <option value="Facultad de Medicina Veterinaria y Zootecnia">Facultad de Medicina Veterinaria y Zootecnia</option>
-                    <option value="Facultad de Música">Facultad de Música</option>
-                    <option value="Facultad de Odontología">Facultad de Odontología</option>
-                    <option value="Facultad de Psicología">Facultad de Psicología</option>
-                    <option value="Facultad de Química">Facultad de Química</option>
+                  if (pg_num_rows($conn1) > 0) {
+                    while ($rowData = pg_fetch_array($conn1)) {
+                     ?>   
+          <option><?php echo $rowData["nombre_institucion"] ?></option>  
+                     
+           <?php } }  ?>
+                    
 
-                    <option value="FES Acatlán">FES Acatlán</option>
-                    <option value="FES Aragón">FES Aragón</option>
-                    <option value="FES Cuautitlán">FES Cuautitlán</option>
-                    <option value="FES Iztacala">FES Iztacala</option>
-                    <option value="FES Zaragoza">FES Zaragoza</option>
-
-                    <option value="ENAC">ENAC</option>
-                    <option value="ENCiT">ENCiT</option>
-                    <option value="ENEO">ENEO</option>
-
-                    <option value="ENES Juriquilla">ENES Juriquilla</option>
-                    <option value="ENES León">ENES León</option>
-                    <option value="ENES Mérida">ENES Mérida</option>
-                    <option value="ENES Morelia">ENES Morelia</option>
-
-                    <option value="ENALLT">ENALLT</option>
-
-                    <option value="Escuela Nacional de Trabajo Social">Escuela Nacional de Trabajo Social</option>
-
-                    <option value="ENP 1 Gabino Barreda">ENP 1 Gabino Barreda</option>
-                    <option value="ENP 2 Erasmo Castellanos Quinto">ENP 2 Erasmo Castellanos Quinto</option>
-                    <option value="ENP 3 Justo Sierra">ENP 3 Justo Sierra</option>
-                    <option value="ENP 4 Vidal Castañeda y Nájera">ENP 4 Vidal Castañeda y Nájera</option>
-                    <option value="ENP 5 José Vasconcelos">ENP 5 José Vasconcelos</option>
-                    <option value="ENP 6 Antonio Caso">ENP 6 Antonio Caso</option>
-                    <option value="ENP 7 Ezequiel A. Chávez">ENP 7 Ezequiel A. Chávez</option>
-                    <option value="ENP 8 Miguel E. Schulz">ENP 8 Miguel E. Schulz</option>
-                    <option value="ENP 9 Pedro de Alba">ENP 9 Pedro de Alba</option>
-
-                    <option value="CCH Azcapotzalco">CCH Azcapotzalco</option>
-                    <option value="CCH Naucalpan">CCH Naucalpan</option>
-                    <option value="CCH Oriente">CCH Oriente</option>
-                    <option value="CCH Sur">CCH Sur</option>
-                    <option value="CCH Vallejo">CCH Vallejo</option>
-
-                    <option value="UNAM Campus Morelos">UNAM Campus Morelos</option>
-
-                    <option value="Coordinación de Estudios de Posgrado">Coordinación de Estudios de Posgrado</option>
-
-                    <option value="Benemérita Universidad Autónoma de Puebla">Benemérita Universidad Autónoma de Puebla</option>
-                    <option value="Centros de Bachillerato Tecnológico 2">Centros de Bachillerato Tecnológico 2</option>
-                    <option value="Centros de Bachillerato Tecnológico 3">Centros de Bachillerato Tecnológico 3</option>
-                    <option value="Centro de Actualización del Magisterio de Ciudad Juárez">Centro de Actualización del Magisterio de Ciudad Juárez</option>
-                    <option value="Centro de Estudios Científicos y Tecnológicos">Centro de Estudios Científicos y Tecnológicos</option>
-                    <option value="Centro de Bachillerato Tecnológico Industrial y de Servicios 50">Centro de Bachillerato Tecnológico Industrial y de Servicios 50</option>
-                    <option value="Centro de Bachillerato Tecnológico Industrial y de Servicios 36">Centro de Bachillerato Tecnológico Industrial y de Servicios 36</option>
-                    <option value="Centro de Bachillerato Tecnológico Industrial y de Servicios 154">Centro de Bachillerato Tecnológico Industrial y de Servicios 154</option>
-                    <option value="Centro Interdisciplinario de Investigación y Docencia en Educación Técnica">Centro Interdisciplinario de Investigación y Docencia en Educación Técnica</option>
-                    <option value="Centro de Diseño, Cine y Televisión">Centro de Diseño, Cine y Televisión</option>
-                    <option value="Centro Universitario de Tijuana Campus Mexicali">Centro Universitario de Tijuana Campus Mexicali</option>
-                    <option value="Centro Universitario Los Ángeles">Centro Universitario Los Ángeles</option>
-                    <option value="Colegio de Bachilleres">Colegio de Bachilleres</option>
-                    <option value="Colegio Álamos">Colegio Álamos</option>
-                    <option value="Colegio de Estudios Científicos y Tecnológicos del Estado de Hidalgo">Colegio de Estudios Científicos y Tecnológicos del Estado de Hidalgo</option>
-                    <option value="Colegio Nacional de Educación Profesional Técnica Azcapotzalco">Colegio Nacional de Educación Profesional Técnica Azcapotzalco</option>
-                    <option value="Colegio Superior para la Educación Integral Intercultural de Oaxaca">Colegio Superior para la Educación Integral Intercultural de Oaxaca</option>
-
-                    <option value="Escuela Normal Superior de Oaxaca">Escuela Normal Superior de Oaxaca</option>
-                    <option value="Escuela Normal Superior de México">Escuela Normal Superior de México</option>
-                    <option value="Escuela Normal Superior de Zumpango">Escuela Normal Superior de Zumpango</option>
-                    <option value="Escuela Normal Superior de Chiapas">Escuela Normal Superior de Chiapas</option>
-                    <option value="Escuela Normal Rural Gral. Matías Ramos Santos">Escuela Normal Rural Gral. Matías Ramos Santos</option>
-
-                    <option value="Escuela Secundaria General Pública en Cuautitlán">Escuela Secundaria General Pública en Cuautitlán</option>
-                    <option value="Escuela Secundaria Base Aérea">Escuela Secundaria Base Aérea</option>
-                    <option value="Escuela Secundaria Técnica 12">Escuela Secundaria Técnica 12</option>
-                    <option value="Escuela Secundaria Técnica 84">Escuela Secundaria Técnica 84</option>
-                    <option value="Escuela Secundaria 37 Para Trabajadores">Escuela Secundaria 37 Para Trabajadores</option>
-
-                    <option value="Escuela Preparatoria Oficial de Estado de México 4">Escuela Preparatoria Oficial de Estado de México 4</option>
-                    <option value="Escuela Preparatoria Oficial de Estado de México 138">Escuela Preparatoria Oficial de Estado de México 138</option>
-                    <option value="Escuela Preparatoria Oficial de Estado de México 194">Escuela Preparatoria Oficial de Estado de México 194</option>
-                    <option value="Escuela Preparatoria Oficial Anexa a la Normal 1">Escuela Preparatoria Oficial Anexa a la Normal 1</option>
-
-                    <option value="Escuela de Bellas Artes de Amecameca">Escuela de Bellas Artes de Amecameca</option>
-                    <option value="Instituto Politécnico Nacional">Instituto Politécnico Nacional</option>
-                    <option value="IPN SEPI ESIME Azcapotzalco">IPN SEPI ESIME Azcapotzalco</option>
-                    <option value="IPN SEPI ESIME Zacatenco">IPN SEPI ESIME Zacatenco</option>
-                    <option value="IPN SEPI ESIME Ticomán">IPN SEPI ESIME Ticomán</option>
-                    <option value="IPN UPIICSA">IPN UPIICSA</option>
-                    <option value="IPN UPIITA">IPN UPIITA</option>
-                    <option value="IPN ESFM">IPN ESFM</option>
-                    <option value="IPN CINVESTAV">IPN CINVESTAV</option>
-                    <option value="IPN ESIQIE">IPN ESIQIE</option>
-                    <option value="IPN ESIT">IPN ESIT</option>
-                    <option value="IPN CICATA LEGARIA">IPN CICATA LEGARIA</option>
-
-                    <option value="Instituto Tecnológico de Tehuacán">Instituto Tecnológico de Tehuacán</option>
-                    <option value="Instituto Tecnológico de Tlalnepantla">Instituto Tecnológico de Tlalnepantla</option>
-                    <option value="Instituto Tecnológico de Pachuca">Instituto Tecnológico de Pachuca</option>
-                    <option value="Instituto Tecnológico de Veracruz">Instituto Tecnológico de Veracruz</option>
-                    <option value="Instituto Tecnológico de Atitalaquia">Instituto Tecnológico de Atitalaquia</option>
-                    <option value="Instituto Tecnológico de Acapulco">Instituto Tecnológico de Acapulco</option>
-                    <option value="Instituto Tecnológico de Iztapalapa">Instituto Tecnológico de Iztapalapa</option>
-                    <option value="Instituto Tecnológico del Altiplano de Tlaxcala">Instituto Tecnológico del Altiplano de Tlaxcala</option>
-                    <option value="Instituto Tecnológico de Estudios Superiores Ecatepec">Instituto Tecnológico de Estudios Superiores Ecatepec</option>
-                    <option value="Instituto Tecnológico de Estudios Superiores Monterrey">Instituto Tecnológico de Estudios Superiores Monterrey</option>
-                    <option value="Instituto Tecnológico de Estudios Superiores Jilotepec">Instituto Tecnológico de Estudios Superiores Jilotepec</option>
-                    <option value="Instituto Tecnológico Superior de Ciudad Serdán">Instituto Tecnológico Superior de Ciudad Serdán</option>
-                    <option value="Instituto de educación Media Superior">Instituto de educación Media Superior</option>
-                    <option value="Instituto de educación Media Superior de la Ciudad de México">Instituto de educación Media Superior de la Ciudad de México</option>
-                    <option value="Instituto Superior de Ciencias de la Educación del Estado de México">Instituto Superior de Ciencias de la Educación del Estado de México</option>
-                    <option value="Instituto Zumárraga">Instituto Zumárraga</option>
-                    <option value="Instituto Mexicano del Petróleo">Instituto Mexicano del Petróleo</option>
-                    <option value="Instituto de Estudios Superiores de Progreso de Obregón Hidalgo">Instituto de Estudios Superiores de Progreso de Obregón Hidalgo</option>
-                    <option value="Instituto Cumbres y Alpes de Querétaro">Instituto Cumbres y Alpes de Querétaro</option>
-                    <option value="Instituto Bartolomé de las Casas">Instituto Bartolomé de las Casas</option>
-                    <option value="Instituto Americano Bilingüe John F. Kennedy">Instituto Americano Bilingüe John F. Kennedy</option>
-
-                    <option value="Secretaria de educación Pública">Secretaria de educación Pública</option>
-                    <option value="Secretaria de Cultura">Secretaria de Cultura</option>
-                    <option value="Secundaria Técnica 119 Albert Einstein">Secundaria Técnica 119 Albert Einstein</option>
-                    <option value="Secundaria Federal Margarita Maza P. de Juárez">Secundaria Federal Margarita Maza P. de Juárez</option>
-                    <option value="Servicios Educativos del Estado de Chihuahua">Servicios Educativos del Estado de Chihuahua</option>
-
-                    <option value="Tecnológico de Monterrey">Tecnológico de Monterrey</option>
-                    <option value="Tecnológico de Estudios Superiores de Coacalco">Tecnológico de Estudios Superiores de Coacalco</option>
-                    <option value="Tecnológico de Estudios Superiores de Jilotepec">Tecnológico de Estudios Superiores de Jilotepec</option>
-                    <option value="Tecnológico de Estudios Superiores de Cuautitlán Izcalli">Tecnológico de Estudios Superiores de Cuautitlán Izcalli</option>
-                    <option value="Tecnológico de Estudios Superiores de Ecatepec">Tecnológico de Estudios Superiores de Ecatepec</option>
-                    <option value="Tecnológico de Estudios Superiores de Veracruz">Tecnológico de Estudios Superiores de Veracruz</option>
-                    <option value="Tecnológico Nacional de México">Tecnológico Nacional de México</option>
-
-                    <option value="Telesecundaria 123 de Tulancingo">Telesecundaria 123 de Tulancingo</option>
-
-                    <option value="Universidad Anáhuac">Universidad Anáhuac</option>
-                    <option value="Universidad La Salle">Universidad La Salle</option>
-                    <option value="Universidad del Distrito Federal">Universidad del Distrito Federal</option>
-                    <option value="Universidad Autónoma del Estado de México">Universidad Autónoma del Estado de México</option>
-                    <option value="Universidad Autónoma de Sinaloa">Universidad Autónoma de Sinaloa</option>
-                    <option value="Universidad Autónoma de Baja California">Universidad Autónoma de Baja California</option>
-                    <option value="Universidad Autónoma de Quintana Roo">Universidad Autónoma de Quintana Roo</option>
-                    <option value="Universidad Autónoma de Nayarit">Universidad Autónoma de Nayarit</option>
-                    <option value="Universidad Autónoma de Zacatecas">Universidad Autónoma de Zacatecas</option>
-                    <option value="Universidad Autónoma de Yucatán">Universidad Autónoma de Yucatán</option>
-                    <option value="Universidad Autónoma de Querétaro">Universidad Autónoma de Querétaro</option>
-                    <option value="Universidad Autónoma de Campeche">Universidad Autónoma de Campeche</option>
-                    <option value="Universidad de Guadalajara">Universidad de Guadalajara</option>
-                    <option value="Universidad INACE">Universidad INACE</option>
-                    <option value="Universidad Tecnológica de Oriental">Universidad Tecnológica de Oriental</option>
-                    <option value="Universidad Tecnológica de Tecámac">Universidad Tecnológica de Tecámac</option>
-                    <option value="Universidad Autónoma del Estado de Hidalgo">Universidad Autónoma del Estado de Hidalgo</option>
-                    <option value="Universidad Autónoma del Estado de Morelos">Universidad Autónoma del Estado de Morelos</option>
-                    <option value="Universidad Autónoma Metropolitana Unidad Azcapotzalco">Universidad Autónoma Metropolitana Unidad Azcapotzalco</option>
-                    <option value="Universidad Autónoma Metropolitana Unidad Xochimilco">Universidad Autónoma Metropolitana Unidad Xochimilco</option>
-                    <option value="Universidad Pedagógica Nacional del Estado de Chihuahua">Universidad Pedagógica Nacional del Estado de Chihuahua</option>
-                    <option value="Universidad Tecnológica del Valle del Mezquital">Universidad Tecnológica del Valle del Mezquital</option>
-                    <option value="Universidad Interamericana para el Desarrollo">Universidad Interamericana para el Desarrollo</option>
-                    <option value="Universidad Abierta y a Distancia de México">Universidad Abierta y a Distancia de México</option>
-
-                    <option value="Instituto Superior del Profesorado Dr. Joaquín V. González">Instituto Superior del Profesorado Dr. Joaquín V. González</option>
-                    <option value="Universidad Nove de Julho">Universidad Nove de Julho</option>
-                    <option value="Universidad de Sao Paulo">Universidad de Sao Paulo</option>
-                    <option value="Universidad Presbiteriana Mackenzie">Universidad Presbiteriana Mackenzie</option>
-                    <option value="Universidad Distrital Francisco José de Caldas">Universidad Distrital Francisco José de Caldas</option>
-                    <option value="Pentester University">Pentester University</option>
-                    <option value="Universidad de Valencia">Universidad de Valencia</option>
-                    <option value="Hacking University">Hacking University</option>
-                    <option value="Colegio Santa Cruz Huayarqui">Colegio Santa Cruz Huayarqui</option>
-                    <option value="Universidad Tecnológica de Israel">Universidad Tecnológica de Israel</option>
-                    <option value="Universidad Central de Venezuela">Universidad Central de Venezuela</option>
-                    <option value="UPEL IMPM Extensión Académica Paraguná">UPEL IMPM Extensión Académica Paraguná</option>
-                    <option value="Universidad Simón Bolívar">Universidad Simón Bolívar</option>
-
-                    <!--  <option value="Otra">Otra</option> -->
                   </select>
                 </td>
-
-                <!--     <td class="C2">
-									<input class="inputP" list="iO" type="text" name="institucion" placeholder="Selecciona Institución" required>	
-								</td> -->
-
-
-
-
 
               </tr>
             </center>
@@ -733,8 +562,7 @@ session_start();
           <a href="#" rel="modal:close">Cerrar Ventana</a>
 
         </div>
-
-        <div class="g-recaptcha" data-sitekey="6Lef3iQiAAAAAAita50DKSAbufLdOP74h6_nGMpt" data-callback="correctCaptcha"></div>
+        <div class="g-recaptcha" data-sitekey="6LdLWGcjAAAAAKPWsfyRYT5BposgMdreUWztAlb_" data-callback="correctCaptcha"></div> 
 
 
         <button name="uploadBtn" class="enviarBtn" value="Enviar">Enviar</button>
@@ -748,9 +576,6 @@ session_start();
 
 
     <?php
-
-    //  session_start();
-
 
     $message = '';
     if (isset($_POST['uploadBtn']) && $_POST['uploadBtn'] == 'Enviar') {
@@ -801,11 +626,8 @@ session_start();
           $consultaR = pg_query($conexion, $query);
           $cantidad = pg_num_rows($consultaR);
           if ($cantidad > 0) {
-            echo "Ya existe un usuario registrado con el mismo email y telefono. Verifica tus datos e intenta nuevamente";
+            echo "<script>alert('Ya existe un usuario registrado con el mismo email y telefono. Verifica tus datos e intenta nuevamente');</script>";
           } else {
-
-
-
 
             if ($contraseña == $contraseña2) {
 
@@ -900,6 +722,7 @@ session_start();
                     $query10 = ("INSERT INTO permisos (permiso_id_rol, usuario_id, estado) 
                           VALUES('1', '$conn3', '1')");
                     $consulta10 = pg_query($conexion, $query10);
+                    echo "<script>alert('Registrado Exitosamente !!!');</script>";
                   }
                 } else {
                   $message = 'Subida fallida. Tipos de archivo permitidos: ' . implode(',', $allowedfileExtensions);
@@ -915,9 +738,11 @@ session_start();
           }
         }
       }
+      
     }
 
-    $_SESSION['sms'] = $message;    ?>
+    $_SESSION['sms'] = $message; 
+      ?>
 
   </div>
 
@@ -950,3 +775,4 @@ session_start();
 
 
 </html>
+

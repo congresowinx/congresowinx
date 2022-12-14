@@ -10,13 +10,13 @@ while ($elemento = readdir($directorio))
   {
   if (is_dir("memorias/memorias2/".$elemento))
   {
-    $listar .="<a class=' col-md-6' href='memorias/memorias2/ $elemento' target='_blank'> 
+    $listar .="<a class=' col-md-6' href='memorias/memorias2/$elemento'target='_blank'> 
     $elemento/</a>
     <br><br>";
   }
   else
   {
-     $listar .="<a class=' col-md-6' href='memorias/memorias2/ $elemento' target='_blank'> 
+     $listar .="<a class=' col-md-6' href='memorias/memorias2/$elemento'target='_blank'> 
     $elemento</a>
     <br><br>";
   }
@@ -146,7 +146,7 @@ echo "<div class='alert alert-danger'><p class='hidd' align=center>El archivo  "
    width: 100%;
     height: 12vh;
     position: relative;
-    top: 6%;
+    top: 7%;
     transform: translateY(-50%);
     text-align: center; 
     background-color: transparent;
@@ -345,7 +345,7 @@ Encabezado de la página */
          <div id="wrapper" > <center> <img src="img/banpru.jpg" class="baner"/> </center>  </div>
          
        <!-- Barra de menu -->
-         <div>
+       <div>
             <header>  
                 <input type="checkbox" id="btn-menu"> 
                 <label for="btn-menu"><img src="img/menuicono11.png"> </label>
@@ -353,9 +353,9 @@ Encabezado de la página */
                     <ul>
                         <li> <a href="">Inicio</a></li>
                         <li> <a href="memoriascarrusel.php">Memorias</a></li>
-                        <li> <a href="">Convocatoria</a></li> 
-                        <li> <a href="">Inscripción y Costos</a></li>
-                        <li> <a href="ComiteOrg">Comité Organizador</a></li>
+                        <li> <a href="convocatoria.php">Convocatoria</a></li> 
+                        <li> <a href="inscripcionYcostos.php">Inscripción y Costos</a></li>
+                        <li> <a href="ComiteOrg.php">Comité Organizador</a></li>
                         <li> <a href=""><img class="alineadoicono" src="img/iniciaricono.png">&nbsp;Iniciar Sesión</a></li>
                     </ul>  
                 </nav> 

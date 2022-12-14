@@ -1,3 +1,8 @@
+<?php
+ini_set("display_errors", 1);
+session_start();
+?>
+
 <html lang="es">
     <head>
         <link href="icono.ico" type="image/x-icon" rel="shortcut icon" />
@@ -436,6 +441,12 @@ button{
 	margin-top: 3%;
 }
 
+.inputNombreC {
+        border: 0.15em solid #B18904;
+        width: 500px;
+        border-radius: 3em;
+      }
+
 @media (max-width: 560px) {
         .inputP {
           width: 75px;
@@ -507,6 +518,8 @@ button{
         margin:3em;
 }
 
+
+
         </style>
     </head>
 
@@ -528,11 +541,12 @@ Encabezado de la página */
                 <nav class="menu" style="z-index: 1;">
                     <ul>
                     <li> <a href="index.php">Inicio</a></li>
-                        <li> <a href="">Memorias</a></li>
+                        <li> <a href="memoriascarrusel.php">Memorias</a></li>
                         <li> <a href="convocatoria.php">Convocatoria</a></li> 
                         <li> <a href="inscripcionYcostos.php">Inscripción y Costos</a></li>
                         <li> <a href="ComiteOrg.php">Comité Organizador</a></li>
-                        <li> <a href="InicioSesion.php"><img class="alineadoicono" src="img/iniciaricono.png">&nbsp;Iniciar Sesión</a></li>
+                        <li> <a href="ComiteEva">Comité Evaluador</a></li>
+                        <li> <a href="InicioSesion.php"><img class="alineadoicono" src="img/iniciaricono.png">&nbsp;Cerrar Sesión</a></li>
                 </nav> 
                 
             </header>
@@ -580,15 +594,40 @@ Encabezado de la página */
    
     <div class="col-lg-6 mx-auto">
       <p class="Tema">Referencias de Congreso</p>
-      <form action="#" method="POST" >
+      <form method="POST" >
                             
                             <p class="temaCentral">Identificadores Registrados: </p>
         <div class="datosP">
                                       
                                         <div class="D1">
                                             <p>Lista de Identificadores dados de alta:</p>
-                                        </div>
-                                            
+         <center> <table >
+            <tr class="inputNombreC">
+              <td>Tipo de Identificador </td>
+              <td>Referencia</td>
+            </tr> </center>
+
+          
+               <?php 
+           $conexion = pg_connect("host=localhost dbname=congresowinx user=congresowinx password=W1nxC0ngr3s032511");
+            $query1 = ("Select * from identificador");
+                  $conn1 = pg_query($conexion, $query1);
+
+                  if (!$conn1) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($conn1) > 0) {
+                    while ($rowData = pg_fetch_array($conn1)) {
+                 
+               ?>   
+          <tr class="inputNombreC">  
+           <td><?php echo $rowData["tipo"] ?></td> 
+           <td><?php echo $rowData["n_referencia"] ?></td>          
+                    </tr>
+          <?php } }  ?>
+       </table> 
+                                        </div>                                            
                                 </div>
                             
         <p class="temaCentral">Registrar Nuevo Identificador </p>
@@ -602,7 +641,7 @@ Encabezado de la página */
                   <label for="Name">Tipo:</label>
                 </td>
                 <td >
-                                                                    <select class="inputP" required>
+                                                                    <select name="Tipo" class="inputP" required>
                                                                         <option> ISBN </option>
                                                                         <option> ISSN </option>
                                                                         <option> DOI</option>
@@ -615,18 +654,20 @@ Encabezado de la página */
                   <label for="Last">Número de Referencia:</label>
                 </td>
                 <td>
-                <input  class="inputP" type ="text" name ="referencia" placeholder="Ingrese el Número de Referencia" required>  
+                <input  class="inputP" type ="text" name ="Referencia" placeholder="Ingrese el Número de Referencia" required>  
                 </td>
               </tr>           
             </table>
           </div> 
         </div>
-        <div> <center> <button>Registrar </button> </center> </div>
-      </form>                            
+        <div> <center> <button name="uploadBtn" class="enviarBtn" value="Enviar">Registrar Identificador</button> </center> </div>
+      </form>    
+      <br>
+        <br>
+        <div> <a  href="Perfiladmin.php"  > <button > Regresar</button> </a> </div>                        
        </div>
   </div>
 </div>
-
        <br>
        <br>
 
@@ -674,6 +715,41 @@ Encabezado de la página */
       <p style="color: #FFFFFF;">&copy; <?php echo date('Y'); ?> Hecho en México, todos los derechos reservados. </p>
     </center>
   </footer>
+
+  <?php
+$message = '';
+if (isset($_POST['uploadBtn']) && $_POST['uploadBtn'] == 'Enviar') {
+    
+
+    $conexion = pg_connect("host=localhost dbname=congresowinx user=congresowinx password=W1nxC0ngr3s032511");
+   
+
+    if (isset($_POST["Referencia"]) && isset($_POST["Tipo"]) ) {
+
+      $REF = $_POST["Referencia"];
+      $TIP = $_POST["Tipo"];
+
+      $query="SELECT n_referencia, tipo FROM identificador WHERE n_referencia='$REF' AND tipo= '$TIP' ";
+      $consulta= pg_query($conexion,$query);
+      $cantidad= pg_num_rows($consulta);
+      if ($cantidad>0){
+       echo "<script>alert('Ya existe este Indetificador Registrado. Intenta Nuevamente!!!'); 
+       window.location.replace('https://laboratoriosistemas.cuautitlan2.unam.mx/congresowinx/WinxCongreso/ReferenciaCongr.php');</script>";
+     
+      } else{
+        $query = ("INSERT INTO identificador (n_referencia, tipo) VALUES('$REF','$TIP')");
+      $consulta = pg_query($conexion, $query);
+      if($consulta){
+      echo "<script>alert('Registro de Identificador Exitoso !!!'); 
+       window.location.replace('https://laboratoriosistemas.cuautitlan2.unam.mx/congresowinx/WinxCongreso/ReferenciaCongr.php');</script>";
+      }
+
+      }
+     }}
+       
+     $_SESSION['sms'] = $message;  ?>    
+
+
 </div>
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
            

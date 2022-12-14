@@ -816,7 +816,7 @@ Encabezado de la página */
 
        <br> <button name= "uploadBtn" class="enviarBtn" value="Enviar">Enviar registro</button> 
         
-        <script src="./mainregistrotrabajos.js"></script>
+        <script src="js/mainregistrotrabajos.js"></script>
 
 
                 </div>

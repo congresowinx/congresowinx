@@ -395,6 +395,7 @@
   border: 0.3em solid #B18904;
     margin:2em;
     flex-direction: row;
+    
 }
      
 
@@ -408,6 +409,14 @@
   padding: 0 0 50px;
   text-align: center;
   font-size: 50px;
+  font-style: normal;
+  color: #2B307C;
+}
+.Tema2 {
+  margin: -10px;
+  padding: 0 0 50px;
+  text-align: center;
+  font-size: 20px;
   font-style: normal;
   color: #2B307C;
 }
@@ -456,12 +465,23 @@
         width: 500px;
         border-radius: 3em;
       }
+
+      .inputNombreC2 {
+        border: 0.15em solid #B18904;
+        width: 500px;
+        border-radius: 3em;
+      }
        @media (max-width: 760px) {
         .inputP {
           width: 80px;
         }
         .inputNombreC {
           width: 160px;
+          font-size: 0.9rem;
+        }
+        .inputNombreC2 {
+          width: 160px;
+          font-size: 0.6rem;
         }
 
         .content-select {
@@ -483,6 +503,10 @@
         }
         .inputNombreC {
           width: 130px;
+        }
+        .inputNombreC2 {
+          width: 130px;
+           font-size: 0.6rem;
         }
         .content-select {
           width: 60px;
@@ -509,6 +533,17 @@ button{
   
 
 }
+
+.table-responsive{
+
+        margin:1em;
+        height: 90%;
+
+        border-radius: 1em;
+ 
+        width: auto;
+}
+
         </style>
     </head>
 
@@ -555,56 +590,351 @@ Encabezado de la página */
             </header>
         </div>
  
-       <div class="containerBoton">
-        <label for="btn-menu3"></label>
-        <nav class="menu3" style="z-index: 2;">  
-        <button class="boton1" type="button" onClick="ico2()" >Usuario</button>
-        <button class="boton2" type="button" onClick="ico1()">Ponente</button>
-        <button class="boton3" type="button" onClick="ico4()" >Evaluador</button>
-        <button class="boton4" type="button" onClick="ico3()" >Memorias</button>
-        <button class="boton5" type="button" onClick="ico6()" >Admin</button>
-        <button class="boton6" type="button" onClick="ico5()" >Comite Orga</button>
-        </nav>
-    </div>
-
-    <!-- Barra de menu Secundario - Movil-->
-
-       <div class="nav-bar" >
-            <a onClick="return ico2()"class="icond icon-book" target="_blank"> <img src="img/icons8-usuario-16.png"/> </a>
-            <a onClick="return ico1()" href="#" class="icond icon-file-text2" target="_blank"> <img src="img/icons8-expositor-16.png"/> </a>
-            <a onClick="return ico4()" href="#" class="icond icon-mic" target="_blank"> <img src="img/icons8-lectura-16.png"/> </a>
-            <a onClick="return ico3()" href="#" class="icond icon-stack" target="_blank"> <img src="img/icons8-foto-16.png"/> </a>
-            <a onClick="return ico6()" href="#" class="icond icon-key" target="_blank"> <img src="img/icons8-configuración-del-administrador-16.png"/> </a>
-            <a onClick="return ico5()" href="#" class="icond icon-hearth" target="_blank"> <img src="img/icons8-llamada-de-conferencia-16.png"/> </a>
-        </div> 
+      
 
 <div class="contenedorregistroI"> 
   <div class="px-4 pt-5 my-5 text-center border-bottom">
     <div class="col-lg-6 mx-auto">
     <p class="Tema">Consultar datos</p>
+<form action="#" method="POST" >
 <div class="D1">
                             <table>
                                 <tr>
             <td class="C2">
-          <select border-radius: 9px; input class="inputNombreC" name ="tabla">
-                                                                        <option>TABLA 1</option>
-                                                                        <option>TABLA 2</option>
-                                                                        
-                                                                    </select>
-               <button >Buscar</button> 
-                </td>
-                                                                
+          <select class="inputNombreC" name ="tabla1">
+                      
+                  
+                <option >SELECCIONE UNA TABLA</option>
+                <option value="USUARIOS">USUARIOS</option>
+               <option value="CONGRESOS">CONGRESOS</option>
+               <option value="TRABAJOS">TRABAJOS</option>
+               <option value="EXTENSOS APROBADOS">EXTENSOS APROBADOS</option>
+               <option value="EXTENSOS POR EVALUAR">EXTENSOS POR EVALUAR</option>
+              <option value="EXTENSOS POR CORREGIR">EXTENSOS POR CORREGIR</option>
+
+                </select>
+                 
+              <button name="uploadBtn2" class="enviarBtn" value="Buscar">Buscar</button> 
+                </td>                                                 
               </tr> 
- </table> </div>
+ </table> </div> </form>
+    
+    <?php if (isset($_POST['uploadBtn2']) && $_POST['uploadBtn2'] == 'Buscar') {
 
-      <div class="contenedorregistroI2"> 
-  <div class="px-4 pt-5 my-5 text-center border-bottom">
-    <div class="col-lg-6 mx-auto">
-      
+          
+            if (isset($_POST["tabla1"])) {
+             $tablaa = $_POST["tabla1"]; 
+             
+             //Opcion Usuarios
+             if($tablaa =='USUARIOS') { ?>
 
+      <div class="contenedorregistroI2"  > 
+  <div class="px-4 pt-1 my-5 text-center border-bottom">
+    <div class="col-lg-12 mx-auto">
+      <p class="Tema2">USUARIOS</p>
+       <div class="table-responsive">
+      <table class="table table-bordered border border-secondary"  ><center>
+               <table class="inputNombreC" > 
+            <tr class="inputNombreC2">
+              <td class="inputNombreC2">Correo</td>
+              <td class="inputNombreC2">Nombre</td>
+              <td class="inputNombreC2">País</td>
+              <td class="inputNombreC2">Teléfono</td>
+            </tr>
 
+          
+               <?php 
+           $conexion = pg_connect("host=localhost dbname=congresowinx user=congresowinx password=W1nxC0ngr3s032511");
+            $query1 = ("Select * from usuario");
+                  $conn1 = pg_query($conexion, $query1);
+
+                  if (!$conn1) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($conn1) > 0) {
+                    while ($rowData = pg_fetch_array($conn1)) {
+                 
+                 $correoo = $rowData["usuario"];   ?>   
+          <tr class="inputNombreC2">  <td class="inputNombreC2"><?php echo $rowData["usuario"] ?></td>  
+           <td class="inputNombreC2" ><?php echo $rowData["nombre_usuario"] ?></td>  
+           <td class="inputNombreC2"><?php echo $rowData["pais_usuario"] ?></td>          
+           
+          <?php $query2 = ("Select * from contacto where email= '$correoo' ");
+                  $conn2 = pg_query($conexion, $query2);
+
+                  if (!$conn2) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($conn2) > 0) {
+                    while ($rowData2 = pg_fetch_array($conn2)) {
+                     ?>   
+          <td class="inputNombreC2"><?php echo $rowData2["telefono"] ?></td>  
+          <!-- <td> <button >Editar</button> </td> -->
+
+                 </tr>   <?php } }  ?> <?php } }  ?>
+       
+</table></center></table>
+      </div>
       </div></div>
-  </div>
+  </div><?php
+
+             } 
+             //Opcion CONGRESOS
+              else if($tablaa =='CONGRESOS') {
+                ?>
+
+      <div class="contenedorregistroI2"  > 
+  <div class="px-4 pt-1 my-5 text-center border-bottom">
+    <div class="col-lg-12 mx-auto">
+      <p class="Tema2">CONGRESOS</p>
+
+  <div class="table-responsive">
+      <table class="table table-bordered border border-secondary"  ><center>
+               <table class="inputNombreC" > 
+            <tr class="inputNombreC2">
+              <td class="inputNombreC2">Email</td>
+              <!-- nombre congreso  -->
+              <td class="inputNombreC2">Nombre del congreso </td>
+              <!-- numero congreso -->
+              <td class="inputNombreC2">Número del congreso </td>
+              <!-- identificador numero registro -->
+              <td class="inputNombreC2">Identificador del número del registro</td>
+
+              <!-- congreso  -->
+              <td class="inputNombreC2">Fecha de inicio del congreso </td>
+              <td class="inputNombreC2">Fecha final del congreso </td>
+
+              <!--Envio de invitaciones convocatoria  -->
+              <td class="inputNombreC2">Fecha de inicio de envio de invitaciones de convocatoria</td>
+              <td class="inputNombreC2">Fecha final de envio de invitaciones de convocatoria</td>
+
+              <!--recepcion resumenes  -->
+              <td class="inputNombreC2">Fecha de inicio de recepción de resumenes</td>
+              <td class="inputNombreC2">Fecha final de recepción de resumenes</td>
+
+              <!--evaluacion resumenes  -->
+              <td class="inputNombreC2">Fecha de inicio de evaluación de resumenes</td>
+              <td class="inputNombreC2">Fecha final de evaluación de resumenes</td>
+
+              <!--resultados de evaluacion resumenes  -->
+              <td class="inputNombreC2">Fecha de inicio de resultados de evaluaciones de resumenes</td>
+              <td class="inputNombreC2">Fecha final de resultados de evaluaciones de resumenes</td>
+
+              <!-- recepcion correccion resumenes -->
+              <td class="inputNombreC2">Fecha de inicio de recepciones de correcciones de resumenes</td>
+              <td class="inputNombreC2">Fecha final de recepciones de correcciones de resumenes</td>
+
+             <!-- recepcion extensos  -->
+              <td class="inputNombreC2">Fecha de inicio de recepcion de extensos </td>
+              <td class="inputNombreC2">Fecha final de recepcion de extensos </td>
+
+               <!-- notifiacion observaciones extensos  -->
+              <td class="inputNombreC2">Fecha de inicio de notificaciones de observaciones de extensos </td>
+              <td class="inputNombreC2">Fecha final de notificaciones de observaciones de extensos </td>
+
+               <!-- recepcion pagos  -->
+              <td class="inputNombreC2">Fecha de inicio de recepcion de pagos</td>
+              <td class="inputNombreC2">Fecha final de recepcion de pagos</td>
+
+              <!--  recepcion extensos finales -->
+              <td class="inputNombreC2">Fecha de inicio de recepciones de extensos finales </td>
+              <td class="inputNombreC2">Fecha final de recepciones de extensos finales </td>
+
+              <!--  recepcion videos ponencias aceptadas -->
+              <td class="inputNombreC2">Fecha de inicio de recepciones de videos de ponencias aceptadas </td>
+              <td class="inputNombreC2">Fecha final de recepciones de videos de ponencias aceptadas </td>
+
+              <!-- Publicacion del programa evento  -->
+              <td class="inputNombreC2">Fecha de publicación del programa del evento </td>
+
+              <!--  imparticion talleres -->
+              <td class="inputNombreC2">Fecha de inicio de imparticion de talleres </td>
+              <td class="inputNombreC2">Fecha final de imparticion de talleres </td>
+
+              <!--  envio constancias -->
+              <td class="inputNombreC2">Fecha de inicio de envios de constancias </td>
+              <td class="inputNombreC2">Fecha final de envios de constancias </td>
+
+              <!--  publicacion memorias -->
+              <td class="inputNombreC2">Fecha de publicacion de memorias </td>
+
+            </tr>
+
+          
+               <?php 
+           $conexion = pg_connect("host=localhost dbname=congresowinx user=congresowinx password=W1nxC0ngr3s032511");
+            $query3 = ("Select * from congreso");
+                  $conn3 = pg_query($conexion, $query3);
+
+                  if (!$conn3) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($conn3) > 0) {
+                    while ($rowData3 = pg_fetch_array($conn3)) {
+                 
+                // $correoo = $rowData["usuario"];  
+                 ?>       
+           <tr class="inputNombreC2">
+              <td class="inputNombreC2"><?php echo $rowData3["email"] ?></td>
+              <!-- nombre congreso  -->
+              <td class="inputNombreC2"><?php echo $rowData3["nombre_congreso"] ?></td>
+              <!-- numero congreso -->
+              <td class="inputNombreC2"><?php echo $rowData3["numero_congreso"] ?></td>
+              <!-- identificador numero registro -->
+              <td class="inputNombreC2"><?php echo $rowData3["identificador_numero_registro"] ?></td>
+
+              <!-- congreso  -->
+              <td class="inputNombreC2"><?php echo $rowData3["fecha_inicio_congreso"] ?></td>
+              <td class="inputNombreC2"><?php echo $rowData3["fecha_fin_congreso"] ?></td>
+
+              <!--Envio de invitaciones convocatoria  -->
+              <td class="inputNombreC2"><?php echo $rowData3["fecha_inicio_envio_invitaciones_convocatoria"] ?></td>
+              <td class="inputNombreC2"><?php echo $rowData3["fecha_fin_envio_invitaciones_convocatoria"] ?></td>
+
+              <!--recepcion resumenes  -->
+              <td class="inputNombreC2"><?php echo $rowData3["fecha_inicio_recepcion_resumenes"] ?></td>
+              <td class="inputNombreC2"><?php echo $rowData3["fecha_fin_recepcion_resumenes"] ?></td>
+
+              <!--evaluacion resumenes  -->
+              <td class="inputNombreC2"><?php echo $rowData3["fecha_inicio_evaluacion_resumenes"] ?></td>
+              <td class="inputNombreC2"><?php echo $rowData3["fecha_fin_evaluacion_resumenes"] ?></td>
+
+              <!--resultados de evaluacion resumenes  -->
+              <td class="inputNombreC2"><?php echo $rowData3["fecha_inicio_resultado_evaluacion_resumenes"] ?></td>
+              <td class="inputNombreC2"><?php echo $rowData3["fecha_fin_resultado_evaluacion_resumenes"] ?></td>
+
+              <!-- recepcion correccion resumenes -->
+              <td class="inputNombreC2"><?php echo $rowData3["fecha_inicio_recepcion_correccion_resumenes"] ?></td>
+              <td class="inputNombreC2"><?php echo $rowData3["fecha_fin_recepcion_correccion_resumenes"] ?></td>
+
+             <!-- recepcion extensos  -->
+              <td class="inputNombreC2"><?php echo $rowData3["fecha_inicio_recepcion_extensos"] ?></td>
+              <td class="inputNombreC2"><?php echo $rowData3["fecha_fin_recepcion_extensos"] ?></td>
+
+               <!-- notifiacion observaciones extensos  -->
+              <td class="inputNombreC2"><?php echo $rowData3["fecha_inicio_notificacion_observaciones-extensos"] ?></td>
+              <td class="inputNombreC2"><?php echo $rowData3["fecha_fin_notificacion_observaciones-extensos"] ?></td>
+
+               <!-- recepcion pagos  -->
+              <td class="inputNombreC2"><?php echo $rowData3["fecha_inicio_recepcion_pagos"] ?></td>
+              <td class="inputNombreC2"><?php echo $rowData3["fecha_fin_recepcion_pagos"] ?></td>
+
+              <!--  recepcion extensos finales -->
+              <td class="inputNombreC2"><?php echo $rowData3["fecha_inicio_recepcion_extensos_finales"] ?></td>
+              <td class="inputNombreC2"><?php echo $rowData3["fecha_fin_recepcion_extensos_finales"] ?></td>
+
+              <!--  recepcion videos ponencias aceptadas -->
+              <td class="inputNombreC2"><?php echo $rowData3["fecha_inicio_recepcion_videos_ponencias_aceptadas"] ?></td>
+              <td class="inputNombreC2"><?php echo $rowData3["fecha_fin_recepcion_videos_ponencias_aceptadas"] ?></td>
+
+              <!-- publicacion programa evento  -->
+              <td class="inputNombreC2"><?php echo $rowData3["fecha_publicacion_programa_evento"] ?></td>
+
+              <!--  imparticion talleres -->
+              <td class="inputNombreC2"><?php echo $rowData3["fecha_inicio_imparticion_talleres"] ?></td>
+              <td class="inputNombreC2"><?php echo $rowData3["fecha_fin_imparticion_talleres"] ?></td>
+
+              <!--  envio constancias -->
+              <td class="inputNombreC2"><?php echo $rowData3["fecha_inicio_envio_constancias"] ?></td>
+              <td class="inputNombreC2"><?php echo $rowData3["fecha_fin_envio_constancias"] ?></td>
+
+              <!--  publicacion memorias -->
+              <td class="inputNombreC2"><?php echo $rowData3["fecha_publicacion_memorias"] ?></td>
+
+            </tr>   <?php } }  ?>
+       
+</table> </center></table>
+      </div>
+      </div></div>
+  </div><?php
+
+              }
+             //Opcion TRABAJOS
+              else if($tablaa =='TRABAJOS') {
+
+                ?>
+
+      <div class="contenedorregistroI2"  > 
+  <div class="px-4 pt-1 my-5 text-center border-bottom">
+    <div class="col-lg-12 mx-auto">
+      <p class="Tema2">TRABAJOS</p>
+       <div class="table-responsive">
+      <table class="table table-bordered border border-secondary"  ><center>
+               <table class="inputNombreC" > 
+            <tr class="inputNombreC2">
+              <td class="inputNombreC2">Correo</td>
+              <!--
+                id trabajo
+                titulo
+                autor
+                categoria
+                palabras clave
+                fecha trabajos
+               -->
+              <td class="inputNombreC2">Nombre</td>
+              <td class="inputNombreC2">País</td>
+              <td class="inputNombreC2">Teléfono</td>
+            </tr>
+
+          
+               <?php 
+           $conexion = pg_connect("host=localhost dbname=congresowinx user=congresowinx password=W1nxC0ngr3s032511");
+            $query1 = ("Select * from usuario");
+                  $conn1 = pg_query($conexion, $query1);
+
+                  if (!$conn1) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($conn1) > 0) {
+                    while ($rowData = pg_fetch_array($conn1)) {
+                 
+                 $correoo = $rowData["usuario"];   ?>   
+          <tr class="inputNombreC2">  <td class="inputNombreC2"><?php echo $rowData["usuario"] ?></td>  
+           <td class="inputNombreC2" ><?php echo $rowData["nombre_usuario"] ?></td>  
+           <td class="inputNombreC2"><?php echo $rowData["pais_usuario"] ?></td>          
+           
+          <?php $query2 = ("Select * from contacto where email= '$correoo' ");
+                  $conn2 = pg_query($conexion, $query2);
+
+                  if (!$conn2) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($conn2) > 0) {
+                    while ($rowData2 = pg_fetch_array($conn2)) {
+                     ?>   
+          <td class="inputNombreC2"><?php echo $rowData2["telefono"] ?></td>  
+          <!-- <td> <button >Editar</button> </td> -->
+
+                 </tr>   <?php } }  ?> <?php } }  ?>
+       
+</table></center></table>
+      </div>
+      </div></div>
+  </div><?php
+              }  /*
+
+              //Opcion EXTENSOS APROBADOS
+              else {
+
+
+              } //Opcion EXTENSOS POR EVALUAR
+              else {
+
+
+              }//Opcion EXTENSOS POR CORREGIR
+              else {
+
+
+              }*/
+
+
+
+           }} ?>
       <a  href="Perfiladmin.php"  > <button >Regresar</button> </a> 
          
   </div></div>
@@ -660,16 +990,7 @@ Encabezado de la página */
 </div>
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
         
-        <script type="text/javascript">
-           function ico1(){
-                document.getElementById('link').style.display = 'block';
-                
-            }
-
-
-
-        </script>
-
+        
 
 
 </body>

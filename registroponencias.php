@@ -1,3 +1,8 @@
+<?php
+ini_set("display_errors",1);
+session_start();
+?>
+
 <html lang="es">
     <head>
         <link href="icono.ico" type="image/x-icon" rel="shortcut icon" />
@@ -601,7 +606,7 @@ Encabezado de la página */
                                 </td>
                                 <td class="C2">
 
-                                    <textarea class="textarea3" type="text"  name="referencia" placeholder="INGRESA RESUMEN" style="text-transform:uppercase;"required></textarea>
+                                    <textarea class="textarea3" type="text"  name="resumen" placeholder="INGRESA RESUMEN" style="text-transform:uppercase;"required></textarea>
                                     <!--<textarea  type="text" name="resumen" placeholder="Ingresa resumen"  required> </textarea>-->
 
                                 </td>
@@ -667,7 +672,7 @@ Encabezado de la página */
                                     <label for="Correo">Correo:</label>
                                 </td>
                                 <td class="C2">
-                                    <textarea class="textarea2" type="text"  name="Correo1" placeholder="INGRESA CORREO DEL AUTOR" style="text-transform:uppercase;"required></textarea>
+                                    <textarea class="textarea2" type="text"  name="Correo1" placeholder="INGRESA CORREO DEL AUTOR" required></textarea>
                                 
                                 </td>
                                                     </tr> </center>
@@ -698,7 +703,7 @@ Encabezado de la página */
                                     <label for="Correo">Correo 1:</label>
                                 </td>
                                 <td class="C2">
-                                    <textarea class="textarea2" type="text"  name="Correo2" placeholder="INGRESA CORREO DEL COAUTOR 1 (OPCIONAL)" style="text-transform:uppercase;"required></textarea>
+                                    <textarea class="textarea2" type="text"  name="Correo2" placeholder="INGRESA CORREO DEL COAUTOR 1 (OPCIONAL)" ></textarea>
                                 
                                 </td>
                                                     </tr> </center> 
@@ -708,7 +713,7 @@ Encabezado de la página */
                                     <label for="Correo">Correo 2:</label>
                                 </td>
                                 <td class="C2">
-                                <textarea class="textarea2" type="text"  name="Correo2" placeholder="INGRESA CORREO DEL COAUTOR 2 (OPCIONAL)" style="text-transform:uppercase;"required></textarea>
+                                <textarea class="textarea2" type="text"  name="Correo3" placeholder="INGRESA CORREO DEL COAUTOR 2 (OPCIONAL)" ></textarea>
                                 </td>
                                                     </tr> </center>
                                                     
@@ -717,7 +722,7 @@ Encabezado de la página */
                                     <label for="Correo">Correo 3:</label>
                                 </td>
                                 <td class="C2">
-                                <textarea class="textarea2" type="text"  name="Correo2" placeholder="INGRESA CORREO DEL COAUTOR 3 (OPCIONAL)" style="text-transform:uppercase;"required></textarea>
+                                <textarea class="textarea2" type="text"  name="Correo4" placeholder="INGRESA CORREO DEL COAUTOR 3 (OPCIONAL)" ></textarea>
                                 </td>
                                                     </tr> </center>
                                                     
@@ -726,7 +731,7 @@ Encabezado de la página */
                                     <label for="Correo">Correo 4:</label>
                                 </td>
                                 <td class="C2">
-                                <textarea class="textarea2" type="text"  name="Correo2" placeholder="INGRESA CORREO DEL COAUTOR 4 (OPCIONAL)" style="text-transform:uppercase;"required></textarea>
+                                <textarea class="textarea2" type="text"  name="Correo5" placeholder="INGRESA CORREO DEL COAUTOR 4 (OPCIONAL)" ></textarea>
                                 </td>
                                                     </tr> </center>
 
@@ -775,47 +780,13 @@ Encabezado de la página */
 
        <br> <button name= "uploadBtn" class="enviarBtn" value="Enviar">Enviar registro</button> 
         
-        <script src="./mainregistrotrabajos.js"></script>
+        <script src="js/mainregistrotrabajos.js"></script>
 
 
                 </div>
 
                  
-
-                <!--<p class="temaCentral">Documento</p> 
-
-                <div class="datosP">
-<div class="D1">
-                    <!--******SEMBLANZA*******-->
-  <!-- <table>
-                            
-                        <center> <tr>
-                                <td class="C1">
-                                    <label for="Extenso">Extenso:</label>
-                                </td>
-                                <td class="C2">
-                                <input class="inputP" type="file" name="uploadedFile" accept="application/pdf" required>
-                                </td>
-                                                    </tr> </center>
-    
-                                                    <center><tr>
-                                <td class="C1">
-                                    <label for="URL">URL:</label>
-                                </td>
-                                <td class="C2">
-                                    <input class="inputP" style="text-transform:uppercase;" type="text" name="url" placeholder="Ingresa URL del video" required>
-                                </td>
-                            </tr></center>
-</table>
-                    <!--<p class="temaTer">En una cuartilla formato PDF, en Arial 12 interlineado sencillo, destacando estudios, participaciones en congresos y publicaciones. El archivo deberá ser nombrado de la siguiente manera: NombrePrimerapellido_semblanza, ejemplo: JuanHernandez_semblanza.pdf </p> -->
-                                       
-                                        <!--<input type="file" name="uploadedFile" accept="application/pdf" required />-->
-                                   <!-- </div> -->
                 </div>
-
-                <div class="final">
-                               
-                <!--******CAMPO 1*******-->
             </form>
         
         <div class="alert alert-info" style="display: none;"></div>
@@ -825,61 +796,52 @@ Encabezado de la página */
         
            <?php
                    
-      //  session_start();
+      
 
 
-         /*  $message = ''; 
-               if (isset($_POST['uploadBtn']) && $_POST['uploadBtn'] == 'Enviar')
-                        {
-                 if (isset($_FILES['uploadedFile']) && $_FILES['uploadedFile']['error'] === UPLOAD_ERR_OK)
-                     {
-    // get details of the uploaded file
-    $fileTmpPath = $_FILES['uploadedFile']['tmp_name'];
-    $fileName = $_FILES['uploadedFile']['name'];
-    $fileSize = $_FILES['uploadedFile']['size'];
-    $fileType = $_FILES['uploadedFile']['type'];
-    $fileNameCmps = explode(".", $fileName);
-    $fileExtension = strtolower(end($fileNameCmps));
- 
-    // CON ENCRIPTACIÓN
-    $newFileName =  strtoupper($_POST["titulo"]) .time() ;
-   // $newFileName = hash('md5', $newFileNameSin). '.' . $fileExtension;
-   
-    $allowedfileExtensions = array('pdf');
+       $conexion = pg_connect("host=localhost dbname=congresowinx user=congresowinx password=W1nxC0ngr3s032511");
 
-       
-         $conexion=pg_connect("host=localhost dbname=BDCongresoMate user=postgres password=FernandaUNAM");
        $fechaActual = date ( 'Y-m-d' );
-       $horaActual = date("H:i:s");                         // 17:16:18
-
+       $fechaid = date('myhis');
+       $horaActual = date("H:i:s");      
+       $numid = intval($fechaid);               // 17:16:18
+        /*
         echo $fechaActual;
+        echo $fechaid;
                if($conexion){
                 echo "CONEXIÓN EXITOSA <br>";
             }else{
                 echo "CONEXIÓN FALLIDA";
-            }  
+            }  */
+            //referencia agregar...
+
+
+             if (isset($_POST['uploadBtn']) && $_POST['uploadBtn'] == 'Enviar') {
                
-                if(isset($_POST["titulo"]) && isset($_POST["resumen"]) && isset($_POST["palabrasclave"]) && isset($_POST["categoria"]) && isset($_POST["Correo1"]) &&isset($_POST["referencia"]) &&isset($_POST["url"]) ){  
+if(isset($_POST["titulo"]) && isset($_POST["resumen"]) && isset($_POST["palabrasclave"]) && isset($_POST["categorias"]) && isset($_POST["Correo1"]) /*&&isset($_POST["referencia"]) &&isset($_POST["url"])*/ && isset($_POST["Correo2"]) && isset($_POST["Correo3"]) && isset($_POST["Correo4"]) && isset($_POST["Correo5"]) ) {  
                         $titulo1 = $_POST["titulo"];
                         $titulo= strtoupper($titulo1);
                         $resumen1 = $_POST["resumen"];
                         $resumen = strtoupper($resumen1);
                         $palabrasclave1 = $_POST["palabrasclave"];
                         $palabrasclave = strtoupper($palabrasclave1);
-                        $categoria = $_POST["categoria"];
+                        $categoria = $_POST["categorias"];
                         $Correo1 = $_POST["Correo1"];
-                        $referencia = $_POST["referencia"];
-                        $url = $_POST["url"];
-                        $tponencia =  strval($newFileName);
+                         $Correo2 = $_POST["Correo2"];
+                         $Correo3 = $_POST["Correo3"];
+                        $Correo4 = $_POST["Correo4"];
+                        $Correo5 = $_POST["Correo5"];
+                       // $referencia = $_POST["referencia"];
+                       // $url = $_POST["url"];
+                       // $tponencia =  strval($newFileName);
                         
                         
-                        $query1=("Select id_usuario from usuario where usuario='$Correo1' ");
+           $query1=("Select id_usuario from usuario where usuario='$Correo1' ");
                             $conn1=pg_query($conexion,$query1);
-                         $cantidad= pg_num_rows($conn1);
-                         if ($cantidad1>0){
-                             if(!$conn1){
-                                 die(pg_error($conexion));
-                                    }
+                         
+                  if(!$conn1){
+                                       die(pg_error($conexion));
+                                            }      
 
                                if (pg_num_rows($conn1) > 0) {
                                           while($rowData = pg_fetch_array($conn1)){
@@ -889,50 +851,50 @@ Encabezado de la página */
                                                         
                 
                 
-                if(isset($_POST["Correo2"])){
+         if($Correo2 != ""){
                     $Correo2 = $_POST["Correo2"];
                     $query=("Select id_usuario from usuario where usuario='$Correo2' ");
                             $conn=pg_query($conexion,$query);
                          $cantidad= pg_num_rows($conn);
-                         if ($cantidad>0){
-                             if(!$conn){
-                                 die(pg_error($conexion));
-                                    }
+                                 if ($cantidad>0){
+                                                     if(!$conn){
+                                                        die(pg_error($conexion));
+                                                         }
 
-                               if (pg_num_rows($conn) > 0) {
-                                          while($rowData = pg_fetch_array($conn)){
-                                       $idcoautor2=intval($rowData["id_usuario"]);
-                                                   }
-                                             }
-                                                   } else{
+                                               if (pg_num_rows($conn) > 0) {
+                                                    while($rowData = pg_fetch_array($conn)){
+                                                      $idcoautor2=intval($rowData["id_usuario"]);
+                                                      }
+                                                       }
+                                        } else{
                                                        //alerta de que el correo no existe
                                                     }       
                //como sí hay correo2, lo ingresa con el trabajo
                  
                                                  //como sí hay correo3, lo ingresa con el trabajo    
                                                     
-                                                     if(isset($_POST["Correo3"])){
-                    $Correo3 = $_POST["Correo3"];
-                    $query2=("Select id_usuario from usuario where usuario='$Correo3' ");
-                            $conn2=pg_query($conexion,$query2);
-                         $cantidad2= pg_num_rows($conn2);
+         if( $Correo3 != ""){
+                           $Correo3 = $_POST["Correo3"];
+                             $query2=("Select id_usuario from usuario where usuario='$Correo3' ");
+                             $conn2=pg_query($conexion,$query2);
+                                 $cantidad2= pg_num_rows($conn2);
                          if ($cantidad2>0){
-                             if(!$conn2){
-                                 die(pg_error($conexion));
-                                    }
+                                 if(!$conn2){
+                                         die(pg_error($conexion));
+                                                }
 
-                               if (pg_num_rows($conn2) > 0) {
-                                          while($rowData = pg_fetch_array($conn2)){
-                                       $idcoautor3=intval($rowData["id_usuario"]);
+                                            if (pg_num_rows($conn2) > 0) {
+                                                        while($rowData = pg_fetch_array($conn2)){
+                                                        $idcoautor3=intval($rowData["id_usuario"]);
                                                    }
-                                             }
-                                                   } else{
+                                                           }
+                                        } else{
                                                        //ERROR CORREO INVALIDO
                                                     }       
                 
                                                     //como sí hay correo4, lo ingresa con el trabajo
                                                     
-                                                    if(isset($_POST["Correo4"])){
+         if($Correo4 != "" ){
                     $Correo4 = $_POST["Correo4"];
                     $query3=("Select id_usuario from usuario where usuario='$Correo4' ");
                             $conn3=pg_query($conexion,$query3);
@@ -954,13 +916,13 @@ Encabezado de la página */
                                                     
                  //si existe el correo4
                                                     //evalua si hay correo5
-                                                    if(isset($_POST["Correo5"])){
-                    $Correo5 = $_POST["Correo5"];
+       if( $Correo5 != ""){
+                    
                     $query4=("Select id_usuario from usuario where usuario='$Correo5' ");
                             $conn4=pg_query($conexion,$query4);
                          $cantidad4= pg_num_rows($conn4);
-                         if ($cantidad4>0){
-                             if(!$conn4){
+                         
+                            if(!$conn4){
                                  die(pg_error($conexion));
                                     }
 
@@ -969,36 +931,25 @@ Encabezado de la página */
                                        $idcoautor5=intval($rowData["id_usuario"]);
                                                    }
                                              }
-                                                   } else{
+                                                 else{
                                                        // correo inválido
                                                     }       
                 //si hay correo5
                       // TABLA TRABAJOS 
                 //INSERT PARA INSERTAR TITULO, CATEGORIA Y PALABRAS CLAVE
                 
-                $query5=("INSERT INTO trabajos (titulo, categoria, palabras_clave, fecha_trabajos, hora_trabajos)
-                          VALUES('$titulo','$categoria','$palabrasclave','$fechaActual','$horaActual')");
+                $query5=("INSERT INTO trabajos (id_trabajo, titulo, categoria, palabras_clave, fecha_trabajos, hora_trabajos)
+                          VALUES('$numid','$titulo','$categoria','$palabrasclave','$fechaActual','$horaActual')");
                         $consulta1=pg_query($conexion,$query5);        
                         
-                $query6=("Select id_trabajo from trabajos where fecha_trabajos='$fechaActual' and hora_trabajos='$horaActual' ");
-                            $conn5=pg_query($conexion,$query6);
-
-                               if(!$conn5){
-                                 die(pg_error($conexion));
-                                    }
-
-                               if (pg_num_rows($conn5) > 0) {
-                                          while($rowData = pg_fetch_array($conn5)){
-                                       $id_trabajo=intval($rowData["id_trabajo"]);
-                                                   }
-                                             }        
+               
                 // TABLAS CON LAS QUE SE RELACIONA LA TABLA TRABAJOS
                 // 1. TABLA PONENCIA 
                 //INSERT PARA INSERTAR EL ID DE LA TABLA TRABAJOS EN LA TABLA PONENCIA
                 //INSERT PARA INSERTAR TAMBIEN EL RESUMEN, EXTENSO Y VIDEO                      
                                              
-                $query7=("INSERT INTO ponencia (resumen_ponencia, id_trabajo)
-                          VALUES('$resumen','$id_trabajo')");
+                $query7=("INSERT INTO ponencia (id_trabajos, resumen_ponencia)
+                          VALUES('$numid','$resumen')");
                         $consulta2=pg_query($conexion,$query7);         
                         
                 // TABLAS CON LAS QUE SE RELACIONA LA TABLA TRABAJOS
@@ -1006,26 +957,109 @@ Encabezado de la página */
                 //INSERT PARA INSERTAR EL ID DE LA TABLA TRABAJOS EN LA TABLA PONTENTE_TRABAJOS
                 //INSERT PARA INSERTAR TAMBIEN LA FECHA (fecha_registro)
                         
-                $query8=("INSERT INTO ponente_trabajos (ponente_id, fecha_registro, id_trabajo)
-                          VALUES('$idcoautor1','$fechaActual','$id_trabajo')");
+                $query8=("INSERT INTO ponente_trabajos (ponente_id, trabajos_id, fecha_registro)
+                          VALUES('$idcoautor1','$numid','$fechaActual')");
                         $consulta3=pg_query($conexion,$query8);
+
+                    
+                  //coautor 2
+                     $query41=("Select * from coautor where id_usuario='$idcoautor2' ");
+                            $conn41=pg_query($conexion,$query41);
+                         $cantidad41= pg_num_rows($conn41);
+                         
+                            if(!$conn41){
+                                 die(pg_error($conexion));
+                                    }
+
+                               if (pg_num_rows($conn41) > 0) {
+                                          while($rowData = pg_fetch_array($conn41)){
+                                       $id_coa2=intval($rowData["id_coautor"]);
+                                                   }
+                                             }
+                                                 else{
+                                                    $query51=("INSERT INTO coautor (id_coautor,fecha, id_usuario)
+                                                    VALUES('$idcoautor2','$fechaActual','$idcoautor2')");
+                                                 $consulta51=pg_query($conexion,$query51);
+
+                                                   
+                                                    }
+                                          //coautor 3
+                     $query42=("Select * from coautor where id_usuario='$idcoautor3' ");
+                            $conn42=pg_query($conexion,$query42);
+                         $cantidad42= pg_num_rows($conn42);
+                         
+                            if(!$conn42){
+                                 die(pg_error($conexion));
+                                    }
+
+                               if (pg_num_rows($conn42) > 0) {
+                                          while($rowData = pg_fetch_array($conn42)){
+                                       $id_coa3=intval($rowData["id_coautor"]);
+                                                   }
+                                             }
+                                                 else{
+                                                    $query52=("INSERT INTO coautor (id_coautor,fecha, id_usuario)
+                                                    VALUES('$idcoautor3','$fechaActual','$idcoautor3')");
+                                                 $consulta52=pg_query($conexion,$query52);
+
+                                                    }
+                                                    //coautor 4
+                     $query43=("Select * from coautor where id_usuario='$idcoautor4' ");
+                            $conn43=pg_query($conexion,$query43);
+                         $cantidad43= pg_num_rows($conn43);
+                         
+                            if(!$conn43){
+                                 die(pg_error($conexion));
+                                    }
+
+                               if (pg_num_rows($conn43) > 0) {
+                                          while($rowData = pg_fetch_array($conn43)){
+                                       $id_coa4=intval($rowData["id_coautor"]);
+                                                   }
+                                             }
+                                                 else{
+                                                    $query53=("INSERT INTO coautor (id_coautor,fecha, id_usuario)
+                                                    VALUES('$idcoautor4','$fechaActual','$idcoautor4')");
+                                                 $consulta53=pg_query($conexion,$query53);
+
+                                                    }//coautor 5
+                     $query44=("Select * from coautor where id_usuario='$idcoautor5' ");
+                            $conn44=pg_query($conexion,$query44);
+                         $cantidad44= pg_num_rows($conn44);
+                         
+                            if(!$conn44){
+                                 die(pg_error($conexion));
+                                    }
+
+                               if (pg_num_rows($conn44) > 0) {
+                                          while($rowData = pg_fetch_array($conn44)){
+                                       $id_coa5=intval($rowData["id_coautor"]);
+                                                   }
+                                             }
+                                                 else{
+                                                    $query54=("INSERT INTO coautor (id_coautor,fecha, id_usuario)
+                                                    VALUES('$idcoautor5','$fechaActual','$idcoautor5')");
+                                                 $consulta54=pg_query($conexion,$query54);
+
+                                                    }
+
                         
-                        $query9=("INSERT INTO trabajos_coautores (coautor_id, id_trabajo)
-                          VALUES('$idcoautor2','$id_trabajo')");
+                        $query9=("INSERT INTO trabajos_coautores (trabajos_id, coautor_id)
+                          VALUES('$numid','$idcoautor2')");
                         $consulta4=pg_query($conexion,$query9);
                         
-                        $query10=("INSERT INTO trabajos_coautores (coautor_id, id_trabajo)
-                          VALUES('$idcoautor3','$id_trabajo')");
+                        $query10=("INSERT INTO trabajos_coautores (trabajos_id, coautor_id)
+                          VALUES('$numid','$idcoautor3')");
                         $consulta5=pg_query($conexion,$query10);  
                         
-                        $query11=("INSERT INTO trabajos_coautores (coautor_id, id_trabajo)
-                          VALUES('$idcoautor4','$id_trabajo')");
-                        $consulta6=pg_query($conexion,$query11);
+                        $query11=("INSERT INTO trabajos_coautores (trabajos_id, coautor_id)
+                          VALUES('$numid','$idcoautor4')");
+                        $consulta6=pg_query($conexion,$query11); 
                         
-                        $query12=("INSERT INTO trabajos_coautores (coautor_id, id_trabajo)
-                          VALUES('$idcoautor5','$id_trabajo')");
+                        $query12=("INSERT INTO trabajos_coautores (trabajos_id, coautor_id)
+                          VALUES('$numid','$idcoautor5')");
                         $consulta7=pg_query($conexion,$query12);
-                        
+                        /*
                         
                 // TABLA TRABAJOS SE RELACIONA CON TRABAJOS_CONGRESO
                         //QUERY PARA LA TABLA DE TRABAJOS_CONGRESO
@@ -1046,7 +1080,7 @@ Encabezado de la página */
                          $query14=("INSERT INTO trabajos_congreso (congreso_id, fecha, id_trabajo)
                           VALUES('$id_congreso','$fechaActual,'$id_trabajo')");
                         $consulta8=pg_query($conexion,$query14);        
-                        
+                        /*
                    //INSERT PARA AGREGAR REFERENCIA
                         $query15=("INSERT INTO referencias (referencia)
                           VALUES('$referencia')");
@@ -1063,47 +1097,31 @@ Encabezado de la página */
                                           while($rowData = pg_fetch_array($conn7)){
                                        $id_referencia=intval($rowData["id_referencia"]);
                                                    }
-                                             }
+                                             } 
                         
                     //AQUI SE INSERTAN LOS ID EN TRABAJOS REFERENCIAS    
                         $query17=("INSERT INTO trabajos_referencias (referencias_id,id_trabajo)
                           VALUES('$id_trabajo','$id_referencia')");
                         $consulta10=pg_query($conexion,$query17); 
+                        */
                         
                         
-                        
-                        
-                        
-                        
-                        
-                                                 
-                }else{ // no hay correo 5, pero si correo1, 2 , 3 y 4
+    } else { // no hay correo 5, pero si correo1, 2 , 3 y 4
                   // TABLA TRABAJOS 
                 //INSERT PARA INSERTAR TITULO, CATEGORIA Y PALABRAS CLAVE
                 
-                $query5=("INSERT INTO trabajos (titulo, categoria, palabras_clave, fecha_trabajos, hora_trabajos)
-                          VALUES('$titulo','$categoria','$palabrasclave','$fechaActual','$horaActual')");
+                $query5=("INSERT INTO trabajos (id_trabajo,titulo, categoria, palabras_clave, fecha_trabajos, hora_trabajos)
+                          VALUES('$numid','$titulo','$categoria','$palabrasclave','$fechaActual','$horaActual')");
                         $consulta1=pg_query($conexion,$query5);        
                         
-                $query6=("Select id_trabajo from trabajos where fecha_trabajos='$fechaActual' and hora_trabajos='$horaActual' ");
-                            $conn5=pg_query($conexion,$query6);
-
-                               if(!$conn5){
-                                 die(pg_error($conexion));
-                                    }
-
-                               if (pg_num_rows($conn5) > 0) {
-                                          while($rowData = pg_fetch_array($conn5)){
-                                       $id_trabajo=intval($rowData["id_trabajo"]);
-                                                   }
-                                             }        
+             
                 // TABLAS CON LAS QUE SE RELACIONA LA TABLA TRABAJOS
                 // 1. TABLA PONENCIA 
                 //INSERT PARA INSERTAR EL ID DE LA TABLA TRABAJOS EN LA TABLA PONENCIA
                 //INSERT PARA INSERTAR TAMBIEN EL RESUMEN, EXTENSO Y VIDEO                      
                                              
-                $query7=("INSERT INTO ponencia (resumen_ponencia, id_trabajo)
-                          VALUES('$resumen','$id_trabajo')");
+                $query7=("INSERT INTO ponencia (id_trabajos, resumen_ponencia)
+                          VALUES('$numid','$resumen')");
                         $consulta2=pg_query($conexion,$query7);         
                         
                 // TABLAS CON LAS QUE SE RELACIONA LA TABLA TRABAJOS
@@ -1111,23 +1129,89 @@ Encabezado de la página */
                 //INSERT PARA INSERTAR EL ID DE LA TABLA TRABAJOS EN LA TABLA PONTENTE_TRABAJOS
                 //INSERT PARA INSERTAR TAMBIEN LA FECHA (fecha_registro)
                         
-                $query8=("INSERT INTO ponente_trabajos (ponente_id, fecha_registro, id_trabajo)
-                          VALUES('$idcoautor1','$fechaActual','$id_trabajo')");
+                $query8=("INSERT INTO ponente_trabajos (ponente_id, trabajos_id, fecha_registro)
+                          VALUES('$idcoautor1','$numid','$fechaActual')");
                         $consulta3=pg_query($conexion,$query8);
                         
-                        $query9=("INSERT INTO trabajos_coautores (coautor_id, id_trabajo)
-                          VALUES('$idcoautor2','$id_trabajo')");
+                        
+                    
+                  //coautor 2
+                     $query41=("Select * from coautor where id_usuario='$idcoautor2' ");
+                            $conn41=pg_query($conexion,$query41);
+                         $cantidad41= pg_num_rows($conn41);
+                         
+                            if(!$conn41){
+                                 die(pg_error($conexion));
+                                    }
+
+                               if (pg_num_rows($conn41) > 0) {
+                                          while($rowData = pg_fetch_array($conn41)){
+                                       $id_coa2=intval($rowData["id_coautor"]);
+                                                   }
+                                             }
+                                                 else{
+                                                    $query51=("INSERT INTO coautor (id_coautor,fecha, id_usuario)
+                                                    VALUES('$idcoautor2','$fechaActual','$idcoautor2')");
+                                                 $consulta51=pg_query($conexion,$query51);
+
+                                                   
+                                                    }
+                                          //coautor 3
+                     $query42=("Select * from coautor where id_usuario='$idcoautor3' ");
+                            $conn42=pg_query($conexion,$query42);
+                         $cantidad42= pg_num_rows($conn42);
+                         
+                            if(!$conn42){
+                                 die(pg_error($conexion));
+                                    }
+
+                               if (pg_num_rows($conn42) > 0) {
+                                          while($rowData = pg_fetch_array($conn42)){
+                                       $id_coa3=intval($rowData["id_coautor"]);
+                                                   }
+                                             }
+                                                 else{
+                                                    $query52=("INSERT INTO coautor (id_coautor,fecha, id_usuario)
+                                                    VALUES('$idcoautor3','$fechaActual','$idcoautor3')");
+                                                 $consulta52=pg_query($conexion,$query52);
+
+                                                    }
+                                                    //coautor 4
+                     $query43=("Select * from coautor where id_usuario='$idcoautor4' ");
+                            $conn43=pg_query($conexion,$query43);
+                         $cantidad43= pg_num_rows($conn43);
+                         
+                            if(!$conn43){
+                                 die(pg_error($conexion));
+                                    }
+
+                               if (pg_num_rows($conn43) > 0) {
+                                          while($rowData = pg_fetch_array($conn43)){
+                                       $id_coa4=intval($rowData["id_coautor"]);
+                                                   }
+                                             }
+                                                 else{
+                                                    $query53=("INSERT INTO coautor (id_coautor,fecha, id_usuario)
+                                                    VALUES('$idcoautor4','$fechaActual','$idcoautor4')");
+                                                 $consulta53=pg_query($conexion,$query53);
+
+                                                    }
+
+                        
+                        $query9=("INSERT INTO trabajos_coautores (trabajos_id, coautor_id)
+                          VALUES('$numid','$idcoautor2')");
                         $consulta4=pg_query($conexion,$query9);
                         
-                        $query10=("INSERT INTO trabajos_coautores (coautor_id, id_trabajo)
-                          VALUES('$idcoautor3','$id_trabajo')");
+                        $query10=("INSERT INTO trabajos_coautores (trabajos_id, coautor_id)
+                          VALUES('$numid','$idcoautor3')");
                         $consulta5=pg_query($conexion,$query10);  
                         
-                        $query11=("INSERT INTO trabajos_coautores (coautor_id, id_trabajo)
-                          VALUES('$idcoautor4','$id_trabajo')");
+                        $query11=("INSERT INTO trabajos_coautores (trabajos_id, coautor_id)
+                          VALUES('$numid','$idcoautor4')");
                         $consulta6=pg_query($conexion,$query11); 
+                       
                         
-                        
+                        /*
                          // TABLA TRABAJOS SE RELACIONA CON TRABAJOS_CONGRESO
                         //QUERY PARA LA TABLA DE TRABAJOS_CONGRESO
                         
@@ -1147,7 +1231,7 @@ Encabezado de la página */
                          $query14=("INSERT INTO trabajos_congreso (congreso_id, fecha, id_trabajo)
                           VALUES('$id_congreso','$fechaActual,'$id_trabajo')");
                         $consulta8=pg_query($conexion,$query14);        
-                        
+                       /* 
                    //INSERT PARA AGREGAR REFERENCIA
                         $query15=("INSERT INTO referencias (referencia)
                           VALUES('$referencia')");
@@ -1171,38 +1255,23 @@ Encabezado de la página */
                           VALUES('$id_trabajo','$id_referencia')");
                         $consulta10=pg_query($conexion,$query17); 
                         
-                        
-                }
-                                                    
-                                                    
-                                                    
-                }else{ //no hay correo 4, sí hay correo1,2 y 3 
+                        */
+                                                
+    } }else { //no hay correo 4, sí hay correo1,2 y 3 
                    // TABLA TRABAJOS 
                 //INSERT PARA INSERTAR TITULO, CATEGORIA Y PALABRAS CLAVE
                 
-                $query5=("INSERT INTO trabajos (titulo, categoria, palabras_clave, fecha_trabajos, hora_trabajos)
-                          VALUES('$titulo','$categoria','$palabrasclave','$fechaActual','$horaActual')");
-                        $consulta1=pg_query($conexion,$query5);        
-                        
-                $query6=("Select id_trabajo from trabajos where fecha_trabajos='$fechaActual' and hora_trabajos='$horaActual' ");
-                            $conn5=pg_query($conexion,$query6);
-
-                               if(!$conn5){
-                                 die(pg_error($conexion));
-                                    }
-
-                               if (pg_num_rows($conn5) > 0) {
-                                          while($rowData = pg_fetch_array($conn5)){
-                                       $id_trabajo=intval($rowData["id_trabajo"]);
-                                                   }
-                                             }        
+                   $query5=("INSERT INTO trabajos (id_trabajo, titulo, categoria, palabras_clave, fecha_trabajos, hora_trabajos)
+                          VALUES('$numid','$titulo','$categoria','$palabrasclave','$fechaActual','$horaActual')");
+                        $consulta1=pg_query($conexion,$query5);
+                         
                 // TABLAS CON LAS QUE SE RELACIONA LA TABLA TRABAJOS
                 // 1. TABLA PONENCIA 
                 //INSERT PARA INSERTAR EL ID DE LA TABLA TRABAJOS EN LA TABLA PONENCIA
                 //INSERT PARA INSERTAR TAMBIEN EL RESUMEN, EXTENSO Y VIDEO                      
                                              
-                $query7=("INSERT INTO ponencia (resumen_ponencia, id_trabajo)
-                          VALUES('$resumen','$id_trabajo')");
+                $query7=("INSERT INTO ponencia (id_trabajos, resumen_ponencia)
+                          VALUES('$numid','$resumen')");
                         $consulta2=pg_query($conexion,$query7);         
                         
                 // TABLAS CON LAS QUE SE RELACIONA LA TABLA TRABAJOS
@@ -1210,18 +1279,64 @@ Encabezado de la página */
                 //INSERT PARA INSERTAR EL ID DE LA TABLA TRABAJOS EN LA TABLA PONTENTE_TRABAJOS
                 //INSERT PARA INSERTAR TAMBIEN LA FECHA (fecha_registro)
                         
-                $query8=("INSERT INTO ponente_trabajos (ponente_id, fecha_registro, id_trabajo)
-                          VALUES('$idcoautor1','$fechaActual',$id_trabajo')");
+                $query8=("INSERT INTO ponente_trabajos (ponente_id, trabajos_id, fecha_registro)
+                          VALUES('$idcoautor1','$numid','$fechaActual')");
                         $consulta3=pg_query($conexion,$query8);
                         
-                        $query9=("INSERT INTO trabajos_coautores (coautor_id, id_trabajo)
-                          VALUES('$idcoautor2','$id_trabajo')");
+                       
+                  //coautor 2
+                     $query41=("Select * from coautor where id_usuario='$idcoautor2' ");
+                            $conn41=pg_query($conexion,$query41);
+                         $cantidad41= pg_num_rows($conn41);
+                         
+                            if(!$conn41){
+                                 die(pg_error($conexion));
+                                    }
+
+                               if (pg_num_rows($conn41) > 0) {
+                                          while($rowData = pg_fetch_array($conn41)){
+                                       $id_coa2=intval($rowData["id_coautor"]);
+                                                   }
+                                             }
+                                                 else{
+                                                    $query51=("INSERT INTO coautor (id_coautor,fecha, id_usuario)
+                                                    VALUES('$idcoautor2','$fechaActual','$idcoautor2')");
+                                                 $consulta51=pg_query($conexion,$query51);
+
+                                                   
+                                                    }
+                                          //coautor 3
+                     $query42=("Select * from coautor where id_usuario='$idcoautor3' ");
+                            $conn42=pg_query($conexion,$query42);
+                         $cantidad42= pg_num_rows($conn42);
+                         
+                            if(!$conn42){
+                                 die(pg_error($conexion));
+                                    }
+
+                               if (pg_num_rows($conn42) > 0) {
+                                          while($rowData = pg_fetch_array($conn42)){
+                                       $id_coa3=intval($rowData["id_coautor"]);
+                                                   }
+                                             }
+                                                 else{
+                                                    $query52=("INSERT INTO coautor (id_coautor,fecha, id_usuario)
+                                                    VALUES('$idcoautor3','$fechaActual','$idcoautor3')");
+                                                 $consulta52=pg_query($conexion,$query52);
+
+                                                    }
+
+                        
+                        $query9=("INSERT INTO trabajos_coautores (trabajos_id, coautor_id)
+                          VALUES('$numid','$idcoautor2')");
                         $consulta4=pg_query($conexion,$query9);
                         
-                        $query10=("INSERT INTO trabajos_coautores (coautor_id, id_trabajo)
-                          VALUES('$idcoautor3','$id_trabajo')");
-                        $consulta5=pg_query($conexion,$query10);
-                        
+                        $query10=("INSERT INTO trabajos_coautores (trabajos_id, coautor_id)
+                          VALUES('$numid','$idcoautor3')");
+                        $consulta5=pg_query($conexion,$query10);  
+                       
+
+                        /*
                         
                          // TABLA TRABAJOS SE RELACIONA CON TRABAJOS_CONGRESO
                         //QUERY PARA LA TABLA DE TRABAJOS_CONGRESO
@@ -1264,38 +1379,27 @@ Encabezado de la página */
                     //AQUI SE INSERTAN LOS ID EN TRABAJOS REFERENCIAS    
                         $query17=("INSERT INTO trabajos_referencias (referencias_id,id_trabajo)
                           VALUES('$id_trabajo','$id_referencia')");
-                        $consulta10=pg_query($conexion,$query17); 
-                }
+                        $consulta10=pg_query($conexion,$query17); */
+                
                                                     
                                                     
                                                     
-                }else{ // si no hay correo 3 pero sí hay correo1 y correo2
+}} else{ // si no hay correo 3 pero sí hay correo1 y correo2
                   // TABLA TRABAJOS 
                 //INSERT PARA INSERTAR TITULO, CATEGORIA Y PALABRAS CLAVE
                 
-                $query5=("INSERT INTO trabajos (titulo, categoria, palabras_clave, fecha_trabajos, hora_trabajos)
-                          VALUES('$titulo','$categoria','$palabrasclave','$fechaActual','$horaActual')");
+                $query5=("INSERT INTO trabajos (id_trabajo, titulo, categoria, palabras_clave, fecha_trabajos, hora_trabajos)
+                          VALUES('$numid','$titulo','$categoria','$palabrasclave','$fechaActual','$horaActual')");
                         $consulta1=pg_query($conexion,$query5);        
                         
-                $query6=("Select id_trabajo from trabajos where fecha_trabajos='$fechaActual' and hora_trabajos='$horaActual' ");
-                            $conn5=pg_query($conexion,$query6);
-
-                               if(!$conn5){
-                                 die(pg_error($conexion));
-                                    }
-
-                               if (pg_num_rows($conn5) > 0) {
-                                          while($rowData = pg_fetch_array($conn5)){
-                                       $id_trabajo=intval($rowData["id_trabajo"]);
-                                                   }
-                                             }        
-                // TABLAS CON LAS QUE SE RELACIONA LA TABLA TRABAJOS
+                    
+                 // TABLAS CON LAS QUE SE RELACIONA LA TABLA TRABAJOS
                 // 1. TABLA PONENCIA 
                 //INSERT PARA INSERTAR EL ID DE LA TABLA TRABAJOS EN LA TABLA PONENCIA
                 //INSERT PARA INSERTAR TAMBIEN EL RESUMEN, EXTENSO Y VIDEO                      
                                              
-                $query7=("INSERT INTO ponencia (resumen_ponencia, id_trabajo)
-                          VALUES('$resumen','$id_trabajo')");
+                $query7=("INSERT INTO ponencia (id_trabajos, resumen_ponencia)
+                          VALUES('$numid','$resumen')");
                         $consulta2=pg_query($conexion,$query7);         
                         
                 // TABLAS CON LAS QUE SE RELACIONA LA TABLA TRABAJOS
@@ -1303,15 +1407,40 @@ Encabezado de la página */
                 //INSERT PARA INSERTAR EL ID DE LA TABLA TRABAJOS EN LA TABLA PONTENTE_TRABAJOS
                 //INSERT PARA INSERTAR TAMBIEN LA FECHA (fecha_registro)
                         
-                $query8=("INSERT INTO ponente_trabajos (ponente_id, fecha_registro, id_trabajo)
-                          VALUES('$idcoautor1','$fechaActual','$id_trabajo')");
+                $query8=("INSERT INTO ponente_trabajos (ponente_id, trabajos_id, fecha_registro)
+                          VALUES('$idcoautor1','$numid','$fechaActual')");
                         $consulta3=pg_query($conexion,$query8);
                         
-                        $query9=("INSERT INTO trabajos_coautores (coautor_id, id_trabajo)
-                          VALUES('$idcoautor2','$id_trabajo')");
+                        
+                    
+                  //coautor 2
+                     $query41=("Select * from coautor where id_usuario='$idcoautor2' ");
+                            $conn41=pg_query($conexion,$query41);
+                         $cantidad41= pg_num_rows($conn41);
+                         
+                            if(!$conn41){
+                                 die(pg_error($conexion));
+                                    }
+
+                               if (pg_num_rows($conn41) > 0) {
+                                          while($rowData = pg_fetch_array($conn41)){
+                                       $id_coa2=intval($rowData["id_coautor"]);
+                                                   }
+                                             }
+                                                 else{
+                                                    $query51=("INSERT INTO coautor (id_coautor,fecha, id_usuario)
+                                                    VALUES('$idcoautor2','$fechaActual','$idcoautor2')");
+                                                 $consulta51=pg_query($conexion,$query51);
+
+                                                   
+                                                    }
+
+                        
+                        $query9=("INSERT INTO trabajos_coautores (trabajos_id, coautor_id)
+                          VALUES('$numid','$idcoautor2')");
                         $consulta4=pg_query($conexion,$query9);
                         
-                        
+                        /*
                          // TABLA TRABAJOS SE RELACIONA CON TRABAJOS_CONGRESO
                         //QUERY PARA LA TABLA DE TRABAJOS_CONGRESO
                         
@@ -1353,38 +1482,29 @@ Encabezado de la página */
                     //AQUI SE INSERTAN LOS ID EN TRABAJOS REFERENCIAS    
                         $query17=("INSERT INTO trabajos_referencias (referencias_id,id_trabajo)
                           VALUES('$id_trabajo','$id_referencia')");
-                        $consulta10=pg_query($conexion,$query17); 
-                }
+                        $consulta10=pg_query($conexion,$query17); */
+ }} else{//2
                 
                 
-                }else{ //si no mete ningun autor y el idcoautor2 esta vacío
+                //si no mete ningun autor y el idcoautor2 esta vacío
                    
                 // TABLA TRABAJOS 
                 //INSERT PARA INSERTAR TITULO, CATEGORIA Y PALABRAS CLAVE
-                
-                $query5=("INSERT INTO trabajos (titulo, categoria, palabras_clave, fecha_trabajos, hora_trabajos)
-                          VALUES('$titulo','$categoria','$palabrasclave','$fechaActual','$horaActual')");
-                        $consulta1=pg_query($conexion,$query5);        
-                        
-                $query6=("Select id_trabajo from trabajos where fecha_trabajos='$fechaActual' and hora_trabajos='$horaActual' ");
-                            $conn5=pg_query($conexion,$query6);
+               
 
-                               if(!$conn5){
-                                 die(pg_error($conexion));
-                                    }
 
-                               if (pg_num_rows($conn5) > 0) {
-                                          while($rowData = pg_fetch_array($conn5)){
-                                       $id_trabajo=intval($rowData["id_trabajo"]);
-                                                   }
-                                             }        
-                // TABLAS CON LAS QUE SE RELACIONA LA TABLA TRABAJOS
+
+                $query5=("INSERT INTO trabajos (id_trabajo, titulo, categoria, palabras_clave, fecha_trabajos, hora_trabajos)
+                          VALUES('$numid','$titulo','$categoria','$palabrasclave','$fechaActual','$horaActual')");
+                        $consulta1=pg_query($conexion,$query5); 
+
+                       // TABLAS CON LAS QUE SE RELACIONA LA TABLA TRABAJOS
                 // 1. TABLA PONENCIA 
                 //INSERT PARA INSERTAR EL ID DE LA TABLA TRABAJOS EN LA TABLA PONENCIA
                 //INSERT PARA INSERTAR TAMBIEN EL RESUMEN, EXTENSO Y VIDEO                      
                                              
-                $query7=("INSERT INTO ponencia (resumen_ponencia, id_trabajo)
-                          VALUES('$resumen','$id_trabajo')");
+                $query7=("INSERT INTO ponencia (id_trabajos, resumen_ponencia)
+                          VALUES('$numid','$resumen')");
                         $consulta2=pg_query($conexion,$query7);         
                         
                 // TABLAS CON LAS QUE SE RELACIONA LA TABLA TRABAJOS
@@ -1392,14 +1512,13 @@ Encabezado de la página */
                 //INSERT PARA INSERTAR EL ID DE LA TABLA TRABAJOS EN LA TABLA PONTENTE_TRABAJOS
                 //INSERT PARA INSERTAR TAMBIEN LA FECHA (fecha_registro)
                         
-                $query8=("INSERT INTO ponente_trabajos (ponente_id, fecha_registro, id_trabajo)
-                          VALUES('$idcoautor1','$fechaActual','$id_trabajo')");
+                $query8=("INSERT INTO ponente_trabajos (ponente_id, trabajos_id, fecha_registro)
+                          VALUES('$idcoautor1','$numid','$fechaActual')");
                         $consulta3=pg_query($conexion,$query8);
-                        
                         
                          // TABLA TRABAJOS SE RELACIONA CON TRABAJOS_CONGRESO
                         //QUERY PARA LA TABLA DE TRABAJOS_CONGRESO
-                        
+                        /*
                    
                 $query13=("Select id_congreso from congreso where fecha_inicio_congreso<='$fechaActual' and fecha_fin_congreso>='$horaActual' ");
                             $conn6=pg_query($conexion,$query13);
@@ -1415,8 +1534,10 @@ Encabezado de la página */
                                              }
                          $query14=("INSERT INTO trabajos_congreso (congreso_id, fecha, id_trabajo)
                           VALUES('$id_congreso','$fechaActual,'$id_trabajo')");
-                        $consulta8=pg_query($conexion,$query14);        
-                         
+                        $consulta8=pg_query($conexion,$query14);    */
+
+
+                           /*
                    //INSERT PARA AGREGAR REFERENCIA
                         $query15=("INSERT INTO referencias (referencia)
                           VALUES('$referencia')");
@@ -1438,45 +1559,14 @@ Encabezado de la página */
                     //AQUI SE INSERTAN LOS ID EN TRABAJOS REFERENCIAS    
                         $query17=("INSERT INTO trabajos_referencias (referencias_id,id_trabajo)
                           VALUES('$id_trabajo','$id_referencia')");
-                        $consulta10=pg_query($conexion,$query17); 
-                        
-                        
-                }
-                
-               
-                
-                    /*  if (in_array($fileExtension, $allowedfileExtensions))
-    {
-      $uploadFileDir = '../semblanza/';
-      $dest_path = $uploadFileDir . $newFileName;
+                        $consulta10=pg_query($conexion,$query17);  */
 
-      if(move_uploaded_file($fileTmpPath, $dest_path)) 
-      {
-        
+echo "<script>alert('registro exitoso');</script>";
+
                         
-                      
-                         
-             }
-    else
-    {
-      $message = 'Subida fallida. Tipos de archivo permitidos: ' . implode(',', $allowedfileExtensions);
-    }
-  }
-  else
-  {
-    $message = 'Hay algún error en la carga del archivo. Por favor revise el siguiente error.<br>';
-    $message .= 'Error:' . $_FILES['uploadedFile']['error'];
-                              } /*
-                         
-                     }else{
-                           echo"<script>alert('Las contraseñas no coinciden. El Registro no se Pudo Realizar. Intenta nuevamente!!');</script>";
-                          return false;
-                        }    } 
-                              
-                              } 
-  } }}
-        
-                      $_SESSION['sms'] = $message;*/  ?>
+     }}          } 
+                
+                    ?>
            
        </div>
 

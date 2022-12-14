@@ -1,3 +1,49 @@
+<?php
+
+/////////////ENLISTAR LAS FOTOS EXISTENTES///////////////////////////////////////////////
+$listar = null;
+$directorio = opendir("Pagos/Pagos2023/");
+
+while ($elemento = readdir($directorio)) {
+  if ($elemento != '.' && $elemento != '..') {
+    if (is_dir("Pagos/Pagos2023/" . $elemento)) {
+      $listar .= "<a class=' col-md-6' href='Pagos/Pagos2023/$elemento'target='_blank'> 
+    $elemento/</a>
+    <br><br>";
+    } else {
+      $listar .= "<a class=' col-md-6' href='Pagos/Pagos2023/$elemento'target='_blank'> 
+    $elemento</a>
+    <br><br>";
+    }
+  }
+}
+
+///////////////////////// SUBIR UNA NUEVA FOTO /////////////////////////////////////////////
+
+
+if (isset($_POST["subir"])) {
+  $subir = $_POST["subir"];
+
+  if ($subir  == "Cargar archivo") {
+
+    $folder = "Pagos/Pagos2023/";
+    move_uploaded_file($_FILES["formato"]["tmp_name"], "$folder" . $_FILES["formato"]["name"]);
+    echo "<div class='alert alert-success'><p class='hidd' align=center>El archivo  " . $_FILES["formato"]["name"] . " se ha cargado correctamente. <a href='pagos.php' class='btn btn-default'>Clic aquí </a> para verificar.</div>";
+  }
+}
+
+/////////////////////////////// BORRAR FOTO ////////////////////////////////////
+
+if (isset($_POST['borrarFor'])) {
+  $borrarFor = ($_POST['borrarFor']);
+  @unlink('Pagos/Pagos2023/' . $borrarFor);
+  echo "<div class='alert alert-danger'><p class='hidd' align=center>El archivo  " . $borrarFor . " ha sido eliminado correctamente. <a href='pagos.php' class='btn btn-default'>Clic aquí </a> para verificar.</div>";
+}
+?>
+
+
+
+
 <html lang="es">
 
 <head>
@@ -5,11 +51,12 @@
   <title>Pagos del Congreso de Matemáticas</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1, minimum-scale=1">
- 
+
   <link rel="stylesheet" href="css/estilosmenuarriba.css">
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
-
+  <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
+  <link rel="icon" href="img/favicon.png" type="image/x-icon">
   <style>
     .bd-placeholder-img {
       font-size: 1.125rem;
@@ -120,9 +167,9 @@
 ------
 ------
 ------*/
-.nav-bar{
-  display: none;
-}
+    .nav-bar {
+      display: none;
+    }
 
 
 
@@ -149,18 +196,16 @@
 
     .boton1 {
       padding: 15px 25px;
-    margin: 1px;
-    font-size: 16px;
-    border: 2px solid #876E13;
-    border-radius: 1em;
-    color: black;
-    cursor: pointer; 
-    background: linear-gradient(to right, transparent 50%, #876E13 50%);
-    background-size: 200%;
-    background-position: left;
-    transition: background-position 0.5s
-
-
+      margin: 1px;
+      font-size: 16px;
+      border: 2px solid #876E13;
+      border-radius: 1em;
+      color: black;
+      cursor: pointer;
+      background: linear-gradient(to right, transparent 50%, #876E13 50%);
+      background-size: 200%;
+      background-position: left;
+      transition: background-position 0.5s
     }
 
     .boton1:hover {
@@ -171,18 +216,16 @@
 
     .boton2 {
       padding: 15px 25px;
-    margin: 1px;
-    font-size: 16px;
-    border: 2px solid #876E13;
-    border-radius: 1em;
-    color: black;
-    cursor: pointer; 
-    background: linear-gradient(to right, transparent 50%, #876E13 50%);
-    background-size: 200%;
-    background-position: left;
-    transition: background-position 0.5s
-
-
+      margin: 1px;
+      font-size: 16px;
+      border: 2px solid #876E13;
+      border-radius: 1em;
+      color: black;
+      cursor: pointer;
+      background: linear-gradient(to right, transparent 50%, #876E13 50%);
+      background-size: 200%;
+      background-position: left;
+      transition: background-position 0.5s
     }
 
     .boton2:hover {
@@ -193,17 +236,16 @@
 
     .boton3 {
       padding: 15px 25px;
-    margin: 1px;
-    font-size: 16px;
-    border: 2px solid #876E13;
-    border-radius: 1em;
-    color: black;
-    cursor: pointer; 
-    background: linear-gradient(to right, transparent 50%, #876E13 50%);
-    background-size: 200%;
-    background-position: left;
-    transition: background-position 0.5s
-
+      margin: 1px;
+      font-size: 16px;
+      border: 2px solid #876E13;
+      border-radius: 1em;
+      color: black;
+      cursor: pointer;
+      background: linear-gradient(to right, transparent 50%, #876E13 50%);
+      background-size: 200%;
+      background-position: left;
+      transition: background-position 0.5s
     }
 
     .boton3:hover {
@@ -214,17 +256,16 @@
 
     .boton4 {
       padding: 15px 25px;
-    margin: 1px;
-    font-size: 16px;
-    border: 2px solid #876E13;
-    border-radius: 1em;
-    color: black;
-    cursor: pointer; 
-    background: linear-gradient(to right, transparent 50%, #876E13 50%);
-    background-size: 200%;
-    background-position: left;
-    transition: background-position 0.5s
-
+      margin: 1px;
+      font-size: 16px;
+      border: 2px solid #876E13;
+      border-radius: 1em;
+      color: black;
+      cursor: pointer;
+      background: linear-gradient(to right, transparent 50%, #876E13 50%);
+      background-size: 200%;
+      background-position: left;
+      transition: background-position 0.5s
     }
 
     .boton4:hover {
@@ -235,18 +276,16 @@
 
     .boton5 {
       padding: 15px 25px;
-    margin: 1px;
-    font-size: 16px;
-    border: 2px solid #876E13;
-    border-radius: 1em;
-    color: black;
-    cursor: pointer; 
-    background: linear-gradient(to right, transparent 50%, #876E13 50%);
-    background-size: 200%;
-    background-position: left;
-    transition: background-position 0.5s
-
-
+      margin: 1px;
+      font-size: 16px;
+      border: 2px solid #876E13;
+      border-radius: 1em;
+      color: black;
+      cursor: pointer;
+      background: linear-gradient(to right, transparent 50%, #876E13 50%);
+      background-size: 200%;
+      background-position: left;
+      transition: background-position 0.5s
     }
 
     .boton5:hover {
@@ -257,17 +296,16 @@
 
     .boton6 {
       padding: 15px 25px;
-    margin: 1px;
-    font-size: 16px;
-    border: 2px solid #876E13;
-    border-radius: 1em;
-    color: black;
-    cursor: pointer; 
-    background: linear-gradient(to right, transparent 50%, #876E13 50%);
-    background-size: 200%;
-    background-position: left;
-    transition: background-position 0.5s
-
+      margin: 1px;
+      font-size: 16px;
+      border: 2px solid #876E13;
+      border-radius: 1em;
+      color: black;
+      cursor: pointer;
+      background: linear-gradient(to right, transparent 50%, #876E13 50%);
+      background-size: 200%;
+      background-position: left;
+      transition: background-position 0.5s
     }
 
     .boton6:hover {
@@ -303,27 +341,27 @@
 
       .icon-book {
         background: #876E13;
-    }
+      }
 
-    .icon-file-text2 {
+      .icon-file-text2 {
         background: #2b507c;
-    }
+      }
 
-    .icon-mic {
+      .icon-mic {
         background: #876E13;
-    }
+      }
 
-    .icon-stack {
+      .icon-stack {
         background: #2b507c;
-    }
+      }
 
-    .icon-key {
+      .icon-key {
         background: #876E13;
-    }
+      }
 
-    .icon-hearth {
-        background:#2b507c;
-}
+      .icon-hearth {
+        background: #2b507c;
+      }
 
       .icond:first-child {
         border-radius: 1rem 0 0 0;
@@ -482,14 +520,15 @@
     @media (max-width: 600px) {
       .inputP {
         width: 150px;
-       
+
       }
 
       .temaCentral {
         font-size: 13px;
 
       }
-/*Hacer responsiva la imagen*/
+
+      /*Hacer responsiva la imagen*/
       .img {
         width: 50px;
         height: 40px;
@@ -523,7 +562,7 @@ Encabezado de la página */
   <div>
     <header>
       <input type="checkbox" id="btn-menu">
-      <label for="btn-menu"><img src="img/menuicono.png" alt=""> </label>
+      <label for="btn-menu"><img src="img/menuicono11.png" alt=""> </label>
       <nav class="menu" style="z-index: 1;">
         <ul>
           <li> <a href="">Inicio</a></li>
@@ -541,10 +580,10 @@ Encabezado de la página */
   <div>
     <header>
       <input type="checkbox" id="btn-menu2">
-      <label for="btn-menu2"><img src="img/icono_informacion.png" alt=""> </label>
+      <label for="btn-menu2"><img src="img/icono_informacion2.png" alt=""> </label>
       <nav class="menu2" style="z-index: 2;">
         <ul>
-          <li> <a href=""><img class="alineadoicono" src="img/icono_informacion.png"> </a></li>
+          <li> <a href=""><img class="alineadoicono" src="img/icono_informacion2.png"> </a></li>
           <li> <a href="ponencias_info.php">Ponencias</a></li>
           <li> <a href="carteles_info.php">Carteles</a></li>
           <li> <a href="talleres_info.php">Talleres</a></li>
@@ -567,117 +606,156 @@ Encabezado de la página */
 
   <!-- Barra de menu Secundario - Movil-->
 
-  <div class="nav-bar" >
-       <a href="#" class="icond icon-book" target="_blank"> <img src="img/icons8-usuario-16.png"/> </a>
-            <a href="#" class="icond icon-file-text2" target="_blank"> <img src="img/icons8-expositor-16.png"/> </a>
-            <a href="#" class="icond icon-mic" target="_blank"> <img src="img/icons8-lectura-16.png"/> </a>
-            <a href="#" class="icond icon-stack" target="_blank"> <img src="img/icons8-foto-16.png"/> </a>
-            <a href="#" class="icond icon-key" target="_blank"> <img src="img/icons8-configuración-del-administrador-16.png"/> </a>
-            <a href="#" class="icond icon-hearth" target="_blank"> <img src="img/icons8-llamada-de-conferencia-16.png"/></a>
-        </div>   
-  
-<main>
+  <div class="nav-bar">
+    <a href="#" class="icond icon-book" target="_blank"> <img src="img/icons8-usuario-16.png" /> </a>
+    <a href="#" class="icond icon-file-text2" target="_blank"> <img src="img/icons8-expositor-16.png" /> </a>
+    <a href="#" class="icond icon-mic" target="_blank"> <img src="img/icons8-lectura-16.png" /> </a>
+    <a href="#" class="icond icon-stack" target="_blank"> <img src="img/icons8-foto-16.png" /> </a>
+    <a href="#" class="icond icon-key" target="_blank"> <img src="img/icons8-configuración-del-administrador-16.png" /> </a>
+    <a href="#" class="icond icon-hearth" target="_blank"> <img src="img/icons8-llamada-de-conferencia-16.png" /></a>
+  </div>
+
+  <main>
     <div class="ContenedorPrincipal">
-    <div class="px-4 pt-5 my-5 text-center border-bottom">
+      <div class="px-4 pt-5 my-5 text-center border-bottom">
 
-      <div class="col-lg-6 mx-auto">
+        <div class="col-lg-6 mx-auto">
 
-        <form action="#" method="POST">
-          <!-- Aqui va el codigo de cada uno-->
+          <form action="#" method="POST">
+            <!-- Aqui va el codigo de cada uno-->
 
-          <p class="Tema">Pagos</p>
+            <p class="Tema">Pagos</p>
 
-          <!--DATOS-->
-          <div class="datosP">
-            <div class="D1">
+            <!--DATOS-->
+            <div class="datosP">
+              <div class="D1">
+                <table>
+                  <center>
+                    <tr>
+                      <div class="photo">
+                        <img src="img/info_pagos5.png" alt="Photo" style="width:100%;">
+                      </div>
+                      <p class="temaSec">Introducir los datos de pagos</p>
+                    </tr>
+                  </center>
+                </table>
+              </div>
+            </div>
+
+
+            <!--******Tipo de pagos*******-->
+            <p class="temaCentral">Tipo de pago</p>
+            <div class="datosP">
               <table>
                 <center>
                   <tr>
-                    <div class="photo">
-                    <img src="img/info_pagos5.png" alt="Photo" style="width:100%;">
-                  </div>
-                    <p class="temaSec">Introducir los datos de pagos</p>
+                    <td class="C1">
+                      <label for="Metodo"><br>Elige el tipo de pago:</label>
+                    </td>
+                    <td class="C2">
+                      <select class="inputP" style="text-transform:uppercase;" id="metodo" name="metodo_pago" placeholder="Seleccione" required>
+                        <option value="opcion">Seleccione</option>
+                        <option value="efectivo">Efectivo</option>
+                        <option value="transferencia">Tranferencia</option>
+                        <option value="Beca">Beca</option>
+
+                      </select>
+                    </td>
                   </tr>
                 </center>
+
+                <center>
+                  <tr>
+                    <td class="C1">
+                      <label for="Folio">Referencia o folio:</label>
+                    </td>
+                    <td class="C2">
+                      <input class="inputP" style="text-transform:uppercase;" type="text" name="id_referencia" placeholder="Referencia" required>
+                    </td>
+                  </tr>
+                </center>
+
+                <center>
+                  <tr>
+                    <td class="C1">
+                      <label for="MontoPago">Monto:</label>
+                    </td>
+                    <td class="C2">
+                      <input class="inputP" style="text-transform:uppercase;" type="text" name="monto" placeholder="Monto" required>
+                    </td>
+                  </tr>
+                </center>
+
+                <center>
+                  <tr>
+                    <td class="C1">
+                      <label for="Date">Fecha:</label>
+                    </td>
+                    <td class="C2">
+                      <input class="inputP" style="text-transform:uppercase;" type="date" name="fecha" value="2023-01-01" min="2022-01-01" max="2030-12-31" required>
+                    </td>
+                  </tr>
+                </center>
+
+
               </table>
             </div>
-          </div>
+            <br>
+
+            <!--******Imagen*******-->
+            <p class="temaCentral">Comprobante de pago</p>
+            <div class="datosP">
+
+              <p class="temaTer"><br>Subir el ficha de pago en formato jpg.</p>
 
 
-          <!--******Tipo de pagos*******-->
-          <p class="temaCentral">Tipo de pago</p>
-          <div class="datosP">
-            <table>
-              <center>
-                <tr>
-                  <td class="C1">
-                    <label for="Metodo"><br>Elige el tipo de pago:</label>
-                  </td>
-                  <td class="C2">
-                    <select class="inputP" style="text-transform:uppercase;" id="metodo" name="metodo_pago" placeholder="Seleccione" required>
-                      <option value="opcion">Seleccione</option>
-                      <option value="efectivo">Efectivo</option>
-                      <option value="transferencia">Tranferencia</option>
-                      <option value="Beca">Beca</option>
-
-                    </select>
-                  </td>
-                </tr>
-              </center>
-
-              <center>
-                <tr>
-                  <td class="C1">
-                    <label for="Folio">Referencia o folio:</label>
-                  </td>
-                  <td class="C2">
-                    <input class="inputP" style="text-transform:uppercase;" type="text" name="id_referencia" placeholder="Referencia" required>
-                  </td>
-                </tr>
-              </center>
-
-              <center>
-                <tr>
-                  <td class="C1">
-                    <label for="MontoPago">Monto:</label>
-                  </td>
-                  <td class="C2">
-                    <input class="inputP" style="text-transform:uppercase;" type="text" name="monto" placeholder="Monto" required>
-                  </td>
-                </tr>
-              </center>
-
-              <center>
-                <tr>
-                  <td class="C1">
-                    <label for="Date">Fecha:</label>
-                  </td>
-                  <td class="C2">
-                    <input class="inputP" style="text-transform:uppercase;" type="date" name="fecha" value="2023-01-01" min="2022-01-01" max="2030-12-31" required>
-                  </td>
-                </tr>
-              </center>
+              <!-- <input class="imgPago" type="file" name="imgPago">-->
 
 
-            </table>
-          </div>
-          <br>
-
-          <!--******Imagen*******-->
-          <p class="temaCentral">Comprobante de pago</p>
-          <div class="datosP">
-
-            <p class="temaTer"><br>Subir el ficha de pago en formato jpg.</p>
-
-            <input class="imgPago" type="file" name="imgPago">
-
-          </div>
-          <br>
-          <button class="enviarPagoBtn">Enviar</button>
-        </form>
+          </form>
+        </div>
       </div>
+      <center>
+        <div class="col-md-offset-4">
+          <?php
+          echo $listar;
+          ?>
+        </div>
+      </center>
+      <center>
+        <form method="post" enctype="multipart/form-data" class="col-md-offset-4 col-md-4" style="margin-right:2%; border-radius:20px;">
+          <div class="bg-secondary text-white" style="margin-top:2%; margin-bottom:20%; padding:3%; border-radius:20px; background-color: #2B307C;">
+            <input class="form-control" type="file" name="formato" id="formato" style="margin-bottom:2%;">
+            <input class="btn btn-default" type="submit" name="subir" value="Cargar archivo" style="width:100%; color: white;">
+          </div>
+        </form>
+
+        <form method="post" class="col-md-offset-4 col-md-4" style="margin-right:2%; margin-top:-7%; ">
+
+          <div class="bg-dark text-white" style="margin-top:2%; margin-bottom:20%; padding:3%; border-radius:20px;">
+            <input class="form-control" name="borrarFor" size="50" placeholder=" Ejemplo: 1.Nombre_Del_Archivo.xls" style="margin-bottom:2%;" />
+            <input class="btn btn-default" type="submit" name="borrar" value="Borrar archivo" style="width:100%; color: white;">
+            <div class="col-md-6" style="margin-top:-6%;">
+              <?php
+              if (isset($_POST['mensajeOk'])) {
+                $mensajeOk = ($_POST['mensajeOk']);
+                echo $mensajeOk;
+              }
+              ?>
+            </div>
+            <br>
+          </div>
+        </form>
+
+      </center>
+
+      <center>
+        <button class="enviarPagoBtn">Enviar</button>
+      </center>
+
     </div>
-  </div>
+
+    </div>
   </main>
 
   <br>

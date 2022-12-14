@@ -1,3 +1,7 @@
+<?php
+ini_set("display_errors", 0);
+session_start();
+?>
 <html lang="es">
     <head>
         <link href="icono.ico" type="image/x-icon" rel="shortcut icon" />
@@ -515,22 +519,21 @@ Encabezado de la página */
         */banner, menu, carrusel, cuadro iniciar, cuadro fechas, -->
         <!-- Baner -->
      
-      
-         <div id="wrapper" > <center> <img src="img/banpru.jpg" class="baner"/> </center>  </div>
+       <div id="wrapper" > <center> <img src="img/banpru.jpg" class="baner"/> </center>  </div>
          
        <!-- Barra de menu -->
          <div>
             <header>  
                 <input type="checkbox" id="btn-menu"> 
-                <label for="btn-menu"><img src="img/menuicono.png" alt=""> </label>
+                <label for="btn-menu"><img src="img/menuicono11.png" alt=""> </label>
                 <nav class="menu" style="z-index: 1;">
                     <ul>
-                        <li> <a href="">Inicio</a></li>
-                        <li> <a href="">Memorias</a></li>
+                        
+                        <li> <a href="memoriascarrusel.php">Memorias</a></li>
                         <li> <a href="convocatoria.php">Convocatoria</a></li> 
                         <li>  <a href="inscripcionYcostos.php">Inscripción y Costos</a></li>
-                        <li> <a href="ComiteOrg">Comité Organizador</a></li>
-                        <li> <a href=""><img class="alineadoicono" src="img/iniciaricono.png">&nbsp;Iniciar Sesión</a></li>
+                        <li> <a href="ComiteOrg.php">Comité Organizador</a></li>
+                        <li> <a href="index3.php"><img class="alineadoicono" src="img/iniciaricono.png">&nbsp;Cerrar Sesión</a></li>
                     </ul>  
                 </nav> 
                 
@@ -552,29 +555,6 @@ Encabezado de la página */
             </header>
         </div>
  
-       <div class="containerBoton">
-        <label for="btn-menu3"></label>
-        <nav class="menu3" style="z-index: 2;">  
-        <button class="boton1" type="button" onClick="ico2()" >Usuario</button>
-        <button class="boton2" type="button" onClick="ico1()">Ponente</button>
-        <button class="boton3" type="button" onClick="ico4()" >Evaluador</button>
-        <button class="boton4" type="button" onClick="ico3()" >Memorias</button>
-        <button class="boton5" type="button" onClick="ico6()" >Admin</button>
-        <button class="boton6" type="button" onClick="ico5()" >Comite Orga</button>
-        </nav>
-    </div>
-
-    <!-- Barra de menu Secundario - Movil-->
-
-       <div class="nav-bar" >
-            <a onClick="return ico2()"class="icond icon-book" target="_blank"> <img src="img/icons8-usuario-16.png"/> </a>
-            <a onClick="return ico1()" href="#" class="icond icon-file-text2" target="_blank"> <img src="img/icons8-expositor-16.png"/> </a>
-            <a onClick="return ico4()" href="#" class="icond icon-mic" target="_blank"> <img src="img/icons8-lectura-16.png"/> </a>
-            <a onClick="return ico3()" href="#" class="icond icon-stack" target="_blank"> <img src="img/icons8-foto-16.png"/> </a>
-            <a onClick="return ico6()" href="#" class="icond icon-key" target="_blank"> <img src="img/icons8-configuración-del-administrador-16.png"/> </a>
-            <a onClick="return ico5()" href="#" class="icond icon-hearth" target="_blank"> <img src="img/icons8-llamada-de-conferencia-16.png"/> </a>
-        </div> 
-
 <div class="contenedorregistroI"> 
   <div class="px-4 pt-5 my-5 text-center border-bottom">
     <div class="col-lg-6 mx-auto">
@@ -590,7 +570,7 @@ Encabezado de la página */
           <label for="Titulo">Título de la conferencia:</label>
                                                 </td>
             <td class="C2">
-          <input class="inputNombreC" type="text" name="titulo" placeholder="Ingresa el Titulo de la conferencia" required>
+          <input class="inputNombreC" type="text" name="titulo" placeholder="Ingresa el Titulo de la conferencia" style="text-transform:uppercase;" required>
                 </td>
                                                                 
               </tr> 
@@ -669,7 +649,7 @@ Encabezado de la página */
 
                                                                   <select border-radius: 9px; input class="inputNombreC" name ="tipo">
                                                                         <option>PRESENCIAL</option>
-                                                                        <option ><a onClick="return ico1()">VIRTUAL</a></option>
+                                                                        <option ><a >VIRTUAL</a></option>
                                                                     </select>
                                                                 </td>
                                                                 
@@ -689,12 +669,61 @@ Encabezado de la página */
 
             </table>                              
        </div>  </div>
-                           
-                            <button >Registrar Conferencia</button> 
+                           <button name="uploadBtn" class="enviarBtn" value="Registrar Conferencia">Registrar Conferencia</button>
         
       </form> <br><br> <a  href="Perfiladmin.php"  > <button class="enviarBtn">Regresar</button> </a>
   </div></div>
   </div>
+       
+
+       <div>
+    <?php
+ $message = '';
+     if (isset($_POST['uploadBtn']) && $_POST['uploadBtn'] == 'Registrar Conferencia') {
+
+    $conexion = pg_connect("host=localhost dbname=congresowinx user=congresowinx password=W1nxC0ngr3s032511");
+    $expoid = date('dmys');
+ if (isset($_POST["titulo"]) && isset($_POST["correo"]) && isset($_POST["categorias"])&& isset($_POST["fecha"])&& isset($_POST["hora"])&& isset($_POST["tipo"]) ) {
+          $titulo = $_POST["titulo"];
+          $tituloo =strtoupper($titulo);
+          $corr = $_POST["correo"];
+          $cate = $_POST["categorias"];
+          $fech = $_POST["fecha"];
+          $hor = $_POST["hora"];
+          $tip = $_POST["tipo"];
+
+             
+
+               $query3 = ("Select id_usuario from usuario where usuario='$corr' ");
+                  $conn3 = pg_query($conexion, $query3);
+
+                  if (!$conn3) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($conn3) > 0) {
+                    while ($rowData = pg_fetch_array($conn3)) {
+                      $id_usu = intval($rowData["id_usuario"]);
+                    }
+                  }
+
+                  $query2 = ("INSERT INTO exposicion (id_expo, fecha, hora, ponente_id)
+                          VALUES('$expoid','$fech','$hor','$id_usu')");
+                  $consulta2 = pg_query($conexion, $query2);
+                  $query = ("INSERT INTO conferencia (exposicion_id,titulo_conferencia, tipo_conferencia, categoria_conferencia)
+                          VALUES('$expoid','$tituloo','$tip','$cate')");
+                  $consulta1 = pg_query($conexion, $query);
+
+                   echo "<script languaje='JavaScript'> 
+                    alert('Los datos de añadieron correctamente');
+                    </script>";
+}}
+?>
+
+
+
+
+    </div>
 
 
 

@@ -1,3 +1,8 @@
+<?php
+ini_set("display_errors", 0);
+session_start();
+?>
+
 <html lang="es">
     <head>
         <link href="icono.ico" type="image/x-icon" rel="shortcut icon" />
@@ -202,11 +207,12 @@ Encabezado de la página */
                 <label for="btn-menu"><img src="img/menuicono11.png" alt=""> </label>
                 <nav class="menu" style="z-index: 1;">
                     <ul>
-                    <li> <a href="index.php">Inicio</a></li>
-                        <li> <a href="">Memorias</a></li>
+                    <li> <a href="index3.php">Inicio</a></li>
+                    <li> <a href="memoriascarrusel.php">Memorias</a></li>
                         <li> <a href="convocatoria.php">Convocatoria</a></li> 
                         <li> <a href="inscripcionYcostos.php">Inscripción y Costos</a></li>
                         <li> <a href="ComiteOrg.php">Comité Organizador</a></li>
+                        <li> <a href="ComiteEva.php">Comité Evaluador</a></li>
                         <li> <a href="InicioSesion.php"><img class="alineadoicono" src="img/iniciaricono.png">&nbsp;Iniciar Sesión</a></li>
                     </ul>  
                 </nav> 
@@ -235,30 +241,57 @@ Encabezado de la página */
     
         <div class="loginBox">
 <main class="form-signin w-100 m-auto">
-  <form>
+  <form method="POST">
     <img class="mb-4" src="img/Recurso1.png" alt="" width="80" height="80">
     <h1 class="h3 mb-3 fw-normal" >Iniciar Sesion</h1>
 
     <div class="form-floating">
-      <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" required>
+      <input type="email" class="form-control" id="floatingInput" name="correo" placeholder="name@example.com" required>
       <label for="floatingInput">Correo</label>
     </div>
     <br>
     <div class="form-floating">
-      <input type="password" class="form-control" id="floatingPassword" placeholder="Password" required>
+      <input type="password" class="form-control" id="floatingPassword" name="contraseña" placeholder="Password" required>  
       <label for="floatingPassword">Contraseña</label>
     </div>
 
     
-    <input type="submit" value="Iniciar Sesión">
+    <input type="submit" name="uploadBtn"  value="Iniciar Sesión">
     <br>
     <br>
  <a href="contraseñaOlvido.php">¿Olvidaste tu contraseña?</a>
 					<br>
-					<a href="registro.php">¿No tienes una cuenta?</a>
+					<a href="RegistroN.php">¿No tienes una cuenta?</a>
   </form>
 </main>
         </div>
+
+        <?php
+        $message = '';
+
+$conexion = pg_connect("host=localhost dbname=congresowinx user=congresowinx password=W1nxC0ngr3s032511");
+if (isset($_POST['uploadBtn']) && $_POST['uploadBtn'] == 'Iniciar Sesión'){
+ if (isset($_POST["correo"]) && isset($_POST["contraseña"]) ) {
+          
+  $coreo = $_POST["correo"];
+  $clave= $_POST["contraseña"];
+  $clave = hash('sha512', $clave);
+
+
+  $query="SELECT usuario, contraseña FROM usuario WHERE usuario='$coreo' AND contraseña= '$clave' ";
+ $consulta= pg_query($conexion,$query);
+ $cantidad= pg_num_rows($consulta);
+ if ($cantidad>0){
+  echo "<script>alert('Bienvenido!!!'); 
+  window.location.replace('https://laboratoriosistemas.cuautitlan2.unam.mx/congresowinx/WinxCongreso/Perfiladmin.php');</script>";
+
+ } else{
+     echo"<script> alert ('El Correo o la Contraseña son Incorrectos. Porfavor, intenta nuevamente !!')</script>";
+ }
+}}
+  
+$_SESSION['sms'] = $message;  ?>
+
   </body>
 </div>
 
@@ -311,6 +344,8 @@ Encabezado de la página */
   </footer>
 </div>
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
-           
+    
+    
+
 </body>
 </html>

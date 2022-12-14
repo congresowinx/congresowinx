@@ -1,17 +1,17 @@
 <html lang="es">
     <head>
         <link href="icono.ico" type="image/x-icon" rel="shortcut icon" />
+        
         <title>Buscar Congresos de Matemáticas</title>
-       <meta charset="UTF-8"> 
+        <meta charset="UTF-8"> 
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1, minimum-scale=1">
         <link rel="stylesheet" href="icon.css">
- 
            <link rel="stylesheet" href="css/estilosmenuarriba.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"> 
-
-        <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
-<link rel="icon" href="img/favicon.png" type="image/x-icon">       
+           
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">   
         
+        <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
+<link rel="icon" href="img/favicon.png" type="image/x-icon">      
         <style>
    .bd-placeholder-img {
         font-size: 1.125rem;

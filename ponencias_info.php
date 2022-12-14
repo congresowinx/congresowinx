@@ -236,9 +236,9 @@ Encabezado de la página */
                     <ul>
                         <li> <a href="">Inicio</a></li>
                         <li> <a href="memoriascarrusel.php">Memorias</a></li>
-                        <li> <a href="">Convocatoria</a></li> 
-                        <li> <a href="">Inscripción</a></li>
-                        <li> <a href="">Comité Organizador</a></li>
+                        <li> <a href="convocatoria.php">Convocatoria</a></li> 
+                        <li> <a href="inscripcionYcostos.php">Inscripción y Costos</a></li>
+                        <li> <a href="ComiteOrg.php">Comité Organizador</a></li>
                         <li> <a href=""><img class="alineadoicono" src="img/iniciaricono.png">&nbsp;Iniciar Sesión</a></li>
                     </ul>  
                 </nav> 

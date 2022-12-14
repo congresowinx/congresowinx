@@ -337,10 +337,10 @@ Encabezado de la página */
                 <nav class="menu" style="z-index: 1;">
                     <ul>
                         <li> <a href="">Inicio</a></li>
-                        <li> <a href="">Memorias</a></li>
-                        <li> <a href="">Convocatoria</a></li> 
-                        <li> <a href="">Inscripción</a></li>
-                        <li> <a href="">Comité Organizador</a></li>
+                        <li> <a href="memoriascarrusel.php">Memorias</a></li>
+                        <li> <a href="convocatoria.php">Convocatoria</a></li> 
+                        <li> <a href="inscripcionYcostos.php">Inscripción y Costos</a></li>
+                        <li> <a href="ComiteOrg.php">Comité Organizador</a></li>
                         <li> <a href=""><img class="alineadoicono" src="img/iniciaricono.png">&nbsp;Iniciar Sesión</a></li>
                     </ul>  
                 </nav> 
@@ -419,12 +419,16 @@ echo "<div class='col'><p class='btn btn-warning'><a href='memoriascarrusel3.php
 
 </div>
 </section>
+<center>
+<button type="button" class="btn btn-secondary btn-lg"> <a href="acercade.php" style="color: white;"> Acerca de</a></button>
+</center>
 
   
   <br>
   <br>
   <br> 
 </div>
+
 
 <center>
  

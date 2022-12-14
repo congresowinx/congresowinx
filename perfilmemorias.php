@@ -146,7 +146,7 @@ echo "<div class='alert alert-danger'><p class='hidd' align=center>El archivo  "
    width: 100%;
     height: 12vh;
     position: relative;
-    top: 6%;
+    top: 7%;
     transform: translateY(-50%);
     text-align: center; 
     background-color: transparent;
@@ -353,9 +353,9 @@ Encabezado de la página */
                     <ul>
                         <li> <a href="">Inicio</a></li>
                         <li> <a href="memoriascarrusel.php">Memorias</a></li>
-                        <li> <a href="">Convocatoria</a></li> 
-                        <li> <a href="">Inscripción y Costos</a></li>
-                        <li> <a href="ComiteOrg">Comité Organizador</a></li>
+                        <li> <a href="convocatoria.php">Convocatoria</a></li> 
+                        <li> <a href="inscripcionYcostos.php">Inscripción y Costos</a></li>
+                        <li> <a href="ComiteOrg.php">Comité Organizador</a></li>
                         <li> <a href=""><img class="alineadoicono" src="img/iniciaricono.png">&nbsp;Iniciar Sesión</a></li>
                     </ul>  
                 </nav> 
