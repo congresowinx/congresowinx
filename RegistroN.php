@@ -576,6 +576,7 @@ Encabezado de la página */
    
     <div class="col-lg-6 mx-auto">
         <?php
+          require './PHPMailerAutoload.php';
             if (isset($_POST['uploadBtn'])) {
                 $captcha_response = true;
                 $recaptcha = $_POST['g-recaptcha-response'];
@@ -735,15 +736,44 @@ if (isset($_POST['uploadBtn']) && $_POST['uploadBtn'] == 'Enviar') {
                       VALUES('$conn4', '$conn88')");
               $consulta9 = pg_query($conexion, $query9);
 
+              $enviarCorreo = false;
               if ($conn66 == 1) {
                 $query10 = ("INSERT INTO permisos (permiso_id_rol, usuario_id, estado) 
                       VALUES('0', '$conn3', '1')");
                 $consulta10 = pg_query($conexion, $query10);
-                echo "<script>alert('Registrado Exitosamente !!!');</script>";
+                $enviarCorreo = true;
               } else if ($conn66 >= 2) {
                 $query10 = ("INSERT INTO permisos (permiso_id_rol, usuario_id, estado) 
                       VALUES('1', '$conn3', '1')");
                 $consulta10 = pg_query($conexion, $query10);
+                $enviarCorreo = true;
+              }
+              if ($enviarCorreo) {
+                // ENVIO DE CORREO  
+                $contraseñaSinHash = $_POST["contraseña"];
+
+                // Create a new PHPMailer instance
+                $mail = new PHPMailer();
+                $mail->IsSMTP();
+
+                //Configuracion servidor mail
+                $mail->From = "pruebascongresomatexv@gmail.com"; //remitente
+                $mail->SMTPAuth = true;
+                $mail->SMTPSecure = 'tls'; //seguridad
+                $mail->Host = "smtp.gmail.com"; // servidor smtp
+                $mail->Port = 587; //puerto
+                $mail->Username = 'pruebascongresomatexv@gmail.com'; //nombre usuario
+                $mail->Password = 'yttrlwqkltwcpyme'; //contraseña
+
+                //Agregar destinatario
+                $mail->AddAddress($Correo);
+                $mail->Subject = "Registro Congreso de Matematicas FES Cuautitlan";
+                $mail->Body = "Bienvenid@ {$nombre}, se ha registrado de manera exitosa, esta es su contraseña: {$contraseñaSinHash}";
+
+                // Enviar
+                $mail->Send();
+
+                // Alerta de registro exitoso
                 echo "<script>alert('Registrado Exitosamente !!!');</script>";
               }
             } else {
