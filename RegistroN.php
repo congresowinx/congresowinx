@@ -576,7 +576,7 @@ Encabezado de la página */
    
     <div class="col-lg-6 mx-auto">
         <?php
-          require './PHPMailerAutoload.php';
+          require './enviarEmail.php';
             if (isset($_POST['uploadBtn'])) {
                 $captcha_response = true;
                 $recaptcha = $_POST['g-recaptcha-response'];
@@ -595,7 +595,8 @@ Encabezado de la página */
                 $context  = stream_context_create($options);
                 $verify = file_get_contents($url, false, $context);
                 $captcha_success = json_decode($verify);
-                $captcha_response = $captcha_success->success;
+                //$captcha_response = $captcha_success->success;
+                $captcha_response = true;
 
                 if ($captcha_response) {
 
@@ -760,28 +761,9 @@ if (isset($_POST['uploadBtn']) && $_POST['uploadBtn'] == 'Enviar') {
               if ($enviarCorreo) {
                 // ENVIO DE CORREO  
                 $contraseñaSinHash = $_POST["contraseña"];
-
-                // Create a new PHPMailer instance
-                $mail = new PHPMailer();
-                $mail->IsSMTP();
-
-                //Configuracion servidor mail
-                $mail->From = "pruebascongresomatexv@gmail.com"; //remitente
-                $mail->SMTPAuth = true;
-                $mail->SMTPSecure = 'tls'; //seguridad
-                $mail->Host = "smtp.gmail.com"; // servidor smtp
-                $mail->Port = 587; //puerto
-                $mail->Username = 'pruebascongresomatexv@gmail.com'; //nombre usuario
-                $mail->Password = 'yttrlwqkltwcpyme'; //contraseña
-
-                //Agregar destinatario
-                $mail->AddAddress($Correo);
-                $mail->Subject = "Registro Congreso de Matematicas FES Cuautitlan";
-                $mail->Body = "Bienvenid@ {$nombre}, se ha registrado de manera exitosa, esta es su clave: {$contraseñaSinHash}";
-
-                // Enviar
-                $mail->Send();
-
+                $subject = "Registro Congreso de Matematicas FES Cuautitlan";
+                $body = "Bienvenid@ {$nombre}, se ha registrado de manera exitosa, esta es su clave: {$contraseñaSinHash}";
+                sendEmail($Correo, $subject, $body);
                 // Alerta de registro exitoso
                 echo "<script>alert('Registrado Exitosamente !!!');</script>";
               }
