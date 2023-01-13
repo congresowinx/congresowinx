@@ -1,3 +1,14 @@
+<?php
+session_start();
+error_reporting(0);
+$varsec=$_SESSION['nombre_usuario'];
+if($varsec == null || $varsec = '') {
+    header('Location:404.php');
+    session_destroy();
+    session_unset();
+    die();
+}?>
+
 <html lang="es">
     <head>
         <link href="icono.ico" type="image/x-icon" rel="shortcut icon" />
@@ -7,7 +18,7 @@
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1, minimum-scale=1">
         <link rel="stylesheet" href="icon.css">
            <link rel="stylesheet" href="css/estilosmenuarriba.css">
-           
+            <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">   
         
         <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
@@ -32,8 +43,6 @@
     }
 
   
-
-
       .b-example-divider {
         height: 3rem;
         background-color: rgba(0, 0, 0, .1);
@@ -113,270 +122,6 @@
 }
 
 
-/*Aqui empieza el nuevo menu de colores junto con el menu para celular responsivo
--------
-------
-------
-------*/
-
-
- * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Roboto, sans-serif;
-}
-
-
-
-.containerBoton {
-   width: 100%;
-    height: 12vh;
-    position: relative;
-    top: 6%;
-    transform: translateY(-50%);
-    text-align: center; 
-    background-color: transparent;
-}
-
-
-.boton1 {
-    padding: 15px 25px;
-    margin: 1px;
-    font-size: 16px;
-    border: 2px solid #876E13;
-    border-radius: 1em;
-    color: black;
-    cursor: pointer; 
-    background: linear-gradient(to right, transparent 50%, #876E13 50%);
-    background-size: 200%;
-    background-position: left;
-    transition: background-position 0.5s;
-}
-
-.boton1:hover {
-    background-position: right;
-    color: white;
-    font-weight: 700;
-}
-
-.boton2 {
-    padding: 15px 25px;
-    margin: 1px;
-    font-size: 16px;
-    border: 2px solid #876E13;
-    border-radius: 1em;
-    color: black;
-    cursor: pointer; 
-    background: linear-gradient(to right, transparent 50%, #876E13 50%);
-    background-size: 200%;
-    background-position: left;
-    transition: background-position 0.5s;
-}
-
-.boton2:hover {
-    background-position: right;
-    color: white;
-    font-weight: 700;
-}
-
-.boton3 {
-   padding: 15px 25px;
-    margin: 1px;
-    font-size: 16px;
-    border: 2px solid #876E13;
-    border-radius: 1em;
-    color: black;
-    cursor: pointer; 
-    background: linear-gradient(to right, transparent 50%, #876E13 50%);
-    background-size: 200%;
-    background-position: left;
-    transition: background-position 0.5s;
-}
-
-.boton3:hover {
-    background-position: right;
-    color: white;
-    font-weight: 700;
-}
-
-.boton4 {
-    padding: 15px 25px;
-    margin: 1px;
-    font-size: 16px;
-    border: 2px solid #876E13;
-    border-radius: 1em;
-    color: black;
-    cursor: pointer; 
-    background: linear-gradient(to right, transparent 50%, #876E13 50%);
-    background-size: 200%;
-    background-position: left;
-    transition: background-position 0.5s;
-}
-
-.boton4:hover {
-    background-position: right;
-    color: white;
-    font-weight: 700;
-}
-
-.boton5 {
-  padding: 15px 25px;
-    margin: 1px;
-    font-size: 16px;
-    border: 2px solid #876E13;
-    border-radius: 1em;
-    color: black;
-    cursor: pointer; 
-    background: linear-gradient(to right, transparent 50%, #876E13 50%);
-    background-size: 200%;
-    background-position: left;
-    transition: background-position 0.5s;
-}
-
-.boton5:hover {
-    background-position: right;
-    color: white;
-    font-weight: 700;
-}
-
-.boton6 {
-   padding: 15px 25px;
-    margin: 1px;
-    font-size: 16px;
-    border: 2px solid #876E13;
-    border-radius: 1em;
-    color: black;
-    cursor: pointer; 
-    background: linear-gradient(to right, transparent 50%, #876E13 50%);
-    background-size: 200%;
-    background-position: left;
-    transition: background-position 0.5s;
-}
-
-.boton6:hover {
-    background-position: right;
-    color: white;
-    font-weight: 700;
-}
-
-@media only screen and (max-width:768px){
-
-    .nav-bar{
-    position: fixed;
-    right: 0;
-    top: 14%;
-    font-size:1.5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    z-index: 100;
-    }
-
-    .icond {
-    color: white;
-    text-decoration: none;
-    padding: .7rem;
-    display: flex;
-    transition: all .5s; 
-    }
-
-    .menuRB{
-        display: none;
-    }
-
-    .icon-book {
-        background: #876E13;
-    }
-
-    .icon-file-text2 {
-        background: #2b507c;
-    }
-
-    .icon-mic {
-        background: #876E13;
-    }
-
-    .icon-stack {
-        background: #2b507c;
-    }
-
-    .icon-key {
-        background: #876E13;
-    }
-
-    .icon-hearth {
-        background: #2b507c;
-    }
-
-    .icond:first-child{
-        border-radius: 1rem 0 0 0;
-    }
-
-    .icond:last-child{
-        border-radius: 0 0 0 1rem;
-    }
-
-
-
-}
-
-
-
-  #btn-menu3{
-      display: none;
-    }
-    .menu3 ul{
-      margin: 0;
-      list-style: none;
-      padding: 0;
-      display: flex;
-    }
-    
-    .menu3 li{
-      text-align: center;
-      flex-grow: 1;
-    }
-    
-    .menu3 li:hover {
-        background:  rgb(135, 110, 19); 
-    }
-    
-    .menu3 li a{
-      display:  block;
-      padding: 15px 20px;
-      color: #fff;
-      text-decoration: none;
-    }
-
-    
- @media (max-width: 768px){
-      header label{
-        display: block;
-      } 
-      .menu3 {
-        position: absolute;
-        background: transparent;
-        width: 70%;
-        margin-left: -70%;
-        transition: all 0.5s;
-      }
-      .menu3 ul {
-        flex-direction: column;
-      }
-      .menu3 li{
-        border-top: 1px solid transparent;
-      }
-      #btn-menu3:checked ~.menu3 {
-        margin: 0;
-      }
-    }
-
-    
-/*Aqui termina el nuevo menu de colores junto con el menu para celular responsivo*
--------------
-------------
-------------*/
 
 /*Aqui Empieza el css de estilos de la pagina de cada uno*
 -------------
@@ -436,7 +181,7 @@ button{
 	margin-bottom: 6%;
 	margin-top: 3%;
 }
-.inputNombreC {
+.inputNombreC2 {
 				border: 0.15em solid #B18904;
 				width: 500px;
         border-radius: 3em;
@@ -446,7 +191,7 @@ button{
         .inputP {
           width: 80px;
         }
-        .inputNombreC {
+        .inputNombreC2 {
           width: 160px;
         }
 
@@ -467,7 +212,7 @@ button{
         .inputP {
           width: 65px;
         }
-        .inputNombreC {
+        .inputNombreC2 {
           width: 150px;
         }
         .content-select {
@@ -510,6 +255,28 @@ button{
 	border: 0.3em solid #B18904;
         margin:3em;
 }
+.table-responsive{
+
+margin:1em;
+height: 60%;
+
+border-radius: 1em;
+
+width: auto;
+}
+
+.button2{
+  background: #2B307C;
+  color: #FFF;
+  font-size: 15px;
+  border-radius: 1px;
+  padding: 1px 10px;
+  margin-bottom: 0.5px; 
+  position: relative;
+  top:10%; 
+  left: 10%;
+
+}
         </style>
     </head>
 
@@ -530,12 +297,13 @@ Encabezado de la página */
                 <label for="btn-menu"><img src="img/menuicono11.png" alt=""> </label>
                 <nav class="menu" style="z-index: 1;">
                     <ul>
-                    <li> <a href="index.php">Inicio</a></li>
-                        <li> <a href="">Memorias</a></li>
-                        <li> <a href="convocatoria.php">Convocatoria</a></li> 
-                        <li> <a href="inscripcionYcostos.php">Inscripción y Costos</a></li>
-                        <li> <a href="ComiteOrg.php">Comité Organizador</a></li>
-                        <li> <a href="InicioSesion.php"><img class="alineadoicono" src="img/iniciaricono.png">&nbsp;Iniciar Sesión</a></li>
+                    <li> <a href="indexSesion.php">Inicio</a></li>
+                        <li> <a href="memoriascarruselSesion.php">Memorias</a></li>
+                        <li> <a href="convocatoriaSesion.php">Convocatoria</a></li> 
+                        <li>  <a href="inscripcionYcostosSesion.php">Inscripción y Costos</a></li>
+                        <li> <a href="ComiteOrgSesion">Comité Organizador</a></li>
+                        <li> <a href="ComiteEvaSesion">Comité Evaluador</a></li>
+                        <li> <a href="destroySesion.php"><img class="alineadoicono" src="img/iniciaricono.png">&nbsp;Cerrar  Sesión</a></li>
                     </ul>  
                 </nav> 
                 
@@ -549,37 +317,15 @@ Encabezado de la página */
                 <nav class="menu2" style="z-index: 2;">           
                     <ul>    
                       <li> <a href=""><img class="alineadoicono" src="img/icono_informacion2.png"> </a></li>        
-                        <li> <a href="ponencias_info.php">Ponencias</a></li>  
-                        <li> <a href="carteles_info.php">Carteles</a></li>
-                        <li> <a href="talleres_info.php">Talleres</a></li>
+                      <li> <a href="ponencias_infoSesion.php">Ponencias</a></li>  
+                        <li> <a href="carteles_infoSesion.php">Carteles</a></li>
+                        <li> <a href="talleres_infoSesion.php">Talleres</a></li>
                     </ul>  
                 </nav>                
             </header>
         </div>
                 
-                <!-- Barra de menu Secundario-->       
-       <div class="containerBoton">
-        <label for="btn-menu3"></label>
-        <nav class="menu3" style="z-index: 2;">  
-        <button class="boton1" type="button">Alumno</button>
-        <button class="boton2" type="button">Ponente</button>
-        <button class="boton3" type="button">Evaluador</button>
-        <button class="boton4" type="button">Memorias</button>
-        <button class="boton5" type="button">Admin</button>
-        <button class="boton6" type="button">Comite Orga</button>
-        </nav>
-    </div>
-
-    <!-- Barra de menu Secundario - Movil-->
-
-       <div class="nav-bar" >
-       <a href="#" class="icond icon-book" target="_blank"> <img src="img/icons8-usuario-16.png"/> </a>
-            <a href="#" class="icond icon-file-text2" target="_blank"> <img src="img/icons8-expositor-16.png"/> </a>
-            <a href="#" class="icond icon-mic" target="_blank"> <img src="img/icons8-lectura-16.png"/> </a>
-            <a href="#" class="icond icon-stack" target="_blank"> <img src="img/icons8-foto-16.png"/> </a>
-            <a href="#" class="icond icon-key" target="_blank"> <img src="img/icons8-configuración-del-administrador-16.png"/> </a>
-            <a href="#" class="icond icon-hearth" target="_blank"> <img src="img/icons8-llamada-de-conferencia-16.png"/> </a>
-        </div>   
+                 
        
 
 <div class="contenedorregistroI"> 
@@ -587,427 +333,182 @@ Encabezado de la página */
     <div class="col-lg-6 mx-auto">
            
           <p class="Tema">Busqueda de Congreso</p>
-			<form action="#" method="POST" >
-                             <div class="D1">
-							 <p class="temaSec">Introducir los datos solicitados de manera correcta para realizar la busqueda del congreso que desees.</p>
-							 <br>
-							 <p class="temaCentral">Busqueda por Número de Congreso: </p>
-				<div class="datosP">
-                            <table>
+			
+      <p>Desliza la barra para poder ver todos los datos y modificar de ser necesario</p>
+      <div class="table-responsive">
+      <table class="table table-bordered border border-secondary"  ><center>
+               <table class="inputNombreC" > 
+            <tr class="inputNombreC2">
+            <td class="inputNombreC2"><center>Id</center></td>
+              <td class="inputNombreC2"><center>Email</center></td>
+              <!-- nombre congreso  -->
+              <td class="inputNombreC2"><center>Nombre del congreso </center></td>
+              <!-- numero congreso -->
+              <td class="inputNombreC2"><center>Número del congreso </center></td>
+              <!-- identificador numero registro -->
+              <td class="inputNombreC2"><center>Identificador del número del registro</center></td>
 
-							<tr>
-							<td class="C1">
-								<br>
-							<label for="Numero">Número de Congreso:</label>
-								<td class="C2">
-									<br>
-                                                                    <select class="inputNombreC" required>
-                                                                        <option class="inputP"> 1° Primero I</option>
-                                                                        <option class="inputP"> 2° Segundo  II</option>
-                                                                        <option class="inputP"> 3° Tercero  III</option>
-                                                                        <option class="inputP"> 4° Cuarto  IV</option>
-                                                                        <option class="inputP"> 5° Quinto  V</option> 
-                                                                        <option class="inputP"> 6° Sexto  VI</option>
-                                                                        <option class="inputP"> 7° Séptimo  VII</option>
-                                                                        <option class="inputP"> 8° Octavo VIII</option>
-                                                                        <option class="inputP"> 9° Noveno  IX</option>
-                                                                        <option class="inputP"> 10° Décimo  X</option>
-                                                                        <option class="inputP"> 11° Décimoprimero  XI</option>
-                                                                        <option class="inputP"> 12° Décimosegundo  XII</option>
-                                                                        <option class="inputP"> 13° Décimotercero  XIII</option>
-                                                                        <option class="inputP"> 14° Décimocuarto  XIV</option>
-                                                                        <option class="inputP"> 15° Décimoquinto  XV</option>
-                                                                        <option class="inputP"> 16° Décimosexto  XVI</option>
-                                                                        <option class="inputP"> 17° Décimoséptimo  XVII</option>
-                                                                        <option class="inputP"> 18° Décimooctavo  XVIII</option>
-                                                                        <option class="inputP"> 19° Décimonoveno  XIX</option>
-                                                                        <option class="inputP"> 20° Vigésimo  XX</option>
-                                                                        <option class="inputP"> 21° Vigésimoprimero  XXI</option>
-                                                                        <option class="inputP"> 22° Vigésimosegundo  XXII</option>
-									 <option class="inputP"> 23° Vigésimotercero  XXIII</option>
-                                                                        <option class="inputP"> 24° Vigésimocuarto  XXIV</option>
-                                                                        <option class="inputP"> 25° Vigésimoquinto  XXV</option>
-                                                                        <option class="inputP"> 26° Vigésimosexto  XXVI</option>
-                                                                        <option class="inputP"> 27° Vigésimoseptimo  XXVII</option>
-                                                                    </select>
-								</td>
-</td>
-                                <tr>
-						<td class="C1">
-				
-						<br>
-					<label for="Name">Nombre del Congreso:</label>
-                                                </td>
-						<td class="C2">
-							<br>
-					<input class="inputNombreC" type="text" name="nombre" placeholder="Nombre del Congreso" required>
-								</td>
-                                                                
-							</tr>
-                            </table>
-                             </div>
-                            <div> 
-                                <table>
-                                                        <tr>
-                                                            <td class="C1">
-																<br>
-									<label for="Registro">Número de Registro:</label>
-								</td>
-								<td class="C2">
-									<br>
-									<input class="inputNombreC" type="text" name="nombre" placeholder="Número de Congreso" required>
-								</td>
-								<td class="C1">
-									
-							</tr>
-                                                    
-                                                      <tr>
-								<td class="C1">
-									<br>
-									<label for="Email">Correo del Congreso:</label>
-								</td>
-								<td class="C2">
-									<br>
-									<input class="inputNombreC" type="email" name="Correo" placeholder=" Correo del Congreso" required>
-								</td>
-							</tr>
-                                
-                            </table>
-                             </div>
+              <!-- congreso  -->
+              <td class="inputNombreC2"><center>Fecha de inicio del congreso <center></td>
+              <td class="inputNombreC2"><center>Fecha final del congreso <center></td>
 
-</div>
-				<p class="temaCentral">Envio Invitaciones de la Convocatoria </p>
-				<div class="datosP">					                                        
-                                        <div class="D1">
-						<table>							
-							<tr>
-								<td class="C1">
-									<label for="Name">Fecha Inicio:</label>
-								</td>
-								<td class="C2">
-                                                                       <input  class="inputP" type ="date" name ="fechaI" required/>
-								</td>
-                                                                
-								<td class="C1">
-									<label for="Last">Fecha Fin:</label>
-								</td>
-								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaF" required/>
-								</td>
-							</tr>						
-						</table>
-					</div> 
-				</div>
+              <!--Envio de invitaciones convocatoria  -->
+              <td class="inputNombreC2"><center>Fecha de inicio de envio de invitaciones de convocatoria</center></td>
+              <td class="inputNombreC2"><center>Fecha final de envio de invitaciones de convocatoria</center></td>
 
-                          <p class="temaCentral">Fechas del Congreso: </p>
-				<div class="datosP">					                                        
-                                        <div class="D1">
-						<table>							
-							<tr>
-								<td class="C1">
-									<label for="Name">Fecha Inicio:</label>
-								</td>
-								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaI" required/>
-								</td>
-                                                                
-								<td class="C1">
-									<label for="Last">Fecha Fin:</label>
-								</td>
-								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaF" required/>
-								</td>
-							</tr>						
-						</table>
-					</div> 
-				</div>
-                          
-                          <p class="temaCentral">Recepción de Pagos </p>
-				<div class="datosP">					                                        
-                                        <div class="D1">
-						<table>							
-							<tr>
-								<td class="C1">
-									<label for="Name">Fecha Inicio:</label>
-								</td>
-								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaI" required/>
-								</td>
-                                                                
-								<td class="C1">
-									<label for="Last">Fecha Fin:</label>
-								</td>
-								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaF" required/>
-								</td>
-							</tr>						
-						</table>
-					</div> 
-				</div>  
-                                
-				<p class="temaCentral">Recepción de Resumenes </p>
-				<div class="datosP">					                                        
-                                        <div class="D1">
-						<table>							
-							<tr>
-								<td class="C1">
-									<label for="Name">Fecha Inicio:</label>
-								</td>
-								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaI" required/>
-								</td>
-                                                                
-								<td class="C1">
-									<label for="Last">Fecha Fin:</label>
-								</td>
-								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaF" required/>
-								</td>
-							</tr>						
-						</table>
-					</div> 
-				</div>
-                                
-                                <p class="temaCentral">Evaluación de Resumenes </p>
-				<div class="datosP">					                                        
-                                        <div class="D1">
-						<table>							
-							<tr>
-								<td class="C1">
-									<label for="Name">Fecha Inicio:</label>
-								</td>
-								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaI" required/>
-								</td>
-                                                                
-								<td class="C1">
-									<label for="Last">Fecha Fin:</label>
-								</td>
-								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaF" required/>
-								</td>
-							</tr>						
-						</table>
-					</div> 
-				</div>
-                                
-                           <p class="temaCentral">Resultado Evaluación de Resumenes </p>
-				<div class="datosP">					                                        
-                                        <div class="D1">
-						<table>							
-							<tr>
-								<td class="C1">
-									<label for="Name">Fecha Inicio:</label>
-								</td>
-								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaI" required/>
-								</td>
-                                                                
-								<td class="C1">
-									<label for="Last">Fecha Fin:</label>
-								</td>
-								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaF" required/>
-								</td>
-							</tr>						
-						</table>
-					</div> 
-				</div>
-                           
-                           <p class="temaCentral">Recepción Corrección de Resumenes </p>
-				<div class="datosP">					                                        
-                                        <div class="D1">
-						<table>							
-							<tr>
-								<td class="C1">
-									<label for="Name">Fecha Inicio:</label>
-								</td>
-								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaI" required/>
-								</td>
-                                                                
-								<td class="C1">
-									<label for="Last">Fecha Fin:</label>
-								</td>
-								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaF" required/>
-								</td>
-							</tr>						
-						</table>
-					</div> 
-				</div>
-                           
-                           <p class="temaCentral">Recepción de Extensos </p>
-				<div class="datosP">					                                        
-                                        <div class="D1">
-						<table>							
-							<tr>
-								<td class="C1">
-									<label for="Name">Fecha Inicio:</label>
-								</td>
-								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaI" required/>
-								</td>
-                                                                
-								<td class="C1">
-									<label for="Last">Fecha Fin:</label>
-								</td>
-								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaF" required/>
-								</td>
-							</tr>						
-						</table>
-					</div> 
-				</div>  
-                             
-                           <p class="temaCentral">Notificación de Observaciones de Extensos </p>
-				<div class="datosP">					                                        
-                                        <div class="D1">
-						<table>							
-							<tr>
-								<td class="C1">
-									<label for="Name">Fecha Inicio:</label>
-								</td>
-								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaI" required/>
-								</td>
-                                                                
-								<td class="C1">
-									<label for="Last">Fecha Fin:</label>
-								</td>
-								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaF" required/>
-								</td>
-							</tr>						
-						</table>
-					</div> 
-				</div>                             
-                           
-                           <p class="temaCentral">Recepción de Extensos Finales</p>
-				<div class="datosP">					                                        
-                                        <div class="D1">
-						<table>							
-							<tr>
-								<td class="C1">
-									<label for="Name">Fecha Inicio:</label>
-								</td>
-								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaI" required/>
-								</td>
-                                                                
-								<td class="C1">
-									<label for="Last">Fecha Fin:</label>
-								</td>
-								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaF" required/>
-								</td>
-							</tr>						
-						</table>
-					</div> 
-				</div>  
-                           
-                           <p class="temaCentral">Recepción de Videos de Ponencias Aceptadas  </p>
-				<div class="datosP">					                                        
-                                        <div class="D1">
-						<table>							
-							<tr>
-								<td class="C1">
-									<label for="Name">Fecha Inicio:</label>
-								</td>
-								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaI" required/>
-								</td>
-                                                                
-								<td class="C1">
-									<label for="Last">Fecha Fin:</label>
-								</td>
-								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaF" required/>
-								</td>
-							</tr>						
-						</table>
-					</div> 
-				</div>  
-                           
-                           <p class="temaCentral">Publicación del Programa del Evento  </p>
-				<div class="datosP">					                                        
-                                        <div class="D1">
-						<table>							
-							<tr>
-								<td class="C1">
-									<label for="Name">Fecha de Publicación del Evento:</label>
-								</td>
-								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaI" required/>
-								</td>
-							</tr>						
-						</table>
-					</div> 
-				</div>  
-                           
-                           <p class="temaCentral">Impartición de Talleres </p>
-				<div class="datosP">					                                        
-                                        <div class="D1">
-						<table>							
-							<tr>
-								<td class="C1">
-									<label for="Name">Fecha Inicio:</label>
-								</td>
-								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaI" required/>
-								</td>
-                                                                
-								<td class="C1">
-									<label for="Last">Fecha Fin:</label>
-								</td>
-								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaF" required/>
-								</td>
-							</tr>						
-						</table>
-					</div> 
-				</div>  
-                           
-                           <p class="temaCentral">Envio de Constancias </p>
-				<div class="datosP">					                                        
-                                        <div class="D1">
-						<table>							
-							<tr>
-								<td class="C1">
-									<label for="Name">Fecha Inicio:</label>
-								</td>
-								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaI" required/>
-								</td>
-                                                                
-								<td class="C1">
-									<label for="Last">Fecha Fin:</label>
-								</td>
-								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaF" required/>
-								</td>
-							</tr>						
-						</table>
-					</div> 
-				</div>
-                           
-                           <p class="temaCentral">Publicación de Memorias </p>
-				<div class="datosP">					                                        
-                                        <div class="D1">
-						<table>							
-							<tr>
-								<td class="C1">
-									<label for="Name">Fecha de Publicación de Memorias del Congreso:</label>
-								</td>
-								<td class="C2">
-									<input  class="inputP" type ="date" name ="fechaI" required/>
-								</td>
-							</tr>						
-						</table>
-					</div> 
-				</div>  
+              <!--recepcion resumenes  -->
+              <td class="inputNombreC2"><center>Fecha de inicio de recepción de resumenes</center></td>
+              <td class="inputNombreC2"><center>Fecha final de recepción de resumenes</center></td>
+
+              <!--evaluacion resumenes  -->
+              <td class="inputNombreC2"><center>Fecha de inicio de evaluación de resumenes</center></td>
+              <td class="inputNombreC2"><center>Fecha final de evaluación de resumenes</center></td>
+
+              <!--resultados de evaluacion resumenes  -->
+              <td class="inputNombreC2"><center>Fecha de inicio de resultados de evaluaciones de resumenes</center></td>
+              <td class="inputNombreC2"><center>Fecha final de resultados de evaluaciones de resumenes</center></td>
+
+              <!-- recepcion correccion resumenes -->
+              <td class="inputNombreC2"><center>Fecha de inicio de recepciones de correcciones de resumenes</center></td>
+              <td class="inputNombreC2"><center>Fecha final de recepciones de correcciones de resumenes</center></td>
+
+             <!-- recepcion extensos  -->
+              <td class="inputNombreC2"><center>Fecha de inicio de recepcion de extensos</center> </td>
+              <td class="inputNombreC2"><center>Fecha final de recepcion de extensos </center></td>
+
+               <!-- notifiacion observaciones extensos  -->
+              <td class="inputNombreC2"><center>Fecha de inicio de notificaciones de observaciones de extensos </center></td>
+              <td class="inputNombreC2"><center>Fecha final de notificaciones de observaciones de extensos </center></td>
+
+               <!-- recepcion pagos  -->
+              <td class="inputNombreC2"><center>Fecha de inicio de recepcion de pagos</center></td>
+              <td class="inputNombreC2"><center>Fecha final de recepcion de pagos</center></td>
+
+              <!--  recepcion extensos finales -->
+              <td class="inputNombreC2"><center>Fecha de inicio de recepciones de extensos finales </center></td>
+              <td class="inputNombreC2"><center>Fecha final de recepciones de extensos finales </center></td>
+
+              <!--  recepcion videos ponencias aceptadas -->
+              <td class="inputNombreC2"><center>Fecha de inicio de recepciones de videos de ponencias aceptadas </center></td>
+              <td class="inputNombreC2"><center>Fecha final de recepciones de videos de ponencias aceptadas </center></td>
+
+              <!-- Publicacion del programa evento  -->
+              <td class="inputNombreC2"><center>Fecha de publicación del programa del evento </center></td>
+
+              <!--  imparticion talleres -->
+              <td class="inputNombreC2"><center>Fecha de inicio de imparticion de talleres </center></td>
+              <td class="inputNombreC2"><center>Fecha final de imparticion de talleres </center></td>
+
+              <!--  envio constancias -->
+              <td class="inputNombreC2"><center>Fecha de inicio de envios de constancias <center></td>
+              <td class="inputNombreC2"><center>Fecha final de envios de constancias </center></td>
+
+              <!--  publicacion memorias -->
+              <td class="inputNombreC2"><center>Fecha de publicacion de memorias </center> </td>
+              <td class="inputNombreC2"><center>Opción</center></td>
+
+            </tr>
+
+          
+               <?php 
+           $conexion = pg_connect("host=localhost dbname=congresowinx user=congresowinx password=W1nxC0ngr3s032511");
+            $query3 = ("Select * from congreso");
+                  $conn3 = pg_query($conexion, $query3);
+
+                  if (!$conn3) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($conn3) > 0) {
+                    while ($rowData3 = pg_fetch_array($conn3)) {
+                 
+                $id_congr= $rowData3["id_congreso"];
+                 ?>       
+           <tr class="inputNombreC2">
+           <td class="inputNombreC2"><center><?php echo $rowData3["id_congreso"] ?></center></td>
+           
+              <td class="inputNombreC2"><center><?php echo $rowData3["email"] ?></center></td>
+              <!-- nombre congreso  -->
+              <td class="inputNombreC2"><center><?php echo $rowData3["nombre_congreso"] ?></center></td>
+              <!-- numero congreso -->
+              <td class="inputNombreC2"><center><?php echo $rowData3["numero_congreso"] ?></center></td>
+              <!-- identificador numero registro -->
+              <td class="inputNombreC2"><center><?php echo $rowData3["identificador_numero_registro"] ?></center></td>
+
+              <!-- congreso  -->
+              <td class="inputNombreC2"><center><?php echo $rowData3["fecha_inicio_congreso"] ?></center></td>
+              <td class="inputNombreC2"><center><?php echo $rowData3["fecha_fin_congreso"] ?></center></td>
+
+              <!--Envio de invitaciones convocatoria  -->
+              <td class="inputNombreC2"><center><?php echo $rowData3["fecha_inicio_envio_invitaciones_convocatoria"] ?></center></td>
+              <td class="inputNombreC2"><center><?php echo $rowData3["fecha_fin_envio_invitaciones_convocatoria"] ?></center></td>
+
+              <!--recepcion resumenes  -->
+              <td class="inputNombreC2"><center><?php echo $rowData3["fecha_inicio_recepcion_resumenes"] ?></center></td>
+              <td class="inputNombreC2"><center><?php echo $rowData3["fecha_fin_recepcion_resumenes"] ?></center></td>
+
+              <!--evaluacion resumenes  -->
+              <td class="inputNombreC2"><center><?php echo $rowData3["fecha_inicio_evaluacion_resumenes"] ?></center></td>
+              <td class="inputNombreC2"><center><?php echo $rowData3["fecha_fin_evaluacion_resumenes"] ?></center></td>
+
+              <!--resultados de evaluacion resumenes  -->
+              <td class="inputNombreC2"><center><?php echo $rowData3["fecha_inicio_resultado_evaluacion_resumenes"] ?></center></td>
+              <td class="inputNombreC2"><center><?php echo $rowData3["fecha_fin_resultado_evaluacion_resumenes"] ?></center></td>
+
+              <!-- recepcion correccion resumenes -->
+              <td class="inputNombreC2"><center><?php echo $rowData3["fecha_inicio_recepcion_correcion_resumenes"] ?></center></td>
+              <td class="inputNombreC2"><center><?php echo $rowData3["fecha_fin_recepcion_correcion_resumenes"] ?></center></td>
+
+             <!-- recepcion extensos  -->
+              <td class="inputNombreC2"><center><?php echo $rowData3["fecha_inicio_recepcion_extensos"] ?></center></td>
+              <td class="inputNombreC2"><center><?php echo $rowData3["fecha_fin_recepcion_extensos"] ?></center></td>
+
+               <!-- notifiacion observaciones extensos  -->
+              <td class="inputNombreC2"><center><?php echo $rowData3["fecha_inicio_notificacion_observaciones_extensos"] ?></center></td>
+              <td class="inputNombreC2"><center><?php echo $rowData3["fecha_fin_notificacion_observaciones_extensos"] ?></center></td>
+
+               <!-- recepcion pagos  -->
+              <td class="inputNombreC2"><center><?php echo $rowData3["fecha_inicio_recepcion_pagos"] ?></center></td>
+              <td class="inputNombreC2"><center><?php echo $rowData3["fceha_fin_recepcion_pagos"] ?><center></td>
+
+              <!--  recepcion extensos finales -->
+              <td class="inputNombreC2"><center><?php echo $rowData3["fecha_inicio_recepcion_extensos_finales"] ?></center></td>
+              <td class="inputNombreC2"><center><?php echo $rowData3["fecha_fin_recepcion_extensos_finales"] ?></center></td>
+
+              <!--  recepcion videos ponencias aceptadas -->
+              <td class="inputNombreC2"><center><?php echo $rowData3["fecha_inicio_recepcion_videos_ponencias_aceptadas"] ?></center></td>
+              <td class="inputNombreC2"><center><?php echo $rowData3["fecha_fin_recepcion_videos_ponencias_aceptadas"] ?></center></td>
+
+              <!-- publicacion programa evento  -->
+              <td class="inputNombreC2"><center><?php echo $rowData3["fecha_publicacion_programa_evento"] ?></center></td>
+
+              <!--  imparticion talleres -->
+              <td class="inputNombreC2"><center><?php echo $rowData3["fecha_inicio_imparticion_talleres"] ?></center></td>
+              <td class="inputNombreC2"><center><?php echo $rowData3["fecha_fin_imparticion_talleres"] ?></center></td>
+
+              <!--  envio constancias -->
+              <td class="inputNombreC2"><center><?php echo $rowData3["fecha_inicio_envio_contancias"] ?></center></td>
+              <td class="inputNombreC2"><center><?php echo $rowData3["fecha_fin_envio_contancias"] ?></center></td>
+
+              <!--  publicacion memorias -->
+              <td class="inputNombreC2"><center><?php echo $rowData3["fecha_publicacion_memorias"] ?></center></td>
+
+
+              <td class="inputNombreC2" >
+               
+
+              <a href="ModificarCongr.php?id=<?php echo $rowData3["id_congreso"];?>"> 
+
+         <button class="button2" onclick="getElementsByTagName('textareaa').readonly:false;">Editar Congreso</button> </a>
+          </td>
+
+            </tr>   <?php } }  ?>
        
-			</form>
+</table> </center></table>
+
+      </div>
+      <div> <a  href="menu.php"  > <button > Regresar</button> </a> </div>   
+			
         
        </div>
   </div>
@@ -1018,7 +519,7 @@ Encabezado de la página */
 
 <div class="containerCredi">
 <footer class="py-5">
-    <div class="row">
+    <div class="row gx-0">
       <div class="col-6 col-md-2 mb-3">
         <ul class="nav flex-column">
           <li class="nav-item mb-2" class="nav-link p-0 text-muted"> <img src="img/escudo-blanco.png" alt="Photo" style="width:65%;"> </li>
@@ -1047,6 +548,7 @@ Encabezado de la página */
           <li style="color: #FFFFFF;"class="nav-item mb-2" class="nav-link p-0 text-muted">Para mayores informes o dudas comunicarse al Departamento de Matemáticas Edificio A8 Campo 4.</li>
         </ul>
         </div>
+    </div>
 
   <div class="containerCredi">
   <footer class="py-3 my-4">

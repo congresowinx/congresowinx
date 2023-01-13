@@ -1,8 +1,84 @@
-<?php
-ini_set("display_errors",1);
-session_start();
-?>
+ <?php
 
+include 'credentials.php';
+include 'pgsqlConexion';
+//  America/Mexico_City
+       date_default_timezone_set("America/Mexico_City");
+       $fechaActual = date ( 'Y-m-d' );
+       $fechaid = date('myhis');
+       $horaActual = date("H:i:s");      
+       $numid = intval($fechaid); 
+// $varName; Nombre
+// $varId Id;
+// $varEmail; Correo
+
+$conta1 = 0;  //contabiliza el total de trabajos (que no sean mas de 5)
+$conta2 = 0;  //contabiliza el total de ponencias (que no sean mas de 3)
+//Consulta el congreso actual
+       $conexion = pg_connect("host=localhost dbname=congresowinx user=congresowinx password=W1nxC0ngr3s032511");
+ $queryc13=("Select * from congreso ");
+                            $connc6=pg_query($conexion,$queryc13);
+
+                               if(!$connc6){
+                                 die(pg_error($conexion));
+                                    }
+
+                               if (pg_num_rows($connc6) > 0) {
+                                          while($rowData = pg_fetch_array($connc6)){
+                                       $id_congreso=intval($rowData["id_congreso"]);
+                                                   }
+                                             }
+                    //Consulta los trabajos del ponente en sesion
+   $queryC1=("Select * from ponente_trabajos where ponente_id='$varId'");
+                            $connC1=pg_query($conexion,$queryC1);
+                                                     if(!$connC1){
+                                                        die(pg_error($conexion));
+                                                         }
+
+                                               if (pg_num_rows($connC1) > 0) {
+                                                    while($rowData = pg_fetch_array($connC1)){
+                                    //obtiene el id de cada trabajo
+                                            $idt=intval($rowData["trabajos_id"]);
+                                 //evalua si ese mismo trabajo esta registrado en el congreso actual
+                                   $queryC2=("Select * from trabajos_congreso where trabajos_id='$idt'");
+                            $connC2=pg_query($conexion,$queryC2);
+                                                     if(!$connC2){
+                                                        die(pg_error($conexion));
+                                                         }
+
+                                               if (pg_num_rows($connC2) > 0) {
+                                                    while($rowDatat2 = pg_fetch_array($connC2)){ 
+                                        //contador de trabajos por congreso actual
+                                             $idt2=intval($rowDatat2["trabajos_id"]);
+                                             $conta1++; 
+                                             //busca cuantas ponencias tiene
+                                           $queryP1=("Select * from ponencia where id_trabajos='$idt2'");
+                                               $connP1=pg_query($conexion,$queryP1);
+                                                     if(!$connP1){
+                                                        die(pg_error($conexion));
+                                                         }
+                                               if (pg_num_rows($connP1) > 0) {
+                                                    while($rowDataP1 = pg_fetch_array($connP1)){
+                                                          
+                                                          $conta2++; //contabiliza el trabajo de ponencia
+                                                    }}
+
+                                                    //no mas de 3 ponencias
+                                                    
+
+                                                      }
+                                                       }
+                                                      }
+                                                       }
+                           //evalua si al final se ha subido 3 o mas trabajos, de ser asi no permite registrar y manda al menu.
+                                                        if($conta2>=3){                           
+
+echo "<script>alert('Ha sobrepasado el limite de registro de ponencias permitidas.');window.location.replace('https://laboratoriosistemas.cuautitlan2.unam.mx/congresowinx/WinxCongreso/menu.php');</script>"; }
+                            if($conta1>=5){   
+                                  echo "<script>alert('Ha sobrepasado el limite de registro de trabajos permitidos.');window.location.replace('https://laboratoriosistemas.cuautitlan2.unam.mx/congresowinx/WinxCongreso/menu.php');</script>"; }
+
+
+?>
 <html lang="es">
     <head>
         <link href="icono.ico" type="image/x-icon" rel="shortcut icon" />
@@ -58,6 +134,24 @@ session_start();
 
 <style type="text/css">
     .textarea2{
+
+   width: 500px;
+    padding: 12px;
+    border: 0.15em solid #2B307C;
+    resize: none;
+    height: 50px;
+    text-align: left;
+    position: relative;
+  }
+
+
+</style>
+
+
+<!-- recuadros de resumen-->
+
+<style type="text/css">
+    .textarea3{
 
    width: 500px;
     padding: 12px;
@@ -186,13 +280,14 @@ session_start();
 
 
 .containerBoton {
-   width: 100%;
+    width: 100%;
     height: 12vh;
     position: relative;
-    top: 6%;
-    transform: translateY(-50%);
     text-align: center; 
     background-color: transparent;
+    margin-top: 10px;
+    margin-bottom: -10px;
+     
 }
 
 
@@ -518,7 +613,7 @@ Encabezado de la página */
                         <li> <a href="">Convocatoria</a></li> 
                         <li> <a href="">Inscripción y Costos</a></li>
                         <li> <a href="ComiteOrg">Comité Organizador</a></li>
-                        <li> <a href=""><img class="alineadoicono" src="img/iniciaricono.png">&nbsp;Iniciar Sesión</a></li>
+                        <li> <a href="destroySesion.php"><img class="alineadoicono" src="img/iniciaricono.png">&nbsp;Cerrar Sesión</a></li>
                     </ul>  
                 </nav> 
                 
@@ -528,10 +623,10 @@ Encabezado de la página */
         <div>
             <header>
             <input type="checkbox" id="btn-menu2"> 
-                <label for="btn-menu2"><img src="img/icono_informacion.png" alt=""> </label>
+                <label for="btn-menu2"><img src="img/icono_informacion2.png" alt=""> </label>
                 <nav class="menu2" style="z-index: 2;">           
                     <ul>    
-                      <li> <a href=""><img class="alineadoicono" src="img/icono_informacion.png"> </a></li>        
+                      <li> <a href=""><img class="alineadoicono" src="img/icono_informacion2.png"> </a></li>        
                         <li> <a href="ponencias_info.php">Ponencias</a></li>  
                         <li> <a href="carteles_info.php">Carteles</a></li>
                         <li> <a href="talleres_info.php">Talleres</a></li>
@@ -540,7 +635,7 @@ Encabezado de la página */
             </header>
         </div>
  
-       <div class="containerBoton">
+       <!--<div class="containerBoton">
         <label for="btn-menu3"></label>
         <nav class="menu3" style="z-index: 2;">  
         <button class="boton1" type="button"  >Usuario</button>
@@ -550,7 +645,7 @@ Encabezado de la página */
         <button class="boton5" type="button">Administrador</button>
         <button class="boton6" type="button" >Comite Organizador</button>
         </nav>
-    </div>
+    </div> -->
 
     <!-- Barra de menu Secundario - Movil-->
 
@@ -578,42 +673,51 @@ Encabezado de la página */
     } 
   ?>
         <p class="Tema">Registro de resumen para ponencia</p>
-                        <form  method="POST" enctype="multipart/form-data"   >
-
+                        <form method="POST" enctype="multipart/form-data"   >
+<p class="temaSec">Antes de llenar cada espacio, favor de leer primero las indicaciones detenidamente. </p> <br>
                 <p class="temaCentral">Datos</p>
                 
                 <div class="datosP">
                     <!-- <p class="temaSec">Ingrese correctamente los datos de su cartel.</p> -->
 
                     <div class="D1">
-                        <!--******DATOS SOBRE EL CARTEL*******-->
+                        <!--******DATOS SOBRE LA PONENCIA*******-->
                         
                         <table>
-                            
+
+                         <p class="temaSec">1.- El  resumen debe de incluir el título del trabajo a lo más 15 palabras.</p>   
                         <center>    <tr>
                                 <td class="C1">
+
                                     <label for="Title">Título:</label>
                                 </td>
                                 <td class="C2">
-                                    <textarea class="textarea2" type="text"  name="titulo" placeholder="INGRESA TITULO DEL RESUMEN" style="text-transform:uppercase;"required></textarea>
+                                    <textarea class="textarea2" type="text"  name="titulo" placeholder="INGRESA TITULO DE MÁXIMO 15 PALABRAS" style="text-transform:uppercase;"required></textarea>
                             
                                 </td>
                                                     </tr> </center>
+                        </table>
 
-                            <center><tr>
-                                <td class="C1">
-                                    <label for="Resumen">Resumen:</label>
+                                          
+                        <table>
+                        <br><p class="temaSec">2.- El resumen del trabajo debe de contener no más de 300 palabras.</p>  
+                         	<center>    <tr>
+                                 <td class="C1">
+                                    <br> <label for="Resumen">Resumen:</label>
                                 </td>
                                 <td class="C2">
 
-                                    <textarea class="textarea3" type="text"  name="resumen" placeholder="INGRESA RESUMEN" style="text-transform:uppercase;"required></textarea>
+                                    <textarea class="textarea3" type="text"  name="resumen" placeholder="INGRESA RESUMEN DE MÁXIMO 300 PALABRAS" style="text-transform:uppercase;"required></textarea>
                                     <!--<textarea  type="text" name="resumen" placeholder="Ingresa resumen"  required> </textarea>-->
 
                                 </td>
                             </tr></center>
+                        </table>
+                     
 
 
-
+                       	<table>
+                        <br><p class="temaSec">3.- Agregar palabras clave.</p>
                         <center>    <tr>
                                 <td class="C1">
                                     <label for="Palabras">Palabras clave:</label>
@@ -622,12 +726,14 @@ Encabezado de la página */
                                     <textarea class="textarea2" type="text"  name="palabrasclave" placeholder="INGRESA PALABRAS CLAVE DEL RESUMEN" style="text-transform:uppercase;"required></textarea>
                             
                                 </td>
-                            </tr> </center>
+                            </tr> </center> </table>
                                                     
-                                                    <center>    <tr>
-                                <td class="C1">
-                                                                    
-                                     <label for="Palabras">Categoria:</label>
+                         
+                        <table>
+                       	<br><p class="temaSec">4.- Seleccione una categoria.</p>
+                       	<center>    <tr>
+                                <td class="C1">                              
+                                     <label for="Palabras">Categoría:</label>
                                                                         
                                                                          
                                 </td>
@@ -672,7 +778,7 @@ Encabezado de la página */
                                     <label for="Correo">Correo:</label>
                                 </td>
                                 <td class="C2">
-                                    <textarea class="textarea2" type="text"  name="Correo1" placeholder="INGRESA CORREO DEL AUTOR" required></textarea>
+                                    <textarea class="textarea2" type="text" readonly="readonly" name="Correo1" placeholder=" <?=$varEmail?>" required><?=$varEmail?></textarea> 
                                 
                                 </td>
                                                     </tr> </center>
@@ -689,15 +795,12 @@ Encabezado de la página */
 
                 <div class="datosP">
                     
-                     <br><p class="temaSec">Ingrese únicamente un correo por recuadro.</p> 
-
                     <div class="D1">
                         <!--******DATOS SOBRE LOS COAUTORES*******-->
                         
                         <table>
-                            
+                        	<br><p class="temaSec">5.- Ingrese un correo únicamente por recuadro de texto. Importante: el correo debe estar registrado en el sistema para que el registro de este resumen sea éxitoso.</p>
                         
-                                                    
                                                     <center>    <tr>
                                 <td class="C1">
                                     <label for="Correo">Correo 1:</label>
@@ -750,14 +853,13 @@ Encabezado de la página */
                 <p class="temaCentral">Referencias</p>
 
                 <div class="datosP">
-<br><p class="temaSec">Ingrese únicamente una referencia por recuadro, si desea agregar una nueva referencia: dar clic en el botón 
-    "agregar".</p>
+
                     <!--******REFERENCIAS*******-->
                                 <div class="D1">
                         <!--******BIBLIOGRAFIA*******-->
                         
                         <table>
-                            
+                            <br><p class="temaSec">6.- Ingrese una bibliografía únicamente por recuadro de texto. Importante: el correo debe estar registrado en el sistema para que el registro de este resumen sea éxitoso.</p>
                         <center>    <tr>
                             <td class="C1">
                             <label for="Biblio">Bibliografía:</label>
@@ -777,17 +879,59 @@ Encabezado de la página */
 
                      <button class="agregarBtn" id="agregar">Agregar referencia </button>
         <div id="dinamic"></div>
-
-       <br> <button name= "uploadBtn" class="enviarBtn" value="Enviar">Enviar registro</button> 
         
         <script src="js/mainregistrotrabajos.js"></script>
+        
+        <?php 
+       $Cuentarefe=0;
+       $referencias_id = [];
+    foreach($_POST['referencia'] as $bibliografia) {
+       /* echo("<script>console.log('PHP: ');</script>");*/
+
+   
+        $host='localhost';
+        $bd='congresowinx';
+        $user='congresowinx';
+        $pass='W1nxC0ngr3s032511';
+
+
+
+        $conexion=pg_connect("host=$host dbname=$bd user=$user password=$pass");
+        $queryR=("INSERT INTO referencias (referencia) VALUES ('$bibliografia')");
+        $consulta=pg_query($conexion,$queryR);
+
+         $Cuentarefe++;
+
+
+ 	/*	echo $consulta;
+ 		
+                if ($consulta != false) {
+                  array_push($referencias_id, $consulta[0]);
+                }*/
+
+        }
+             
+         unset($_POST['referencia']);                             
+        
+    ?>
+
+       <br> <button name= "uploadBtn" class="enviarBtn" value="Enviar" onClick="ActPage()">Enviar registro</button> 
+       
+       <script>
+function ActPage(){
+    window.location.reload(true);
+} 
+</script>
+        
+        
 
 
                 </div>
-
-                 
                 </div>
             </form>
+
+            <br><br> <a  href="menu.php"  > <button class="enviarBtn">Regresar</button> </a>
+
         
         <div class="alert alert-info" style="display: none;"></div>
        <div>
@@ -800,21 +944,8 @@ Encabezado de la página */
 
 
        $conexion = pg_connect("host=localhost dbname=congresowinx user=congresowinx password=W1nxC0ngr3s032511");
-
-       $fechaActual = date ( 'Y-m-d' );
-       $fechaid = date('myhis');
-       $horaActual = date("H:i:s");      
-       $numid = intval($fechaid);               // 17:16:18
-        /*
-        echo $fechaActual;
-        echo $fechaid;
-               if($conexion){
-                echo "CONEXIÓN EXITOSA <br>";
-            }else{
-                echo "CONEXIÓN FALLIDA";
-            }  */
-            //referencia agregar...
-
+ 
+    $redir= 0;
 
              if (isset($_POST['uploadBtn']) && $_POST['uploadBtn'] == 'Enviar') {
                
@@ -831,10 +962,11 @@ if(isset($_POST["titulo"]) && isset($_POST["resumen"]) && isset($_POST["palabras
                          $Correo3 = $_POST["Correo3"];
                         $Correo4 = $_POST["Correo4"];
                         $Correo5 = $_POST["Correo5"];
+                        $idcoautor4="";
                        // $referencia = $_POST["referencia"];
                        // $url = $_POST["url"];
                        // $tponencia =  strval($newFileName);
-                        
+
                         
            $query1=("Select id_usuario from usuario where usuario='$Correo1' ");
                             $conn1=pg_query($conexion,$query1);
@@ -856,7 +988,7 @@ if(isset($_POST["titulo"]) && isset($_POST["resumen"]) && isset($_POST["palabras
                     $query=("Select id_usuario from usuario where usuario='$Correo2' ");
                             $conn=pg_query($conexion,$query);
                          $cantidad= pg_num_rows($conn);
-                                 if ($cantidad>0){
+                                 if ($cantidad>0){}
                                                      if(!$conn){
                                                         die(pg_error($conexion));
                                                          }
@@ -865,10 +997,7 @@ if(isset($_POST["titulo"]) && isset($_POST["resumen"]) && isset($_POST["palabras
                                                     while($rowData = pg_fetch_array($conn)){
                                                       $idcoautor2=intval($rowData["id_usuario"]);
                                                       }
-                                                       }
-                                        } else{
-                                                       //alerta de que el correo no existe
-                                                    }       
+                                                            
                //como sí hay correo2, lo ingresa con el trabajo
                  
                                                  //como sí hay correo3, lo ingresa con el trabajo    
@@ -878,7 +1007,7 @@ if(isset($_POST["titulo"]) && isset($_POST["resumen"]) && isset($_POST["palabras
                              $query2=("Select id_usuario from usuario where usuario='$Correo3' ");
                              $conn2=pg_query($conexion,$query2);
                                  $cantidad2= pg_num_rows($conn2);
-                         if ($cantidad2>0){
+                         if ($cantidad2>0){}
                                  if(!$conn2){
                                          die(pg_error($conexion));
                                                 }
@@ -887,11 +1016,7 @@ if(isset($_POST["titulo"]) && isset($_POST["resumen"]) && isset($_POST["palabras
                                                         while($rowData = pg_fetch_array($conn2)){
                                                         $idcoautor3=intval($rowData["id_usuario"]);
                                                    }
-                                                           }
-                                        } else{
-                                                       //ERROR CORREO INVALIDO
-                                                    }       
-                
+                                                           
                                                     //como sí hay correo4, lo ingresa con el trabajo
                                                     
          if($Correo4 != "" ){
@@ -899,7 +1024,7 @@ if(isset($_POST["titulo"]) && isset($_POST["resumen"]) && isset($_POST["palabras
                     $query3=("Select id_usuario from usuario where usuario='$Correo4' ");
                             $conn3=pg_query($conexion,$query3);
                          $cantidad3= pg_num_rows($conn3);
-                         if ($cantidad3>0){
+                         if ($cantidad3>0){}
                              if(!$conn3){
                                  die(pg_error($conexion));
                                     }
@@ -908,10 +1033,8 @@ if(isset($_POST["titulo"]) && isset($_POST["resumen"]) && isset($_POST["palabras
                                           while($rowData = pg_fetch_array($conn3)){
                                        $idcoautor4=intval($rowData["id_usuario"]);
                                                    }
-                                             }
-                                                   } else{
-                                              //error correo inválido          
-                                                    }       
+                                            
+                                                         
                 
                                                     
                  //si existe el correo4
@@ -929,11 +1052,7 @@ if(isset($_POST["titulo"]) && isset($_POST["resumen"]) && isset($_POST["palabras
                                if (pg_num_rows($conn4) > 0) {
                                           while($rowData = pg_fetch_array($conn4)){
                                        $idcoautor5=intval($rowData["id_usuario"]);
-                                                   }
-                                             }
-                                                 else{
-                                                       // correo inválido
-                                                    }       
+                                                   } 
                 //si hay correo5
                       // TABLA TRABAJOS 
                 //INSERT PARA INSERTAR TITULO, CATEGORIA Y PALABRAS CLAVE
@@ -942,6 +1061,22 @@ if(isset($_POST["titulo"]) && isset($_POST["resumen"]) && isset($_POST["palabras
                           VALUES('$numid','$titulo','$categoria','$palabrasclave','$fechaActual','$horaActual')");
                         $consulta1=pg_query($conexion,$query5);        
                         
+
+
+
+                     /*   foreach ($referencias_id as $id) {
+                        $queryR2 = ("INSERT INTO trabajos_referencias (trabajos_id, referencias_id)
+                          VALUES('$numid','$id')");
+                        $consultaR2 = pg_query($conexion, $queryR2);
+                      }*/
+
+ 
+
+
+
+
+
+
                
                 // TABLAS CON LAS QUE SE RELACIONA LA TABLA TRABAJOS
                 // 1. TABLA PONENCIA 
@@ -963,7 +1098,7 @@ if(isset($_POST["titulo"]) && isset($_POST["resumen"]) && isset($_POST["palabras
 
                     
                   //coautor 2
-                     $query41=("Select * from coautor where id_usuario='$idcoautor2' ");
+                     $query41=("Select * from coautor where id_coautor='$idcoautor2' ");
                             $conn41=pg_query($conexion,$query41);
                          $cantidad41= pg_num_rows($conn41);
                          
@@ -977,14 +1112,14 @@ if(isset($_POST["titulo"]) && isset($_POST["resumen"]) && isset($_POST["palabras
                                                    }
                                              }
                                                  else{
-                                                    $query51=("INSERT INTO coautor (id_coautor,fecha, id_usuario)
-                                                    VALUES('$idcoautor2','$fechaActual','$idcoautor2')");
+                                                    $query51=("INSERT INTO coautor (id_coautor,fecha)
+                                                    VALUES('$idcoautor2','$fechaActual')");
                                                  $consulta51=pg_query($conexion,$query51);
 
                                                    
                                                     }
                                           //coautor 3
-                     $query42=("Select * from coautor where id_usuario='$idcoautor3' ");
+                     $query42=("Select * from coautor where id_coautor='$idcoautor3' ");
                             $conn42=pg_query($conexion,$query42);
                          $cantidad42= pg_num_rows($conn42);
                          
@@ -998,13 +1133,13 @@ if(isset($_POST["titulo"]) && isset($_POST["resumen"]) && isset($_POST["palabras
                                                    }
                                              }
                                                  else{
-                                                    $query52=("INSERT INTO coautor (id_coautor,fecha, id_usuario)
-                                                    VALUES('$idcoautor3','$fechaActual','$idcoautor3')");
+                                                    $query52=("INSERT INTO coautor (id_coautor,fecha)
+                                                    VALUES('$idcoautor3','$fechaActual')");
                                                  $consulta52=pg_query($conexion,$query52);
 
                                                     }
                                                     //coautor 4
-                     $query43=("Select * from coautor where id_usuario='$idcoautor4' ");
+                     $query43=("Select * from coautor where id_coautor='$idcoautor4' ");
                             $conn43=pg_query($conexion,$query43);
                          $cantidad43= pg_num_rows($conn43);
                          
@@ -1018,12 +1153,12 @@ if(isset($_POST["titulo"]) && isset($_POST["resumen"]) && isset($_POST["palabras
                                                    }
                                              }
                                                  else{
-                                                    $query53=("INSERT INTO coautor (id_coautor,fecha, id_usuario)
-                                                    VALUES('$idcoautor4','$fechaActual','$idcoautor4')");
+                                                    $query53=("INSERT INTO coautor (id_coautor,fecha)
+                                                    VALUES('$idcoautor4','$fechaActual')");
                                                  $consulta53=pg_query($conexion,$query53);
 
                                                     }//coautor 5
-                     $query44=("Select * from coautor where id_usuario='$idcoautor5' ");
+                     $query44=("Select * from coautor where id_coautor='$idcoautor5' ");
                             $conn44=pg_query($conexion,$query44);
                          $cantidad44= pg_num_rows($conn44);
                          
@@ -1037,8 +1172,8 @@ if(isset($_POST["titulo"]) && isset($_POST["resumen"]) && isset($_POST["palabras
                                                    }
                                              }
                                                  else{
-                                                    $query54=("INSERT INTO coautor (id_coautor,fecha, id_usuario)
-                                                    VALUES('$idcoautor5','$fechaActual','$idcoautor5')");
+                                                    $query54=("INSERT INTO coautor (id_coautor,fecha)
+                                                    VALUES('$idcoautor5','$fechaActual')");
                                                  $consulta54=pg_query($conexion,$query54);
 
                                                     }
@@ -1059,13 +1194,11 @@ if(isset($_POST["titulo"]) && isset($_POST["resumen"]) && isset($_POST["palabras
                         $query12=("INSERT INTO trabajos_coautores (trabajos_id, coautor_id)
                           VALUES('$numid','$idcoautor5')");
                         $consulta7=pg_query($conexion,$query12);
-                        /*
-                        
-                // TABLA TRABAJOS SE RELACIONA CON TRABAJOS_CONGRESO
+
+      // TABLA TRABAJOS SE RELACIONA CON TRABAJOS_CONGRESO
                         //QUERY PARA LA TABLA DE TRABAJOS_CONGRESO
-                        
-                   
-                $query13=("Select id_congreso from congreso where fecha_inicio_congreso<='$fechaActual' and fecha_fin_congreso>='$horaActual' ");
+
+                $query13=("Select * from congreso ");
                             $conn6=pg_query($conexion,$query13);
 
                                if(!$conn6){
@@ -1077,35 +1210,54 @@ if(isset($_POST["titulo"]) && isset($_POST["resumen"]) && isset($_POST["palabras
                                        $id_congreso=intval($rowData["id_congreso"]);
                                                    }
                                              }
-                         $query14=("INSERT INTO trabajos_congreso (congreso_id, fecha, id_trabajo)
-                          VALUES('$id_congreso','$fechaActual,'$id_trabajo')");
-                        $consulta8=pg_query($conexion,$query14);        
-                        /*
-                   //INSERT PARA AGREGAR REFERENCIA
-                        $query15=("INSERT INTO referencias (referencia)
-                          VALUES('$referencia')");
-                        $consulta9=pg_query($conexion,$query15); 
-                        
-                        $query16=("Select id_referencia from referencias where refrencia='$referencia'");
-                            $conn7=pg_query($conexion,$query16);
 
-                               if(!$conn7){
-                                 die(pg_error($conexion));
-                                    }
 
-                               if (pg_num_rows($conn7) > 0) {
-                                          while($rowData = pg_fetch_array($conn7)){
-                                       $id_referencia=intval($rowData["id_referencia"]);
-                                                   }
-                                             } 
+                         $query14=("INSERT INTO trabajos_congreso (congreso_id, trabajos_id, fecha)
+                          VALUES('$id_congreso','$numid', '$fechaActual')");
+                        $consulta8=pg_query($conexion,$query14);     
+
+                       
                         
-                    //AQUI SE INSERTAN LOS ID EN TRABAJOS REFERENCIAS    
-                        $query17=("INSERT INTO trabajos_referencias (referencias_id,id_trabajo)
-                          VALUES('$id_trabajo','$id_referencia')");
-                        $consulta10=pg_query($conexion,$query17); 
-                        */
-                        
-                        
+   
+
+
+     //SACAREMOS EL ID DE LA TABLA REFERENCIA:
+        $queryR1=("Select * from referencias where referencia='$bibliografia'");
+                            $connR1=pg_query($conexion,$queryR1);
+                         $cantidadR1= pg_num_rows($connR1);
+                                 if ($cantidadR1>0){
+                                                     if(!$connR1){
+                                                        die(pg_error($conexion));
+                                                         }
+
+                                               if (pg_num_rows($connR1) > 0) {
+                                                    while($rowData = pg_fetch_array($connR1)){
+                                                      $idreferencia=intval($rowData["id_referencia"]);
+                                                      }
+                                                       }}
+  
+      do {
+           //EL ID DE REFERENCIAS SE IRA A LA TABLA DE TRABAJOS_REFERENCIAS:    
+                        $queryR2=("INSERT INTO trabajos_referencias (trabajos_id, referencias_id)
+                          VALUES('$numid','$idreferencia')");
+                        $consultaR2=pg_query($conexion,$queryR2);  
+
+          $Cuentarefe--;
+          $idreferencia--;
+
+      }while($Cuentarefe > 0);
+
+                 if($redir==0){             
+                        echo "<script>alert('Registro exitoso.');window.location.replace('https://laboratoriosistemas.cuautitlan2.unam.mx/congresowinx/WinxCongreso/menu.php');</script>";  }
+
+
+                        }
+                                                           else{  $redir++;
+                                                        echo "<script>alert('El correo del Coautor 4 no está registrado en el sistema, inténtelo de nuevo.');</script>"; 
+                                                       }
+
+
+
     } else { // no hay correo 5, pero si correo1, 2 , 3 y 4
                   // TABLA TRABAJOS 
                 //INSERT PARA INSERTAR TITULO, CATEGORIA Y PALABRAS CLAVE
@@ -1136,7 +1288,7 @@ if(isset($_POST["titulo"]) && isset($_POST["resumen"]) && isset($_POST["palabras
                         
                     
                   //coautor 2
-                     $query41=("Select * from coautor where id_usuario='$idcoautor2' ");
+                     $query41=("Select * from coautor where id_coautor='$idcoautor2' ");
                             $conn41=pg_query($conexion,$query41);
                          $cantidad41= pg_num_rows($conn41);
                          
@@ -1150,14 +1302,14 @@ if(isset($_POST["titulo"]) && isset($_POST["resumen"]) && isset($_POST["palabras
                                                    }
                                              }
                                                  else{
-                                                    $query51=("INSERT INTO coautor (id_coautor,fecha, id_usuario)
-                                                    VALUES('$idcoautor2','$fechaActual','$idcoautor2')");
+                                                    $query51=("INSERT INTO coautor (id_coautor,fecha)
+                                                    VALUES('$idcoautor2','$fechaActual')");
                                                  $consulta51=pg_query($conexion,$query51);
 
                                                    
                                                     }
                                           //coautor 3
-                     $query42=("Select * from coautor where id_usuario='$idcoautor3' ");
+                     $query42=("Select * from coautor where id_coautor='$idcoautor3' ");
                             $conn42=pg_query($conexion,$query42);
                          $cantidad42= pg_num_rows($conn42);
                          
@@ -1171,13 +1323,14 @@ if(isset($_POST["titulo"]) && isset($_POST["resumen"]) && isset($_POST["palabras
                                                    }
                                              }
                                                  else{
-                                                    $query52=("INSERT INTO coautor (id_coautor,fecha, id_usuario)
-                                                    VALUES('$idcoautor3','$fechaActual','$idcoautor3')");
+                                                    $query52=("INSERT INTO coautor (id_coautor,fecha)
+                                                    VALUES('$idcoautor3','$fechaActual')");
                                                  $consulta52=pg_query($conexion,$query52);
 
                                                     }
+                                                    $idc4 = intval($idcoautor4);
                                                     //coautor 4
-                     $query43=("Select * from coautor where id_usuario='$idcoautor4' ");
+                     $query43=("Select * from coautor where id_coautor='$idc4' ");
                             $conn43=pg_query($conexion,$query43);
                          $cantidad43= pg_num_rows($conn43);
                          
@@ -1191,8 +1344,8 @@ if(isset($_POST["titulo"]) && isset($_POST["resumen"]) && isset($_POST["palabras
                                                    }
                                              }
                                                  else{
-                                                    $query53=("INSERT INTO coautor (id_coautor,fecha, id_usuario)
-                                                    VALUES('$idcoautor4','$fechaActual','$idcoautor4')");
+                                                    $query53=("INSERT INTO coautor (id_coautor,fecha)
+                                                    VALUES('$idcoautor4','$fechaActual')");
                                                  $consulta53=pg_query($conexion,$query53);
 
                                                     }
@@ -1210,13 +1363,10 @@ if(isset($_POST["titulo"]) && isset($_POST["resumen"]) && isset($_POST["palabras
                           VALUES('$numid','$idcoautor4')");
                         $consulta6=pg_query($conexion,$query11); 
                        
-                        
-                        /*
-                         // TABLA TRABAJOS SE RELACIONA CON TRABAJOS_CONGRESO
+                             // TABLA TRABAJOS SE RELACIONA CON TRABAJOS_CONGRESO
                         //QUERY PARA LA TABLA DE TRABAJOS_CONGRESO
-                        
-                   
-                $query13=("Select id_congreso from congreso where fecha_inicio_congreso<='$fechaActual' and fecha_fin_congreso>='$horaActual' ");
+
+                $query13=("Select * from congreso ");
                             $conn6=pg_query($conexion,$query13);
 
                                if(!$conn6){
@@ -1228,36 +1378,53 @@ if(isset($_POST["titulo"]) && isset($_POST["resumen"]) && isset($_POST["palabras
                                        $id_congreso=intval($rowData["id_congreso"]);
                                                    }
                                              }
-                         $query14=("INSERT INTO trabajos_congreso (congreso_id, fecha, id_trabajo)
-                          VALUES('$id_congreso','$fechaActual,'$id_trabajo')");
-                        $consulta8=pg_query($conexion,$query14);        
-                       /* 
-                   //INSERT PARA AGREGAR REFERENCIA
-                        $query15=("INSERT INTO referencias (referencia)
-                          VALUES('$referencia')");
-                        $consulta9=pg_query($conexion,$query15); 
-                        
-                        $query16=("Select id_referencia from referencias where refrencia='$referencia'");
-                            $conn7=pg_query($conexion,$query16);
 
-                               if(!$conn7){
-                                 die(pg_error($conexion));
-                                    }
 
-                               if (pg_num_rows($conn7) > 0) {
-                                          while($rowData = pg_fetch_array($conn7)){
-                                       $id_referencia=intval($rowData["id_referencia"]);
-                                                   }
-                                             }
-                        
-                    //AQUI SE INSERTAN LOS ID EN TRABAJOS REFERENCIAS    
-                        $query17=("INSERT INTO trabajos_referencias (referencias_id,id_trabajo)
-                          VALUES('$id_trabajo','$id_referencia')");
-                        $consulta10=pg_query($conexion,$query17); 
-                        
-                        */
-                                                
-    } }else { //no hay correo 4, sí hay correo1,2 y 3 
+                         $query14=("INSERT INTO trabajos_congreso (congreso_id, trabajos_id, fecha)
+                          VALUES('$id_congreso','$numid', '$fechaActual')");
+                        $consulta8=pg_query($conexion,$query14);     
+             
+    } 
+
+
+
+     //SACAREMOS EL ID DE LA TABLA REFERENCIA:
+        $queryR1=("Select * from referencias where referencia='$bibliografia'");
+                            $connR1=pg_query($conexion,$queryR1);
+                         $cantidadR1= pg_num_rows($connR1);
+                                 if ($cantidadR1>0){
+                                                     if(!$connR1){
+                                                        die(pg_error($conexion));
+                                                         }
+
+                                               if (pg_num_rows($connR1) > 0) {
+                                                    while($rowData = pg_fetch_array($connR1)){
+                                                      $idreferencia=intval($rowData["id_referencia"]);
+                                                      }
+                                                       }}
+  
+      do {
+           //EL ID DE REFERENCIAS SE IRA A LA TABLA DE TRABAJOS_REFERENCIAS:    
+                        $queryR2=("INSERT INTO trabajos_referencias (trabajos_id, referencias_id)
+                          VALUES('$numid','$idreferencia')");
+                        $consultaR2=pg_query($conexion,$queryR2);  
+
+          $Cuentarefe--;
+          $idreferencia--;
+
+      }while($Cuentarefe > 0);
+
+                        if($redir==0){             
+                        echo "<script>alert('Registro exitoso.');window.location.replace('https://laboratoriosistemas.cuautitlan2.unam.mx/congresowinx/WinxCongreso/menu.php');</script>";  }
+
+
+                            }
+                                                           else{  $redir++;
+                                                        echo "<script>alert('El correo del Coautor 3 no está registrado en el sistema, inténtelo de nuevo.');</script>"; 
+                                                       }
+
+
+    }else { //no hay correo 4, sí hay correo1,2 y 3 
                    // TABLA TRABAJOS 
                 //INSERT PARA INSERTAR TITULO, CATEGORIA Y PALABRAS CLAVE
                 
@@ -1285,7 +1452,7 @@ if(isset($_POST["titulo"]) && isset($_POST["resumen"]) && isset($_POST["palabras
                         
                        
                   //coautor 2
-                     $query41=("Select * from coautor where id_usuario='$idcoautor2' ");
+                     $query41=("Select * from coautor where id_coautor='$idcoautor2' ");
                             $conn41=pg_query($conexion,$query41);
                          $cantidad41= pg_num_rows($conn41);
                          
@@ -1299,14 +1466,14 @@ if(isset($_POST["titulo"]) && isset($_POST["resumen"]) && isset($_POST["palabras
                                                    }
                                              }
                                                  else{
-                                                    $query51=("INSERT INTO coautor (id_coautor,fecha, id_usuario)
-                                                    VALUES('$idcoautor2','$fechaActual','$idcoautor2')");
+                                                    $query51=("INSERT INTO coautor (id_coautor,fecha)
+                                                    VALUES('$idcoautor2','$fechaActual')");
                                                  $consulta51=pg_query($conexion,$query51);
 
                                                    
                                                     }
                                           //coautor 3
-                     $query42=("Select * from coautor where id_usuario='$idcoautor3' ");
+                     $query42=("Select * from coautor where id_coautor='$idcoautor3' ");
                             $conn42=pg_query($conexion,$query42);
                          $cantidad42= pg_num_rows($conn42);
                          
@@ -1320,8 +1487,8 @@ if(isset($_POST["titulo"]) && isset($_POST["resumen"]) && isset($_POST["palabras
                                                    }
                                              }
                                                  else{
-                                                    $query52=("INSERT INTO coautor (id_coautor,fecha, id_usuario)
-                                                    VALUES('$idcoautor3','$fechaActual','$idcoautor3')");
+                                                    $query52=("INSERT INTO coautor (id_coautor,fecha)
+                                                    VALUES('$idcoautor3','$fechaActual')");
                                                  $consulta52=pg_query($conexion,$query52);
 
                                                     }
@@ -1335,14 +1502,10 @@ if(isset($_POST["titulo"]) && isset($_POST["resumen"]) && isset($_POST["palabras
                           VALUES('$numid','$idcoautor3')");
                         $consulta5=pg_query($conexion,$query10);  
                        
-
-                        /*
-                        
-                         // TABLA TRABAJOS SE RELACIONA CON TRABAJOS_CONGRESO
+                              // TABLA TRABAJOS SE RELACIONA CON TRABAJOS_CONGRESO
                         //QUERY PARA LA TABLA DE TRABAJOS_CONGRESO
-                        
-                   
-                $query13=("Select id_congreso from congreso where fecha_inicio_congreso<='$fechaActual' and fecha_fin_congreso>='$horaActual' ");
+
+                $query13=("Select * from congreso ");
                             $conn6=pg_query($conexion,$query13);
 
                                if(!$conn6){
@@ -1354,37 +1517,59 @@ if(isset($_POST["titulo"]) && isset($_POST["resumen"]) && isset($_POST["palabras
                                        $id_congreso=intval($rowData["id_congreso"]);
                                                    }
                                              }
-                         $query14=("INSERT INTO trabajos_congreso (congreso_id, fecha, id_trabajo)
-                          VALUES('$id_congreso','$fechaActual,'$id_trabajo')");
-                        $consulta8=pg_query($conexion,$query14);        
-                        
-                   //INSERT PARA AGREGAR REFERENCIA
-                        $query15=("INSERT INTO referencias (referencia)
-                          VALUES('$referencia')");
-                        $consulta9=pg_query($conexion,$query15); 
-                        
-                        $query16=("Select id_referencia from referencias where refrencia='$referencia'");
-                            $conn7=pg_query($conexion,$query16);
 
-                               if(!$conn7){
-                                 die(pg_error($conexion));
-                                    }
 
-                               if (pg_num_rows($conn7) > 0) {
-                                          while($rowData = pg_fetch_array($conn7)){
-                                       $id_referencia=intval($rowData["id_referencia"]);
-                                                   }
-                                             }
-                        
-                    //AQUI SE INSERTAN LOS ID EN TRABAJOS REFERENCIAS    
-                        $query17=("INSERT INTO trabajos_referencias (referencias_id,id_trabajo)
-                          VALUES('$id_trabajo','$id_referencia')");
-                        $consulta10=pg_query($conexion,$query17); */
-                
+                         $query14=("INSERT INTO trabajos_congreso (congreso_id, trabajos_id, fecha)
+                          VALUES('$id_congreso','$numid', '$fechaActual')");
+                        $consulta8=pg_query($conexion,$query14);     
+
+                                          
                                                     
-                                                    
-                                                    
-}} else{ // si no hay correo 3 pero sí hay correo1 y correo2
+}
+
+
+
+     //SACAREMOS EL ID DE LA TABLA REFERENCIA:
+        $queryR1=("Select * from referencias where referencia='$bibliografia'");
+                            $connR1=pg_query($conexion,$queryR1);
+                         $cantidadR1= pg_num_rows($connR1);
+                                 if ($cantidadR1>0){
+                                                     if(!$connR1){
+                                                        die(pg_error($conexion));
+                                                         }
+
+                                               if (pg_num_rows($connR1) > 0) {
+                                                    while($rowData = pg_fetch_array($connR1)){
+                                                      $idreferencia=intval($rowData["id_referencia"]);
+                                                      }
+                                                       }}
+  
+      do {
+           //EL ID DE REFERENCIAS SE IRA A LA TABLA DE TRABAJOS_REFERENCIAS:    
+                        $queryR2=("INSERT INTO trabajos_referencias (trabajos_id, referencias_id)
+                          VALUES('$numid','$idreferencia')");
+                        $consultaR2=pg_query($conexion,$queryR2);  
+
+          $Cuentarefe--;
+          $idreferencia--;
+
+                          }while($Cuentarefe > 0);
+
+
+              if($redir==0){             
+                        echo "<script>alert('Registro exitoso.');window.location.replace('https://laboratoriosistemas.cuautitlan2.unam.mx/congresowinx/WinxCongreso/menu.php');</script>";  }
+
+
+                               }else{   $redir++;
+                                                        echo "<script>alert('El correo del Coautor 2 no está registrado en el sistema, inténtelo de nuevo.');</script>"; 
+                                                       }
+
+
+
+
+
+
+   } else{ // si no hay correo 3 pero sí hay correo1 y correo2
                   // TABLA TRABAJOS 
                 //INSERT PARA INSERTAR TITULO, CATEGORIA Y PALABRAS CLAVE
                 
@@ -1414,7 +1599,7 @@ if(isset($_POST["titulo"]) && isset($_POST["resumen"]) && isset($_POST["palabras
                         
                     
                   //coautor 2
-                     $query41=("Select * from coautor where id_usuario='$idcoautor2' ");
+                     $query41=("Select * from coautor where id_coautor='$idcoautor2' ");
                             $conn41=pg_query($conexion,$query41);
                          $cantidad41= pg_num_rows($conn41);
                          
@@ -1428,8 +1613,8 @@ if(isset($_POST["titulo"]) && isset($_POST["resumen"]) && isset($_POST["palabras
                                                    }
                                              }
                                                  else{
-                                                    $query51=("INSERT INTO coautor (id_coautor,fecha, id_usuario)
-                                                    VALUES('$idcoautor2','$fechaActual','$idcoautor2')");
+                                                    $query51=("INSERT INTO coautor (id_coautor,fecha)
+                                                    VALUES('$idcoautor2','$fechaActual')");
                                                  $consulta51=pg_query($conexion,$query51);
 
                                                    
@@ -1439,13 +1624,11 @@ if(isset($_POST["titulo"]) && isset($_POST["resumen"]) && isset($_POST["palabras
                         $query9=("INSERT INTO trabajos_coautores (trabajos_id, coautor_id)
                           VALUES('$numid','$idcoautor2')");
                         $consulta4=pg_query($conexion,$query9);
-                        
-                        /*
-                         // TABLA TRABAJOS SE RELACIONA CON TRABAJOS_CONGRESO
+                      
+                              // TABLA TRABAJOS SE RELACIONA CON TRABAJOS_CONGRESO
                         //QUERY PARA LA TABLA DE TRABAJOS_CONGRESO
-                        
-                   
-                $query13=("Select id_congreso from congreso where fecha_inicio_congreso<='$fechaActual' and fecha_fin_congreso>='$horaActual' ");
+
+                $query13=("Select * from congreso ");
                             $conn6=pg_query($conexion,$query13);
 
                                if(!$conn6){
@@ -1457,36 +1640,58 @@ if(isset($_POST["titulo"]) && isset($_POST["resumen"]) && isset($_POST["palabras
                                        $id_congreso=intval($rowData["id_congreso"]);
                                                    }
                                              }
-                         $query14=("INSERT INTO trabajos_congreso (congreso_id, fecha, id_trabajo)
-                          VALUES('$id_congreso','$fechaActual,'$id_trabajo')");
-                        $consulta8=pg_query($conexion,$query14);        
-                        
-                   //INSERT PARA AGREGAR REFERENCIA
-                        $query15=("INSERT INTO referencias (referencia)
-                          VALUES('$referencia')");
-                        $consulta9=pg_query($conexion,$query15); 
-                        
-                        $query16=("Select id_referencia from referencias where refrencia='$referencia'");
-                            $conn7=pg_query($conexion,$query16);
 
-                               if(!$conn7){
-                                 die(pg_error($conexion));
-                                    }
 
-                               if (pg_num_rows($conn7) > 0) {
-                                          while($rowData = pg_fetch_array($conn7)){
-                                       $id_referencia=intval($rowData["id_referencia"]);
-                                                   }
-                                             }
+                         $query14=("INSERT INTO trabajos_congreso (congreso_id, trabajos_id, fecha)
+                          VALUES('$id_congreso','$numid', '$fechaActual')");
+                        $consulta8=pg_query($conexion,$query14);     
+   
                         
-                    //AQUI SE INSERTAN LOS ID EN TRABAJOS REFERENCIAS    
-                        $query17=("INSERT INTO trabajos_referencias (referencias_id,id_trabajo)
-                          VALUES('$id_trabajo','$id_referencia')");
-                        $consulta10=pg_query($conexion,$query17); */
- }} else{//2
+                   
+ 
+ }
+
+     //SACAREMOS EL ID DE LA TABLA REFERENCIA:
+        $queryR1=("Select * from referencias where referencia='$bibliografia'");
+                            $connR1=pg_query($conexion,$queryR1);
+                         $cantidadR1= pg_num_rows($connR1);
+                                 if ($cantidadR1>0){
+                                                     if(!$connR1){
+                                                        die(pg_error($conexion));
+                                                         }
+
+                                               if (pg_num_rows($connR1) > 0) {
+                                                    while($rowData = pg_fetch_array($connR1)){
+                                                      $idreferencia=intval($rowData["id_referencia"]);
+                                                      }
+                                                       }}
+  
+      do {
+           //EL ID DE REFERENCIAS SE IRA A LA TABLA DE TRABAJOS_REFERENCIAS:    
+                        $queryR2=("INSERT INTO trabajos_referencias (trabajos_id, referencias_id)
+                          VALUES('$numid','$idreferencia')");
+                        $consultaR2=pg_query($conexion,$queryR2);  
+
+          $Cuentarefe--;
+          $idreferencia--;
+
+      }while($Cuentarefe > 0);
+
+                              if($redir==0){             
+                        echo "<script>alert('Registro exitoso.');window.location.replace('https://laboratoriosistemas.cuautitlan2.unam.mx/congresowinx/WinxCongreso/menu.php');</script>";  }
+
+
+                          }
+                                                           else{     $redir++;
+                                                        echo "<script>alert('El correo del Coautor 1 no está registrado en el sistema, inténtelo de nuevo.');</script>"; 
+                                                       }
+
+
+
+ } else{//2
                 
                 
-                //si no mete ningun autor y el idcoautor2 esta vacío
+                //si no mete ningun coautor 
                    
                 // TABLA TRABAJOS 
                 //INSERT PARA INSERTAR TITULO, CATEGORIA Y PALABRAS CLAVE
@@ -1515,12 +1720,11 @@ if(isset($_POST["titulo"]) && isset($_POST["resumen"]) && isset($_POST["palabras
                 $query8=("INSERT INTO ponente_trabajos (ponente_id, trabajos_id, fecha_registro)
                           VALUES('$idcoautor1','$numid','$fechaActual')");
                         $consulta3=pg_query($conexion,$query8);
-                        
+                    
                          // TABLA TRABAJOS SE RELACIONA CON TRABAJOS_CONGRESO
                         //QUERY PARA LA TABLA DE TRABAJOS_CONGRESO
-                        /*
-                   
-                $query13=("Select id_congreso from congreso where fecha_inicio_congreso<='$fechaActual' and fecha_fin_congreso>='$horaActual' ");
+
+                $query13=("Select * from congreso ");
                             $conn6=pg_query($conexion,$query13);
 
                                if(!$conn6){
@@ -1532,62 +1736,54 @@ if(isset($_POST["titulo"]) && isset($_POST["resumen"]) && isset($_POST["palabras
                                        $id_congreso=intval($rowData["id_congreso"]);
                                                    }
                                              }
-                         $query14=("INSERT INTO trabajos_congreso (congreso_id, fecha, id_trabajo)
-                          VALUES('$id_congreso','$fechaActual,'$id_trabajo')");
-                        $consulta8=pg_query($conexion,$query14);    */
 
 
-                           /*
-                   //INSERT PARA AGREGAR REFERENCIA
-                        $query15=("INSERT INTO referencias (referencia)
-                          VALUES('$referencia')");
-                        $consulta9=pg_query($conexion,$query15); 
-                        
-                        $query16=("Select id_referencia from referencias where refrencia='$referencia'");
-                            $conn7=pg_query($conexion,$query16);
+                         $query14=("INSERT INTO trabajos_congreso (congreso_id, trabajos_id, fecha)
+                          VALUES('$id_congreso','$numid', '$fechaActual')");
+                        $consulta8=pg_query($conexion,$query14);     
 
-                               if(!$conn7){
-                                 die(pg_error($conexion));
-                                    }
+     //SACAREMOS EL ID DE LA TABLA REFERENCIA:
+        $queryR1=("Select * from referencias where referencia='$bibliografia'");
+                            $connR1=pg_query($conexion,$queryR1);
+                         $cantidadR1= pg_num_rows($connR1);
+                                 if ($cantidadR1>0){
+                                                     if(!$connR1){
+                                                        die(pg_error($conexion));
+                                                         }
 
-                               if (pg_num_rows($conn7) > 0) {
-                                          while($rowData = pg_fetch_array($conn7)){
-                                       $id_referencia=intval($rowData["id_referencia"]);
-                                                   }
-                                             }
-                        
-                    //AQUI SE INSERTAN LOS ID EN TRABAJOS REFERENCIAS    
-                        $query17=("INSERT INTO trabajos_referencias (referencias_id,id_trabajo)
-                          VALUES('$id_trabajo','$id_referencia')");
-                        $consulta10=pg_query($conexion,$query17);  */
+                                               if (pg_num_rows($connR1) > 0) {
+                                                    while($rowData = pg_fetch_array($connR1)){
+                                                      $idreferencia=intval($rowData["id_referencia"]);
+                                                      }
+                                                       }}
+  
+      do {
+           //EL ID DE REFERENCIAS SE IRA A LA TABLA DE TRABAJOS_REFERENCIAS:    
+                        $queryR2=("INSERT INTO trabajos_referencias (trabajos_id, referencias_id)
+                          VALUES('$numid','$idreferencia')");
+                        $consultaR2=pg_query($conexion,$queryR2);  
 
-echo "<script>alert('registro exitoso');</script>";
+          $Cuentarefe--;
+          $idreferencia--;
 
-                        
-     }}          } 
+      }while($Cuentarefe > 0);
+                
+              if($redir==0){             
+                       echo "<script>alert('Registro exitoso.');window.location.replace('https://laboratoriosistemas.cuautitlan2.unam.mx/congresowinx/WinxCongreso/menu.php');</script>"; 
+
+                     /*
+echo "<div class='alert alert-success'><p class='hidd' align=center>El archivo  ".$id_congreso ." se ha cargado correctamente. <a href='registrotrabajoponencias.php' class='btn btn-default'>Clic aquí </a> para finalizar.</div>";  */
+
+
+                      }
+
+     }
+ }          } 
                 
                     ?>
            
        </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-       
-
- 
        </div>
   </div>
 </div>
@@ -1598,7 +1794,7 @@ echo "<script>alert('registro exitoso');</script>";
 
 <div class="containerCredi">
 <footer class="py-5">
-    <div class="row">
+    <div class="row gx-0">
       <div class="col-6 col-md-2 mb-3">
         <ul class="nav flex-column">
           <li class="nav-item mb-2" class="nav-link p-0 text-muted"> <img src="img/escudo-blanco.png" alt="Photo" style="width:65%;"> </li>
@@ -1627,6 +1823,7 @@ echo "<script>alert('registro exitoso');</script>";
           <li style="color: #FFFFFF;"class="nav-item mb-2" class="nav-link p-0 text-muted">Para mayores informes o dudas comunicarse al Departamento de Matemáticas Edificio A8 Campo 4.</li>
         </ul>
         </div>
+    </div>
 
   <div class="containerCredi">
   <footer class="py-3 my-4">
@@ -1643,7 +1840,9 @@ echo "<script>alert('registro exitoso');</script>";
 </div>
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
          
-      
+    </footer>
+    </div>
+
                       
 </body>
 

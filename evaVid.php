@@ -1,7 +1,18 @@
+<?php
+session_start();
+error_reporting(0);
+$varsec=$_SESSION['nombre_usuario'];
+if($varsec == null || $varsec = '') {
+    header('Location:404.php');
+    session_destroy();
+    session_unset();
+    die();
+}?>
+
 <html lang="es">
     <head>
         <link href="icono.ico" type="image/x-icon" rel="shortcut icon" />
-        <title>Registro de Nuevo Congreso de Matemáticas</title>
+        <title>Evaluacion de Video</title>
        <meta charset="UTF-8"> 
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1, minimum-scale=1">
         <link rel="stylesheet" href="icon.css">
@@ -150,13 +161,14 @@
 
 
 .containerBoton {
-   width: 100%;
+    width: 100%;
     height: 12vh;
     position: relative;
-    top: 6%;
-    transform: translateY(-50%);
     text-align: center; 
     background-color: transparent;
+    margin-top: 10px;
+    margin-bottom: -10px;
+     
 }
 
 
@@ -627,12 +639,13 @@ Encabezado de la página */
                 <label for="btn-menu"><img src="img/menuicono11.png" alt=""> </label>
                 <nav class="menu" style="z-index: 1;">
                     <ul>
-                    <li> <a href="index.php">Inicio</a></li>
-                        <li> <a href="">Memorias</a></li>
-                        <li> <a href="convocatoria.php">Convocatoria</a></li> 
-                        <li> <a href="inscripcionYcostos.php">Inscripción y Costos</a></li>
-                        <li> <a href="ComiteOrg.php">Comité Organizador</a></li>
-                        <li> <a href="InicioSesion.php"><img class="alineadoicono" src="img/iniciaricono.png">&nbsp;Iniciar Sesión</a></li>
+                    <li> <a href="indexSesion.php">Inicio</a></li>
+                        <li> <a href="memoriascarruselSesion.php">Memorias</a></li>
+                        <li> <a href="convocatoriaSesion.php">Convocatoria</a></li> 
+                        <li>  <a href="inscripcionYcostosSesion.php">Inscripción y Costos</a></li>
+                        <li> <a href="ComiteOrgSesion">Comité Organizador</a></li>
+                        <li> <a href="ComiteEvaSesion">Comité Evaluador</a></li>
+                        <li> <a href="destroySesion.php"><img class="alineadoicono" src="img/iniciaricono.png">&nbsp;Cerrar  Sesión</a></li>
                     </ul>  
                 </nav> 
                 
@@ -646,9 +659,9 @@ Encabezado de la página */
                 <nav class="menu2" style="z-index: 2;">           
                     <ul>    
                       <li> <a href=""><img class="alineadoicono" src="img/icono_informacion2.png"> </a></li>        
-                        <li> <a href="ponencias_info.php">Ponencias</a></li>  
-                        <li> <a href="carteles_info.php">Carteles</a></li>
-                        <li> <a href="talleres_info.php">Talleres</a></li>
+                      <li> <a href="ponencias_infoSesion.php">Ponencias</a></li>  
+                        <li> <a href="carteles_infoSesion.php">Carteles</a></li>
+                        <li> <a href="talleres_infoSesion.php">Talleres</a></li>
                     </ul>  
                 </nav>                
             </header>
@@ -796,6 +809,8 @@ Encabezado de la página */
 			</form>
         
        </div>
+       <br><br>
+        <div> <a  href="menu.php"  > <center> <button > Regresar </button>  </center></a> </div>  
   </div>
 </div>
 
@@ -804,7 +819,7 @@ Encabezado de la página */
 
 <div class="containerCredi">
 <footer class="py-5">
-    <div class="row">
+    <div class="row gx-0">
       <div class="col-6 col-md-2 mb-3">
         <ul class="nav flex-column">
           <li class="nav-item mb-2" class="nav-link p-0 text-muted"> <img src="img/escudo-blanco.png" alt="Photo" style="width:65%;"> </li>
@@ -833,6 +848,7 @@ Encabezado de la página */
           <li style="color: #FFFFFF;"class="nav-item mb-2" class="nav-link p-0 text-muted">Para mayores informes o dudas comunicarse al Departamento de Matemáticas Edificio A8 Campo 4.</li>
         </ul>
         </div>
+    </div>
 
   <div class="containerCredi">
   <footer class="py-3 my-4">

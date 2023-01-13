@@ -1,3 +1,74 @@
+<?php
+// ini_set("display_errors", 0);
+include 'credentials.php';
+//$varName; Nombre
+//$varId;
+//$varEmail; Correo
+
+session_start();
+error_reporting(0);
+$varsec = $_SESSION['nombre_usuario'];
+if ($varsec == null || $varsec = '') {
+  header('Location:404.php');
+  session_destroy();
+  session_unset();
+  die();
+}
+
+
+
+
+/////PARA CERRAR SESION/////
+if (isset($_POST['btn-cerrar'])) {
+  session_destroy();
+  // header("https://laboratoriosistemas.cuautitlan2.unam.mx/congresowinx/WinxCongreso/index3.php");
+  "<script> 
+ window.location.replace('https://laboratoriosistemas.cuautitlan2.unam.mx/congresowinx/WinxCongreso/index3.php'); </script>";
+}
+
+/////////////ENLISTAR LAS FOTOS EXISTENTES///////////////////////////////////////////////
+$listar = null;
+$directorio = opendir("Pagos/Pagos2023/");
+
+while ($elemento = readdir($directorio)) {
+  if ($elemento != '.' && $elemento != '..') {
+    if (is_dir("Pagos/Pagos2023/" . $elemento)) {
+      $listar .= "<a class=' col-md-6' href='Pagos/Pagos2023/$elemento'target='_blank'> 
+    $elemento/</a>
+    <br><br>";
+    } else {
+      $listar .= "<a class=' col-md-6' href='Pagos/Pagos2023/$elemento'target='_blank'> 
+    $elemento</a>
+    <br><br>";
+    }
+  }
+}
+
+///////////////////////// SUBIR UNA NUEVA FOTO /////////////////////////////////////////////
+
+
+if (isset($_POST["subir"])) {
+  $subir = $_POST["subir"];
+
+  if ($subir  == "Cargar archivo") {
+
+    $folder = "Pagos/Pagos2023/";
+    move_uploaded_file($_FILES["formato"]["tmp_name"], "$folder" . $_FILES["formato"]["name"]);
+    echo "<div class='alert alert-success'><p class='hidd' align=center>El archivo  " . $_FILES["formato"]["name"] . " se ha cargado correctamente. <a href='pagos2.php' class='btn btn-default'>Clic aquí </a> para verificar.</div>";
+  }
+}
+
+/////////////////////////////// BORRAR FOTO ////////////////////////////////////
+
+if (isset($_POST['borrarFor'])) {
+  $borrarFor = ($_POST['borrarFor']);
+  @unlink('Pagos/Pagos2023/' . $borrarFor);
+  echo "<div class='alert alert-danger'><p class='hidd' align=center>El archivo  " . $borrarFor . " ha sido eliminado correctamente. <a href='pagos2.php' class='btn btn-default'>Clic aquí </a> para verificar.</div>";
+}
+
+
+?>
+
 <html lang="es">
     <head>
         <link href="icono.ico" type="image/x-icon" rel="shortcut icon" />
@@ -141,10 +212,10 @@
     width: 100%;
     height: 12vh;
     position: relative;
-    top: 6%;
-    transform: translateY(-50%);
     text-align: center; 
     background-color: transparent;
+    margin-top: 10px;
+    margin-bottom: -10px;
      
 }
 
@@ -507,12 +578,13 @@ Encabezado de la página */
                 <label for="btn-menu"><img src="img/menuicono.png" alt=""> </label>
                 <nav class="menu" style="z-index: 1;">
                     <ul>
-                        <li> <a href="">Inicio</a></li>
-                        <li> <a href="">Memorias</a></li>
-                        <li> <a href="">Convocatoria</a></li> 
-                        <li> <a href="">Inscripción y Costos</a></li>
-                        <li> <a href="ComiteOrg">Comité Organizador</a></li>
-                        <li> <a href=""><img class="alineadoicono" src="img/iniciaricono.png">&nbsp;Iniciar Sesión</a></li>
+                    <li> <a href="indexSesion.php">Inicio</a></li>
+                        <li> <a href="memoriascarruselSesion.php">Memorias</a></li>
+                        <li> <a href="convocatoriaSesion.php">Convocatoria</a></li> 
+                        <li>  <a href="inscripcionYcostosSesion.php">Inscripción y Costos</a></li>
+                        <li> <a href="ComiteOrgSesion">Comité Organizador</a></li>
+                        <li> <a href="ComiteEvaSesion">Comité Evaluador</a></li>
+                        <li> <a href="destroySesion.php"><img class="alineadoicono" src="img/iniciaricono.png">&nbsp;Cerrar  Sesión</a></li>
                     </ul>  
                 </nav> 
                 
@@ -526,48 +598,86 @@ Encabezado de la página */
                 <nav class="menu2" style="z-index: 2;">           
                     <ul>    
                       <li> <a href=""><img class="alineadoicono" src="img/icono_informacion2.png"> </a></li>         
-                        <li> <a href="ponencias_info.php">Ponencias</a></li>  
-                        <li> <a href="carteles_info.php">Carteles</a></li>
-                        <li> <a href="talleres_info.php">Talleres</a></li>
+                      <li> <a href="ponencias_infoSesion.php">Ponencias</a></li>  
+                        <li> <a href="carteles_infoSesion.php">Carteles</a></li>
+                        <li> <a href="talleres_infoSesion.php">Talleres</a></li>
                     </ul>  
                 </nav>                
             </header>
         </div>
  
-       <div class="containerBoton">
-        <label for="btn-menu3"></label>
-        <nav class="menu3" style="z-index: 2;">  
-        <button class="boton1" type="button">Alumno</button>
-        <button class="boton2" type="button">Ponente</button>
-        <button class="boton3" type="button">Evaluador</button>
-        <button class="boton4" type="button">Memorias</button>
-        <button class="boton5" type="button">Admin</button>
-        <button class="boton6" type="button">Comite Orga</button>
-        </nav>
-    </div>
-
-    <!-- Barra de menu Secundario - Movil-->
-
-    <div class="nav-bar" >
-       <a href="#" class="icond icon-book" target="_blank"> <img src="img/icons8-usuario-16.png"/> </a>
-            <a href="#" class="icond icon-file-text2" target="_blank"> <img src="img/icons8-expositor-16.png"/> </a>
-            <a href="#" class="icond icon-mic" target="_blank"> <img src="img/icons8-lectura-16.png"/> </a>
-            <a href="#" class="icond icon-stack" target="_blank"> <img src="img/icons8-foto-16.png"/> </a>
-            <a href="#" class="icond icon-key" target="_blank"> <img src="img/icons8-configuración-del-administrador-16.png"/> </a>
-            <a href="#" class="icond icon-hearth" target="_blank"> <img src="img/icons8-llamada-de-conferencia-16.png"/></a>
-        </div> 
 <div class="ContenedorPrincipal"> 
   <div class="px-4 pt-5 my-5 text-center border-bottom">
    
     <div class="col-lg-6 mx-auto">
-        
-      <form action="#" method="POST" >
+       <?php 
+         
+ $message = '';
+     if (isset($_POST['enviarBtn']) && $_POST['enviarBtn'] == 'Guardar cambios') {
+
+    $conexion = pg_connect("host=localhost dbname=congresowinx user=congresowinx password=W1nxC0ngr3s032511");
+ if (isset($_POST["nombre"])&& isset($_POST["apellido"])&& isset($_POST["correo"]) && isset($_POST["pais"])&& isset($_POST["phone"])&& isset($_POST["grado"]) && isset($_POST["institucion"])) {
+          $nombre1 = $_POST["nombre"];
+      $nombre = strtoupper($nombre1);
+      $apellido1 = $_POST["apellido"];
+      $apellido = strtoupper($apellido1);
+       $Correo = $_POST["Correo"];
+      $pais = $_POST["pais"];
+      $grado = $_POST["grado"];
+      $institucion = $_POST["institucion"];
+
+             $query = ("update usuario set nombre_usuario='$nombre', apellido_usuario='$apellido' where usuario='$Correo' ");
+                  $consulta1 = pg_query($conexion, $query);
+
+             $query1g = ("Select * from grado_academico where titulo='$grado'");
+                  $conn1g = pg_query($conexion, $query1g);
+                  if (!$conn1g) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($conn1g) > 0) {
+                       while ($rowData = pg_fetch_array($conn1g)) {
+                        $idgg = $rowData["id_grado"];}}
+
+
+                   $query2 = ("update grado_trayectoria set grado_id='$idgg' where trayectoria_id='$idt1' ");
+                  $consulta2 = pg_query($conexion, $query2);
+
+
+
+
+             $query1i = ("Select * from institucion where nombre_institucion='$institucion'");
+                  $conn1i = pg_query($conexion, $query1i);
+                  if (!$conn1i) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($conn1i) > 0) {
+                       while ($rowData = pg_fetch_array($conn1i)) {
+                        $idii = $rowData["id_institucion"];}}
+
+                         $query3 = ("update trayectoria_institucion set institucion_id='$idii' where trayectoria_id='$idt1' ");
+                  $consulta3 = pg_query($conexion, $query3);
+
+
+                  echo "<script languaje='JavaScript'> 
+                    alert('Los datos de actualizaron correctamente');
+                    window.location.replace('https://laboratoriosistemas.cuautitlan2.unam.mx/congresowinx/WinxCongreso/menu.php');
+                    </script>";
+}}
+?>
+
+
+
+
+      
        <!-- Aqui va el codigo de cada uno-->
       
     <p class="Tema">Perfil</p>
 
     <!--DATOS-->
     <div class="datosP" >
+      <form action="#" method="POST" >
       <div class="D1">
         <table>
           <center>
@@ -577,23 +687,53 @@ Encabezado de la página */
           </center>
         </table>
       </div>
-      </div>
+      
       <p class="temaCentral">Datos personales</p>
 				
 
 				<div class="datosP">
         <div class="D1">
 						<!--******DATOS PERSONALES*******-->
-						
+					            <?php 
+                $conexion = pg_connect("host=localhost dbname=congresowinx user=congresowinx password=W1nxC0ngr3s032511");
+                $idc2= $varId ;
+                
+                   $query4 = ("Select * from usuario where id_usuario='$idc2'");
+                  $conn4 = pg_query($conexion, $query4);
+                  if (!$conn4) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($conn4) > 0) {
+                       while ($rowData = pg_fetch_array($conn4)) {
+                        $nom = $rowData["nombre_usuario"];
+                        $ap = $rowData["apellido_usuario"];
+                        $paa = $rowData["pais_usuario"];
+                        $idc1 = $rowData["usuario"];
+    
+                        $query5 = ("Select * from contacto where email='$idc1'");
+                  $conn5 = pg_query($conexion, $query5);
+                  if (!$conn5) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($conn5) > 0) {
+                       while ($rowData5 = pg_fetch_array($conn5)) {
+                        $cel = $rowData5["telefono"];
+                      
+                         ?>	
 						<table>
 							
 							<tr>
 								<td class="C1">
 									<label for="Name">Nombre (s):</label>
 								</td>
+                    
 								<td class="C2">
-									<input class="inputP" style="text-transform:uppercase;" type="text" name="nombre" placeholder="Ingresa Nombre(s)" required>
+                                     
+									<input class="inputP" style="text-transform:uppercase;" type="text" name="nombre" value=" <?php echo $nom  ?>">
 								</td>
+                               
 							</tr>
 
 							<tr>
@@ -601,7 +741,7 @@ Encabezado de la página */
 									<label for="Last">Apellido (s):</label>
 								</td>
 								<td class="C2">
-									<input class="inputP" style="text-transform:uppercase;" type="text" name="apellido" placeholder="Ingresa Apellido(s)" required>
+									<input class="inputP" style="text-transform:uppercase;" type="text" name="apellido" value="<?php echo $ap  ?>">
 								</td>
 							</tr>
 
@@ -610,7 +750,7 @@ Encabezado de la página */
 									<label for="Emails">Correo:</label>
 								</td>
 								<td class="C2">
-									<input class="inputP" type="Email" name="Correo" placeholder="Ingresa Correo" required>
+									<input class="inputP" type="Email" name="Correo" value="<?php echo $idc1  ?>" readonly>
 								</td>
 							</tr>
 
@@ -621,7 +761,7 @@ Encabezado de la página */
                                                                 <td>
                                                                 <select border-radius: 9px; input class="inputP" name ="pais">
                                                 
-                                                                   <option value="México">México</option>
+                                                            <option value="<?php echo $paa  ?>"><?php echo $paa  ?></option>
                                                                    <option value="Afganistán">Afganistán</option>
                                                                    <option value="Albania">Albania</option>
                                                                    <option value="Alemania">Alemania</option>
@@ -876,32 +1016,14 @@ Encabezado de la página */
                                     <label  for="Phone">Teléfono:</label>
                                 </td>
                                 <td class="C2">
-                                                                        <input id="phone" class="inputP" type="tel" name="phone" required pattern="+[0-9]{14}" maxlength="14" onkeypress="numfinal()" />
+                                 <input id="phone" class="inputP" type="tel" name="phone" required pattern="+[0-9]{14}" maxlength="14" onkeypress="numfinal()"value="<?php echo $cel  ?>"> 
                                 
                                 
                                                                 
                                                                 </td>
                             </tr>
 
-							<tr>
-								<td class="C1">
-									<label for="Password">Contraseña:</label>
-								</td>
-								<td class="C2">
-									<input class="inputP" id="passwordV1" type="password"  name="contraseña" placeholder="Máximo 10 caracteres" required minlength="8" maxlength="10">
-								<img src="img/icono_ojo.png"  id=M1 name="Q1" type="button" width:="22" height= "20" onclick="MostrarP1()" >	
-                                                                 </td>
-							</tr>
-
-							<tr>
-								<td class="C1">
-									<label for="SPassword">Repetir Contraseña:</label>
-								</td>
-								<td class="C2">
-									<input class="inputP" id="passwordV2" type="password" name="Name" placeholder="Máximo 10 caracteres" required minlength="8" maxlength="10">
-                                                                <img src="img/icono_ojo.png"  id=M2 name="Q2" type="button" width:="22" height= "20" onclick="MostrarP2()" >        
-                                                                </td>
-							</tr>
+							
 											
 						</table>
 	
@@ -914,57 +1036,174 @@ Encabezado de la página */
 
 <div class="datosP">
 
-  <div class="D1">
-    <table >
-      <tr>
-        <td class="C1">
-          <label for="GradoA">Grado Acádemico:</label>	
-        </td>
-        <td class="C2">
-          <input class="inputP" list="gA" type="text" name="grado" placeholder="Selecciona Grado Acádemico" required>	
-        </td>
-      </tr>
-    </table>
-  </div>	
+  <center>
+    <div class="D1">
+      <td class="C1">
+        <label for="GradoA">Grado Acádemico:</label>
+      </td>
+      <select name="grado" class="inputP" required />
 
-  </div> <!---Fin de grado academico-->
+
+<?php
+ $queryt1 = ("Select * from trayectoria where usuario_id='$idc2'");
+                  $connt1 = pg_query($conexion, $queryt1);
+                  if (!$connt1) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($connt1) > 0) {
+                       while ($rowDatat1 = pg_fetch_array($connt1)) {
+                        $idt1 = $rowDatat1["id_trayectoria"];
+                      
+                        $queryt2 = ("Select * from grado_trayectoria where trayectoria_id='$idt1'");
+                  $connt2 = pg_query($conexion, $queryt2);
+                  if (!$connt2) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($connt2) > 0) {
+                       while ($rowDatat2 = pg_fetch_array($connt2)) {
+                        $idg1 = $rowDatat2["grado_id"];
+                           
+                             $queryt3 = ("Select * from grado_academico where id_grado='$idg1'");
+                             $connt3 = pg_query($conexion, $queryt3);
+                             if (!$connt3) {
+                                  die(pg_error($conexion));
+                              }
+ 
+                                   if (pg_num_rows($connt3) > 0) {
+                               while ($rowDatat3 = pg_fetch_array($connt3)) {
+                       
+                        ?>
+
+  
+    <option value="<?php echo $rowDatat3["titulo"] ?>"><?php echo $rowDatat3["titulo"] ?></option>  
+
+                        <?php
+
+                    }}  }}
+
+                      }}
+ ?>
+
+
+        <option value="Estudiante">Estudiante</option>
+        <option value="Licenciatura">Licenciatura</option>
+        <option value="Maestría">Maestría</option>
+        <option value="Doctorado">Doctorado</option>
+
+
+
+      </select>
+
+    </div></div>
+  </center> <!---Fin de grado academico-->
    
 	<p class="temaCentral">Trayectoria Laboral</p>
 
 				<div class="datosP">
 
-					<!--******TRAYECTORIA LABORAL*******-->
+				<div class="D1">
 
-					<div class="D1">
+    <table>
+      <center>
+        <tr>
+          <td class="C1">
+            <label for="Institucion">Institución:</label>
+          </td>
 
-						<table>
-							<tr>
-								<td class="C1">
-									<label for="Institucion">Institución:</label>	
-								</td>
-								<td class="C2">
-									<input class="inputP" list="iO" type="text" name="institucion" placeholder="Selecciona Institución" required>	
-								</td>
-							</tr>
-						</table>
+          <td>
+            <select name="institucion" class="inputP" required value=""/>
+  
+   <?php 
 
-					</div>	
+
+     $queryi = ("Select * from trayectoria_institucion where trayectoria_id='$idt1'");
+            $conni = pg_query($conexion, $queryi);
+
+            if (!$conni) {
+              die(pg_error($conexion));
+            }
+
+            if (pg_num_rows($conni) > 0) {
+              while ($rowDatai = pg_fetch_array($conni)) {
+          $idi1 = $rowDatai["institucion_id"];
+                      
+                       $queryi2 = ("Select * from institucion where id_institucion='$idi1'");
+            $conni2 = pg_query($conexion, $queryi2);
+
+            if (!$conni2) {
+              die(pg_error($conexion));
+            }
+
+            if (pg_num_rows($conni2) > 0) {
+              while ($rowDatai2 = pg_fetch_array($conni2)) {
+       
+ ?>
+
+  
+    <option value="<?php echo $rowDatai2["nombre_institucion"] ?>"><?php echo $rowDatai2["nombre_institucion"] ?></option>  
+
+                        <?php
+
+
+              }}}}
+      
+
+
+
+      $query1 = ("Select * from institucion");
+            $conn1 = pg_query($conexion, $query1);
+
+            if (!$conn1) {
+              die(pg_error($conexion));
+            }
+
+            if (pg_num_rows($conn1) > 0) {
+              while ($rowData = pg_fetch_array($conn1)) {
+               ?>   
+    <option value="<?php echo $rowData["nombre_institucion"] ?>"><?php echo $rowData["nombre_institucion"] ?></option>  
+               
+     <?php } }  ?>
+              
+
+            </select>
+          </td>
+
+        </tr>
+      </center>
+    </table>
+
+  </div><?php }}}}
+
+                         ?>
 				</div>  <!---Fin de trayectoria laboral---->
 
-        <button class="enviarBtn">Modificar</button>
-      </form>                            
+ <button name="enviarBtn"class="enviarBtn" value="Guardar cambios">Guardar cambios</button>
+      </form> </div>
+        <br>
+        <br>
+        <br>
+        <br>  
+        <a  href="menu.php"  > <button >Cambiar contraseña</button> </a>
+      <br> <br>
+        <br>
+        <br>
+     <a  href="menu.php"  > <button >Regresar</button> </a>
        </div>
   </div>
 </div>
+       
 
        <br>
        <br>
 
        <!---Creditos--->
+</div>
 
 <div class="containerCredi">
 <footer class="py-5">
-    <div class="row">
+    <div class="row gx-0">
       <div class="col-6 col-md-2 mb-3">
         <ul class="nav flex-column">
           <li class="nav-item mb-2" class="nav-link p-0 text-muted"> <img src="img/escudo-blanco.png" alt="Photo" style="width:65%;"> </li>
@@ -993,7 +1232,7 @@ Encabezado de la página */
           <li style="color: #FFFFFF;"class="nav-item mb-2" class="nav-link p-0 text-muted">Para mayores informes o dudas comunicarse al Departamento de Matemáticas Edificio A8 Campo 4.</li>
         </ul>
         </div>
-
+    </div>
 
 
   <div class="containerCredi">
@@ -1008,7 +1247,6 @@ Encabezado de la página */
       <p style="color: #FFFFFF;">&copy; <?php echo date('Y'); ?> Hecho en México, todos los derechos reservados. </p>
     </center>
   </footer>
-</div>
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
          <script>
    const phoneInputField = document.querySelector("#phone");

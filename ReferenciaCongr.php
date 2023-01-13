@@ -1,7 +1,13 @@
 <?php
-ini_set("display_errors", 1);
 session_start();
-?>
+error_reporting(0);
+$varsec=$_SESSION['nombre_usuario'];
+if($varsec == null || $varsec = '') {
+    header('Location:404.php');
+    session_destroy();
+    session_unset();
+    die();
+}?>
 
 <html lang="es">
     <head>
@@ -116,270 +122,6 @@ session_start();
   width: 3rem;
   height: 3rem;
 }
-/*Aqui empieza el nuevo menu de colores junto con el menu para celular responsivo
--------
-------
-------
-------*/
-
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Roboto, sans-serif;
-}
-
-
-
-.containerBoton {
-   width: 100%;
-    height: 12vh;
-    position: relative;
-    top: 6%;
-    transform: translateY(-50%);
-    text-align: center; 
-    background-color: transparent;
-}
-
-
-.boton1 {
-    padding: 15px 25px;
-    margin: 1px;
-    font-size: 16px;
-    border: 2px solid #876E13;
-    border-radius: 1em;
-    color: black;
-    cursor: pointer; 
-    background: linear-gradient(to right, transparent 50%, #876E13 50%);
-    background-size: 200%;
-    background-position: left;
-    transition: background-position 0.5s;
-}
-
-.boton1:hover {
-    background-position: right;
-    color: white;
-    font-weight: 700;
-}
-
-.boton2 {
-    padding: 15px 25px;
-    margin: 1px;
-    font-size: 16px;
-    border: 2px solid #876E13;
-    border-radius: 1em;
-    color: black;
-    cursor: pointer; 
-    background: linear-gradient(to right, transparent 50%, #876E13 50%);
-    background-size: 200%;
-    background-position: left;
-    transition: background-position 0.5s;
-}
-
-.boton2:hover {
-    background-position: right;
-    color: white;
-    font-weight: 700;
-}
-
-.boton3 {
-   padding: 15px 25px;
-    margin: 1px;
-    font-size: 16px;
-    border: 2px solid #876E13;
-    border-radius: 1em;
-    color: black;
-    cursor: pointer; 
-    background: linear-gradient(to right, transparent 50%, #876E13 50%);
-    background-size: 200%;
-    background-position: left;
-    transition: background-position 0.5s;
-}
-
-.boton3:hover {
-    background-position: right;
-    color: white;
-    font-weight: 700;
-}
-
-.boton4 {
-    padding: 15px 25px;
-    margin: 1px;
-    font-size: 16px;
-    border: 2px solid #876E13;
-    border-radius: 1em;
-    color: black;
-    cursor: pointer; 
-    background: linear-gradient(to right, transparent 50%, #876E13 50%);
-    background-size: 200%;
-    background-position: left;
-    transition: background-position 0.5s;
-}
-
-.boton4:hover {
-    background-position: right;
-    color: white;
-    font-weight: 700;
-}
-
-.boton5 {
-  padding: 15px 25px;
-    margin: 1px;
-    font-size: 16px;
-    border: 2px solid #876E13;
-    border-radius: 1em;
-    color: black;
-    cursor: pointer; 
-    background: linear-gradient(to right, transparent 50%, #876E13 50%);
-    background-size: 200%;
-    background-position: left;
-    transition: background-position 0.5s;
-}
-
-.boton5:hover {
-    background-position: right;
-    color: white;
-    font-weight: 700;
-}
-
-.boton6 {
-   padding: 15px 25px;
-    margin: 1px;
-    font-size: 16px;
-    border: 2px solid #876E13;
-    border-radius: 1em;
-    color: black;
-    cursor: pointer; 
-    background: linear-gradient(to right, transparent 50%, #876E13 50%);
-    background-size: 200%;
-    background-position: left;
-    transition: background-position 0.5s;
-}
-
-.boton6:hover {
-    background-position: right;
-    color: white;
-    font-weight: 700;
-}
-
-@media only screen and (max-width:768px){
-
-    .nav-bar{
-    position: fixed;
-    right: 0;
-    top: 14%;
-    font-size:1.5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    z-index: 100;
-    }
-
-    .icond {
-    color: white;
-    text-decoration: none;
-    padding: .7rem;
-    display: flex;
-    transition: all .5s; 
-    }
-
-    .menuRB{
-        display: none;
-    }
-
-    .icon-book {
-        background: #876E13;
-    }
-
-    .icon-file-text2 {
-        background: #2b507c;
-    }
-
-    .icon-mic {
-        background: #876E13;
-    }
-
-    .icon-stack {
-        background: #2b507c;
-    }
-
-    .icon-key {
-        background: #876E13;
-    }
-
-    .icon-hearth {
-        background: #2b507c;
-    }
-
-    .icond:first-child{
-        border-radius: 1rem 0 0 0;
-    }
-
-    .icond:last-child{
-        border-radius: 0 0 0 1rem;
-    }
-
-
-
-}
-
-
-
-  #btn-menu3{
-      display: none;
-    }
-    .menu3 ul{
-      margin: 0;
-      list-style: none;
-      padding: 0;
-      display: flex;
-    }
-    
-    .menu3 li{
-      text-align: center;
-      flex-grow: 1;
-    }
-    
-    .menu3 li:hover {
-        background:  rgb(135, 110, 19); 
-    }
-    
-    .menu3 li a{
-      display:  block;
-      padding: 15px 20px;
-      color: #fff;
-      text-decoration: none;
-    }
-
-    
- @media (max-width: 768px){
-      header label{
-        display: block;
-      } 
-      .menu3 {
-        position: absolute;
-        background: transparent;
-        width: 70%;
-        margin-left: -70%;
-        transition: all 0.5s;
-      }
-      .menu3 ul {
-        flex-direction: column;
-      }
-      .menu3 li{
-        border-top: 1px solid transparent;
-      }
-      #btn-menu3:checked ~.menu3 {
-        margin: 0;
-      }
-    }
-
-    
-/*Aqui termina el nuevo menu de colores junto con el menu para celular responsivo*
--------------
-------------
-------------*/
 
 /*Aqui Empieza el css de estilos de la pagina de cada uno*
 -------------
@@ -446,6 +188,8 @@ button{
         width: 500px;
         border-radius: 3em;
       }
+
+      
 
 @media (max-width: 560px) {
         .inputP {
@@ -540,13 +284,13 @@ Encabezado de la página */
                 <label for="btn-menu"><img src="img/menuicono11.png" alt=""> </label>
                 <nav class="menu" style="z-index: 1;">
                     <ul>
-                    <li> <a href="index.php">Inicio</a></li>
-                        <li> <a href="memoriascarrusel.php">Memorias</a></li>
-                        <li> <a href="convocatoria.php">Convocatoria</a></li> 
-                        <li> <a href="inscripcionYcostos.php">Inscripción y Costos</a></li>
-                        <li> <a href="ComiteOrg.php">Comité Organizador</a></li>
-                        <li> <a href="ComiteEva">Comité Evaluador</a></li>
-                        <li> <a href="InicioSesion.php"><img class="alineadoicono" src="img/iniciaricono.png">&nbsp;Cerrar Sesión</a></li>
+                    <li> <a href="indexSesion.php">Inicio</a></li>
+                        <li> <a href="memoriascarruselSesion.php">Memorias</a></li>
+                        <li> <a href="convocatoriaSesion.php">Convocatoria</a></li> 
+                        <li>  <a href="inscripcionYcostosSesion.php">Inscripción y Costos</a></li>
+                        <li> <a href="ComiteOrgSesion">Comité Organizador</a></li>
+                        <li> <a href="ComiteEvaSesion">Comité Evaluador</a></li>
+                        <li> <a href="destroySesion.php"><img class="alineadoicono" src="img/iniciaricono.png">&nbsp;Cerrar  Sesión</a></li>
                 </nav> 
                 
             </header>
@@ -559,35 +303,13 @@ Encabezado de la página */
                 <nav class="menu2" style="z-index: 2;">           
                     <ul>    
                       <li> <a href=""><img class="alineadoicono" src="img/icono_informacion2.png"> </a></li>        
-                        <li> <a href="ponencias_info.php">Ponencias</a></li>  
-                        <li> <a href="carteles_info.php">Carteles</a></li>
-                        <li> <a href="talleres_info.php">Talleres</a></li>
+                      <li> <a href="ponencias_infoSesion.php">Ponencias</a></li>  
+                        <li> <a href="carteles_infoSesion.php">Carteles</a></li>
+                        <li> <a href="talleres_infoSesion.php">Talleres</a></li>
                     </ul>  
                 </nav>                
             </header>
         </div>
- 
-       <div class="containerBoton">
-        <label for="btn-menu3"></label>
-        <nav class="menu3" style="z-index: 2;">  
-        <button class="boton1" type="button">Alumno</button>
-        <button class="boton2" type="button">Ponente</button>
-        <button class="boton3" type="button">Evaluador</button>
-        <button class="boton4" type="button">Memorias</button>
-        <button class="boton5" type="button">Admin</button>
-        <button class="boton6" type="button">Comite Orga</button>
-        </nav>
-    </div>
-
-    <!-- Barra de menu Secundario - Movil-->
-
-       <div class="nav-bar" >
-       <a href="#" class="icond icon-file-text2" target="_blank"> <img src="img/icons8-expositor-16.png"/> </a>
-            <a href="#" class="icond icon-mic" target="_blank"> <img src="img/icons8-lectura-16.png"/> </a>
-            <a href="#" class="icond icon-stack" target="_blank"> <img src="img/icons8-foto-16.png"/> </a>
-            <a href="#" class="icond icon-key" target="_blank"> <img src="img/icons8-configuración-del-administrador-16.png"/> </a>
-            <a href="#" class="icond icon-hearth" target="_blank"> <img src="img/icons8-llamada-de-conferencia-16.png"/> </a>
-        </div>   
 
 <div class="contenedorregistroI"> 
   <div class="px-4 pt-5 my-5 text-center border-bottom">
@@ -603,8 +325,8 @@ Encabezado de la página */
                                             <p>Lista de Identificadores dados de alta:</p>
          <center> <table >
             <tr class="inputNombreC">
-              <td>Tipo de Identificador </td>
-              <td>Referencia</td>
+              <td class="inputNombreC"><center>Tipo de Identificador </center></td>
+              <td class="inputNombreC"><center>Referencia</center></td>
             </tr> </center>
 
           
@@ -622,8 +344,8 @@ Encabezado de la página */
                  
                ?>   
           <tr class="inputNombreC">  
-           <td><?php echo $rowData["tipo"] ?></td> 
-           <td><?php echo $rowData["n_referencia"] ?></td>          
+           <td class="inputNombreC"><center><?php echo $rowData["tipo"] ?></center></td> 
+           <td class="inputNombreC"><center> <?php echo $rowData["n_referencia"] ?></center></td>          
                     </tr>
           <?php } }  ?>
        </table> 
@@ -664,7 +386,7 @@ Encabezado de la página */
       </form>    
       <br>
         <br>
-        <div> <a  href="Perfiladmin.php"  > <button > Regresar</button> </a> </div>                        
+        <div> <a  href="menu.php"  > <button > Regresar</button> </a> </div>                        
        </div>
   </div>
 </div>
@@ -673,7 +395,7 @@ Encabezado de la página */
 
 <div class="containerCredi">
 <footer class="py-5">
-    <div class="row">
+    <div class="row gx-0">
       <div class="col-6 col-md-2 mb-3">
         <ul class="nav flex-column">
           <li class="nav-item mb-2" class="nav-link p-0 text-muted"> <img src="img/escudo-blanco.png" alt="Photo" style="width:65%;"> </li>
@@ -702,6 +424,7 @@ Encabezado de la página */
           <li style="color: #FFFFFF;"class="nav-item mb-2" class="nav-link p-0 text-muted">Para mayores informes o dudas comunicarse al Departamento de Matemáticas Edificio A8 Campo 4.</li>
         </ul>
         </div>
+    </div>
 
   <div class="containerCredi">
   <footer class="py-3 my-4">

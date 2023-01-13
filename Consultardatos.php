@@ -1,4 +1,15 @@
-<html lang="es">
+<?php
+session_start();
+error_reporting(0);
+$varsec=$_SESSION['nombre_usuario'];
+if($varsec == null || $varsec = '') {
+    header('Location:404.php');
+    session_destroy();
+    session_unset();
+    die();
+}?>
+  
+   <html lang="es">
     <head>
         <link href="icono.ico" type="image/x-icon" rel="shortcut icon" />
         <title>Consultar Datos</title>
@@ -131,10 +142,10 @@
     width: 100%;
     height: 12vh;
     position: relative;
-    top: 6%;
-    transform: translateY(-50%);
     text-align: center; 
     background-color: transparent;
+    margin-top: 10px;
+    margin-bottom: -10px;
      
 }
 
@@ -563,12 +574,13 @@ Encabezado de la página */
                 <label for="btn-menu"><img src="img/menuicono.png" alt=""> </label>
                 <nav class="menu" style="z-index: 1;">
                     <ul>
-                        <li> <a href="">Inicio</a></li>
-                        <li> <a href="">Memorias</a></li>
-                        <li> <a href="convocatoria.php">Convocatoria</a></li> 
-                        <li>  <a href="inscripcionYcostos.php">Inscripción y Costos</a></li>
-                        <li> <a href="ComiteOrg">Comité Organizador</a></li>
-                        <li> <a href=""><img class="alineadoicono" src="img/iniciaricono.png">&nbsp;Iniciar Sesión</a></li>
+                    <li> <a href="indexSesion.php">Inicio</a></li>
+                        <li> <a href="memoriascarruselSesion.php">Memorias</a></li>
+                        <li> <a href="convocatoriaSesion.php">Convocatoria</a></li> 
+                        <li>  <a href="inscripcionYcostosSesion.php">Inscripción y Costos</a></li>
+                        <li> <a href="ComiteOrgSesion">Comité Organizador</a></li>
+                        <li> <a href="ComiteEvaSesion">Comité Evaluador</a></li>
+                        <li> <a href="destroySesion.php"><img class="alineadoicono" src="img/iniciaricono.png">&nbsp;Cerrar  Sesión</a></li>
                     </ul>  
                 </nav> 
                 
@@ -578,13 +590,13 @@ Encabezado de la página */
         <div>
             <header>
             <input type="checkbox" id="btn-menu2"> 
-                <label for="btn-menu2"><img src="img/icono_informacion.png" alt=""> </label>
+                <label for="btn-menu2"><img src="img/icono_informacion2.png" alt=""> </label>
                 <nav class="menu2" style="z-index: 2;">           
                     <ul>    
                        <li> <a href=""><img class="alineadoicono" src="img/icono_informacion2.png"> </a></li>        
-                        <li> <a href="ponencias_info.php">Ponencias</a></li>  
-                        <li> <a href="carteles_info.php">Carteles</a></li>
-                        <li> <a href="talleres_info.php">Talleres</a></li>
+                       <li> <a href="ponencias_infoSesion.php">Ponencias</a></li>  
+                        <li> <a href="carteles_infoSesion.php">Carteles</a></li>
+                        <li> <a href="talleres_infoSesion.php">Talleres</a></li>
                     </ul>  
                 </nav>                
             </header>
@@ -607,10 +619,25 @@ Encabezado de la página */
                 <option >SELECCIONE UNA TABLA</option>
                 <option value="USUARIOS">USUARIOS</option>
                <option value="CONGRESOS">CONGRESOS</option>
-               <option value="TRABAJOS">TRABAJOS</option>
-               <option value="EXTENSOS APROBADOS">EXTENSOS APROBADOS</option>
+
+               <option value="PONENCIAS SIN EVALUADOR ASIGNADO">PONENCIAS SIN EVALUADOR ASIGNADO</option>
+               <option value="PONENCIAS POR EVALUAR">PONENCIAS POR EVALUAR</option>
+               <option value="PONENCIAS POR CORREGIR">PONENCIAS POR CORREGIR</option>
+               <option value="PONENCIAS ACEPTADAS">PONENCIAS ACEPTADAS</option>
+
+               <option value="CARTELES SIN EVALUADOR ASIGNADO">CARTELES SIN EVALUADOR ASIGNADO</option>
+               <option value="CARTELES POR EVALUAR">CARTELES POR EVALUAR</option>
+               <option value="CARTELES POR CORREGIR">CARTELES POR CORREGIR</option>
+               <option value="CARTELES ACEPTADOS">CARTELES ACEPTADOS</option>
+               
+               <option value="TALLERES SIN EVALUADOR ASIGNADO">TALLERES SIN EVALUADOR ASIGNADO</option>
+               <option value="TALLERES POR EVALUAR">TALLERES POR EVALUAR</option>
+               <option value="TALLERES POR CORREGIR">TALLERES POR CORREGIR</option>
+               <option value="TALLERES ACEPTADOS">TALLERES ACEPTADOS</option>
+
+             <!--  <option value="EXTENSOS APROBADOS">EXTENSOS APROBADOS</option>
                <option value="EXTENSOS POR EVALUAR">EXTENSOS POR EVALUAR</option>
-              <option value="EXTENSOS POR CORREGIR">EXTENSOS POR CORREGIR</option>
+              <option value="EXTENSOS POR CORREGIR">EXTENSOS POR CORREGIR</option>-->
 
                 </select>
                  
@@ -807,20 +834,20 @@ Encabezado de la página */
               <td class="inputNombreC2"><?php echo $rowData3["fecha_fin_resultado_evaluacion_resumenes"] ?></td>
 
               <!-- recepcion correccion resumenes -->
-              <td class="inputNombreC2"><?php echo $rowData3["fecha_inicio_recepcion_correccion_resumenes"] ?></td>
-              <td class="inputNombreC2"><?php echo $rowData3["fecha_fin_recepcion_correccion_resumenes"] ?></td>
+              <td class="inputNombreC2"><?php echo $rowData3["fecha_inicio_recepcion_correcion_resumenes"] ?></td>
+              <td class="inputNombreC2"><?php echo $rowData3["fecha_fin_recepcion_correcion_resumenes"] ?></td>
 
              <!-- recepcion extensos  -->
               <td class="inputNombreC2"><?php echo $rowData3["fecha_inicio_recepcion_extensos"] ?></td>
               <td class="inputNombreC2"><?php echo $rowData3["fecha_fin_recepcion_extensos"] ?></td>
 
                <!-- notifiacion observaciones extensos  -->
-              <td class="inputNombreC2"><?php echo $rowData3["fecha_inicio_notificacion_observaciones-extensos"] ?></td>
-              <td class="inputNombreC2"><?php echo $rowData3["fecha_fin_notificacion_observaciones-extensos"] ?></td>
+              <td class="inputNombreC2"><?php echo $rowData3["fecha_inicio_notificacion_observaciones_extensos"] ?></td>
+              <td class="inputNombreC2"><?php echo $rowData3["fecha_fin_notificacion_observaciones_extensos"] ?></td>
 
                <!-- recepcion pagos  -->
               <td class="inputNombreC2"><?php echo $rowData3["fecha_inicio_recepcion_pagos"] ?></td>
-              <td class="inputNombreC2"><?php echo $rowData3["fecha_fin_recepcion_pagos"] ?></td>
+              <td class="inputNombreC2"><?php echo $rowData3["fceha_fin_recepcion_pagos"] ?></td>
 
               <!--  recepcion extensos finales -->
               <td class="inputNombreC2"><?php echo $rowData3["fecha_inicio_recepcion_extensos_finales"] ?></td>
@@ -838,8 +865,8 @@ Encabezado de la página */
               <td class="inputNombreC2"><?php echo $rowData3["fecha_fin_imparticion_talleres"] ?></td>
 
               <!--  envio constancias -->
-              <td class="inputNombreC2"><?php echo $rowData3["fecha_inicio_envio_constancias"] ?></td>
-              <td class="inputNombreC2"><?php echo $rowData3["fecha_fin_envio_constancias"] ?></td>
+              <td class="inputNombreC2"><?php echo $rowData3["fecha_inicio_envio_contancias"] ?></td>
+              <td class="inputNombreC2"><?php echo $rowData3["fecha_fin_envio_contancias"] ?></td>
 
               <!--  publicacion memorias -->
               <td class="inputNombreC2"><?php echo $rowData3["fecha_publicacion_memorias"] ?></td>
@@ -853,70 +880,1482 @@ Encabezado de la página */
 
               }
              //Opcion TRABAJOS
-              else if($tablaa =='TRABAJOS') {
+              else if($tablaa =='PONENCIAS SIN EVALUADOR ASIGNADO') {
 
                 ?>
 
-      <div class="contenedorregistroI2"  > 
+              <div class="contenedorregistroI2" id='usua1' > 
   <div class="px-4 pt-1 my-5 text-center border-bottom">
     <div class="col-lg-12 mx-auto">
-      <p class="Tema2">TRABAJOS</p>
-       <div class="table-responsive">
+      <div class="table-responsive">
       <table class="table table-bordered border border-secondary"  ><center>
-               <table class="inputNombreC" > 
+      
+      <table class="inputNombreC" > 
+         <h1 class="Tema">Ponencia sin evaluador</h1>
             <tr class="inputNombreC2">
-              <td class="inputNombreC2">Correo</td>
-              <!--
-                id trabajo
-                titulo
-                autor
-                categoria
-                palabras clave
-                fecha trabajos
-               -->
-              <td class="inputNombreC2">Nombre</td>
-              <td class="inputNombreC2">País</td>
-              <td class="inputNombreC2">Teléfono</td>
+              <td class="inputNombreC2">Titulo</td>
+              <td class="inputNombreC3">Correo del Autor</td>
+              <td class="inputNombreC3">Nombre(s) del Autor</td>
+              <td class="inputNombreC3">Apellido(s) del Autor</td>
+              <td class="inputNombreC3">Categoria del trabajo</td>
+              <td class="inputNombreC3">Palabras clave</td>
+              <td class="inputNombreC3">Fecha</td>
+              <td class="inputNombreC3">Hora</td>
             </tr>
 
-          
                <?php 
-           $conexion = pg_connect("host=localhost dbname=congresowinx user=congresowinx password=W1nxC0ngr3s032511");
-            $query1 = ("Select * from usuario");
-                  $conn1 = pg_query($conexion, $query1);
+                    $conexion = pg_connect("host=localhost dbname=congresowinx user=congresowinx password=W1nxC0ngr3s032511");
+                    //hace un select de todos los trabajos de ponencia
+                     $queryTT1 = ("Select * from ponencia");
+                  $connTT1 = pg_query($conexion, $queryTT1);
 
-                  if (!$conn1) {
+                  if (!$connTT1) {
                     die(pg_error($conexion));
                   }
 
-                  if (pg_num_rows($conn1) > 0) {
-                    while ($rowData = pg_fetch_array($conn1)) {
-                 
-                 $correoo = $rowData["usuario"];   ?>   
-          <tr class="inputNombreC2">  <td class="inputNombreC2"><?php echo $rowData["usuario"] ?></td>  
-           <td class="inputNombreC2" ><?php echo $rowData["nombre_usuario"] ?></td>  
-           <td class="inputNombreC2"><?php echo $rowData["pais_usuario"] ?></td>          
-           
-          <?php $query2 = ("Select * from contacto where email= '$correoo' ");
-                  $conn2 = pg_query($conexion, $query2);
+                  if (pg_num_rows($connTT1) > 0) {
+                    while ($rowDataTT1 = pg_fetch_array($connTT1)) {
+               
+                  //obtenemos id de cada trabajo
+                          $Idtrabajo = $rowDataTT1["id_trabajos"];  
+                                   $queryT1 = ("Select * from trabajos where id_trabajo = '$Idtrabajo'");
+                                   $connT1 = pg_query($conexion, $queryT1);
 
-                  if (!$conn2) {
+                                     if (!$connT1) {
+                                     die(pg_error($conexion));
+                                          }
+
+                                        if (pg_num_rows($connT1) > 0) {
+                                       while ($rowDataT1 = pg_fetch_array($connT1)) {
+               
+                  //obtenemos id de cada trabajo
+                                
+                          
+
+                      //Verificamos si ese trabajo se encuentra en evaluación
+                      //de ser el caso contrario, se mostrará los datos en la tabla de tal trabajo para que 
+                      //se le asigne un evaluador
+                  $queryT2 = ("Select * from evaluacion_trabajos where trabajos_id='$Idtrabajo'");
+                  $connT2 = pg_query($conexion, $queryT2);
+
+                  if (!$connT2) {
+                    die(pg_error($conexion));
+                  }
+                  //evalua si el trabajo se encuentra en la tabla evaluación trabajos
+                  if (pg_num_rows($connT2) > 0) {
+                    }else {  //Si el trabajo no se encuentra en la tabla evaluación trabajos
+                  //Muestra el titulo del trabajo
+                   ?>
+
+                  <tr >  <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["titulo"] ?> </textarea></td> 
+                <?php
+                //busca el id del autor en la tabla ponente_trabajos
+          $queryT3 = ("Select * from ponente_trabajos where trabajos_id = '$Idtrabajo'");
+                  $connT3 = pg_query($conexion, $queryT3);
+
+                  if (!$connT3) {
                     die(pg_error($conexion));
                   }
 
-                  if (pg_num_rows($conn2) > 0) {
-                    while ($rowData2 = pg_fetch_array($conn2)) {
-                     ?>   
-          <td class="inputNombreC2"><?php echo $rowData2["telefono"] ?></td>  
-          <!-- <td> <button >Editar</button> </td> -->
+                  if (pg_num_rows($connT3) > 0) {
+                    while ($rowDataT3 = pg_fetch_array($connT3)) {
+                      //Guarda el id del autor en la variable $Idusuario
+                          $Idusuario = $rowDataT3["ponente_id"];}
+                                  //Select de usuarios para obtener los datos del autor mediante el id obtenido recien
+                                 $queryT4 = ("Select * from usuario where id_usuario = '$Idusuario'");
+                                $connT4 = pg_query($conexion, $queryT4);
 
-                 </tr>   <?php } }  ?> <?php } }  ?>
-       
-</table></center></table>
+                                         if (!$connT4) {
+                                       die(pg_error($conexion));
+                                       }
+
+                                               if (pg_num_rows($connT4) > 0) {
+                                              while ($rowDataT4 = pg_fetch_array($connT4)) {
+
+                                             $correo = $rowDataT4["usuario"];
+                                              $nombre = $rowDataT4["nombre_usuario"];
+                                              $apellido= $rowDataT4["apellido_usuario"];
+                        ?>
+                              <td class="inputNombreC2"><textarea name="cor" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $correo ?> </textarea></td> 
+                               <td class="inputNombreC2"><textarea name="cor" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $nombre ?> </textarea></td>
+                               <td class="inputNombreC2"><textarea name="cor" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $apellido ?> </textarea></td>
+                              <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["categoria"] ?> </textarea></td> 
+                               <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["palabras_clave"] ?> </textarea></td> 
+                              <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["fecha_trabajos"] ?> </textarea></td> 
+                              <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["hora_trabajos"] ?> </textarea></td> 
+                              
+
+
+                                </tr> 
+
+<?php
+                                           }}
+                      
+                    }}
+                    }}}}
+
+ ?>
+       </table></table>
+
       </div>
+
       </div></div>
-  </div><?php
-              }  /*
+  </div>
+
+          <?php
+          }
+             //Opcion TRABAJOS
+              else if($tablaa =='PONENCIAS POR EVALUAR') {
+              ?>  
+
+              <div class="contenedorregistroI2" id='usua1' > 
+  <div class="px-4 pt-1 my-5 text-center border-bottom">
+    <div class="col-lg-12 mx-auto">
+      <div class="table-responsive">
+      <table class="table table-bordered border border-secondary"  ><center>
+      
+      <table class="inputNombreC" > 
+         <h1 class="Tema">Ponencia por evaluar</h1>
+            <tr class="inputNombreC2">
+              <td class="inputNombreC2">Titulo</td>
+              <td class="inputNombreC3">Correo del Autor</td>
+              <td class="inputNombreC3">Nombre(s) del Autor</td>
+              <td class="inputNombreC3">Apellido(s) del Autor</td>
+              <td class="inputNombreC3">Categoria del trabajo</td>
+              <td class="inputNombreC3">Palabras clave</td>
+              <td class="inputNombreC3">Fecha</td>
+              <td class="inputNombreC3">Hora</td>
+            </tr>
+
+               <?php 
+                    $conexion = pg_connect("host=localhost dbname=congresowinx user=congresowinx password=W1nxC0ngr3s032511");
+                    //hace un select de todos los trabajos de ponencia
+                     $queryTT1 = ("Select * from ponencia");
+                  $connTT1 = pg_query($conexion, $queryTT1);
+
+                  if (!$connTT1) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($connTT1) > 0) {
+                    while ($rowDataTT1 = pg_fetch_array($connTT1)) {
+               
+                  //obtenemos id de cada trabajo
+                          $Idtrabajo = $rowDataTT1["id_trabajos"];  
+                                   $queryT1 = ("Select * from trabajos where id_trabajo = '$Idtrabajo'");
+                                   $connT1 = pg_query($conexion, $queryT1);
+
+                                     if (!$connT1) {
+                                     die(pg_error($conexion));
+                                          }
+
+                                        if (pg_num_rows($connT1) > 0) {
+                                       while ($rowDataT1 = pg_fetch_array($connT1)) {
+               
+                  //obtenemos id de cada trabajo
+                                
+                          
+
+                      //Verificamos si ese trabajo se encuentra en evaluación
+                      //de ser el caso contrario, se mostrará los datos en la tabla de tal trabajo para que 
+                      //se le asigne un evaluador
+                  $queryT2 = ("Select * from evaluacion_trabajos where trabajos_id='$Idtrabajo'and estado='POR EVALUAR'");
+                  $connT2 = pg_query($conexion, $queryT2);
+
+                  if (!$connT2) {
+                    die(pg_error($conexion));
+                  }
+                  //evalua si el trabajo se encuentra en la tabla evaluación trabajos
+                  if (pg_num_rows($connT2) > 0) {
+                   //Si el trabajo  se encuentra en la tabla evaluación trabajos
+                  //Muestra el titulo del trabajo
+                   ?>
+
+                  <tr >  <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["titulo"] ?> </textarea></td> 
+                <?php
+                //busca el id del autor en la tabla ponente_trabajos
+          $queryT3 = ("Select * from ponente_trabajos where trabajos_id = '$Idtrabajo'");
+                  $connT3 = pg_query($conexion, $queryT3);
+
+                  if (!$connT3) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($connT3) > 0) {
+                    while ($rowDataT3 = pg_fetch_array($connT3)) {
+                      //Guarda el id del autor en la variable $Idusuario
+                          $Idusuario = $rowDataT3["ponente_id"];}
+                                  //Select de usuarios para obtener los datos del autor mediante el id obtenido recien
+                                 $queryT4 = ("Select * from usuario where id_usuario = '$Idusuario'");
+                                $connT4 = pg_query($conexion, $queryT4);
+
+                                         if (!$connT4) {
+                                       die(pg_error($conexion));
+                                       }
+
+                                               if (pg_num_rows($connT4) > 0) {
+                                              while ($rowDataT4 = pg_fetch_array($connT4)) {
+
+                                             $correo = $rowDataT4["usuario"];
+                                              $nombre = $rowDataT4["nombre_usuario"];
+                                              $apellido= $rowDataT4["apellido_usuario"];
+                        ?>
+                              <td class="inputNombreC2"><textarea name="cor" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $correo ?> </textarea></td> 
+                               <td class="inputNombreC2"><textarea name="cor" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $nombre ?> </textarea></td>
+                               <td class="inputNombreC2"><textarea name="cor" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $apellido ?> </textarea></td>
+                              <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["categoria"] ?> </textarea></td> 
+                               <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["palabras_clave"] ?> </textarea></td> 
+                              <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["fecha_trabajos"] ?> </textarea></td> 
+                              <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["hora_trabajos"] ?> </textarea></td> 
+                              
+
+
+                                </tr> 
+
+<?php
+                                           }}
+                      
+                    }}
+                    }}}}
+
+ ?>
+       </table></table>
+
+      </div>
+
+      </div></div>
+  </div>              
+
+  <?php }else if($tablaa =='PONENCIAS POR CORREGIR'){?>
+
+
+              <div class="contenedorregistroI2" id='usua1' > 
+  <div class="px-4 pt-1 my-5 text-center border-bottom">
+    <div class="col-lg-12 mx-auto">
+      <div class="table-responsive">
+      <table class="table table-bordered border border-secondary"  ><center>
+      
+      <table class="inputNombreC" > 
+         <h1 class="Tema">Ponencia por corregir</h1>
+            <tr class="inputNombreC2">
+              <td class="inputNombreC2">Titulo</td>
+              <td class="inputNombreC3">Correo del Autor</td>
+              <td class="inputNombreC3">Nombre(s) del Autor</td>
+              <td class="inputNombreC3">Apellido(s) del Autor</td>
+              <td class="inputNombreC3">Categoria del trabajo</td>
+              <td class="inputNombreC3">Palabras clave</td>
+              <td class="inputNombreC3">Fecha</td>
+              <td class="inputNombreC3">Hora</td>
+            </tr>
+
+               <?php 
+                    $conexion = pg_connect("host=localhost dbname=congresowinx user=congresowinx password=W1nxC0ngr3s032511");
+                    //hace un select de todos los trabajos de ponencia
+                     $queryTT1 = ("Select * from ponencia");
+                  $connTT1 = pg_query($conexion, $queryTT1);
+
+                  if (!$connTT1) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($connTT1) > 0) {
+                    while ($rowDataTT1 = pg_fetch_array($connTT1)) {
+               
+                  //obtenemos id de cada trabajo
+                          $Idtrabajo = $rowDataTT1["id_trabajos"];  
+                                   $queryT1 = ("Select * from trabajos where id_trabajo = '$Idtrabajo'");
+                                   $connT1 = pg_query($conexion, $queryT1);
+
+                                     if (!$connT1) {
+                                     die(pg_error($conexion));
+                                          }
+
+                                        if (pg_num_rows($connT1) > 0) {
+                                       while ($rowDataT1 = pg_fetch_array($connT1)) {
+               
+                  //obtenemos id de cada trabajo
+                                
+                          
+
+                      //Verificamos si ese trabajo se encuentra en evaluación
+                      //de ser el caso contrario, se mostrará los datos en la tabla de tal trabajo para que 
+                      //se le asigne un evaluador
+                  $queryT2 = ("Select * from evaluacion_trabajos where trabajos_id='$Idtrabajo'and estado='POR CORREGIR'");
+                  $connT2 = pg_query($conexion, $queryT2);
+
+                  if (!$connT2) {
+                    die(pg_error($conexion));
+                  }
+                  //evalua si el trabajo se encuentra en la tabla evaluación trabajos
+                  if (pg_num_rows($connT2) > 0) {
+                   //Si el trabajo  se encuentra en la tabla evaluación trabajos
+                  //Muestra el titulo del trabajo
+                   ?>
+
+                  <tr >  <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["titulo"] ?> </textarea></td> 
+                <?php
+                //busca el id del autor en la tabla ponente_trabajos
+          $queryT3 = ("Select * from ponente_trabajos where trabajos_id = '$Idtrabajo'");
+                  $connT3 = pg_query($conexion, $queryT3);
+
+                  if (!$connT3) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($connT3) > 0) {
+                    while ($rowDataT3 = pg_fetch_array($connT3)) {
+                      //Guarda el id del autor en la variable $Idusuario
+                          $Idusuario = $rowDataT3["ponente_id"];}
+                                  //Select de usuarios para obtener los datos del autor mediante el id obtenido recien
+                                 $queryT4 = ("Select * from usuario where id_usuario = '$Idusuario'");
+                                $connT4 = pg_query($conexion, $queryT4);
+
+                                         if (!$connT4) {
+                                       die(pg_error($conexion));
+                                       }
+
+                                               if (pg_num_rows($connT4) > 0) {
+                                              while ($rowDataT4 = pg_fetch_array($connT4)) {
+
+                                             $correo = $rowDataT4["usuario"];
+                                              $nombre = $rowDataT4["nombre_usuario"];
+                                              $apellido= $rowDataT4["apellido_usuario"];
+                        ?>
+                              <td class="inputNombreC2"><textarea name="cor" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $correo ?> </textarea></td> 
+                               <td class="inputNombreC2"><textarea name="cor" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $nombre ?> </textarea></td>
+                               <td class="inputNombreC2"><textarea name="cor" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $apellido ?> </textarea></td>
+                              <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["categoria"] ?> </textarea></td> 
+                               <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["palabras_clave"] ?> </textarea></td> 
+                              <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["fecha_trabajos"] ?> </textarea></td> 
+                              <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["hora_trabajos"] ?> </textarea></td> 
+                              
+
+
+                                </tr> 
+
+<?php
+                                           }}
+                      
+                    }}
+                    }}}}
+
+ ?>
+       </table></table>
+
+      </div>
+
+      </div></div>
+  </div>   
+                <?php }else if($tablaa =='PONENCIAS ACEPTADAS'){ ?>
+
+
+              <div class="contenedorregistroI2" id='usua1' > 
+  <div class="px-4 pt-1 my-5 text-center border-bottom">
+    <div class="col-lg-12 mx-auto">
+      <div class="table-responsive">
+      <table class="table table-bordered border border-secondary"  ><center>
+      
+      <table class="inputNombreC" > 
+         <h1 class="Tema">Ponencias aceptadas</h1>
+            <tr class="inputNombreC2">
+              <td class="inputNombreC2">Titulo</td>
+              <td class="inputNombreC3">Correo del Autor</td>
+              <td class="inputNombreC3">Nombre(s) del Autor</td>
+              <td class="inputNombreC3">Apellido(s) del Autor</td>
+              <td class="inputNombreC3">Categoria del trabajo</td>
+              <td class="inputNombreC3">Palabras clave</td>
+              <td class="inputNombreC3">Fecha</td>
+              <td class="inputNombreC3">Hora</td>
+            </tr>
+
+               <?php 
+                    $conexion = pg_connect("host=localhost dbname=congresowinx user=congresowinx password=W1nxC0ngr3s032511");
+                    //hace un select de todos los trabajos de ponencia
+                     $queryTT1 = ("Select * from ponencia");
+                  $connTT1 = pg_query($conexion, $queryTT1);
+
+                  if (!$connTT1) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($connTT1) > 0) {
+                    while ($rowDataTT1 = pg_fetch_array($connTT1)) {
+               
+                  //obtenemos id de cada trabajo
+                          $Idtrabajo = $rowDataTT1["id_trabajos"];  
+                                   $queryT1 = ("Select * from trabajos where id_trabajo = '$Idtrabajo'");
+                                   $connT1 = pg_query($conexion, $queryT1);
+
+                                     if (!$connT1) {
+                                     die(pg_error($conexion));
+                                          }
+
+                                        if (pg_num_rows($connT1) > 0) {
+                                       while ($rowDataT1 = pg_fetch_array($connT1)) {
+               
+                  //obtenemos id de cada trabajo
+                                
+                          
+
+                      //Verificamos si ese trabajo se encuentra en evaluación
+                      //de ser el caso contrario, se mostrará los datos en la tabla de tal trabajo para que 
+                      //se le asigne un evaluador
+                  $queryT2 = ("Select * from evaluacion_trabajos where trabajos_id='$Idtrabajo'and estado='ACEPTADO'");
+                  $connT2 = pg_query($conexion, $queryT2);
+
+                  if (!$connT2) {
+                    die(pg_error($conexion));
+                  }
+                  //evalua si el trabajo se encuentra en la tabla evaluación trabajos
+                  if (pg_num_rows($connT2) > 0) {
+                   //Si el trabajo  se encuentra en la tabla evaluación trabajos
+                  //Muestra el titulo del trabajo
+                   ?>
+
+                  <tr >  <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["titulo"] ?> </textarea></td> 
+                <?php
+                //busca el id del autor en la tabla ponente_trabajos
+          $queryT3 = ("Select * from ponente_trabajos where trabajos_id = '$Idtrabajo'");
+                  $connT3 = pg_query($conexion, $queryT3);
+
+                  if (!$connT3) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($connT3) > 0) {
+                    while ($rowDataT3 = pg_fetch_array($connT3)) {
+                      //Guarda el id del autor en la variable $Idusuario
+                          $Idusuario = $rowDataT3["ponente_id"];}
+                                  //Select de usuarios para obtener los datos del autor mediante el id obtenido recien
+                                 $queryT4 = ("Select * from usuario where id_usuario = '$Idusuario'");
+                                $connT4 = pg_query($conexion, $queryT4);
+
+                                         if (!$connT4) {
+                                       die(pg_error($conexion));
+                                       }
+
+                                               if (pg_num_rows($connT4) > 0) {
+                                              while ($rowDataT4 = pg_fetch_array($connT4)) {
+
+                                             $correo = $rowDataT4["usuario"];
+                                              $nombre = $rowDataT4["nombre_usuario"];
+                                              $apellido= $rowDataT4["apellido_usuario"];
+                        ?>
+                              <td class="inputNombreC2"><textarea name="cor" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $correo ?> </textarea></td> 
+                               <td class="inputNombreC2"><textarea name="cor" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $nombre ?> </textarea></td>
+                               <td class="inputNombreC2"><textarea name="cor" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $apellido ?> </textarea></td>
+                              <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["categoria"] ?> </textarea></td> 
+                               <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["palabras_clave"] ?> </textarea></td> 
+                              <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["fecha_trabajos"] ?> </textarea></td> 
+                              <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["hora_trabajos"] ?> </textarea></td> 
+                              
+
+
+                                </tr> 
+
+<?php
+                                           }}
+                      
+                    }}
+                    }}}}
+
+ ?>
+       </table></table>
+
+      </div>
+
+      </div></div>
+  </div> 
+
+
+
+                         <?php 
+              }else if($tablaa =='CARTELES SIN EVALUADOR ASIGNADO') {
+
+                ?>
+
+
+              <div class="contenedorregistroI2" id='usua1' > 
+  <div class="px-4 pt-1 my-5 text-center border-bottom">
+    <div class="col-lg-12 mx-auto">
+      <div class="table-responsive">
+      <table class="table table-bordered border border-secondary"  ><center>
+      
+      <table class="inputNombreC" > 
+         <h1 class="Tema">Cartel sin evaluador</h1>
+            <tr class="inputNombreC2">
+              <td class="inputNombreC2">Titulo</td>
+              <td class="inputNombreC3">Correo del Autor</td>
+              <td class="inputNombreC3">Nombre(s) del Autor</td>
+              <td class="inputNombreC3">Apellido(s) del Autor</td>
+              <td class="inputNombreC3">Categoria del trabajo</td>
+              <td class="inputNombreC3">Palabras clave</td>
+              <td class="inputNombreC3">Fecha</td>
+              <td class="inputNombreC3">Hora</td>
+            </tr>
+
+               <?php 
+                    $conexion = pg_connect("host=localhost dbname=congresowinx user=congresowinx password=W1nxC0ngr3s032511");
+                    //hace un select de todos los trabajos de ponencia
+                     $queryTT1 = ("Select * from carteles");
+                  $connTT1 = pg_query($conexion, $queryTT1);
+
+                  if (!$connTT1) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($connTT1) > 0) {
+                    while ($rowDataTT1 = pg_fetch_array($connTT1)) {
+               
+                  //obtenemos id de cada trabajo
+                          $Idtrabajo = $rowDataTT1["id_trabajos"];  
+                                   $queryT1 = ("Select * from trabajos where id_trabajo = '$Idtrabajo'");
+                                   $connT1 = pg_query($conexion, $queryT1);
+
+                                     if (!$connT1) {
+                                     die(pg_error($conexion));
+                                          }
+
+                                        if (pg_num_rows($connT1) > 0) {
+                                       while ($rowDataT1 = pg_fetch_array($connT1)) {
+               
+                  //obtenemos id de cada trabajo
+                                
+                          
+
+                      //Verificamos si ese trabajo se encuentra en evaluación
+                      //de ser el caso contrario, se mostrará los datos en la tabla de tal trabajo para que 
+                      //se le asigne un evaluador
+                  $queryT2 = ("Select * from evaluacion_trabajos where trabajos_id='$Idtrabajo'");
+                  $connT2 = pg_query($conexion, $queryT2);
+
+                  if (!$connT2) {
+                    die(pg_error($conexion));
+                  }
+                  //evalua si el trabajo se encuentra en la tabla evaluación trabajos
+                  if (pg_num_rows($connT2) > 0) {
+                    }else {  //Si el trabajo no se encuentra en la tabla evaluación trabajos
+                  //Muestra el titulo del trabajo
+                   ?>
+
+                  <tr >  <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["titulo"] ?> </textarea></td> 
+                <?php
+                //busca el id del autor en la tabla ponente_trabajos
+          $queryT3 = ("Select * from ponente_trabajos where trabajos_id = '$Idtrabajo'");
+                  $connT3 = pg_query($conexion, $queryT3);
+
+                  if (!$connT3) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($connT3) > 0) {
+                    while ($rowDataT3 = pg_fetch_array($connT3)) {
+                      //Guarda el id del autor en la variable $Idusuario
+                          $Idusuario = $rowDataT3["ponente_id"];}
+                                  //Select de usuarios para obtener los datos del autor mediante el id obtenido recien
+                                 $queryT4 = ("Select * from usuario where id_usuario = '$Idusuario'");
+                                $connT4 = pg_query($conexion, $queryT4);
+
+                                         if (!$connT4) {
+                                       die(pg_error($conexion));
+                                       }
+
+                                               if (pg_num_rows($connT4) > 0) {
+                                              while ($rowDataT4 = pg_fetch_array($connT4)) {
+
+                                             $correo = $rowDataT4["usuario"];
+                                              $nombre = $rowDataT4["nombre_usuario"];
+                                              $apellido= $rowDataT4["apellido_usuario"];
+                        ?>
+                              <td class="inputNombreC2"><textarea name="cor" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $correo ?> </textarea></td> 
+                               <td class="inputNombreC2"><textarea name="cor" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $nombre ?> </textarea></td>
+                               <td class="inputNombreC2"><textarea name="cor" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $apellido ?> </textarea></td>
+                              <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["categoria"] ?> </textarea></td> 
+                               <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["palabras_clave"] ?> </textarea></td> 
+                              <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["fecha_trabajos"] ?> </textarea></td> 
+                              <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["hora_trabajos"] ?> </textarea></td> 
+                              
+
+
+                                </tr> 
+
+<?php
+                                           }}
+                      
+                    }}
+                    }}}}
+
+ ?>
+       </table></table>
+
+      </div>
+
+      </div></div>
+  </div>
+
+
+
+               <?php }else if($tablaa =='CARTELES POR EVALUAR') { ?>
+
+
+          <div class="contenedorregistroI2" id='usua1' > 
+  <div class="px-4 pt-1 my-5 text-center border-bottom">
+    <div class="col-lg-12 mx-auto">
+      <div class="table-responsive">
+      <table class="table table-bordered border border-secondary"  ><center>
+      
+      <table class="inputNombreC" > 
+         <h1 class="Tema">Carteles por evaluar</h1>
+            <tr class="inputNombreC2">
+              <td class="inputNombreC2">Titulo</td>
+              <td class="inputNombreC3">Correo del Autor</td>
+              <td class="inputNombreC3">Nombre(s) del Autor</td>
+              <td class="inputNombreC3">Apellido(s) del Autor</td>
+              <td class="inputNombreC3">Categoria del trabajo</td>
+              <td class="inputNombreC3">Palabras clave</td>
+              <td class="inputNombreC3">Fecha</td>
+              <td class="inputNombreC3">Hora</td>
+            </tr>
+
+               <?php 
+                    $conexion = pg_connect("host=localhost dbname=congresowinx user=congresowinx password=W1nxC0ngr3s032511");
+                    //hace un select de todos los trabajos de ponencia
+                     $queryTT1 = ("Select * from carteles");
+                  $connTT1 = pg_query($conexion, $queryTT1);
+
+                  if (!$connTT1) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($connTT1) > 0) {
+                    while ($rowDataTT1 = pg_fetch_array($connTT1)) {
+               
+                  //obtenemos id de cada trabajo
+                          $Idtrabajo = $rowDataTT1["id_trabajos"];  
+                                   $queryT1 = ("Select * from trabajos where id_trabajo = '$Idtrabajo'");
+                                   $connT1 = pg_query($conexion, $queryT1);
+
+                                     if (!$connT1) {
+                                     die(pg_error($conexion));
+                                          }
+
+                                        if (pg_num_rows($connT1) > 0) {
+                                       while ($rowDataT1 = pg_fetch_array($connT1)) {
+               
+                  //obtenemos id de cada trabajo
+                                
+                          
+
+                      //Verificamos si ese trabajo se encuentra en evaluación
+                      //de ser el caso contrario, se mostrará los datos en la tabla de tal trabajo para que 
+                      //se le asigne un evaluador
+                  $queryT2 = ("Select * from evaluacion_trabajos where trabajos_id='$Idtrabajo'and estado='POR EVALUAR'");
+                  $connT2 = pg_query($conexion, $queryT2);
+
+                  if (!$connT2) {
+                    die(pg_error($conexion));
+                  }
+                  //evalua si el trabajo se encuentra en la tabla evaluación trabajos
+                  if (pg_num_rows($connT2) > 0) {
+                   //Si el trabajo  se encuentra en la tabla evaluación trabajos
+                  //Muestra el titulo del trabajo
+                   ?>
+
+                  <tr >  <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["titulo"] ?> </textarea></td> 
+                <?php
+                //busca el id del autor en la tabla ponente_trabajos
+          $queryT3 = ("Select * from ponente_trabajos where trabajos_id = '$Idtrabajo'");
+                  $connT3 = pg_query($conexion, $queryT3);
+
+                  if (!$connT3) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($connT3) > 0) {
+                    while ($rowDataT3 = pg_fetch_array($connT3)) {
+                      //Guarda el id del autor en la variable $Idusuario
+                          $Idusuario = $rowDataT3["ponente_id"];}
+                                  //Select de usuarios para obtener los datos del autor mediante el id obtenido recien
+                                 $queryT4 = ("Select * from usuario where id_usuario = '$Idusuario'");
+                                $connT4 = pg_query($conexion, $queryT4);
+
+                                         if (!$connT4) {
+                                       die(pg_error($conexion));
+                                       }
+
+                                               if (pg_num_rows($connT4) > 0) {
+                                              while ($rowDataT4 = pg_fetch_array($connT4)) {
+
+                                             $correo = $rowDataT4["usuario"];
+                                              $nombre = $rowDataT4["nombre_usuario"];
+                                              $apellido= $rowDataT4["apellido_usuario"];
+                        ?>
+                              <td class="inputNombreC2"><textarea name="cor" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $correo ?> </textarea></td> 
+                               <td class="inputNombreC2"><textarea name="cor" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $nombre ?> </textarea></td>
+                               <td class="inputNombreC2"><textarea name="cor" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $apellido ?> </textarea></td>
+                              <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["categoria"] ?> </textarea></td> 
+                               <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["palabras_clave"] ?> </textarea></td> 
+                              <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["fecha_trabajos"] ?> </textarea></td> 
+                              <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["hora_trabajos"] ?> </textarea></td> 
+                              
+
+
+                                </tr> 
+
+<?php
+                                           }}
+                      
+                    }}
+                    }}}}
+
+ ?>
+       </table></table>
+
+      </div>
+
+      </div></div>
+  </div>     
+
+<?php    }else if($tablaa =='CARTELES POR CORREGIR'){ ?>
+
+          <div class="contenedorregistroI2" id='usua1' > 
+  <div class="px-4 pt-1 my-5 text-center border-bottom">
+    <div class="col-lg-12 mx-auto">
+      <div class="table-responsive">
+      <table class="table table-bordered border border-secondary"  ><center>
+      
+      <table class="inputNombreC" > 
+         <h1 class="Tema">Carteles por corregir</h1>
+            <tr class="inputNombreC2">
+              <td class="inputNombreC2">Titulo</td>
+              <td class="inputNombreC3">Correo del Autor</td>
+              <td class="inputNombreC3">Nombre(s) del Autor</td>
+              <td class="inputNombreC3">Apellido(s) del Autor</td>
+              <td class="inputNombreC3">Categoria del trabajo</td>
+              <td class="inputNombreC3">Palabras clave</td>
+              <td class="inputNombreC3">Fecha</td>
+              <td class="inputNombreC3">Hora</td>
+            </tr>
+
+               <?php 
+                    $conexion = pg_connect("host=localhost dbname=congresowinx user=congresowinx password=W1nxC0ngr3s032511");
+                    //hace un select de todos los trabajos de ponencia
+                     $queryTT1 = ("Select * from carteles");
+                  $connTT1 = pg_query($conexion, $queryTT1);
+
+                  if (!$connTT1) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($connTT1) > 0) {
+                    while ($rowDataTT1 = pg_fetch_array($connTT1)) {
+               
+                  //obtenemos id de cada trabajo
+                          $Idtrabajo = $rowDataTT1["id_trabajos"];  
+                                   $queryT1 = ("Select * from trabajos where id_trabajo = '$Idtrabajo'");
+                                   $connT1 = pg_query($conexion, $queryT1);
+
+                                     if (!$connT1) {
+                                     die(pg_error($conexion));
+                                          }
+
+                                        if (pg_num_rows($connT1) > 0) {
+                                       while ($rowDataT1 = pg_fetch_array($connT1)) {
+               
+                  //obtenemos id de cada trabajo
+                                
+                          
+
+                      //Verificamos si ese trabajo se encuentra en evaluación
+                      //de ser el caso contrario, se mostrará los datos en la tabla de tal trabajo para que 
+                      //se le asigne un evaluador
+                  $queryT2 = ("Select * from evaluacion_trabajos where trabajos_id='$Idtrabajo'and estado='POR CORREGIR'");
+                  $connT2 = pg_query($conexion, $queryT2);
+
+                  if (!$connT2) {
+                    die(pg_error($conexion));
+                  }
+                  //evalua si el trabajo se encuentra en la tabla evaluación trabajos
+                  if (pg_num_rows($connT2) > 0) {
+                   //Si el trabajo  se encuentra en la tabla evaluación trabajos
+                  //Muestra el titulo del trabajo
+                   ?>
+
+                  <tr >  <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["titulo"] ?> </textarea></td> 
+                <?php
+                //busca el id del autor en la tabla ponente_trabajos
+          $queryT3 = ("Select * from ponente_trabajos where trabajos_id = '$Idtrabajo'");
+                  $connT3 = pg_query($conexion, $queryT3);
+
+                  if (!$connT3) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($connT3) > 0) {
+                    while ($rowDataT3 = pg_fetch_array($connT3)) {
+                      //Guarda el id del autor en la variable $Idusuario
+                          $Idusuario = $rowDataT3["ponente_id"];}
+                                  //Select de usuarios para obtener los datos del autor mediante el id obtenido recien
+                                 $queryT4 = ("Select * from usuario where id_usuario = '$Idusuario'");
+                                $connT4 = pg_query($conexion, $queryT4);
+
+                                         if (!$connT4) {
+                                       die(pg_error($conexion));
+                                       }
+
+                                               if (pg_num_rows($connT4) > 0) {
+                                              while ($rowDataT4 = pg_fetch_array($connT4)) {
+
+                                             $correo = $rowDataT4["usuario"];
+                                              $nombre = $rowDataT4["nombre_usuario"];
+                                              $apellido= $rowDataT4["apellido_usuario"];
+                        ?>
+                              <td class="inputNombreC2"><textarea name="cor" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $correo ?> </textarea></td> 
+                               <td class="inputNombreC2"><textarea name="cor" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $nombre ?> </textarea></td>
+                               <td class="inputNombreC2"><textarea name="cor" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $apellido ?> </textarea></td>
+                              <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["categoria"] ?> </textarea></td> 
+                               <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["palabras_clave"] ?> </textarea></td> 
+                              <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["fecha_trabajos"] ?> </textarea></td> 
+                              <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["hora_trabajos"] ?> </textarea></td> 
+                              
+
+
+                                </tr> 
+
+<?php
+                                           }}
+                      
+                    }}
+                    }}}}
+
+ ?>
+       </table></table>
+
+      </div>
+
+      </div></div>
+  </div>  
+
+
+
+<?php }else if($tablaa =='CARTELES ACEPTADOS'){?>
+
+   <div class="contenedorregistroI2" id='usua1' > 
+  <div class="px-4 pt-1 my-5 text-center border-bottom">
+    <div class="col-lg-12 mx-auto">
+      <div class="table-responsive">
+      <table class="table table-bordered border border-secondary"  ><center>
+      
+      <table class="inputNombreC" > 
+         <h1 class="Tema">Carteles por corregir</h1>
+            <tr class="inputNombreC2">
+              <td class="inputNombreC2">Titulo</td>
+              <td class="inputNombreC3">Correo del Autor</td>
+              <td class="inputNombreC3">Nombre(s) del Autor</td>
+              <td class="inputNombreC3">Apellido(s) del Autor</td>
+              <td class="inputNombreC3">Categoria del trabajo</td>
+              <td class="inputNombreC3">Palabras clave</td>
+              <td class="inputNombreC3">Fecha</td>
+              <td class="inputNombreC3">Hora</td>
+            </tr>
+
+               <?php 
+                    $conexion = pg_connect("host=localhost dbname=congresowinx user=congresowinx password=W1nxC0ngr3s032511");
+                    //hace un select de todos los trabajos de ponencia
+                     $queryTT1 = ("Select * from carteles");
+                  $connTT1 = pg_query($conexion, $queryTT1);
+
+                  if (!$connTT1) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($connTT1) > 0) {
+                    while ($rowDataTT1 = pg_fetch_array($connTT1)) {
+               
+                  //obtenemos id de cada trabajo
+                          $Idtrabajo = $rowDataTT1["id_trabajos"];  
+                                   $queryT1 = ("Select * from trabajos where id_trabajo = '$Idtrabajo'");
+                                   $connT1 = pg_query($conexion, $queryT1);
+
+                                     if (!$connT1) {
+                                     die(pg_error($conexion));
+                                          }
+
+                                        if (pg_num_rows($connT1) > 0) {
+                                       while ($rowDataT1 = pg_fetch_array($connT1)) {
+               
+                  //obtenemos id de cada trabajo
+                                
+                          
+
+                      //Verificamos si ese trabajo se encuentra en evaluación
+                      //de ser el caso contrario, se mostrará los datos en la tabla de tal trabajo para que 
+                      //se le asigne un evaluador
+                  $queryT2 = ("Select * from evaluacion_trabajos where trabajos_id='$Idtrabajo'and estado='ACEPTADO'");
+                  $connT2 = pg_query($conexion, $queryT2);
+
+                  if (!$connT2) {
+                    die(pg_error($conexion));
+                  }
+                  //evalua si el trabajo se encuentra en la tabla evaluación trabajos
+                  if (pg_num_rows($connT2) > 0) {
+                   //Si el trabajo  se encuentra en la tabla evaluación trabajos
+                  //Muestra el titulo del trabajo
+                   ?>
+
+                  <tr >  <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["titulo"] ?> </textarea></td> 
+                <?php
+                //busca el id del autor en la tabla ponente_trabajos
+          $queryT3 = ("Select * from ponente_trabajos where trabajos_id = '$Idtrabajo'");
+                  $connT3 = pg_query($conexion, $queryT3);
+
+                  if (!$connT3) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($connT3) > 0) {
+                    while ($rowDataT3 = pg_fetch_array($connT3)) {
+                      //Guarda el id del autor en la variable $Idusuario
+                          $Idusuario = $rowDataT3["ponente_id"];}
+                                  //Select de usuarios para obtener los datos del autor mediante el id obtenido recien
+                                 $queryT4 = ("Select * from usuario where id_usuario = '$Idusuario'");
+                                $connT4 = pg_query($conexion, $queryT4);
+
+                                         if (!$connT4) {
+                                       die(pg_error($conexion));
+                                       }
+
+                                               if (pg_num_rows($connT4) > 0) {
+                                              while ($rowDataT4 = pg_fetch_array($connT4)) {
+
+                                             $correo = $rowDataT4["usuario"];
+                                              $nombre = $rowDataT4["nombre_usuario"];
+                                              $apellido= $rowDataT4["apellido_usuario"];
+                        ?>
+                              <td class="inputNombreC2"><textarea name="cor" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $correo ?> </textarea></td> 
+                               <td class="inputNombreC2"><textarea name="cor" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $nombre ?> </textarea></td>
+                               <td class="inputNombreC2"><textarea name="cor" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $apellido ?> </textarea></td>
+                              <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["categoria"] ?> </textarea></td> 
+                               <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["palabras_clave"] ?> </textarea></td> 
+                              <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["fecha_trabajos"] ?> </textarea></td> 
+                              <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["hora_trabajos"] ?> </textarea></td> 
+                              
+
+
+                                </tr> 
+
+<?php
+                                           }}
+                      
+                    }}
+                    }}}}
+
+ ?>
+       </table></table>
+
+      </div>
+
+      </div></div>
+  </div>  
+
+
+
+
+             <?php 
+              }else if($tablaa =='TALLERES SIN EVALUADOR ASIGNADO') {
+                      ?>
+
+              <div class="contenedorregistroI2" id='usua1' > 
+  <div class="px-4 pt-1 my-5 text-center border-bottom">
+    <div class="col-lg-12 mx-auto">
+      <div class="table-responsive">
+      <table class="table table-bordered border border-secondary"  ><center>
+      
+      <table class="inputNombreC" > 
+         <h1 class="Tema">Taller sin evaluador</h1>
+            <tr class="inputNombreC2">
+              <td class="inputNombreC2">Titulo</td>
+              <td class="inputNombreC3">Correo del Autor</td>
+              <td class="inputNombreC3">Nombre(s) del Autor</td>
+              <td class="inputNombreC3">Apellido(s) del Autor</td>
+              <td class="inputNombreC3">Categoria del trabajo</td>
+              <td class="inputNombreC3">Palabras clave</td>
+              <td class="inputNombreC3">Fecha</td>
+              <td class="inputNombreC3">Hora</td>
+            </tr>
+
+               <?php 
+                    $conexion = pg_connect("host=localhost dbname=congresowinx user=congresowinx password=W1nxC0ngr3s032511");
+                    //hace un select de todos los trabajos de ponencia
+                     $queryTT1 = ("Select * from talleres");
+                  $connTT1 = pg_query($conexion, $queryTT1);
+
+                  if (!$connTT1) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($connTT1) > 0) {
+                    while ($rowDataTT1 = pg_fetch_array($connTT1)) {
+               
+                  //obtenemos id de cada trabajo
+                          $Idtrabajo = $rowDataTT1["id_trabajos"];  
+                                   $queryT1 = ("Select * from trabajos where id_trabajo = '$Idtrabajo'");
+                                   $connT1 = pg_query($conexion, $queryT1);
+
+                                     if (!$connT1) {
+                                     die(pg_error($conexion));
+                                          }
+
+                                        if (pg_num_rows($connT1) > 0) {
+                                       while ($rowDataT1 = pg_fetch_array($connT1)) {
+               
+                  //obtenemos id de cada trabajo
+                                
+                          
+
+                      //Verificamos si ese trabajo se encuentra en evaluación
+                      //de ser el caso contrario, se mostrará los datos en la tabla de tal trabajo para que 
+                      //se le asigne un evaluador
+                  $queryT2 = ("Select * from evaluacion_trabajos where trabajos_id='$Idtrabajo'");
+                  $connT2 = pg_query($conexion, $queryT2);
+
+                  if (!$connT2) {
+                    die(pg_error($conexion));
+                  }
+                  //evalua si el trabajo se encuentra en la tabla evaluación trabajos
+                  if (pg_num_rows($connT2) > 0) {
+                    }else {  //Si el trabajo no se encuentra en la tabla evaluación trabajos
+                  //Muestra el titulo del trabajo
+                   ?>
+
+                  <tr >  <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["titulo"] ?> </textarea></td> 
+                <?php
+                //busca el id del autor en la tabla ponente_trabajos
+          $queryT3 = ("Select * from ponente_trabajos where trabajos_id = '$Idtrabajo'");
+                  $connT3 = pg_query($conexion, $queryT3);
+
+                  if (!$connT3) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($connT3) > 0) {
+                    while ($rowDataT3 = pg_fetch_array($connT3)) {
+                      //Guarda el id del autor en la variable $Idusuario
+                          $Idusuario = $rowDataT3["ponente_id"];}
+                                  //Select de usuarios para obtener los datos del autor mediante el id obtenido recien
+                                 $queryT4 = ("Select * from usuario where id_usuario = '$Idusuario'");
+                                $connT4 = pg_query($conexion, $queryT4);
+
+                                         if (!$connT4) {
+                                       die(pg_error($conexion));
+                                       }
+
+                                               if (pg_num_rows($connT4) > 0) {
+                                              while ($rowDataT4 = pg_fetch_array($connT4)) {
+
+                                             $correo = $rowDataT4["usuario"];
+                                              $nombre = $rowDataT4["nombre_usuario"];
+                                              $apellido= $rowDataT4["apellido_usuario"];
+                        ?>
+                              <td class="inputNombreC2"><textarea name="cor" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $correo ?> </textarea></td> 
+                               <td class="inputNombreC2"><textarea name="cor" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $nombre ?> </textarea></td>
+                               <td class="inputNombreC2"><textarea name="cor" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $apellido ?> </textarea></td>
+                              <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["categoria"] ?> </textarea></td> 
+                               <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["palabras_clave"] ?> </textarea></td> 
+                              <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["fecha_trabajos"] ?> </textarea></td> 
+                              <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["hora_trabajos"] ?> </textarea></td> 
+                              
+
+
+                                </tr> 
+
+<?php
+                                           }}
+                      
+                    }}
+                    }}}}
+
+ ?>
+       </table></table>
+
+      </div>
+
+      </div></div>
+  </div>
+
+               
+                <?php
+              }else if($tablaa =='TALLERES POR EVALUAR'){ ?>
+
+
+          <div class="contenedorregistroI2" id='usua1' > 
+  <div class="px-4 pt-1 my-5 text-center border-bottom">
+    <div class="col-lg-12 mx-auto">
+      <div class="table-responsive">
+      <table class="table table-bordered border border-secondary"  ><center>
+      
+      <table class="inputNombreC" > 
+         <h1 class="Tema">Talleres por evaluar</h1>
+            <tr class="inputNombreC2">
+              <td class="inputNombreC2">Titulo</td>
+              <td class="inputNombreC3">Correo del Autor</td>
+              <td class="inputNombreC3">Nombre(s) del Autor</td>
+              <td class="inputNombreC3">Apellido(s) del Autor</td>
+              <td class="inputNombreC3">Categoria del trabajo</td>
+              <td class="inputNombreC3">Palabras clave</td>
+              <td class="inputNombreC3">Fecha</td>
+              <td class="inputNombreC3">Hora</td>
+            </tr>
+
+               <?php 
+                    $conexion = pg_connect("host=localhost dbname=congresowinx user=congresowinx password=W1nxC0ngr3s032511");
+                    //hace un select de todos los trabajos de ponencia
+                     $queryTT1 = ("Select * from talleres");
+                  $connTT1 = pg_query($conexion, $queryTT1);
+
+                  if (!$connTT1) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($connTT1) > 0) {
+                    while ($rowDataTT1 = pg_fetch_array($connTT1)) {
+               
+                  //obtenemos id de cada trabajo
+                          $Idtrabajo = $rowDataTT1["id_trabajos"];  
+                                   $queryT1 = ("Select * from trabajos where id_trabajo = '$Idtrabajo'");
+                                   $connT1 = pg_query($conexion, $queryT1);
+
+                                     if (!$connT1) {
+                                     die(pg_error($conexion));
+                                          }
+
+                                        if (pg_num_rows($connT1) > 0) {
+                                       while ($rowDataT1 = pg_fetch_array($connT1)) {
+               
+                  //obtenemos id de cada trabajo
+                                
+                          
+
+                      //Verificamos si ese trabajo se encuentra en evaluación
+                      //de ser el caso contrario, se mostrará los datos en la tabla de tal trabajo para que 
+                      //se le asigne un evaluador
+                  $queryT2 = ("Select * from evaluacion_trabajos where trabajos_id='$Idtrabajo'and estado='POR EVALUAR'");
+                  $connT2 = pg_query($conexion, $queryT2);
+
+                  if (!$connT2) {
+                    die(pg_error($conexion));
+                  }
+                  //evalua si el trabajo se encuentra en la tabla evaluación trabajos
+                  if (pg_num_rows($connT2) > 0) {
+                   //Si el trabajo  se encuentra en la tabla evaluación trabajos
+                  //Muestra el titulo del trabajo
+                   ?>
+
+                  <tr >  <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["titulo"] ?> </textarea></td> 
+                <?php
+                //busca el id del autor en la tabla ponente_trabajos
+          $queryT3 = ("Select * from ponente_trabajos where trabajos_id = '$Idtrabajo'");
+                  $connT3 = pg_query($conexion, $queryT3);
+
+                  if (!$connT3) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($connT3) > 0) {
+                    while ($rowDataT3 = pg_fetch_array($connT3)) {
+                      //Guarda el id del autor en la variable $Idusuario
+                          $Idusuario = $rowDataT3["ponente_id"];}
+                                  //Select de usuarios para obtener los datos del autor mediante el id obtenido recien
+                                 $queryT4 = ("Select * from usuario where id_usuario = '$Idusuario'");
+                                $connT4 = pg_query($conexion, $queryT4);
+
+                                         if (!$connT4) {
+                                       die(pg_error($conexion));
+                                       }
+
+                                               if (pg_num_rows($connT4) > 0) {
+                                              while ($rowDataT4 = pg_fetch_array($connT4)) {
+
+                                             $correo = $rowDataT4["usuario"];
+                                              $nombre = $rowDataT4["nombre_usuario"];
+                                              $apellido= $rowDataT4["apellido_usuario"];
+                        ?>
+                              <td class="inputNombreC2"><textarea name="cor" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $correo ?> </textarea></td> 
+                               <td class="inputNombreC2"><textarea name="cor" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $nombre ?> </textarea></td>
+                               <td class="inputNombreC2"><textarea name="cor" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $apellido ?> </textarea></td>
+                              <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["categoria"] ?> </textarea></td> 
+                               <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["palabras_clave"] ?> </textarea></td> 
+                              <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["fecha_trabajos"] ?> </textarea></td> 
+                              <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["hora_trabajos"] ?> </textarea></td> 
+                              
+
+
+                                </tr> 
+
+<?php
+                                           }}
+                      
+                    }}
+                    }}}}
+
+ ?>
+       </table></table>
+
+      </div>
+
+      </div></div>
+  </div>
+
+
+
+
+
+                <?php  
+              } else if($tablaa =='TALLERES POR CORREGIR'){ ?>
+
+          <div class="contenedorregistroI2" id='usua1' > 
+  <div class="px-4 pt-1 my-5 text-center border-bottom">
+    <div class="col-lg-12 mx-auto">
+      <div class="table-responsive">
+      <table class="table table-bordered border border-secondary"  ><center>
+      
+      <table class="inputNombreC" > 
+         <h1 class="Tema">Talleres por corregir</h1>
+            <tr class="inputNombreC2">
+              <td class="inputNombreC2">Titulo</td>
+              <td class="inputNombreC3">Correo del Autor</td>
+              <td class="inputNombreC3">Nombre(s) del Autor</td>
+              <td class="inputNombreC3">Apellido(s) del Autor</td>
+              <td class="inputNombreC3">Categoria del trabajo</td>
+              <td class="inputNombreC3">Palabras clave</td>
+              <td class="inputNombreC3">Fecha</td>
+              <td class="inputNombreC3">Hora</td>
+            </tr>
+
+               <?php 
+                    $conexion = pg_connect("host=localhost dbname=congresowinx user=congresowinx password=W1nxC0ngr3s032511");
+                    //hace un select de todos los trabajos de ponencia
+                     $queryTT1 = ("Select * from talleres");
+                  $connTT1 = pg_query($conexion, $queryTT1);
+
+                  if (!$connTT1) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($connTT1) > 0) {
+                    while ($rowDataTT1 = pg_fetch_array($connTT1)) {
+               
+                  //obtenemos id de cada trabajo
+                          $Idtrabajo = $rowDataTT1["id_trabajos"];  
+                                   $queryT1 = ("Select * from trabajos where id_trabajo = '$Idtrabajo'");
+                                   $connT1 = pg_query($conexion, $queryT1);
+
+                                     if (!$connT1) {
+                                     die(pg_error($conexion));
+                                          }
+
+                                        if (pg_num_rows($connT1) > 0) {
+                                       while ($rowDataT1 = pg_fetch_array($connT1)) {
+               
+                  //obtenemos id de cada trabajo
+                                
+                          
+
+                      //Verificamos si ese trabajo se encuentra en evaluación
+                      //de ser el caso contrario, se mostrará los datos en la tabla de tal trabajo para que 
+                      //se le asigne un evaluador
+                  $queryT2 = ("Select * from evaluacion_trabajos where trabajos_id='$Idtrabajo'and estado='POR CORREGIR'");
+                  $connT2 = pg_query($conexion, $queryT2);
+
+                  if (!$connT2) {
+                    die(pg_error($conexion));
+                  }
+                  //evalua si el trabajo se encuentra en la tabla evaluación trabajos
+                  if (pg_num_rows($connT2) > 0) {
+                   //Si el trabajo  se encuentra en la tabla evaluación trabajos
+                  //Muestra el titulo del trabajo
+                   ?>
+
+                  <tr >  <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["titulo"] ?> </textarea></td> 
+                <?php
+                //busca el id del autor en la tabla ponente_trabajos
+          $queryT3 = ("Select * from ponente_trabajos where trabajos_id = '$Idtrabajo'");
+                  $connT3 = pg_query($conexion, $queryT3);
+
+                  if (!$connT3) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($connT3) > 0) {
+                    while ($rowDataT3 = pg_fetch_array($connT3)) {
+                      //Guarda el id del autor en la variable $Idusuario
+                          $Idusuario = $rowDataT3["ponente_id"];}
+                                  //Select de usuarios para obtener los datos del autor mediante el id obtenido recien
+                                 $queryT4 = ("Select * from usuario where id_usuario = '$Idusuario'");
+                                $connT4 = pg_query($conexion, $queryT4);
+
+                                         if (!$connT4) {
+                                       die(pg_error($conexion));
+                                       }
+
+                                               if (pg_num_rows($connT4) > 0) {
+                                              while ($rowDataT4 = pg_fetch_array($connT4)) {
+
+                                             $correo = $rowDataT4["usuario"];
+                                              $nombre = $rowDataT4["nombre_usuario"];
+                                              $apellido= $rowDataT4["apellido_usuario"];
+                        ?>
+                              <td class="inputNombreC2"><textarea name="cor" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $correo ?> </textarea></td> 
+                               <td class="inputNombreC2"><textarea name="cor" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $nombre ?> </textarea></td>
+                               <td class="inputNombreC2"><textarea name="cor" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $apellido ?> </textarea></td>
+                              <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["categoria"] ?> </textarea></td> 
+                               <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["palabras_clave"] ?> </textarea></td> 
+                              <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["fecha_trabajos"] ?> </textarea></td> 
+                              <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["hora_trabajos"] ?> </textarea></td> 
+                              
+
+
+                                </tr> 
+
+<?php
+                                           }}
+                      
+                    }}
+                    }}}}
+
+ ?>
+       </table></table>
+
+      </div>
+
+      </div></div>
+  </div>
+
+
+
+              <?php } else if($tablaa =='TALLERES ACEPTADOS'){?>
+
+
+          <div class="contenedorregistroI2" id='usua1' > 
+  <div class="px-4 pt-1 my-5 text-center border-bottom">
+    <div class="col-lg-12 mx-auto">
+      <div class="table-responsive">
+      <table class="table table-bordered border border-secondary"  ><center>
+      
+      <table class="inputNombreC" > 
+         <h1 class="Tema">Talleres por corregir</h1>
+            <tr class="inputNombreC2">
+              <td class="inputNombreC2">Titulo</td>
+              <td class="inputNombreC3">Correo del Autor</td>
+              <td class="inputNombreC3">Nombre(s) del Autor</td>
+              <td class="inputNombreC3">Apellido(s) del Autor</td>
+              <td class="inputNombreC3">Categoria del trabajo</td>
+              <td class="inputNombreC3">Palabras clave</td>
+              <td class="inputNombreC3">Fecha</td>
+              <td class="inputNombreC3">Hora</td>
+            </tr>
+
+               <?php 
+                    $conexion = pg_connect("host=localhost dbname=congresowinx user=congresowinx password=W1nxC0ngr3s032511");
+                    //hace un select de todos los trabajos de ponencia
+                     $queryTT1 = ("Select * from talleres");
+                  $connTT1 = pg_query($conexion, $queryTT1);
+
+                  if (!$connTT1) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($connTT1) > 0) {
+                    while ($rowDataTT1 = pg_fetch_array($connTT1)) {
+               
+                  //obtenemos id de cada trabajo
+                          $Idtrabajo = $rowDataTT1["id_trabajos"];  
+                                   $queryT1 = ("Select * from trabajos where id_trabajo = '$Idtrabajo'");
+                                   $connT1 = pg_query($conexion, $queryT1);
+
+                                     if (!$connT1) {
+                                     die(pg_error($conexion));
+                                          }
+
+                                        if (pg_num_rows($connT1) > 0) {
+                                       while ($rowDataT1 = pg_fetch_array($connT1)) {
+               
+                  //obtenemos id de cada trabajo
+                                
+                          
+
+                      //Verificamos si ese trabajo se encuentra en evaluación
+                      //de ser el caso contrario, se mostrará los datos en la tabla de tal trabajo para que 
+                      //se le asigne un evaluador
+                  $queryT2 = ("Select * from evaluacion_trabajos where trabajos_id='$Idtrabajo'and estado='ACEPTADO'");
+                  $connT2 = pg_query($conexion, $queryT2);
+
+                  if (!$connT2) {
+                    die(pg_error($conexion));
+                  }
+                  //evalua si el trabajo se encuentra en la tabla evaluación trabajos
+                  if (pg_num_rows($connT2) > 0) {
+                   //Si el trabajo  se encuentra en la tabla evaluación trabajos
+                  //Muestra el titulo del trabajo
+                   ?>
+
+                  <tr >  <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["titulo"] ?> </textarea></td> 
+                <?php
+                //busca el id del autor en la tabla ponente_trabajos
+          $queryT3 = ("Select * from ponente_trabajos where trabajos_id = '$Idtrabajo'");
+                  $connT3 = pg_query($conexion, $queryT3);
+
+                  if (!$connT3) {
+                    die(pg_error($conexion));
+                  }
+
+                  if (pg_num_rows($connT3) > 0) {
+                    while ($rowDataT3 = pg_fetch_array($connT3)) {
+                      //Guarda el id del autor en la variable $Idusuario
+                          $Idusuario = $rowDataT3["ponente_id"];}
+                                  //Select de usuarios para obtener los datos del autor mediante el id obtenido recien
+                                 $queryT4 = ("Select * from usuario where id_usuario = '$Idusuario'");
+                                $connT4 = pg_query($conexion, $queryT4);
+
+                                         if (!$connT4) {
+                                       die(pg_error($conexion));
+                                       }
+
+                                               if (pg_num_rows($connT4) > 0) {
+                                              while ($rowDataT4 = pg_fetch_array($connT4)) {
+
+                                             $correo = $rowDataT4["usuario"];
+                                              $nombre = $rowDataT4["nombre_usuario"];
+                                              $apellido= $rowDataT4["apellido_usuario"];
+                        ?>
+                              <td class="inputNombreC2"><textarea name="cor" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $correo ?> </textarea></td> 
+                               <td class="inputNombreC2"><textarea name="cor" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $nombre ?> </textarea></td>
+                               <td class="inputNombreC2"><textarea name="cor" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $apellido ?> </textarea></td>
+                              <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["categoria"] ?> </textarea></td> 
+                               <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["palabras_clave"] ?> </textarea></td> 
+                              <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["fecha_trabajos"] ?> </textarea></td> 
+                              <td class="inputNombreC2"><textarea name="textareaa" rows="mx-auto" cols="mx-auto" class="sinborde"  readonly > <?php echo $rowDataT1["hora_trabajos"] ?> </textarea></td> 
+                              
+
+
+                                </tr> 
+
+<?php
+                                           }}
+                      
+                    }}
+                    }}}}
+
+ ?>
+       </table></table>
+
+      </div>
+
+      </div></div>
+  </div>
+
+
+              <?php  }  /*
 
               //Opcion EXTENSOS APROBADOS
               else {
@@ -935,7 +2374,7 @@ Encabezado de la página */
 
 
            }} ?>
-      <a  href="Perfiladmin.php"  > <button >Regresar</button> </a> 
+      <a  href="menu.php"  > <button >Regresar</button> </a> 
          
   </div></div>
   </div>
@@ -945,7 +2384,7 @@ Encabezado de la página */
               <br>
 <div class="containerCredi">
 <footer class="py-5">
-    <div class="row">
+    <div class="row gx-0">
       <div class="col-6 col-md-2 mb-3">
         <ul class="nav flex-column">
           <li class="nav-item mb-2" class="nav-link p-0 text-muted"> <img src="img/escudo-blanco.png" alt="Photo" style="width:65%;"> </li>
@@ -974,6 +2413,7 @@ Encabezado de la página */
           <li style="color: #FFFFFF;"class="nav-item mb-2" class="nav-link p-0 text-muted">Para mayores informes o dudas comunicarse al Departamento de Matemáticas Edificio A8 Campo 4.</li>
         </ul>
         </div>
+    </div>
 
   <div class="containerCredi">
   <footer class="py-3 my-4">

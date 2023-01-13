@@ -1,7 +1,14 @@
 <?php
-ini_set("display_errors", 0);
 session_start();
-?>
+error_reporting(0);
+$varsec=$_SESSION['nombre_usuario'];
+if($varsec == null || $varsec = '') {
+    header('Location:404.php');
+    session_destroy();
+    session_unset();
+    die();
+}?>
+
 <html lang="es">
     <head>
         <link href="icono.ico" type="image/x-icon" rel="shortcut icon" />
@@ -135,10 +142,10 @@ session_start();
     width: 100%;
     height: 12vh;
     position: relative;
-    top: 6%;
-    transform: translateY(-50%);
     text-align: center; 
     background-color: transparent;
+    margin-top: 10px;
+    margin-bottom: -10px;
      
 }
 
@@ -528,12 +535,13 @@ Encabezado de la página */
                 <label for="btn-menu"><img src="img/menuicono11.png" alt=""> </label>
                 <nav class="menu" style="z-index: 1;">
                     <ul>
-                        
-                        <li> <a href="memoriascarrusel.php">Memorias</a></li>
-                        <li> <a href="convocatoria.php">Convocatoria</a></li> 
-                        <li>  <a href="inscripcionYcostos.php">Inscripción y Costos</a></li>
-                        <li> <a href="ComiteOrg.php">Comité Organizador</a></li>
-                        <li> <a href="index3.php"><img class="alineadoicono" src="img/iniciaricono.png">&nbsp;Cerrar Sesión</a></li>
+                        <li> <a href="indexSesion.php">Inicio</a></li>
+                        <li> <a href="memoriascarruselSesion.php">Memorias</a></li>
+                        <li> <a href="convocatoriaSesion.php">Convocatoria</a></li> 
+                        <li>  <a href="inscripcionYcostosSesion.php">Inscripción y Costos</a></li>
+                        <li> <a href="ComiteOrgSesion">Comité Organizador</a></li>
+                        <li> <a href="ComiteEvaSesion">Comité Evaluador</a></li>
+                        <li> <a href="destroySesion.php"><img class="alineadoicono" src="img/iniciaricono.png">&nbsp;Cerrar  Sesión</a></li>
                     </ul>  
                 </nav> 
                 
@@ -543,13 +551,13 @@ Encabezado de la página */
         <div>
             <header>
             <input type="checkbox" id="btn-menu2"> 
-                <label for="btn-menu2"><img src="img/icono_informacion.png" alt=""> </label>
+                <label for="btn-menu2"><img src="img/icono_informacion2.png" alt=""> </label>
                 <nav class="menu2" style="z-index: 2;">           
                     <ul>    
                        <li> <a href=""><img class="alineadoicono" src="img/icono_informacion2.png"> </a></li>        
-                        <li> <a href="ponencias_info.php">Ponencias</a></li>  
-                        <li> <a href="carteles_info.php">Carteles</a></li>
-                        <li> <a href="talleres_info.php">Talleres</a></li>
+                       <li> <a href="ponencias_infoSesion.php">Ponencias</a></li>  
+                        <li> <a href="carteles_infoSesion.php">Carteles</a></li>
+                        <li> <a href="talleres_infoSesion.php">Talleres</a></li>
                     </ul>  
                 </nav>                
             </header>
@@ -671,7 +679,7 @@ Encabezado de la página */
        </div>  </div>
                            <button name="uploadBtn" class="enviarBtn" value="Registrar Conferencia">Registrar Conferencia</button>
         
-      </form> <br><br> <a  href="Perfiladmin.php"  > <button class="enviarBtn">Regresar</button> </a>
+      </form> <br><br> <a  href="menu.php"  > <button class="enviarBtn">Regresar</button> </a>
   </div></div>
   </div>
        
@@ -732,7 +740,7 @@ Encabezado de la página */
               <br>
 <div class="containerCredi">
 <footer class="py-5">
-    <div class="row">
+    <div class="row gx-0">
       <div class="col-6 col-md-2 mb-3">
         <ul class="nav flex-column">
           <li class="nav-item mb-2" class="nav-link p-0 text-muted"> <img src="img/escudo-blanco.png" alt="Photo" style="width:65%;"> </li>
@@ -761,6 +769,7 @@ Encabezado de la página */
           <li style="color: #FFFFFF;"class="nav-item mb-2" class="nav-link p-0 text-muted">Para mayores informes o dudas comunicarse al Departamento de Matemáticas Edificio A8 Campo 4.</li>
         </ul>
         </div>
+    </div>
 
   <div class="containerCredi">
   <footer class="py-3 my-4">

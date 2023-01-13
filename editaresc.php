@@ -1,7 +1,14 @@
 <?php
-ini_set("display_errors", 0);
 session_start();
-?>
+error_reporting(0);
+$varsec=$_SESSION['nombre_usuario'];
+if($varsec == null || $varsec = '') {
+    header('Location:404.php');
+    session_destroy();
+    session_unset();
+    die();
+}?>
+
 <html lang="es">
     <head>
         <link href="icono.ico" type="image/x-icon" rel="shortcut icon" />
@@ -135,10 +142,10 @@ session_start();
     width: 100%;
     height: 12vh;
     position: relative;
-    top: 6%;
-    transform: translateY(-50%);
     text-align: center; 
     background-color: transparent;
+    margin-top: 10px;
+    margin-bottom: -10px;
      
 }
 
@@ -604,7 +611,7 @@ Encabezado de la página */
                         <li> <a href="convocatoria.php">Convocatoria</a></li> 
                         <li>  <a href="inscripcionYcostos.php">Inscripción y Costos</a></li>
                         <li> <a href="ComiteOrg">Comité Organizador</a></li>
-                        <li> <a href=""><img class="alineadoicono" src="img/iniciaricono.png">&nbsp;Iniciar Sesión</a></li>
+                        <li> <a href="destroySesion.php"><img class="alineadoicono" src="img/iniciaricono.png">&nbsp;Cerrar Sesión</a></li>
                     </ul>  
                 </nav> 
                 
@@ -912,8 +919,8 @@ $id = $_GET['id'];
  </table> </div>
 
       <button name="uploadBtn" class="enviarBtn" value="Actualizar">Actualizar</button> 
-      <button name="uploadBtn2" class="enviarBtn" value="Regresar">Regresar</button>
-         </form>
+      
+         </form><br><br> <a  href="Modificarescuelas.php"  > <button class="enviarBtn">Regresar</button> </a> <br><br><br><br> <a  href="menu.php"  > <button class="enviarBtn">Regresar al menú</button> </a>
   </div></div>
   </div>   
   <div>
@@ -949,7 +956,7 @@ $id = $_GET['id'];
               <br>
 <div class="containerCredi">
 <footer class="py-5">
-    <div class="row">
+    <div class="row gx-0">
       <div class="col-6 col-md-2 mb-3">
         <ul class="nav flex-column">
           <li class="nav-item mb-2" class="nav-link p-0 text-muted"> <img src="img/escudo-blanco.png" alt="Photo" style="width:65%;"> </li>
@@ -978,6 +985,7 @@ $id = $_GET['id'];
           <li style="color: #FFFFFF;"class="nav-item mb-2" class="nav-link p-0 text-muted">Para mayores informes o dudas comunicarse al Departamento de Matemáticas Edificio A8 Campo 4.</li>
         </ul>
         </div>
+    </div>
 
   <div class="containerCredi">
   <footer class="py-3 my-4">

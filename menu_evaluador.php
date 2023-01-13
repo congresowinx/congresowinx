@@ -464,6 +464,60 @@
       filter: invert(59%) sepia(73%) saturate(310%) hue-rotate(10deg) brightness(92%) contrast(97%);
     }
 
+    .botonA {
+      background: transparent;
+      background-image: url("img/evaluar_video1.png");
+      border-color: transparent;
+      background-size: cover;
+      background-position: center;
+      display: inline-block;
+      border: none;
+      /*padding: 20px;*/
+      width: 180px;
+      border-radius: 0px;
+      height: 180px;
+      transition: all 0.5s;
+      cursor: pointer;
+      position: relative;
+      /*top: 30%;
+      left: 55%;
+      transform: translate(-30%, -40%);*/
+
+    }
+
+    .botonA:hover {
+      width: 230px;
+      height: 230px;
+      filter: invert(59%) sepia(73%) saturate(310%) hue-rotate(10deg) brightness(92%) contrast(97%);
+    }
+    
+     .botonB {
+      background: transparent;
+      background-image: url("img/asignar_evaluadores1.png");
+      border-color: transparent;
+      background-size: cover;
+      background-position: center;
+      display: inline-block;
+      border: none;
+      /*padding: 20px;*/
+      width: 180px;
+      border-radius: 0px;
+      height: 180px;
+      transition: all 0.5s;
+      cursor: pointer;
+      position: relative;
+      /*top: 30%;
+      left: 55%;
+      transform: translate(-30%, -40%);*/
+
+    }
+
+    .botonB:hover {
+      width: 230px;
+      height: 230px;
+      filter: invert(59%) sepia(73%) saturate(310%) hue-rotate(10deg) brightness(92%) contrast(97%);
+    }
+
 /*Aqui Termina el css de estilos de la pagina de cada uno*/
 
 
@@ -508,10 +562,10 @@ Encabezado de la página */
         <div>
             <header>
             <input type="checkbox" id="btn-menu2"> 
-                <label for="btn-menu2"><img src="img/icono_informacion.png" alt=""> </label>
+                <label for="btn-menu2"><img src="img/icono_informacion2.png" alt=""> </label>
                 <nav class="menu2" style="z-index: 2;">           
                     <ul>    
-                      <li> <a href=""><img class="alineadoicono" src="img/icono_informacion.png"> </a></li>        
+                      <li> <a href=""><img class="alineadoicono" src="img/icono_informacion2.png"> </a></li>        
                         <li> <a href="ponencias_info.php">Ponencias</a></li>  
                         <li> <a href="carteles_info.php">Carteles</a></li>
                         <li> <a href="talleres_info.php">Talleres</a></li>
@@ -553,9 +607,11 @@ Encabezado de la página */
       <form action="#" method="POST" >
        <!-- Aqui va el codigo de cada uno-->
        
-    <div class="botonU"> </div>
-    <div class="botonH"> </div>
-    <div class="botonP"> </div>
+    <div class="botonU"> </div> <!-- evaluar ponencia -->
+    <div class="botonH"> </div> <!-- evaluar carteles -->
+    <div class="botonP"> </div> <!-- evaluar taller -->
+    <a href="evaVid.php"> <div class="botonA"> </div> </a> <!-- evaluar video -->
+    <div class="botonB"> </div> <!-- asignar evaluador -->
     <!-- <div class="botonR"> </div> -->
     
      

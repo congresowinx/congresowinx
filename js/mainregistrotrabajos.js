@@ -3,15 +3,18 @@ const contenedor = document.querySelector('#dinamic');
 const btnAgregar = document.querySelector('#agregar');
 
 // Variable para el total de elementos agregados
-let total = 1;
+let total = 1; 
 
 /**
  * Método que se ejecuta cuando se da clic al botón de agregar elementos
  */
 btnAgregar.addEventListener('click', e => {
     let div = document.createElement('div');
-    div.innerHTML = `<label>${total++}</label> <textarea  type="text" name="referencia" placeholder="INGRESA BIBLIOGRAFIA" required></textarea> 
-    <button onclick="eliminar(this)">Eliminar referencia</button>`;
+    div.innerHTML = `<label>${total++}</label><textarea  type="text" name="referencia[]" placeholder="INGRESA BIBLIOGRAFIA" required></textarea> 
+    <button onclick="eliminar(this)">Eliminar referencia</button> 
+
+
+`;
     contenedor.appendChild(div);
 })
 

@@ -611,7 +611,7 @@ if (isset($_POST['uploadBtn']) && $_POST['uploadBtn'] == 'Enviar') {
     $fileExtension = strtolower(end($fileNameCmps));
 
     // CON ENCRIPTACIÓN
-    $newFileName =  strtoupper($_POST["nombre"]) . strtoupper($_POST["apellido"]) . time();
+    $newFileName =  strtoupper($_POST["nombre"]) . strtoupper($_POST["apellido"]) . time(). $fileExtension;
     // $newFileName = hash('md5', $newFileNameSin). '.' . $fileExtension;
 
     $allowedfileExtensions = array('pdf');
@@ -746,6 +746,15 @@ if (isset($_POST['uploadBtn']) && $_POST['uploadBtn'] == 'Enviar') {
                 $query10 = ("INSERT INTO permisos (permiso_id_rol, usuario_id, estado) 
                       VALUES('1', '$conn3', '1')");
                 $consulta10 = pg_query($conexion, $query10);
+                
+                $queryExtra1 = ("INSERT INTO ponente (rol_id) 
+                          VALUES('$conn3')"); 
+                $consultaExtra1 = pg_query($conexion, $queryExtra1);
+
+                $queryExtra = ("INSERT INTO permisos (permiso_id_rol, usuario_id, estado) 
+                          VALUES('0', '$conn3', '1')"); 
+                $consultaExtra = pg_query($conexion, $queryExtra);    
+                  
                 $enviarCorreo = true;
               }
               if ($enviarCorreo) {

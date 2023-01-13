@@ -418,7 +418,7 @@ Encabezado de la página */
 
     <div class="checkbox mb-3">
       <label>
-       <a href="#">¿Olvidaste tu contraseña?</a>
+       <a href="contraseñaOlvido.php">¿Olvidaste tu contraseña?</a>
           <br>
           <a href="RegistroN.php">¿No tienes una cuenta?</a>
  
@@ -585,9 +585,13 @@ $_SESSION['sms'] = $message;  ?>
         </ul>
         </div>
 
-      <div class="col-6 col-md-2 mb-3">
+    
+
+        <div class="col-6 col-md-2 mb-3">
         <h5 style="color: #FFFFFF;">CONTACTO</h5>
         <ul class="nav flex-column">
+          <li style="color: #FFFFFF;"class="nav-item mb-2" class="nav-link p-0 text-muted">15congresomatematicas</li>
+          <li style="color: #FFFFFF;"class="nav-item mb-2" class="nav-link p-0 text-muted">@cuautitlan.unam.mx</li>
           <li style="color: #FFFFFF;" class="nav-item mb-2" class="nav-link p-0 text-muted ">SEDE</li>
           <li style="color: #FFFFFF;"class="nav-item mb-2" class="nav-link p-0 text-muted">Facultad de Estudios Superiores Cuautitlán</li>
         </ul>
@@ -610,6 +614,7 @@ $_SESSION['sms'] = $message;  ?>
 
         <div class="col-6 col-md-2 mb-3">
         <h5 style="color: #FFFFFF;">DESARROLLADORES</h5>
+        <ul class="nav flex-column">
         <li style="color: #FFFFFF;"class="nav-item mb-2" class="nav-link p-0 text-muted"> Chavez Luna Miriam Virginia</li>
         <li style="color: #FFFFFF;"class="nav-item mb-2" class="nav-link p-0 text-muted"> Jonathan </li>
         <li style="color: #FFFFFF;"class="nav-item mb-2" class="nav-link p-0 text-muted"> Davila Almaraz Nayeli</li>
@@ -618,8 +623,6 @@ $_SESSION['sms'] = $message;  ?>
         <li style="color: #FFFFFF;"class="nav-item mb-2" class="nav-link p-0 text-muted"> Olvera Mendoza Viridiana</li>
         <li style="color: #FFFFFF;"class="nav-item mb-2" class="nav-link p-0 text-muted"> Perez Monserrat</li>
           <li style="color: #FFFFFF;"class="nav-item mb-2" class="nav-link p-0 text-muted"> Romero Jaime Fernanda</li>
-        <ul class="nav flex-column">
-          
         </ul>
         </div>
 

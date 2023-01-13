@@ -2,13 +2,16 @@
 
 <head>
   <link href="icono.ico" type="image/x-icon" rel="shortcut icon" />
-  <title>Convocatoria de Congreso de Matemáticas</title>
+  <title>Convocatoria Congreso de Matemáticas</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1, minimum-scale=1">
   <link rel="stylesheet" href="icon.css">
   <link rel="stylesheet" href="css/estilosmenuarriba.css">
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+
+  <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
+  <link rel="icon" href="img/favicon.png" type="image/x-icon">
 
   <style>
     .bd-placeholder-img {
@@ -435,7 +438,7 @@ Encabezado de la página */
   <div>
     <header>
       <input type="checkbox" id="btn-menu">
-      <label for="btn-menu"><img src="img/menuicono.png" alt=""> </label>
+      <label for="btn-menu"><img src="img/menuicono11.png" alt=""> </label>
       <nav class="menu" style="z-index: 1;">
         <ul>
           <li> <a href="index.php">Inicio</a></li>
@@ -453,10 +456,10 @@ Encabezado de la página */
   <div>
             <header>
             <input type="checkbox" id="btn-menu2"> 
-                <label for="btn-menu2"><img src="img/icono_informacion.png" alt=""> </label>
+                <label for="btn-menu2"><img src="img/icono_informacion2.png" alt=""> </label>
                 <nav class="menu2" style="z-index: 2;">           
                     <ul>    
-                      <li> <a href=""><img class="alineadoicono" src="img/icono_informacion.png"> </a></li>        
+                      <li> <a href=""><img class="alineadoicono" src="img/icono_informacion2.png"> </a></li>        
                         <li> <a href="ponencias_info.php">Ponencias</a></li>  
                         <li> <a href="carteles_info.php">Carteles</a></li>
                         <li> <a href="talleres_info.php">Talleres</a></li>

@@ -1,20 +1,19 @@
 <?php
-ini_set("display_errors", 0);
-session_start();
+error_reporting(0);
 ?>
-
+<!DOCTYPE html>
 <html lang="es">
     <head>
         <link href="icono.ico" type="image/x-icon" rel="shortcut icon" />
         <title>Inicio de Sesión</title>
        <meta charset="UTF-8"> 
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1, minimum-scale=1">
-        <link rel="stylesheet" href="icon.css">
-           <link rel="stylesheet" href="css/estilosmenuarriba.css">
+       
+           <link rel="stylesheet" href="css/estilosmenuarriba.css" type="text/css">
            
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">        
         
-        <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+       
 
         <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
 <link rel="icon" href="img/favicon.png" type="image/x-icon">
@@ -241,22 +240,22 @@ Encabezado de la página */
     
         <div class="loginBox">
 <main class="form-signin w-100 m-auto">
-  <form method="POST">
+  <form action="sesion.php" method="POST">
     <img class="mb-4" src="img/Recurso1.png" alt="" width="80" height="80">
     <h1 class="h3 mb-3 fw-normal" >Iniciar Sesion</h1>
 
     <div class="form-floating">
-      <input type="email" class="form-control" id="floatingInput" name="correo" placeholder="name@example.com" required>
+      <input type="email" class="form-control" id="floatingInput" name="user" placeholder="name@example.com" required>
       <label for="floatingInput">Correo</label>
     </div>
     <br>
     <div class="form-floating">
-      <input type="password" class="form-control" id="floatingPassword" name="contraseña" placeholder="Password" required>  
+      <input type="password" class="form-control" id="floatingPassword" name="pass" placeholder="Password" required>  
       <label for="floatingPassword">Contraseña</label>
     </div>
 
     
-    <input type="submit" name="uploadBtn"  value="Iniciar Sesión">
+    <input type="submit" name="entrar" class="btn btn-success" value="Iniciar Sesión">
     <br>
     <br>
  <a href="contraseñaOlvido.php">¿Olvidaste tu contraseña?</a>
@@ -266,31 +265,7 @@ Encabezado de la página */
 </main>
         </div>
 
-        <?php
-        $message = '';
-
-$conexion = pg_connect("host=localhost dbname=congresowinx user=congresowinx password=W1nxC0ngr3s032511");
-if (isset($_POST['uploadBtn']) && $_POST['uploadBtn'] == 'Iniciar Sesión'){
- if (isset($_POST["correo"]) && isset($_POST["contraseña"]) ) {
-          
-  $coreo = $_POST["correo"];
-  $clave= $_POST["contraseña"];
-  $clave = hash('sha512', $clave);
-
-
-  $query="SELECT usuario, contraseña FROM usuario WHERE usuario='$coreo' AND contraseña= '$clave' ";
- $consulta= pg_query($conexion,$query);
- $cantidad= pg_num_rows($consulta);
- if ($cantidad>0){
-  echo "<script>alert('Bienvenido!!!'); 
-  window.location.replace('https://laboratoriosistemas.cuautitlan2.unam.mx/congresowinx/WinxCongreso/Perfiladmin.php');</script>";
-
- } else{
-     echo"<script> alert ('El Correo o la Contraseña son Incorrectos. Porfavor, intenta nuevamente !!')</script>";
- }
-}}
-  
-$_SESSION['sms'] = $message;  ?>
+        
 
   </body>
 </div>
@@ -300,7 +275,7 @@ $_SESSION['sms'] = $message;  ?>
 
 <div class="containerCredi">
 <footer class="py-5">
-    <div class="row">
+    <div class="row gx-0">
       <div class="col-6 col-md-2 mb-3">
         <ul class="nav flex-column">
           <li class="nav-item mb-2" class="nav-link p-0 text-muted"> <img src="img/escudo-blanco.png" alt="Photo" style="width:65%;"> </li>
@@ -329,6 +304,8 @@ $_SESSION['sms'] = $message;  ?>
           <li style="color: #FFFFFF;"class="nav-item mb-2" class="nav-link p-0 text-muted">Para mayores informes o dudas comunicarse al Departamento de Matemáticas Edificio A8 Campo 4.</li>
         </ul>
         </div>
+        </div>
+
 
   <div class="containerCredi">
   <footer class="py-3 my-4">
@@ -343,9 +320,6 @@ $_SESSION['sms'] = $message;  ?>
     </center>
   </footer>
 </div>
-    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
-    
-    
 
 </body>
 </html>

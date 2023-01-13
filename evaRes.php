@@ -1,7 +1,23 @@
+<?php
+
+include 'pgsqlConexion.php';
+session_start();
+error_reporting(0);
+$varsec=$_SESSION['nombre_usuario'];
+$userId=$_SESSION['id_user'];
+
+if($varsec == null || $varsec = '') {
+    header('Location:404.php');
+    session_destroy();
+    session_unset();
+    die();
+    
+}?>
+
 <html lang="es">
     <head>
         <link href="icono.ico" type="image/x-icon" rel="shortcut icon" />
-        <title>Registro de Nuevo Congreso de Matemáticas</title>
+        <title>Evaluacion de Resumen</title>
        <meta charset="UTF-8"> 
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1, minimum-scale=1">
         <link rel="stylesheet" href="icon.css">
@@ -150,13 +166,14 @@
 
 
 .containerBoton {
-   width: 100%;
+    width: 100%;
     height: 12vh;
     position: relative;
-    top: 6%;
-    transform: translateY(-50%);
     text-align: center; 
     background-color: transparent;
+    margin-top: 10px;
+    margin-bottom: -10px;
+     
 }
 
 
@@ -457,6 +474,31 @@ button{
 	margin-top: 3%;
     text-align: center;
 }
+
+.textarea2{
+
+   width: 500px;
+    padding: 12px;
+    border: 0.15em solid #2B307C;
+    resize: none;
+    height: 50px;
+    text-align: left;
+    position: relative;
+  }
+            
+.textarea3{
+
+   width: 500px;
+    padding: 12px;
+    border: 0.15em solid #2B307C;
+    resize: none;
+    height: 50px;
+    text-align: left;
+    position: relative;
+    margin:0px auto;
+  }            
+            
+            
 .inputNombreC {
 				border: 0.15em solid #B18904;
 				width: 500px;
@@ -601,7 +643,24 @@ embed {
 .C5{
     text-align: center; 
     width: 50px;
-    }             
+    } 
+            
+@media (max-width: 800px) {
+      .textarea2 {
+        width: 270px;
+    }
+    .textarea3 {
+        width: 270px;
+    }
+}
+@media (max-width: 560px) {
+      .textarea2 {
+        width: 160px;
+    }
+    .textarea3 {
+        width: 160px;
+    }
+}            
 /***** Fin     *****/
 
 
@@ -625,12 +684,13 @@ Encabezado de la página */
                 <label for="btn-menu"><img src="img/menuicono11.png" alt=""> </label>
                 <nav class="menu" style="z-index: 1;">
                     <ul>
-                    <li> <a href="index.php">Inicio</a></li>
-                        <li> <a href="">Memorias</a></li>
-                        <li> <a href="convocatoria.php">Convocatoria</a></li> 
-                        <li> <a href="inscripcionYcostos.php">Inscripción y Costos</a></li>
-                        <li> <a href="ComiteOrg.php">Comité Organizador</a></li>
-                        <li> <a href="InicioSesion.php"><img class="alineadoicono" src="img/iniciaricono.png">&nbsp;Iniciar Sesión</a></li>
+                    <li> <a href="indexSesion.php">Inicio</a></li>
+                        <li> <a href="memoriascarruselSesion.php">Memorias</a></li>
+                        <li> <a href="convocatoriaSesion.php">Convocatoria</a></li> 
+                        <li>  <a href="inscripcionYcostosSesion.php">Inscripción y Costos</a></li>
+                        <li> <a href="ComiteOrgSesion">Comité Organizador</a></li>
+                        <li> <a href="ComiteEvaSesion">Comité Evaluador</a></li>
+                        <li> <a href="destroySesion.php"><img class="alineadoicono" src="img/iniciaricono.png">&nbsp;Cerrar  Sesión</a></li>
                     </ul>  
                 </nav> 
                 
@@ -644,9 +704,9 @@ Encabezado de la página */
                 <nav class="menu2" style="z-index: 2;">           
                     <ul>    
                       <li> <a href=""><img class="alineadoicono" src="img/icono_informacion2.png"> </a></li>        
-                        <li> <a href="ponencias_info.php">Ponencias</a></li>  
-                        <li> <a href="carteles_info.php">Carteles</a></li>
-                        <li> <a href="talleres_info.php">Talleres</a></li>
+                      <li> <a href="ponencias_infoSesion.php">Ponencias</a></li>  
+                        <li> <a href="carteles_infoSesion.php">Carteles</a></li>
+                        <li> <a href="talleres_infoSesion.php">Talleres</a></li>
                     </ul>  
                 </nav>                
             </header>
@@ -685,6 +745,7 @@ Encabezado de la página */
 			<form action="#" method="POST" >
                
               
+<!--
                <div class="contenido">
         <form>
             <input type="file" name="pdffFile" id="pdffFile" required>
@@ -692,9 +753,106 @@ Encabezado de la página */
         </form>
     </div>
                          
+-->
+                 <br>       
+                <p class="temaCentral">Seleccione un trabajo a evaluar </p>
+				<div class="datosP">					                                        
+                                        <div class="D1">
+						<table>							
+							<tr>
+								<td class="C4">
+									<td >
+                                        <p>Trabajo:
+                                          <select  name="workUser">
+                                            <option value="">Seleccione...</option>
+                                            <?php
+                                                $query="SELECT  * FROM ponente_trabajos where ponente_id='$userId'";
+                                                $result=pg_query($conexion, $query);
+                                                while ($row=pg_fetch_array($result)){
+                                                echo '<option value="'.$row['trabajos_id'].'">'.$row['trabajos_id'].'</option>';
+                                              }
+                                              $workUserId = htmlspecialchars($_POST['workUser']); 
+                                              
+                                                
+                                            ?>
+                                          </select>
+
+                                          <input type="submit" value="Seleccionar Trabajo">
+                                          <p>Evaluando el trabajo: <input value="<?=$workUserId?>" readonly="readonly"></p>
+                                          <?php
+                                            $query0=("select * from evaluacion_trabajos where trabajos_id='$workUserId'");
+                                            $consulta0=pg_query($conexion,$query0);
+                                            $queryNew0=pg_fetch_array($consulta0);
+                                            $queryEstado0=$queryNew0["estado"];
+                                    
+                                          ?>
+                                          
+                                          
+                                        </p>
+                                        <p>Estado de la evaluación: <input value="<?=$queryEstado0?>" readonly="readonly"></p>
+								    </td>
+							</tr>						
+						</table>
+					</div> 
+				</div>
+                        
+                <br>       
+                <p class="temaCentral">Datos del trabajo </p>
+				<div class="datosP">					                                        
+                    <div class="D1">
+						<table> 
+                                <center>    
+                                    <tr>
+                                        <td class="C1">
+                                            <label for="Title">Título:</label>
+                                        </td>
+                                        <td class="C2">
+                                            <textarea class="textarea2" type="text" style="text-transform:uppercase;" readonly="readonly">fds</textarea>
+                                        </td>
+                                    </tr>
+                                    <tr><td><br></td></tr>
+                                    <tr>
+                                        <td class="C1">
+                                            <label for="Title">Resumen:</label>
+                                        </td>
+                                        <td class="C2">
+                                            <textarea class="textarea2" type="text" style="text-transform:uppercase;" readonly="readonly"></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr><td><br></td></tr>
+                                    <tr>
+                                        <td class="C1">
+                                            <label for="Title">Palabras Clave:</label>
+                                        </td>
+                                        <td class="C2">
+                                            <textarea class="textarea2" type="text" style="text-transform:uppercase;" readonly="readonly"></textarea>
+                                        </td>
+                                    </tr> 
+                                    <tr><td><br></td></tr>
+                                    <tr>
+                                        <td class="C1">
+                                            <label for="Title">Categoria:</label>
+                                        </td>
+                                        <td class="C2">
+                                            <textarea class="textarea2" type="text" style="text-transform:uppercase;" readonly="readonly"></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr><td><br></td></tr>
+                                    <tr>
+                                        <td class="C1">
+                                            <label for="Title">Bibliografia:</label>
+                                        </td>
+                                        <td class="C2">
+                                            <textarea class="textarea2" type="text" style="text-transform:uppercase;" readonly="readonly"></textarea>
+                                        </td>
+                                    </tr> 
+                                </center>
+                        </table>
+					</div> 
+				</div>        
                          
                           
-                            <br>
+                    
 				<p class="temaCentral">Aspecto a evaluar </p>
 				<div class="datosP">					                                        
                                         <div class="D1">
@@ -779,12 +937,14 @@ Encabezado de la página */
 				<div class="datosP">					                                        
                                         <div class="D1">
 						<table>							
-							<tr>
-								<td class="C4">
-									<td ><textarea class="txa1" rows="5"></textarea>
-								</td>
-							</tr>	
-												
+                            <tr>
+                               <td class="C1">
+                                            <label for="Title">Observaciones:</label>
+                                </td>
+                                <td class="C2">
+                                    <textarea class="textarea3" type="text" style="text-transform:uppercase;"></textarea>
+                                </td>
+                            </tr>                 						
 						</table>
 					</div> 
 				</div>
@@ -794,6 +954,8 @@ Encabezado de la página */
 			</form>
         
        </div>
+       <br><br>
+        <div> <a  href="menu.php"  > <center> <button > Regresar al Menu</button>  </center></a> </div>  
   </div>
 </div>
 
@@ -802,7 +964,7 @@ Encabezado de la página */
 
 <div class="containerCredi">
 <footer class="py-5">
-    <div class="row">
+    <div class="row gx-0">
       <div class="col-6 col-md-2 mb-3">
         <ul class="nav flex-column">
           <li class="nav-item mb-2" class="nav-link p-0 text-muted"> <img src="img/escudo-blanco.png" alt="Photo" style="width:65%;"> </li>
@@ -831,6 +993,7 @@ Encabezado de la página */
           <li style="color: #FFFFFF;"class="nav-item mb-2" class="nav-link p-0 text-muted">Para mayores informes o dudas comunicarse al Departamento de Matemáticas Edificio A8 Campo 4.</li>
         </ul>
         </div>
+    </div>
 
   <div class="containerCredi">
   <footer class="py-3 my-4">

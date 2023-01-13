@@ -1,7 +1,7 @@
 <html lang="es">
     <head>
         <link href="icono.ico" type="image/x-icon" rel="shortcut icon" />
-        <title>Congreso de Matemáticas</title>
+        <title>Memorias del Congreso de Matemáticas</title>
        <meta charset="UTF-8"> 
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1">
         <link rel="stylesheet" href="css/estilosmemorias.css">
@@ -385,7 +385,7 @@ echo "<div class='col'><p class='btn btn-warning'><a href='memoriascarrusel3.php
  <div class="contenedoramarillo">
       <h1><center>Fotos y videos del Congreso de Matemáticas</center></h1>
           <h1><center> <?php echo date('Y')-2; ?> </center></h1>
-          <h5><center>Para subir fotos y videos de congresos anteriores favor de solo seleccionar el año deseado.</center></h5>
+          
     <br>
    
     <main class="gallery">

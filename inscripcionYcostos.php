@@ -8,7 +8,8 @@
            <link rel="stylesheet" href="css/estilosmenuarriba.css">
            
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">        
-        
+         <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
+  <link rel="icon" href="img/favicon.png" type="image/x-icon">
         <style>
     .bd-placeholder-img {
         font-size: 1.125rem;
@@ -547,7 +548,7 @@ Encabezado de la página */
          <div>
             <header>  
                 <input type="checkbox" id="btn-menu"> 
-                <label for="btn-menu"><img src="img/menuicono.png" alt=""> </label>
+                <label for="btn-menu"><img src="img/menuicono11.png" alt=""> </label>
                 <nav class="menu" style="z-index: 1;">
                     <ul>
                         <li> <a href="index.php">Inicio</a></li>
@@ -565,10 +566,10 @@ Encabezado de la página */
         <div>
             <header>
             <input type="checkbox" id="btn-menu2"> 
-                <label for="btn-menu2"><img src="img/icono_informacion.png" alt=""> </label>
+                <label for="btn-menu2"><img src="img/icono_informacion2.png" alt=""> </label>
                 <nav class="menu2" style="z-index: 2;">           
                     <ul>    
-                      <li> <a href=""><img class="alineadoicono" src="img/icono_informacion.png"> </a></li>        
+                      <li> <a href=""><img class="alineadoicono" src="img/icono_informacion2.png"> </a></li>        
                         <li> <a href="ponencias_info.php">Ponencias</a></li>  
                         <li> <a href="carteles_info.php">Carteles</a></li>
                         <li> <a href="talleres_info.php">Talleres</a></li>
@@ -577,28 +578,6 @@ Encabezado de la página */
             </header>
         </div>
  
-       <div class="containerBoton">
-        <label for="btn-menu3"></label>
-        <nav class="menu3" style="z-index: 2;">  
-        <button class="boton1" type="button">Alumno</button>
-        <button class="boton2" type="button">Ponente</button>
-        <button class="boton3" type="button">Evaluador</button>
-        <button class="boton4" type="button">Memorias</button>
-        <button class="boton5" type="button">Admin</button>
-        <button class="boton6" type="button">Comite Orga</button>
-        </nav>
-    </div>
-
-    <!-- Barra de menu Secundario - Movil-->
-
-       <div class="nav-bar" >
-       <a href="#" class="icond icon-book" target="_blank"> <img src="img/icons8-usuario-16.png"/> </a>
-            <a href="#" class="icond icon-file-text2" target="_blank"> <img src="img/icons8-expositor-16.png"/> </a>
-            <a href="#" class="icond icon-mic" target="_blank"> <img src="img/icons8-lectura-16.png"/> </a>
-            <a href="#" class="icond icon-stack" target="_blank"> <img src="img/icons8-foto-16.png"/> </a>
-            <a href="#" class="icond icon-key" target="_blank"> <img src="img/icons8-configuración-del-administrador-16.png"/> </a>
-            <a href="#" class="icond icon-hearth" target="_blank"> <img src="img/icons8-llamada-de-conferencia-16.png"/></a>
-        </div>   
 <main>
 <div class="ContenedorPrincipal"> 
   <div class="px-4 pt-5 my-5 text-center border-bottom">
@@ -655,10 +634,10 @@ Encabezado de la página */
               <!---Falta el boton para Descargar la plantilla de pagos----->
              
               <div id="wrap">
-              <a href="documentos/platillaPagosCongreso.pdf" download="Plantilla_Pagos_efectivo" class="btn-slide2" target="_blank">
+              <a href="documentos/OrdendePagoCongreso.pdf" download="OrdendePagoCongreso" class="btn-slide2" target="_blank">
               <span class="circle2"><i class="fa fa-download"></i></span>
               <span class="title2">Descargar</span>
-              <span class="title-hover2" download="Plantilla_Pagos_efectivo" >Click Aquí</span>
+              <span class="title-hover2" download="OrdendePagoCongreso" >Click Aquí</span>
               </a>
               </div>
               
